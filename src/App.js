@@ -1,28 +1,44 @@
+import PHQ9 from './Containers/PHQ9/PHQ9'
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import NavBar from './Components/Navigation/NavBar'
+import 'tachyons';
 import './App.css';
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+	constructor(props) {
+		super(props);
+		this.state = {
+			route: 'phq9'
+		}
+	}
+
+	onRouteChange = (route) => {
+		console.log('state from:', this.state.route);
+		console.log('state to:', route);
+		this.setState({route: route})
+	}
+// pa5-ns
+	render() {
+		return (
+			<div className="App">
+				<NavBar 
+					onRouteChange={this.onRouteChange}
+				/>
+				{this.state.route === 'phq9'
+				? <PHQ9/>
+				: <section className="pa2-ns bt black-90 bg-light-gray">
+					<h1 className="pa1 ma0">TITLE!</h1>
+					<p>HFUDGSF*DSD</p>
+				</section>
+				}
+				{/* <DailyMaintenance/>
+					<CBT/>
+					<CopingSkills/>
+					<History/> */}
+			</div>
+			
+		);
+	}
 }
 
 export default App;
