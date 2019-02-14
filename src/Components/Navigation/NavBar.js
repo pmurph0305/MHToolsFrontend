@@ -1,5 +1,5 @@
 import logo from './mh_logo_white.png';
-import NavButton from '../NavButton/NavButton';
+import NavButtonLi from '../NavButton/NavButtonLi';
 import React from 'react';
 
 const NavBar = (props) => {
@@ -13,31 +13,37 @@ const NavBar = (props) => {
                         src={logo}
                         onClick={() => props.onRouteChange('home')}
                     />
-                    <NavButton
+                    <NavButtonLi
                         buttonLabel="Daily Maintenance"
                         onRouteChange={props.onRouteChange}
                         route='dm'
                     />
-                    <NavButton
+                    <NavButtonLi
                         buttonLabel="PHQ-9"
                         onRouteChange={props.onRouteChange}
                         route='phq9'
                         
                     />
-                    <NavButton
+                    <NavButtonLi
                         buttonLabel="CBT"
                         onRouteChange={props.onRouteChange}
                         route='cbt'
                     />
-                    <NavButton
+                    <NavButtonLi
                         buttonLabel="Coping Skills"
                         onRouteChange={props.onRouteChange}
                         route='coping'
                     />
-                    <NavButton
+                    <NavButtonLi
                         buttonLabel="History"
                         onRouteChange={props.onRouteChange}
                         route='hist'
+                    />
+                    <NavButtonLi
+                        buttonLabel="Sign in"
+                        liClass='fr'
+                        onRouteChange={props.onRouteChange}
+                        route='signin'
                     />
                 </nav>
             </header>
