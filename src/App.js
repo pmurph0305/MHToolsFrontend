@@ -17,6 +17,12 @@ class App extends Component {
 		console.log('state to:', route);
 		this.setState({route: route})
 	}
+
+	onSubmitPHQ9 = (data) => {
+		console.log("PHQ9 Submitted!");
+		console.log(data);
+	}
+
 // pa5-ns
 	render() {
 		return (
@@ -25,7 +31,9 @@ class App extends Component {
 					onRouteChange={this.onRouteChange}
 				/>
 				{this.state.route === 'phq9'
-				? <PHQ9/>
+				? <PHQ9
+					onSubmitPHQ9={this.onSubmitPHQ9}
+					/>
 				: <section className="pa2-ns bt black-90 bg-light-gray">
 					<h1 className="pa1 ma0">TITLE!</h1>
 					<p>HFUDGSF*DSD</p>
