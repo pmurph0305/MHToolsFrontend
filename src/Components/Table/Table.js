@@ -28,13 +28,15 @@ const Table = ({headers, rows, footers, tdClass, thClass, tClass, trClass, tfCla
                         })}
                     </tr>
                 </thead>
-            :   <thead>
+            : headers
+            ? <thead>
                     <tr className={trClass}>
                         <th className={thClass}>
                             {headers}
                         </th>
                     </tr>
                 </thead>
+            : null
             }
             <tbody>
                 {Array.isArray(rows) 
