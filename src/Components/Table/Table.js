@@ -7,28 +7,16 @@ import React from 'react';
  * columns[0][0] columns[1][0] and columns[2][0] will be in the same row.
  * Will only display a number of rows up to the shortest non-null column length.
  * @headers Headers of the table.
- * @columns Array of arrays of data in columns for the table.
- * @footers Footers of the table, in a row.
+ * @rows Array of data in rows, ideally same number of columns as headers.
+ * @footers Footers of the table, ideally same number of columns as headers.
  * @txClass Every txClass is the className for the tx element.
  */
-const Table = ({headers, columns, footers, tdClass, thClass, tClass, trClass, tfClass}) => {
-
+const Table = ({headers, rows, footers, tdClass, thClass, tClass, trClass, tfClass}) => {
     //calculates shortest column to make sure we don't
     // go over it when we map in the return.
-    if (columns) {
-        var shortestColumn;
-        columns.forEach((column,index) => {
-            if (column != null) {
-                if (!shortestColumn) { shortestColumn = index}
-                shortestColumn = column.length < columns[shortestColumn].length 
-                    ? index 
-                    : shortestColumn;
-            }
-        })
-    }
-    return(
+    return (
         <table className={tClass} cellSpacing="0">
-            {headers ?
+            {Array.isArray(headers) ?
                 <thead>
                     <tr className={trClass}>
                         {headers.map((header, index)=> {
@@ -40,26 +28,41 @@ const Table = ({headers, columns, footers, tdClass, thClass, tClass, trClass, tf
                         })}
                     </tr>
                 </thead>
-            : null
+            :   <thead>
+                    <tr className={trClass}>
+                        <th className={thClass}>
+                            {headers}
+                        </th>
+                    </tr>
+                </thead>
             }
             <tbody>
-                {columns && columns[shortestColumn] ?
-                    columns[shortestColumn].map((indexColumn, index) => {
-                    return (
-                        <tr className={trClass} key={index}>
-                            {columns.map((column,i) => {
-                                if (column) {
-                                return (
-                                    <td className={tdClass}
-                                        key={index+i}
-                                    >{column[index]}</td>
+                {Array.isArray(rows) 
+                ? rows.map((row, rowi) => {
+                    return(
+                        <tr className={trClass} key={rowi}>
+                            {Array.isArray(row)
+                            ? row.map((ele, i) => {
+                                return(
+                                    <td className={tdClass} key={rowi+i}>
+                                        {ele}
+                                    </td>
                                 )
-                                } else { return null }
-                            })}
+                            })
+                            :   <tr className={trClass}>
+                                    <td className={tdClass}>
+                                        {row}
+                                    </td>
+                                </tr>
+                            }
                         </tr>
                     )
                 })
-                : null
+                :   <tr className={trClass}>
+                        <td className={tdClass}>
+                            {rows}
+                        </td>
+                    </tr>
                 }
             </tbody>
             {footers ?

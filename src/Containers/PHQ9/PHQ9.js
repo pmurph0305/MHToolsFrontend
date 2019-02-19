@@ -60,9 +60,10 @@ class PHQ9 extends React.Component {
     }
 
     render() {
-        const selectionBoxes = phq9Questions.map((question, index) => {
+        const rows = phq9Questions.map((question, index) => {
+            var selection;
             if (index < 9) {
-                return <SelectionBox
+                selection = <SelectionBox
                     id={index}
                     key={index}
                     value={this.state.answers[index]}
@@ -70,7 +71,7 @@ class PHQ9 extends React.Component {
                     onChange={this.onSelectAnswer}
                 />
             } else {
-                return <SelectionBox
+                selection = <SelectionBox
                     id={index}
                     key={index}
                     value={this.state.answers[index]}
@@ -78,8 +79,9 @@ class PHQ9 extends React.Component {
                     onChange={this.onSelectAnswer}
                 />
             }
+            return [question, selection];
         })
-       
+
         const footers = [
             '',
             <button 
@@ -98,7 +100,7 @@ class PHQ9 extends React.Component {
                 </p>
                 <Table
                     headers={phq9Headers}
-                    columns={[phq9Questions, selectionBoxes]}
+                    rows={rows}
                     footers={footers}
                     thClass="fw6 tl pa3 bg-white bb br"
                     tdClass="pa3 tl bb br"
