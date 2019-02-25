@@ -19,22 +19,30 @@
   width: 0;
 }
 
-/* Custom checkmark box beside each task. */
+/* Custom checkmark box beside each task. 
+Background color changes depend if checked and if hovered. */
 .checkmark {
   position: absolute;
   left: 0.1em;
   top: 0.2em;
   height: 1em;
   width: 1em;
-
   background-color: rgb(206, 206, 206);
   cursor: pointer;
 }
 
-/* Darker than hover but lighter than normal when checked. */
-.taskContainer input:checked ~.checkmark{
-  background-color: rgb(160, 160, 160);
+.checkmark:hover {
+  background-color: rgb(175,175,175);
 }
+
+.taskContainer input:checked ~.checkmark{
+  background-color: rgb(175, 175, 175)
+}
+
+.taskContainer input:checked ~.checkmark:hover{
+  background-color: rgb(206, 206, 206)
+}
+
 
 /* Create the checkmark/indicator (hidden when not checked) */
 .checkmark:after {
@@ -42,7 +50,6 @@
   position: absolute;
   display: none;
 }
-
 
 /* Show the checkmark when checked */
 .taskContainer input:checked ~ .checkmark:after {
