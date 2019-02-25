@@ -1,0 +1,63 @@
+.taskContainer {
+  display: block;
+  position: relative;
+  border-bottom: 0.1rem solid grey;
+  text-align: left;
+  font-size: 1.5rem;
+  padding: 0.2rem;
+}
+
+.taskText {
+  padding-left: 1.2em;
+}
+
+/* Hide default checkbox */
+.hiddenCheckbox {
+  position: absolute;
+  opacity: 0;
+  height: 0;
+  width: 0;
+}
+
+/* Custom checkmark box beside each task. */
+.checkmark {
+  position: absolute;
+  left: 0.1em;
+  top: 0.2em;
+  height: 1em;
+  width: 1em;
+
+  background-color: rgb(206, 206, 206);
+  cursor: pointer;
+}
+
+/* Darker than hover but lighter than normal when checked. */
+.taskContainer input:checked ~.checkmark{
+  background-color: rgb(160, 160, 160);
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+
+/* Show the checkmark when checked */
+.taskContainer input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Checkmark is a rotated no content span */
+.checkmark:after {
+  left: 0.33em;
+  top: 0.125em;
+  width: 0.2em;
+  height: 0.5em;
+  border: solid white;
+  border-width: 0 0.15em 0.15em 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}

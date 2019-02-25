@@ -1,15 +1,20 @@
 import React from 'react';
+import './TaskItem.css'
 
 const TaskItem = ({task, id, checkbox, onCheck}) => {
     return (
-        <div className="pa3 tl bb">
-            <input 
-            className="mr3"
-            id={id}
-            type="checkbox"
-            onClick={onCheck}
-            />{task}
-        </div>
+        <label htmlFor={id} className='taskContainer'>
+            <div className='taskText'>{task}</div>
+            <input type='checkbox'
+                className='hiddenCheckbox'
+                onClick={onCheck}
+                id={id}
+            />
+            <span className='checkmark'
+            ></span>
+            
+        </label>
+
     )
 };
 
