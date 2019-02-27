@@ -7,14 +7,14 @@ const DMDateNav = ({date, onClick}) => {
             <button
                 value="prev"
                 onClick={onClick}
-                className="f6 dim ph3 pv2 mb2 dib white bg-black"
+                className="f6 dim ph3 pv2 mb2 dib white bg-black pointer"
                 
             >Previous</button>
             <p className="f3">{date}</p>
             <button 
                 value="next"
                 onClick={onClick}
-                className="f6 dim ph3 pv2 mb2 dib white bg-black"
+                className="f6 dim ph3 pv2 mb2 dib white bg-black pointer"
             >Next</button>
         </div>
     )
