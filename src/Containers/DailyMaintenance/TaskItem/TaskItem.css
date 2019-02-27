@@ -1,3 +1,12 @@
+.orderContainer {
+  display: flex;
+  flex-direction: column;
+  float: left;
+  justify-content: center;
+  margin: 0.2em 0em;
+  border: 1px solid;
+}
+
 .taskContainer {
   display: block;
   position: relative;
@@ -9,6 +18,17 @@
 
 .taskText {
   padding-left: 1.2em;
+}
+
+.rankButton {
+  border-width: 1px 1px 1px 1px;
+  padding: .25em;
+  font-size: .6em;
+  cursor: pointer;
+}
+
+.rankButton:hover {
+  background-color: lightgray;
 }
 
 /* Hide default checkbox */

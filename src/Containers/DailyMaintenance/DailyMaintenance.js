@@ -11,11 +11,11 @@ const taskList = [
     ["Exercitation in minim Lorem veniam laboris consectetur laborum amet exercitation adipisicing. Dolor nisi elit fugiat occaecat aliquip eiusmod officia. Est magna labore proident cupidatat incididunt quis laboris eiusmod. Aute pariatur adipisicing do est tempor irure ad nulla velit irure. Ex amet proident est mollit labore sint esse. Aliquip sint commodo qui sint velit. Ex velit pariatur dolor ut anim voluptate culpa. Commodo reprehenderit eiusmod laboris excepteur cillum et reprehenderit id qui qui laborum nulla voluptate.", false, "02/25/2019"]
 ]
 
+// date for list of currently displayed daily maintenance tasks.
 const displayedDate = "02/25/2019"
 
+// placeholder for input field.
 const inputPlaceholder = "Enter a task to add..."
-
-let taskItems = [];
 
 // Displays a list of tasks for a specific day
 // and renders them in a table where each task can be marked as completed or not.
@@ -34,6 +34,7 @@ class DailyMaintenance extends React.Component {
         this.onEditClick = this.onEditClick.bind(this);
         this.onSaveClick = this.onSaveClick.bind(this);
         this.onTaskChange = this.onTaskChange.bind(this);
+        this.onRankChange = this.onRankChange.bind(this);
     }
 
     // On check event for each task.
@@ -77,29 +78,37 @@ class DailyMaintenance extends React.Component {
         this.setState(Object.assign(this.state.taskList[id], currentState))
     }
 
+    // Handles removing the task from the task list and updating state when editing is enabled.
     onRemoveTask(id) {
-        console.log("state before remove", this.state.taskList);
-        
         let currentTasks = this.state.taskList;
-        console.log("remove:"+ id + " task:"+currentTasks[id]);
         currentTasks.splice(id,1);
-        console.log("spliced task list", currentTasks);
         this.setState(Object.assign(this.state.taskList, currentTasks));
     }
 
+    // Handles changing the order of tasks on the task list when editing is enabled.
+    onRankChange(id, change) {
+        if (id + change >= 0 && id + change < this.state.taskList.length) {
+            let currentTasks = this.state.taskList;
+            let temp = currentTasks[id];
+            currentTasks[id] = currentTasks[id+change];
+            currentTasks[id+change] = temp;
+            this.setState(Object.assign(this.state.taskList, currentTasks));
+        }
+    }
+
+    // Handles switching between editing and not editing.
     onEditClick() {
         this.setState({editing : !this.state.editing});
     }
 
-
+    // Handles saving updated data when save is clicked after editing.
     onSaveClick() {
         this.setState({editing : !this.state.editing});
-        if (taskItems) {
-            let newTaskState = taskItems.map((task, index) => {
-                return ([document.getElementById("task_"+index).value, task.props.checked, displayedDate])
-            });
-            this.setState(Object.assign(this.state.taskList, newTaskState));
-        }
+        // send fetches to backend database to update any changes to database order and text.
+    }
+
+    componentWillUnmount() {
+        console.log("Unmounted");
     }
 
     render() {
@@ -115,8 +124,8 @@ class DailyMaintenance extends React.Component {
                 />
                 {console.log('task state on render', this.state.taskList)}
                 { this.state.taskList
-                ? taskItems = this.state.taskList.map((task, index) => {
-                    console.log(task);
+                ? this.state.taskList.map((task, index) => {
+                    //console.log(task);
                     //console.log(this.state.editing);
                     return (
                         <TaskItem
@@ -128,6 +137,7 @@ class DailyMaintenance extends React.Component {
                             onChange={this.onTaskChange}
                             onCheck={this.onCheck}
                             onRemove={this.onRemoveTask}
+                            onRankChange={this.onRankChange}
                             task={task[0]}
                         />
                     )

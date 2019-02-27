@@ -1,7 +1,7 @@
 import React from 'react';
 import './TaskItem.css'
 
-const TaskItem = ({task, id, onCheck, onRemove, onChange, checked, editing}) => {
+const TaskItem = ({task, id, onCheck, onRemove, onChange, onRankChange, checked, editing}) => {
     return (
         <label htmlFor={id} className='taskContainer'>
             {!editing ? 
@@ -18,20 +18,31 @@ const TaskItem = ({task, id, onCheck, onRemove, onChange, checked, editing}) => 
                 </div>
             :
                 <div>
-                    <div className='taskText'>
+                    <div className='flex'>
+                        <div className='orderContainer'>
+                            <button 
+                                className='rankButton'
+                                onClick={() => onRankChange(id, -1)}
+                            >/\</button>
+                            <button 
+                                className='rankButton'
+                                onClick={() => onRankChange(id, 1)}
+                            >\/</button>
+                        </div>
                         <input
                             id={"task_"+id}
                             //className="f4 input-reset fl black-80 bg-white pa2 lh-solid w-100 w-75-m w-80-l br2-ns br--left-ns"
-                            className="f3 input-reset border-box hover-black mw-80 w-80 ba b--black-40 pa1 ma1" 
+                            className="f3 input-reset border-box hover-black ba b--black-40 pa1 ma1 w-100" 
                             value={task}
                             onChange={(event) => onChange(event, id)}
                         />
                         
                         <button
-                            className="f5 button-reset pv2 ma1 v-top  tc bg-animate bg-light-red hover-bg-red white pointer w-10"
+                            // Change remove button to non-text remove button.
+                            className="f5 fr button-reset ph3 ma1 v-mid tc bg-light-red hover-bg-red white pointer"
                             onClick={() => onRemove(id)}
                             type="button">
-                            Remove
+                            X
                         </button>
                         
                         
