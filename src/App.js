@@ -6,11 +6,15 @@ import React, { Component } from 'react';
 import 'tachyons';
 import './App.css';
 
+const serverURL = 'http://localhost:3001'
+
 class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			route: 'dm'
+			route: 'phq9',
+			user_id: 1,
+			phq9_result: ''
 		}
 	}
 
@@ -21,8 +25,19 @@ class App extends Component {
 	}
 
 	onSubmitPHQ9 = (data) => {
-		console.log("PHQ9 Submitted!");
-		console.log(data);
+		let score = data.reduce((acc, cur, i) => i < 9 ? acc + cur : acc);
+		fetch(serverURL+'/phq9/'+this.state.user_id, {
+			method: 'POST',
+			headers: {'Content-Type' : 'application/json'},
+			body: JSON.stringify({
+				id: this.state.user_id,
+				scores: data,
+				score: score,
+			})
+		})
+			.then(response => response.json())
+			.then(response => this.setState({phq9_result: response}))
+			.catch(err => console.log(err));
 	}
 
 // pa5-ns
@@ -35,6 +50,7 @@ class App extends Component {
 				{this.state.route === 'phq9'
 				? <PHQ9
 					onSubmitPHQ9={this.onSubmitPHQ9}
+					submissionResult={this.state.phq9_result}
 					/>
 				: this.state.route === 'cbt'
 				? <CBT/>

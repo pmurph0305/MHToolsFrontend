@@ -83,7 +83,7 @@ class PHQ9 extends React.Component {
         })
 
         const footers = [
-            '',
+            this.props.submissionResult,
             <button 
                 className='f6 pointer dim ph4 ph4-m ph5-l pv2 ma0 tl db white bg-near-black'
                 onClick={this.onSubmitPHQ9}
