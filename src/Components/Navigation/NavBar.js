@@ -6,7 +6,11 @@ const NavBar = (props) => {
     return(
         <div>
             <header className='bg-black w-100 pv0-ns'>
-                <nav className="f6 fw6 ttu tracked">
+                <nav className="f6 fw6 ttu tracked"
+                    role='navigation'
+                    aria-labelledby='navlabel'
+                    >
+                    <h2 id='navlabel'>Navigation links</h2>
                     <img 
                         className="v-mid dib h2 w2 pointer" 
                         alt='logo' 
@@ -17,6 +21,7 @@ const NavBar = (props) => {
                         buttonLabel="Daily Maintenance"
                         onRouteChange={props.onRouteChange}
                         route='dm'
+                        
                     />
                     <NavButtonLi
                         buttonLabel="PHQ-9"

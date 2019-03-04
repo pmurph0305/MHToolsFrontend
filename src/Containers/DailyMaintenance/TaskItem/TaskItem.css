@@ -3,7 +3,7 @@
   flex-direction: column;
   float: left;
   justify-content: center;
-  margin: 0.2em 0em;
+  margin: 0.33rem 0rem;
   border: 1px solid;
 }
 
@@ -17,18 +17,22 @@
 }
 
 .taskText {
-  padding-left: 1.2em;
+  padding-left: 2rem;
 }
 
 .rankButton {
   border-width: 1px 1px 1px 1px;
-  padding: .25em;
-  font-size: .6em;
+  padding: .125rem;
+  font-size: 1rem;
   cursor: pointer;
 }
 
 .rankButton:hover {
   background-color: lightgray;
+}
+
+.rankButton:focus {
+  background-color:lightgray;
 }
 
 /* Hide default checkbox */
@@ -43,10 +47,10 @@
 Background color changes depend if checked and if hovered. */
 .checkmark {
   position: absolute;
-  left: 0.1em;
-  top: 0.2em;
-  height: 1em;
-  width: 1em;
+  left: 0.2rem;
+  top: 0.4rem;
+  height: 1.5rem;
+  width: 1.5rem;
   background-color: rgb(206, 206, 206);
   cursor: pointer;
 }
@@ -78,12 +82,12 @@ Background color changes depend if checked and if hovered. */
 
 /* Checkmark is a rotated no content span */
 .checkmark:after {
-  left: 0.33em;
-  top: 0.125em;
-  width: 0.2em;
-  height: 0.5em;
+  left: 0.5rem;
+  top: 0.15rem;
+  width: 0.33rem;
+  height: 0.75rem;
   border: solid white;
-  border-width: 0 0.15em 0.15em 0;
+  border-width: 0 0.2rem 0.2rem 0;
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
