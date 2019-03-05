@@ -12,9 +12,9 @@ class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			route: 'phq9',
+			route: 'dm',
 			user_id: 1,
-			phq9_result: ''
+			phq9_result: '',
 		}
 	}
 
@@ -30,14 +30,13 @@ class App extends Component {
 			method: 'POST',
 			headers: {'Content-Type' : 'application/json'},
 			body: JSON.stringify({
-				id: this.state.user_id,
 				scores: data,
 				score: score,
 			})
 		})
-			.then(response => response.json())
-			.then(response => this.setState({phq9_result: response}))
-			.catch(err => console.log(err));
+		.then(response => response.json())
+		.then(response => this.setState({phq9_result: response}))
+		.catch(err => console.log(err));
 	}
 
 // pa5-ns
@@ -55,7 +54,10 @@ class App extends Component {
 				: this.state.route === 'cbt'
 				? <CBT/>
 				: this.state.route === 'dm'
-				? <DailyMaintenance/>
+				? <DailyMaintenance
+					user_id={this.state.user_id}
+					serverURL={serverURL}
+				/>
 				:<section className="pa2-ns bt black-90 bg-light-gray">
 					<h1 className="pa1 ma0">TITLE!</h1>
 					<p>Temporary text</p>
