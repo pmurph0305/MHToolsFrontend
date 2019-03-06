@@ -60,15 +60,16 @@ class DailyMaintenance extends React.Component {
             })
             .then(response => response.json())
             .then(data => {
-                if (data.length) {
+                console.log('data fetched', data);
+                if (Array.isArray(data) && data.length) {
                     let tasks = data.map(task => {
                         task['updated'] = false;
                         return task;
                     })
-                    console.log('tasks', tasks);
-                    console.log('data fetched', data);
                     // Set state of the task list to the data recieved.
-                    this.setState({taskList: tasks, date:data[0].date.slice(0,10)});
+                    this.setState({taskList: tasks, date:tasks[0]['date'].slice(0,10)});
+                } else {
+                    // No data was found for the user for that date.
                 }
             })
           
@@ -79,11 +80,11 @@ class DailyMaintenance extends React.Component {
     onCheck(event) {
         console.log(event.target.id + " Checked?: " + event.target.checked)
         // get current state for the task item.
-        let currentState = this.state.taskList[event.target.id];
+        let currentTasks = this.state.taskList;
         // change the bool value to mark as complete or not
-        currentState['completed'] = event.target.checked;
+        currentTasks[event.target.id]['completed'] = event.target.checked;
         // set state of the tasklist item to the updated state array
-        this.setState(Object.assign(this.state.taskList[event.target.id], currentState));
+        this.setState({taskList:currentTasks});
     }
 
     // Change date when the button is clicked.
