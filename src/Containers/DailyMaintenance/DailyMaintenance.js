@@ -29,6 +29,7 @@ class DailyMaintenance extends React.Component {
             editing: false,
         }
         this.onCheck = this.onCheck.bind(this);
+        this.onDateButtonClick = this.onDateButtonClick.bind(this);
         this.onAddTaskClick = this.onAddTaskClick.bind(this);
         this.onRemoveTask = this.onRemoveTask.bind(this);
         this.onEditClick = this.onEditClick.bind(this);
@@ -79,6 +80,12 @@ class DailyMaintenance extends React.Component {
     // On check event for each task.
     onCheck(event) {
         console.log(event.target.id + " Checked?: " + event.target.checked)
+
+        fetch(this.props.serverURL + '/dm/' + this.props.user_id + '/' + this.state.taskList[event.target.id]['task_id'] + '/' + event.target.checked, {
+            method: 'PUT',
+        })
+        .then(response => response.json())
+        .then(data => console.log(data))
         // get current state for the task item.
         let currentTasks = this.state.taskList;
         // change the bool value to mark as complete or not
@@ -89,12 +96,22 @@ class DailyMaintenance extends React.Component {
 
     // Change date when the button is clicked.
     onDateButtonClick(event) {
-        console.log("DateChange " + event.target.value)
-        if (event.target.value === "prev") {
-            console.log("Previous");
-        } else if (event.target.value === "next") {
-            console.log("Next");
-        }
+        console.log("DateChange " + Number(event.target.value))
+        fetch(this.props.serverURL + '/dm/' + this.props.user_id + '/' + this.state.date + '/' + event.target.value)
+        .then(response => response.json())
+        .then(data => {
+            console.log('fetched', data);
+            if (Array.isArray(data) && data.length) {
+                let tasks = data.map(task => {
+                    task['updated'] = false;
+                    return task;
+                })
+                // Set state of the task list to the data recieved.
+                this.setState({taskList: tasks, date:tasks[0]['date'].slice(0,10)});
+            } else {
+                // No data was found for the user for that date.
+            }
+        })
     }
 
     onAddTaskClick(inputField) {
@@ -126,10 +143,10 @@ class DailyMaintenance extends React.Component {
 
     // Updates taskList state of id to event's value.
     onTaskChange(event, id) {
-        let currentState = this.state.taskList[id];
-        currentState['task'] = event.target.value;
-        currentState['updated'] = true;
-        this.setState(Object.assign(this.state.taskList[id], currentState))
+        let currentState = this.state.taskList;
+        currentState[id]['task'] = event.target.value;
+        currentState[id]['updated'] = true;
+        this.setState({taskList: currentState})
     }
 
     // Handles removing the task from the task list and updating state when editing is enabled.
@@ -144,7 +161,7 @@ class DailyMaintenance extends React.Component {
             console.log(response)
             let currentTasks = this.state.taskList;
             currentTasks.splice(id,1);
-            this.setState(Object.assign(this.state.taskList, currentTasks));
+            this.setState({taskList: currentTasks});
         })
     }
 
@@ -168,7 +185,7 @@ class DailyMaintenance extends React.Component {
             currentTasks[id+change]['updated'] = true;
 
             // update the task list state.
-            this.setState(Object.assign(this.state.taskList, currentTasks));
+            this.setState({taskList: currentTasks});
         }
     }
 
