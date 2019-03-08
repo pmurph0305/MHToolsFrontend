@@ -1,20 +1,31 @@
+import { connect } from 'react-redux'
 import InputField from '../../Components/InputField/InputField'
 import DMDateNav from '../../Components/DMDateNav/DMDateNav'
 import React from 'react'
 import TaskItem from './TaskItem/TaskItem'
 
-// Example task list data.
-const taskList = [
-    ["Wake up at 8 am", false, "02/25/2019"],
-    ["Eat breakfast", true, "02/25/2019"],
-    ["Go for a 30 minute walk", false, "02/25/2019"],
-    ["Exercitation in minim Lorem veniam laboris consectetur laborum amet exercitation adipisicing. Dolor nisi elit fugiat occaecat aliquip eiusmod officia. Est magna labore proident cupidatat incididunt quis laboris eiusmod. Aute pariatur adipisicing do est tempor irure ad nulla velit irure. Ex amet proident est mollit labore sint esse. Aliquip sint commodo qui sint velit. Ex velit pariatur dolor ut anim voluptate culpa. Commodo reprehenderit eiusmod laboris excepteur cillum et reprehenderit id qui qui laborum nulla voluptate.", false, "02/25/2019"]
-]
 
-// date for list of currently displayed daily maintenance tasks.
+import { setDMEditing, requestDMTasks } from '../../actions'
 
-// placeholder for input field.
 const inputPlaceholder = "Enter a task to add..."
+
+const mapStateToProps = state => {
+    return {
+        editing: state.setDMEditing.dm_editing,
+        taskList: state.requestDMTaskList.dm_taskList,
+        taskListError: state.requestDMTaskList.dm_error,
+        taskListIsPending: state.requestDMTaskList.dm_isPending,
+        date: state.requestDMTaskList.dm_date
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onEditClick: (event) => dispatch(setDMEditing(true)),
+        onSaveClick: (event) => dispatch(setDMEditing(false)),
+        onRequestDMTaskList: (id, date, change) => dispatch(requestDMTasks(id, date, change))//requestDMTasks(dispatch)
+    }
+}
 
 // Displays a list of tasks for a specific day
 // and renders them in a table where each task can be marked as completed or not.
@@ -24,16 +35,12 @@ class DailyMaintenance extends React.Component {
         super(props);
         this.state = {
             taskList: [],
-            // taskList: taskList,
-            date: '',
-            editing: false,
+
         }
         this.onCheck = this.onCheck.bind(this);
         this.onDateButtonClick = this.onDateButtonClick.bind(this);
         this.onAddTaskClick = this.onAddTaskClick.bind(this);
         this.onRemoveTask = this.onRemoveTask.bind(this);
-        this.onEditClick = this.onEditClick.bind(this);
-        this.onSaveClick = this.onSaveClick.bind(this);
         this.onTaskChange = this.onTaskChange.bind(this);
         this.onRankChange = this.onRankChange.bind(this);
     }
@@ -53,27 +60,31 @@ class DailyMaintenance extends React.Component {
 
     componentDidMount() {
         // retrieve task list if we do not have it.
-        if (!this.state.taskList.length) {
+        // if (!this.state.taskList.length) {
+        //     let date = new Date().toISOString().slice(0,10);
+        //     fetch(this.props.serverURL + '/dm/' + this.props.user_id + '/' + date, {
+        //         method: 'GET',
+        //         headers: {'Content-Type' : 'application/json'},
+        //     })
+        //     .then(response => response.json())
+        //     .then(data => {
+        //         console.log('data fetched', data);
+        //         if (Array.isArray(data) && data.length) {
+        //             let tasks = data.map(task => {
+        //                 task['updated'] = false;
+        //                 return task;
+        //             })
+        //             // Set state of the task list to the data recieved.
+        //             this.setState({taskList: tasks, date:tasks[0]['date'].slice(0,10)});
+        //         } else {
+        //             // No data was found for the user for that date.
+        //         }
+        //     })
+        // }
+        // Don't get data on remounting if the data is already in the state.
+        if (!this.props.taskList.length) {
             let date = new Date().toISOString().slice(0,10);
-            fetch(this.props.serverURL + '/dm/' + this.props.user_id + '/' + date, {
-                method: 'GET',
-                headers: {'Content-Type' : 'application/json'},
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('data fetched', data);
-                if (Array.isArray(data) && data.length) {
-                    let tasks = data.map(task => {
-                        task['updated'] = false;
-                        return task;
-                    })
-                    // Set state of the task list to the data recieved.
-                    this.setState({taskList: tasks, date:tasks[0]['date'].slice(0,10)});
-                } else {
-                    // No data was found for the user for that date.
-                }
-            })
-          
+            this.props.onRequestDMTaskList(1, date)
         }
     }
 
@@ -96,22 +107,8 @@ class DailyMaintenance extends React.Component {
 
     // Change date when the button is clicked.
     onDateButtonClick(event) {
-        console.log("DateChange " + Number(event.target.value))
-        fetch(this.props.serverURL + '/dm/' + this.props.user_id + '/' + this.state.date + '/' + event.target.value)
-        .then(response => response.json())
-        .then(data => {
-            console.log('fetched', data);
-            if (Array.isArray(data) && data.length) {
-                let tasks = data.map(task => {
-                    task['updated'] = false;
-                    return task;
-                })
-                // Set state of the task list to the data recieved.
-                this.setState({taskList: tasks, date:tasks[0]['date'].slice(0,10)});
-            } else {
-                // No data was found for the user for that date.
-            }
-        })
+        // Send request for date change.
+        this.props.onRequestDMTaskList(1, this.props.date, Number(event.target.value));
     }
 
     onAddTaskClick(inputField) {
@@ -190,9 +187,9 @@ class DailyMaintenance extends React.Component {
     }
 
     // Handles switching between editing and not editing.
-    onEditClick() {
-        this.setState({editing : !this.state.editing});
-    }
+    // onEditClick() {
+    //     this.setState({editing : !this.state.editing});
+    // }
 
     // Handles saving updated data when save is clicked after editing.
     onSaveClick() {
@@ -220,7 +217,15 @@ class DailyMaintenance extends React.Component {
         }
     }
 
+
+    // editing: state.setDMEditing.dm_editing,
+    // taskList: state.requestDMTaskList.dm_taskList,
+    // taskListError: state.requestDMTaskList.dm_error,
+    // taskListIsPending: state.requestDMTaskList.dm_isPending,
+    // date: state.requestDMTaskList.dm_date
+
     render() {
+        const { date, editing, taskList, onEditClick, onSaveClick } = this.props;
         return (
             <section className="ma0 pa1 pa3-ns bt black-90 bg-light-gray tc">
                 <h1 className="ma1 mh2 ">Daily Maintenance</h1>
@@ -228,19 +233,19 @@ class DailyMaintenance extends React.Component {
                     A list of tasks you need to get done throughout the day to stay healthy.
                 </p>
                 <DMDateNav
-                    date={this.state.date}
+                    date={date}
                     onClick={this.onDateButtonClick}
                 />
-                {console.log('task state on render', this.state.taskList)}
-                { this.state.taskList
-                ? this.state.taskList.map((task, index) => {
+                {console.log('task state on render', taskList)}
+                { taskList
+                ? taskList.map((task, index) => {
                     //console.log(task);
                     //console.log(this.state.editing);
                     return (
                         <TaskItem
                             checkbox={"checkbox"}
                             checked={task['completed']}
-                            editing={this.state.editing}
+                            editing={editing}
                             id={index}
                             key={task['task_id']}
                             onChange={this.onTaskChange}
@@ -257,17 +262,19 @@ class DailyMaintenance extends React.Component {
                     placeholder={inputPlaceholder}
                     onClick={this.onAddTaskClick}
                 />
-                {   this.state.editing ?
+                { editing ?
                     <button 
                     type="button"
                     className="f6 fr dim ph3 pv2 mb2 dib white bg-black w-20 pa3 ma2"
-                    onClick={this.onSaveClick}
+                    onClick={onSaveClick}
+                    value='false'
                     >Save</button>
                 :
                     <button 
                         type="button"
                         className="f6 fr dim ph3 pv2 mb2 dib white bg-black w-20 pa3 ma2"
-                        onClick={this.onEditClick}
+                        onClick={onEditClick}
+                        value='true'
                     >Edit</button>
                 }
             </section>
@@ -275,4 +282,4 @@ class DailyMaintenance extends React.Component {
     }
 }
 
-export default DailyMaintenance;
+export default connect(mapStateToProps, mapDispatchToProps)(DailyMaintenance);

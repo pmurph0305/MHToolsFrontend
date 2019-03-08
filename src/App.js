@@ -18,6 +18,10 @@ class App extends Component {
 		}
 	}
 
+	// componentDidMount() {
+	// 	console.log(this.props.store.getState());
+	// }
+
 	onRouteChange = (route) => {
 		console.log('state from:', this.state.route);
 		console.log('state to:', route);
