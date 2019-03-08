@@ -34,7 +34,7 @@ const TaskItem = ({task, id, onCheck, onRemove, onChange, onRankChange, checked,
                             //className="f4 input-reset fl black-80 bg-white pa2 lh-solid w-100 w-75-m w-80-l br2-ns br--left-ns"
                             className="f3 input-reset border-box hover-black ba b--black-40 pa1 ma1 w-100" 
                             value={task}
-                            onChange={(event) => onChange(event, id)}
+                            onChange={(event) => onChange(id, event.target.value)}
                         />
                         
                         <button
