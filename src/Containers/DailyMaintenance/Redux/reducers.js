@@ -1,3 +1,5 @@
+import { combineReducers } from 'redux';
+
 import {
     REQUEST_DM_TASKS_PENDING,
     REQUEST_DM_TASKS_SUCCESS,
@@ -26,13 +28,11 @@ import {
 const initialEditState = {
     dm_editing: false
 }
-
-export const setDMEditing = (state=initialEditState, action={}) => {
+// Handles switching the state of being in task list editing.
+function editingReducer(state=false, action) {
     switch(action.type) {
         case CHANGE_DM_EDITING:
-            return Object.assign({}, state, { dm_editing: action.payload });
-            // also works with object spread
-            // return { ...state, searchField:action.payload}
+            return updateObject(state, { dm_editing: !state.dm_editing })
         default:
             return state;
     }
@@ -45,61 +45,40 @@ const initialState = {
     dm_isPending: false,
     dm_taskList: [],
     dm_date: '',
+    dm_editing: ''
 }
 
-// TODO: split this thing up.
-export const dmTasksReducer = (state=initialState, action={}) => {
+// Reducer for getting/updating/creating/modifying tasks.
+function dmTasksReducer(state = [], action) {
     switch(action.type) {
-        // For request for getting all the users DM Tasks.
-        case REQUEST_DM_TASKS_PENDING:
-            return Object.assign({}, state, { dm_isPending: true })
         case REQUEST_DM_TASKS_SUCCESS:
-            return setDMTaskList(state, action);
-        case REQUEST_DM_TASKS_FAILED:
-            return Object.assign({}, state, { dm_isPending: false, dm_error: action.payload})
-        
-        // For request to add a DM Task
-        case REQUEST_ADD_DM_TASK_PENDING:
-            return Object.assign({}, state, { dm_isPending: true })
+            return setDMTaskList(state, action); 
         case REQUEST_ADD_DM_TASK_SUCCESS:
             return addDMTask(state, action);
-        case REQUEST_ADD_DM_TASK_FAILED:
-            return Object.assign({}, state, { dm_isPending: false , dm_error: action.payload })
-
-        // Toggling DM Tasks
+         // Toggling DM Tasks
         case REQUEST_CHECK_DM_TASK_SUCCESS:
             return toggleDMTask(state, action);
-
         // Changing DM Task text.
         case CHANGE_DM_TASK_TEXT:
             return changeDMTaskText(state, action);
-
         // Swaping positions of tasks in the list.        
         case SWAP_DM_TASK_RANKS:
             return swapDMTaskRanks(state,action);
-        
-        // Request for removing DM Task from list.
-        case REMOVE_DM_TASK_PENDING:
-            return Object.assign({}, state, { dm_isPending: true })
         case REMOVE_DM_TASK_SUCCESS:
             return removeDMTask(state, action);
-        case REMOVE_DM_TASK_FAILED:
-            return Object.assign({}, state, { dm_isPending: false, dm_error: action.payload })
-
-        // Request for updating all the tasks that were changed in edit mode.
-        case UPDATE_DM_TASK_PENDING:
-            return Object.assign({}, state, { dm_isPending: true })
         case UPDATE_DM_TASK_SUCCESS:
             return updateDMTasksCompleted(state, action)
-        case UPDATE_DM_TASK_FAILED:
-            return Object.assign({}, state, { dm_isPending: false, dm_error: action.payload })
-
-        default:
-            return state;
+        default: 
+            return state
     }
-
-
 }
+
+export const DMReducer = combineReducers({
+    tasks: dmTasksReducer,
+    editing: editingReducer,
+})
+
+
 
 // helper function to update objects properly.
 function updateObject(oldObject, newValues) {
@@ -121,20 +100,20 @@ function updateItemByIndexInArray(array, itemIndex, updateItemCallback) {
 // adds a task to the task list.
 function addDMTask(state, action) {
     if (Array.isArray(action.payload) && action.payload.length) {
-        let tasks = state.dm_taskList;
+        // map used to copy array so that it is re-rendered when added.
+        let tasks = state.dm_taskList.map(task => task);
+        action.payload[0]['updated'] = false;
         let index = tasks.push(action.payload[0]);
-        tasks[index]['updated'] = false;
-        return updateObject(state, { dm_isPending : false, dm_taskList: tasks})
+        return updateObject(state, { dm_isPending: false, dm_taskList: tasks })
     } else {
-        return updateObject(state, { dm_isPending: false, dm_error: action.payload })
+        return Object.assign({}, state.dm_taskList, { dm_isPending: false, dm_error: action.payload })
     }
 }
 
 // changes the description text of a task.
 function changeDMTaskText(state, action) {
-    console.log(action.type);
     const newTasks = updateItemByIndexInArray(state.dm_taskList, action.payload.index, task => {
-        return updateObject(task, { task: action.payload.text })
+        return updateObject(task, { task: action.payload.text, updated: true })
     })
     return updateObject(state, { dm_taskList: newTasks })
 }
@@ -142,12 +121,11 @@ function changeDMTaskText(state, action) {
 // removes a task from the task list.
 function removeDMTask(state, action) {
     let newTaskState = state.dm_taskList.filter((task, index) => task['task_id'] !== action.payload);
-    return updateObject( state, { dm_isPending: false, dm_taskList: newTaskState })
+    return updateObject(state, { dm_isPending: false, dm_taskList: newTaskState })
 }
 
 // Updates the state with the retrieved dm task list.
 function setDMTaskList(state, action) {
-    console.log("AH")
     if (Array.isArray(action.payload) && action.payload.length) {
         let tasks = action.payload.map(task => {
             task['updated'] = false;
@@ -183,6 +161,7 @@ function swapDMTaskRanks(state, action) {
 
 // handles toggling a task as complete / incomplete
 function toggleDMTask(state, action) {
+    // doesn't need to map array to update/re-render as the checkbox takes care of any visual difference.
     let tasks = state.dm_taskList;
     tasks[action.payload.index]['completed'] = action.payload.checked;
     return updateObject(state, {  dm_taskList: tasks })
@@ -193,3 +172,13 @@ function updateDMTasksCompleted(state, action) {
     let newTaskState = state.dm_taskList.map(task => ({ ...task, updated: false}))
     return updateObject(state, { dm_isPending: false, dm_taskList: newTaskState })
 }
+
+
+
+
+
+
+
+
+
+

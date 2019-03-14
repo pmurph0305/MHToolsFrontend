@@ -30,6 +30,7 @@ export const setDMEditing = (boolean) => ({
 
 // saves all dm tasks that have been updating through text or rank changes.
 export const onDMSaveClick = (id, updatedTasks) => (dispatch) => {
+    console.log("SAVE CLICK");
     dispatch({ type: UPDATE_DM_TASK_PENDING });
     fetch('http://localhost:3001/dm/' + id, {
         method: 'PUT',

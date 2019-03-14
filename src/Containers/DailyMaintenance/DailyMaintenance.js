@@ -9,17 +9,17 @@ import { setDMEditing, requestDMTasks, onDMSaveClick, swapDMTaskRanks,
      addDMTask, toggleDMTask, changeDMTaskName,
      removeDMTask
     
-    } from '../../actions'
+    } from './Redux/actions'
 
 const inputPlaceholder = "Enter a task to add..."
 
 const mapStateToProps = state => {
     return {
-        editing: state.setDMEditing.dm_editing,
-        taskList: state.dmTasksReducer.dm_taskList,
-        taskListError: state.dmTasksReducer.dm_error,
-        taskListIsPending: state.dmTasksReducer.dm_isPending,
-        date: state.dmTasksReducer.dm_date
+        editing: state.DMReducer.editing.dm_editing,
+        taskList: state.DMReducer.tasks.dm_taskList,
+        taskListError: state.DMReducer.tasks.dm_error,
+        taskListIsPending: state.DMReducer.tasks.dm_isPending,
+        date: state.DMReducer.tasks.dm_date
     }
 }
 
@@ -52,7 +52,7 @@ class DailyMaintenance extends React.Component {
 
     componentDidMount() {
         // Don't get data on remounting if the data is already in the state.
-        if (!this.props.taskList.length) {
+        if (!this.props.taskList) {
             // get the current date, slice it to work with database.
             let date = new Date().toISOString().slice(0,10);
             this.props.onRequestDMTaskList(1, date)
@@ -99,14 +99,12 @@ class DailyMaintenance extends React.Component {
         this.props.onEditToggle(false);
         let tasksToUpdate = this.props.taskList.filter((task => task['updated']))
         if (tasksToUpdate.length) {
-            console.log("UPDATE");
             this.props.onSaveClick(1, tasksToUpdate);
         }
     }
 
     render() {
         const { date, editing, taskList, onEditToggle, onTaskTextChange } = this.props;
-        console.log("TASKLIST", taskList);
         return (
             <section className="ma0 pa1 pa3-ns bt black-90 bg-light-gray tc">
                 <h1 className="ma1 mh2 ">Daily Maintenance</h1>
@@ -118,10 +116,8 @@ class DailyMaintenance extends React.Component {
                     onClick={this.onDateButtonClick}
                 />
                 {console.log('task state on render', taskList)}
-                { taskList
+                { taskList && Array.isArray(taskList) 
                 ? taskList.map((task, index) => {
-                    //console.log(task);
-                    //console.log(this.state.editing);
                     return (
                         <TaskItem
                             checkbox={"checkbox"}
