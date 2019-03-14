@@ -14,7 +14,7 @@ import { dmTasksReducer, setDMEditing } from './reducers';
 
 //Redux middleware.
 import thunkMiddleware from 'redux-thunk';
-import { createLogger} from 'redux-logger';
+import { createLogger } from 'redux-logger';
 
 const rootReducer = combineReducers({ dmTasksReducer, setDMEditing })
 const logger = createLogger();

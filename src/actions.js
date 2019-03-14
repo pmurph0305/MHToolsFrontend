@@ -109,9 +109,8 @@ export const swapDMTaskRanks = (index1, index2) => ({
     }
 })
 
+// removes a task from the database for the user.
 export const removeDMTask = (id, task_id) => (dispatch) => {
-    console.log("ID", id);
-    console.log("TASK_ID", task_id);
     dispatch({ type: REMOVE_DM_TASK_PENDING });
     fetch('http://localhost:3001/dm/' + id + '/' + task_id, {
         method: 'DELETE',

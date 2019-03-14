@@ -77,6 +77,8 @@ class DailyMaintenance extends React.Component {
             // calculate rank by finding max of current ranks + 1.
             let rank = Math.max.apply(Math, this.props.taskList.map(task=> {return task.rank +1}))
             this.props.onAddDMTask(1, inputField.value, rank);
+            // clear input field.
+            inputField.value = ''
         }
     }
 
