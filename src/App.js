@@ -1,4 +1,5 @@
 import CBT from './Containers/CBT/CBT'
+import CopingSkills from './Containers/CopingSkills/CopingSkills'
 import DailyMaintenance from './Containers/DailyMaintenance/DailyMaintenance'
 import NavBar from './Components/Navigation/NavBar'
 import PHQ9 from './Containers/PHQ9/PHQ9'
@@ -12,7 +13,7 @@ class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			route: 'dm',
+			route: 'coping',
 			user_id: 1,
 			phq9_result: '',
 		}
@@ -62,7 +63,9 @@ class App extends Component {
 					user_id={this.state.user_id}
 					serverURL={serverURL}
 				/>
-				:<section className="pa2-ns bt black-90 bg-light-gray">
+				: this.state.route === 'coping'
+				? <CopingSkills/>
+				: <section className="pa2-ns bt black-90 bg-light-gray">
 					<h1 className="pa1 ma0">TITLE!</h1>
 					<p>Temporary text</p>
 				</section>
