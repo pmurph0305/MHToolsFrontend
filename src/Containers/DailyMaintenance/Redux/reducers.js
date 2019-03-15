@@ -1,23 +1,23 @@
 import { combineReducers } from 'redux';
 
 import {
-    REQUEST_DM_TASKS_PENDING,
+   // REQUEST_DM_TASKS_PENDING,
     REQUEST_DM_TASKS_SUCCESS,
-    REQUEST_DM_TASKS_FAILED,
+   // REQUEST_DM_TASKS_FAILED,
 
-    REQUEST_ADD_DM_TASK_PENDING,
+  //  REQUEST_ADD_DM_TASK_PENDING,
     REQUEST_ADD_DM_TASK_SUCCESS,
-    REQUEST_ADD_DM_TASK_FAILED,
+   // REQUEST_ADD_DM_TASK_FAILED,
 
-    REMOVE_DM_TASK_PENDING,
+  //  REMOVE_DM_TASK_PENDING,
     REMOVE_DM_TASK_SUCCESS,
-    REMOVE_DM_TASK_FAILED,
+  //  REMOVE_DM_TASK_FAILED,
 
     REQUEST_CHECK_DM_TASK_SUCCESS,
 
-    UPDATE_DM_TASK_PENDING,
+  //  UPDATE_DM_TASK_PENDING,
     UPDATE_DM_TASK_SUCCESS,
-    UPDATE_DM_TASK_FAILED,
+   // UPDATE_DM_TASK_FAILED,
 
     CHANGE_DM_EDITING,
     CHANGE_DM_TASK_TEXT,
@@ -25,9 +25,9 @@ import {
 } from './constants'
 
 // Editing state managment 
-const initialEditState = {
-    dm_editing: false
-}
+// const initialEditState = {
+//     dm_editing: false
+// }
 // Handles switching the state of being in task list editing.
 function editingReducer(state=false, action) {
     switch(action.type) {
@@ -49,7 +49,7 @@ const initialState = {
 }
 
 // Reducer for getting/updating/creating/modifying tasks.
-function dmTasksReducer(state = [], action) {
+function dmTasksReducer(state = [initialState], action) {
     switch(action.type) {
         case REQUEST_DM_TASKS_SUCCESS:
             return setDMTaskList(state, action); 
@@ -103,7 +103,7 @@ function addDMTask(state, action) {
         // map used to copy array so that it is re-rendered when added.
         let tasks = state.dm_taskList.map(task => task);
         action.payload[0]['updated'] = false;
-        let index = tasks.push(action.payload[0]);
+        tasks.push(action.payload[0]);
         return updateObject(state, { dm_isPending: false, dm_taskList: tasks })
     } else {
         return Object.assign({}, state.dm_taskList, { dm_isPending: false, dm_error: action.payload })
@@ -139,23 +139,24 @@ function setDMTaskList(state, action) {
 
 // swaps the rank and position in list of two tasks.
 function swapDMTaskRanks(state, action) {
-    let task1 = state.dm_taskList[action.payload.index1];
-    let task2 = state.dm_taskList[action.payload.index2];
+    let rank1 = state.dm_taskList[action.payload.index1]['rank']
+    let rank2 = state.dm_taskList[action.payload.index2]['rank']
     let newTasks = state.dm_taskList.map((task, index) => {
         if (index !== action.payload.index1 && index !== action.payload.index2 ) {
             return task;
         } else if (index === action.payload.index1) {
-            task = task2;
-            task['rank'] = task1['rank']
+            task = state.dm_taskList[action.payload.index2];
+            task['rank'] = rank1
             task['updated'] = true;
             return task;
         } else {
-            task = task1;
-            task['rank'] = task2['rank']
+            task = state.dm_taskList[action.payload.index1];
+            task['rank'] = rank2
             task['updated'] = true;
             return task;
         }
     })
+    console.log("NewTasks:", newTasks);
     return updateObject(state, { dm_taskList: newTasks })
 }
 
