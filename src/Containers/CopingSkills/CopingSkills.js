@@ -51,9 +51,9 @@ class CopingSkills extends React.Component {
 
     render() {
         return( 
-            <section className="ma0 pa1 pa3-ns bt black-90 bg-light-gray tc">
-                <h1 className="ma1 mh2 ">Coping Skills</h1>
-                <p className="ma2 mh4">
+            <section className='ma0 pa1 pa3-ns bt black-90 bg-light-gray tc'>
+                <h1 className='ma1 mh2'>Coping Skills</h1>
+                <p className='ma2 mh4'>
                     A list of coping skills to use in situations to help tolerate stress and conflict.
                 </p>
                 { testData.length
