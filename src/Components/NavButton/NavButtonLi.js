@@ -10,7 +10,7 @@ const NavButtonLi = ({ buttonLabel, onRouteChange, route, liClass}) => {
     return(
         <li className={liClass ? liClass : "dib"}>
             <button
-                className="f6 f5-l pointer link dim white-80 dib pa3 ph4-l"
+                className="f6 f5-l pointer link dim white-80 pa3 ph4-l"
                 onClick={() => onRouteChange(route)}>
                 {buttonLabel}
             </button>
