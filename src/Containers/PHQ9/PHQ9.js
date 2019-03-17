@@ -64,6 +64,7 @@ class PHQ9 extends React.Component {
             var selection;
             if (index < 9) {
                 selection = <SelectionBox
+                    className='black ma0 pa0 hover-bg-black-20'
                     id={index}
                     key={index}
                     value={this.state.answers[index]}
@@ -72,6 +73,7 @@ class PHQ9 extends React.Component {
                 />
             } else {
                 selection = <SelectionBox
+                    className='black ma0 pa0 hover-bg-black-20'
                     id={index}
                     key={index}
                     value={this.state.answers[index]}

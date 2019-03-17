@@ -5,12 +5,12 @@ import React from 'react';
 const NavBar = (props) => {
     return(
         <div>
-            <header className='bg-black w-100 pv0-ns'>
-                <nav className="f6 fw6 ttu tracked"
+            <header className='bg-black w-100'>
+                <nav className="f6 fw6 overflow-hidden"
                     role='navigation'
                     aria-labelledby='navlabel'
                     >
-                    <h2 id='navlabel'>Navigation links</h2>
+                    {/* <h2 id='navlabel' className='pa0 ma0'>Navigation links</h2> */}
                     <img 
                         className="v-mid dib h2 w2 pointer" 
                         alt='logo' 
