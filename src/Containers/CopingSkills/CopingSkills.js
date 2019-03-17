@@ -44,6 +44,8 @@ const initialState = {
     displayedSkills,
 }
 
+const heightTransition = 'max-height 0.3s ease';
+
 class CopingSkills extends React.Component {
 
     constructor(props) {
@@ -52,7 +54,6 @@ class CopingSkills extends React.Component {
         this.onChangeSkillDisplay = this.onChangeSkillDisplay.bind(this);
     }
 
- 
 
     onAddSkillClick(coping_id) {
         console.log("Add skill:", coping_id);
@@ -61,29 +62,37 @@ class CopingSkills extends React.Component {
         // Use action to send fetch to server to add to coping skills list.
     }
 
+
     onChangeSkillDisplay(event) {
         let expanded = document.getElementsByClassName('collapsibleContent')
+        // Add a quick collapse to all currently opened collapsibles.
         for (let i = 0; i < expanded.length; i++) {
-            //expanded[i].style.transition = 'max-height 0s'
-            expanded[i].style.maxHeight = null; 
+            // only do it on collapsibles currently expanded.
+            if (expanded[i].style.maxHeight) {
+                // use a short time, but still some time so that transitionend fires.
+                expanded[i].style.transition = 'max-height 0.001s'
+                // set height to null so it collapses.
+                expanded[i].style.maxHeight = null; 
+                // event listener that only occurs ONCE, to reset transition style.
+                expanded[i].addEventListener('transitionend', function() {
+                    expanded[i].style.transition = heightTransition;
+                }, {once: true})
+            }
         }
-        console.log("CHANGE", event.target.value)
         if (Number(event.target.value) === 0) {
             console.log("change to my skills")
-            displayedSkills = mySkills;
-            console.log(displayedSkills);
+            this.setState({displayedSkills: mySkills})
             // display user's coping skills
         } else {
             console.log("change to shared")
-            displayedSkills = sharedSkills;
+            this.setState({displayedSkills: sharedSkills})
             // display shared coping skills
         }
-        this.setState({displayedSkills: displayedSkills})
+        //this.setState({displayedSkills: displayedSkills})
     }
 
-
     
-
+    // move into collapsible.js?
     onCollapisbleClick(index) {
         console.log("click: " + index)
         // Get element for the skill clicked on.
@@ -105,8 +114,8 @@ class CopingSkills extends React.Component {
         }
     }
 
-
     render() {
+        console.log(this.state);
         return( 
             <section className='ma0 pa1 pa3-ns bt black-90 bg-light-gray tc'>
                 <h1 className='ma1 mh2'>Coping Skills</h1>
@@ -119,8 +128,8 @@ class CopingSkills extends React.Component {
                     onChange={this.onChangeSkillDisplay}
 
                 />
-                { displayedSkills.length
-                ? displayedSkills.map((skill, index) => {
+                { this.state.displayedSkills.length
+                ? this.state.displayedSkills.map((skill, index) => {
                     return <Collapsible
                         description = {skill['description']}
                         text={skill['text']}

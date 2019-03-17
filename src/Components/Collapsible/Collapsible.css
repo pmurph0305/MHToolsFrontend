@@ -21,7 +21,7 @@
     /* Animated collapsible stuff */
     overflow: hidden;
     max-height: 0;
-    transition: max-height 0.25s ease;
+    transition: max-height 0.3s ease;
     border-bottom: 1px solid black;
 }
 
