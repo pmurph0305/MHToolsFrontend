@@ -9,7 +9,7 @@ import { setDMEditing, requestDMTasks, onDMSaveClick, swapDMTaskRanks,
      addDMTask, toggleDMTask, changeDMTaskName,
      removeDMTask
     
-    } from './Redux/actions'
+    } from './Redux/dm_actions'
 
 const inputPlaceholder = "Enter a task to add..."
 

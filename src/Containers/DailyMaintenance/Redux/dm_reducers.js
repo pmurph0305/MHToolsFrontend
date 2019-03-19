@@ -22,7 +22,7 @@ import {
     CHANGE_DM_EDITING,
     CHANGE_DM_TASK_TEXT,
     SWAP_DM_TASK_RANKS
-} from './constants'
+} from './dm_constants'
 
 // Editing state managment 
 // const initialEditState = {

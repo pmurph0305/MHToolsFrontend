@@ -10,13 +10,14 @@ import { Provider } from 'react-redux';
 import { applyMiddleware, combineReducers, createStore } from 'redux';
 
 //reducers
-import { DMReducer } from './Containers/DailyMaintenance/Redux/reducers';
+import { DMReducer } from './Containers/DailyMaintenance/Redux/dm_reducers';
+import { CSReducer } from './Containers/CopingSkills/Redux/cs_reducers'
 
 //Redux middleware.
 import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 
-const rootReducer = combineReducers({ DMReducer })
+const rootReducer = combineReducers({ DMReducer, CSReducer })
 const logger = createLogger();
 const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, logger));
 
