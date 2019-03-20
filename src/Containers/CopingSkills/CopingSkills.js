@@ -1,5 +1,7 @@
 import { connect } from 'react-redux'
 import React from 'react'
+
+import ErrorBox from '../../Components/ErrorBox/ErrorBox'
 import Collapsible from '../../Components/Collapsible/Collapsible'
 import SelectionBox from '../../Components/SelectionBox/SelectionBox'
 
@@ -10,6 +12,7 @@ import {
 const mapStateToProps = state => {
     return {
         coping_skills: state.CSReducer.skills.coping_skills,
+        error: state.CSReducer.skills.error,
     }
 }
 
@@ -81,19 +84,23 @@ class CopingSkills extends React.Component {
         // Move border from bottom of description button to
         // bottom of the text to seperate it better from next coping skill.
         if (text.style.maxHeight) {
-            console.log("b");
+            // text.style.padding = '0 1rem'
             text.style.maxHeight = null;
         } else {
+            // text.style.padding = '1rem'
             text.style.maxHeight = text.scrollHeight + 'px';
+            
         }
     }
-
+np
     onShareSkillClick(index) {
         console.log("Share:" + index);
     }
 
     render() {
-        const { coping_skills } = this.props;
+        const { coping_skills, error } = this.props;
+        console.log('skills:', coping_skills);
+        console.log('error:', error);
         return( 
             <section className='ma0 pa1 pa3-ns bt black-90 bg-light-gray tc'>
                 <h1 className='ma1 mh2'>Coping Skills</h1>
@@ -122,7 +129,9 @@ class CopingSkills extends React.Component {
                         onShareSkill={this.onShareSkillClick}
                     />
                 })
-                : <div>no data</div>
+                : error
+                ? <ErrorBox error={error}/>
+                : null
                 }
                 
             </section>
