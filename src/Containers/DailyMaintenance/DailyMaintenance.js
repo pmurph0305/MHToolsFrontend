@@ -15,6 +15,7 @@ const inputPlaceholder = "Enter a task to add..."
 
 const mapStateToProps = state => {
     return {
+        user_id: state.appReducer.user_id,
         editing: state.DMReducer.editing.dm_editing,
         taskList: state.DMReducer.tasks.dm_taskList,
         taskListError: state.DMReducer.tasks.dm_error,
@@ -55,20 +56,20 @@ class DailyMaintenance extends React.Component {
         if (!this.props.taskList) {
             // get the current date, slice it to work with database.
             let date = new Date().toISOString().slice(0,10);
-            this.props.onRequestDMTaskList(1, date)
+            this.props.onRequestDMTaskList(this.props.user_id, date)
         }
     }
 
     // On check event for each task.
     onCheck(event) {
         // Send toggling task action.
-        this.props.onToggleDMTask(1, this.props.taskList[event.target.id]['task_id'], event.target.id, event.target.checked) 
+        this.props.onToggleDMTask(this.props.user_id, this.props.taskList[event.target.id]['task_id'], event.target.id, event.target.checked) 
     }
 
     // Change date when the button is clicked.
     onDateButtonClick(event) {
         // Send request for date change.
-        this.props.onRequestDMTaskList(1, this.props.date, Number(event.target.value));
+        this.props.onRequestDMTaskList(this.props.user_id, this.props.date, Number(event.target.value));
     }
 
     onAddTaskClick(inputField) {
@@ -76,7 +77,7 @@ class DailyMaintenance extends React.Component {
         if(inputField.value !== '') {
             // calculate rank by finding max of current ranks + 1.
             let rank = Math.max.apply(Math, this.props.taskList.map(task=> {return task.rank +1}))
-            this.props.onAddDMTask(1, inputField.value, rank);
+            this.props.onAddDMTask(this.props.user_id, inputField.value, rank);
             // clear input field.
             inputField.value = ''
         }
@@ -84,7 +85,7 @@ class DailyMaintenance extends React.Component {
 
     // Handles removing the task from the task list and updating state when editing is enabled.
     onRemoveTask(id) {
-        this.props.onRemoveTask(1, this.props.taskList[id]['task_id']);
+        this.props.onRemoveTask(this.props.user_id, this.props.taskList[id]['task_id']);
     }
 
     // Handles changing the order of tasks on the task list when editing is enabled.
@@ -99,7 +100,7 @@ class DailyMaintenance extends React.Component {
         this.props.onEditToggle(false);
         let tasksToUpdate = this.props.taskList.filter((task => task['updated']))
         if (tasksToUpdate.length) {
-            this.props.onSaveClick(1, tasksToUpdate);
+            this.props.onSaveClick(this.props.user_id, tasksToUpdate);
         }
     }
 

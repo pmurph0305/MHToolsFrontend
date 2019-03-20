@@ -1,27 +1,41 @@
-import CBT from './Containers/CBT/CBT'
-import CopingSkills from './Containers/CopingSkills/CopingSkills'
-import DailyMaintenance from './Containers/DailyMaintenance/DailyMaintenance'
-import NavBar from './Components/Navigation/NavBar'
-import PHQ9 from './Containers/PHQ9/PHQ9'
+import { loginUser } from './Redux/app_actions'
+import CBT from '../CBT/CBT'
+import CopingSkills from '../CopingSkills/CopingSkills'
+import DailyMaintenance from '../DailyMaintenance/DailyMaintenance'
+import NavBar from '../../Components/Navigation/NavBar'
+import PHQ9 from '../PHQ9/PHQ9'
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
 import 'tachyons';
 import './App.css';
 
 const serverURL = 'http://localhost:3001'
+
+
+
+const mapStateToProps = state => {
+	return {
+		user_id: state.appReducer.user_id,
+	}
+}
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		onLoginUser: () => dispatch(loginUser())
+	}
+}
 
 class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			route: 'coping',
-			user_id: 1,
 			phq9_result: '',
 		}
 	}
 
-	// componentDidMount() {
-	// 	console.log(this.props.store.getState());
-	// }
+
 
 	onRouteChange = (route) => {
 		console.log('state from:', this.state.route);
@@ -31,7 +45,7 @@ class App extends Component {
 
 	onSubmitPHQ9 = (data) => {
 		let score = data.reduce((acc, cur, i) => i < 9 ? acc + cur : acc);
-		fetch(serverURL+'/phq9/'+this.state.user_id, {
+		fetch(serverURL+'/phq9/'+this.props.user_id, {
 			method: 'POST',
 			headers: {'Content-Type' : 'application/json'},
 			body: JSON.stringify({
@@ -80,4 +94,4 @@ class App extends Component {
 	}
 }
 
-export default App;
+export default connect(mapStateToProps, mapDispatchToProps)(App);

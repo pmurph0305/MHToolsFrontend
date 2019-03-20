@@ -13,6 +13,7 @@ import { createInflate } from 'zlib';
 
 const mapStateToProps = state => {
     return {
+        user_id: state.appReducer.user_id,
         coping_skills: state.CSReducer.skills.coping_skills,
         error: state.CSReducer.skills.error,
     }
@@ -38,7 +39,7 @@ class CopingSkills extends React.Component {
 
     componentDidMount() {
         if (!this.props.coping_skills) {
-            this.props.onGetUserSkills(1);
+            this.props.onGetUserSkills(this.props.user_id);
         }
     }
 
@@ -68,10 +69,10 @@ class CopingSkills extends React.Component {
         }
         if (Number(event.target.value) === 0) {
             console.log("change to my skills")
-            this.props.onGetUserSkills(1);
+            this.props.onGetUserSkills(this.props.user_id);
         } else {
             console.log("change to shared")
-            this.props.onGetSharedSkills(2, 'rand')
+            this.props.onGetSharedSkills(this.props.user_id, 'top')
           //  this.setState({displayedSkills: sharedSkills})
             // display shared coping skills
         }
@@ -98,18 +99,18 @@ class CopingSkills extends React.Component {
             title.style.borderBottom = '0px';
             text.style.display = 'block';
             text.style.maxHeight = text.scrollHeight + 'px';
-            
         }
     }
-np
+
     onShareSkillClick(index) {
         console.log("Share:" + index);
     }
 
     render() {
-        const { coping_skills, error } = this.props;
+        const { coping_skills, error, user_id } = this.props;
         console.log('skills:', coping_skills);
         console.log('error:', error);
+        console.log('user', user_id)
         return( 
             <section className='ma0 pa1 pa3-ns bt black-90 bg-light-gray tc'>
                 <h1 className='ma1 mh2'>Coping Skills</h1>
@@ -130,7 +131,7 @@ np
                         index={index}
                         key={index}
                         skill_id={skill['skill_id']}
-                        allowAdd={skill['user_id'] === 1 ? false : true}
+                        allowAdd={skill['user_id'] === user_id ? false : true}
                         shared={skill['shared']}
                         shareable={skill['shareable']}
                         onExpand={this.onCollapisbleClick}

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import App from './Containers/App/App';
 
 import * as serviceWorker from './serviceWorker';
 
@@ -10,14 +10,15 @@ import { Provider } from 'react-redux';
 import { applyMiddleware, combineReducers, createStore } from 'redux';
 
 //reducers
+import { appReducer } from './Containers/App/Redux/app_reducers';
 import { DMReducer } from './Containers/DailyMaintenance/Redux/dm_reducers';
-import { CSReducer } from './Containers/CopingSkills/Redux/cs_reducers'
+import { CSReducer } from './Containers/CopingSkills/Redux/cs_reducers';
 
 //Redux middleware.
 import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 
-const rootReducer = combineReducers({ DMReducer, CSReducer })
+const rootReducer = combineReducers({ appReducer, DMReducer, CSReducer })
 const logger = createLogger();
 const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, logger));
 
