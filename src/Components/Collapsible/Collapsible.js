@@ -6,13 +6,14 @@ const Collapsible = ({allowAdd, skill_id, index, shared, shareable, text, title,
     return(
         <div>
             <button className='collapsible'
-                id={'cDesc_'+index}
+                id={'cTitle_'+index}
                 onClick={() => onExpand(index)}
-                >{title}{}</button>
+                >{title}</button>
+                
             <div 
                 id={'cText_'+index}
                 className='collapsibleContent'
-                >{text}<br/>
+                ><p className='collapsibleText'>{text}</p>
                 { allowAdd
                 ? <button
                     className='collapsibleInnerButton'

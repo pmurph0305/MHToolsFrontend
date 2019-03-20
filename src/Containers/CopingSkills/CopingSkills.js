@@ -8,6 +8,7 @@ import SelectionBox from '../../Components/SelectionBox/SelectionBox'
 import {
     getCopingSkills
 } from './Redux/cs_actions'
+import { createInflate } from 'zlib';
 
 const mapStateToProps = state => {
     return {
@@ -80,14 +81,18 @@ class CopingSkills extends React.Component {
         console.log("click: " + index);
         // Get element for the skill clicked on.
         let text = document.getElementById('cText_'+index);
+        let title = document.getElementById('cTitle_'+index);
+        console.log('title', title);
         // Set max height to add transition to expanding card.
         // Move border from bottom of description button to
         // bottom of the text to seperate it better from next coping skill.
         if (text.style.maxHeight) {
-            // text.style.padding = '0 1rem'
+            title.style.borderBottom = '1px solid black'
+            text.style.display = 'none';
             text.style.maxHeight = null;
         } else {
-            // text.style.padding = '1rem'
+            title.style.borderBottom = '0px';
+            text.style.display = 'block';
             text.style.maxHeight = text.scrollHeight + 'px';
             
         }

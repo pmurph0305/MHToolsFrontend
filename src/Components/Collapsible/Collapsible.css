@@ -1,33 +1,42 @@
+/* Button that holds title */
 .collapsible {
     cursor: pointer;
     padding: 1rem;
     width: 100%;
     text-align: left;
     background-color: lightgray;
+    border-bottom: 1px solid black;
 }
 
+/* Change title background color on hover */
 .active, .collapsible:hover {
-    background-color: #ccc
+    background-color: rgb(221, 219, 219);
 }
 
+/* Div that holds the description & share / add button */
 .collapsibleContent {
-    /* display: none; */
     background-color: #f1f1f1;
-    padding: 0 2rem;
     text-align: left;
     /* Animated collapsible stuff */
     overflow: hidden;
+    display: none;
     max-height: 0;
     transition: max-height 0.3s ease;
     border-bottom: 1px solid black;
 }
 
+/* Inner text for coping skill. */
+.collapsibleText {
+    padding: 1rem 2rem;
+    float: left
+}
+
+/* Inner share button. */
 .collapsibleInnerButton {
+    float: right;
     background-color: lightgrey;
     color: black;
     cursor: pointer;
     padding: 0.5rem;
-    margin: 1rem;
-    text-align: left;
-    float: right;
+    margin: 0.5rem;
 }
