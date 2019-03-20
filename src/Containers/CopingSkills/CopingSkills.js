@@ -2,14 +2,13 @@ import { connect } from 'react-redux'
 import React from 'react'
 
 import ErrorBox from '../../Components/ErrorBox/ErrorBox'
-import Collapsible from '../../Components/Collapsible/Collapsible'
+import SkillCollapsible from '../../Components/SkillCollapsible/SkillCollapsible'
 import SelectionBox from '../../Components/SelectionBox/SelectionBox'
 
 import {
     getCopingSkills,
     getSharedCopingSkills
 } from './Redux/cs_actions'
-import { createInflate } from 'zlib';
 
 const mapStateToProps = state => {
     return {
@@ -30,6 +29,12 @@ const mapDispatchToProps = (dispatch) => {
 const heightTransition = 'max-height 0.3s ease';
 
 class CopingSkills extends React.Component {
+
+    //TODO: add skills.
+    //TODO: share skills.
+    //TODO: sort shared skills.
+    //TODO: edit skills.
+
 
     constructor(props) {
         super(props);
@@ -68,37 +73,11 @@ class CopingSkills extends React.Component {
             }
         }
         if (Number(event.target.value) === 0) {
-            console.log("change to my skills")
+            // Get User's coping skills
             this.props.onGetUserSkills(this.props.user_id);
         } else {
-            console.log("change to shared")
+            // Get Shared coping skills, default to 'top' for now.
             this.props.onGetSharedSkills(this.props.user_id, 'top')
-          //  this.setState({displayedSkills: sharedSkills})
-            // display shared coping skills
-        }
-        
-        //this.setState({displayedSkills: displayedSkills})
-    }
-
-    
-    // move into collapsible.js?
-    onCollapisbleClick(index) {
-        console.log("click: " + index);
-        // Get element for the skill clicked on.
-        let text = document.getElementById('cText_'+index);
-        let title = document.getElementById('cTitle_'+index);
-        console.log('title', title);
-        // Set max height to add transition to expanding card.
-        // Move border from bottom of description button to
-        // bottom of the text to seperate it better from next coping skill.
-        if (text.style.maxHeight) {
-            title.style.borderBottom = '1px solid black'
-            text.style.display = 'none';
-            text.style.maxHeight = null;
-        } else {
-            title.style.borderBottom = '0px';
-            text.style.display = 'block';
-            text.style.maxHeight = text.scrollHeight + 'px';
         }
     }
 
@@ -106,11 +85,28 @@ class CopingSkills extends React.Component {
         console.log("Share:" + index);
     }
 
+
     render() {
         const { coping_skills, error, user_id } = this.props;
+        var resizeTimeout;
+
+        // Resize expanded collapsibles when window is resized.
+        window.onresize = function () {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(function() {
+                coping_skills.forEach((item, index) => {
+                    let text = document.getElementById('cText_'+index);
+                    if (text && text.style.maxHeight) {
+                        text.style.maxHeight = text.scrollHeight + 'px';
+                    }
+                })
+            }, 100);
+        }
+
         console.log('skills:', coping_skills);
         console.log('error:', error);
         console.log('user', user_id)
+
         return( 
             <section className='ma0 pa1 pa3-ns bt black-90 bg-light-gray tc'>
                 <h1 className='ma1 mh2'>Coping Skills</h1>
@@ -118,14 +114,14 @@ class CopingSkills extends React.Component {
                     A list of coping skills to use in situations to help tolerate stress and conflict.
                 </p>
                 <SelectionBox
-                    className='black ma2 pa1 hover-bg-black-20 fl'
+                    className='black ma2 pa1 hover-bg-black-20 fl db'
                     options={['My coping skills', 'Shared coping skills']}
                     onChange={this.onChangeSkillDisplay}
 
                 />
                 { coping_skills && Array.isArray(coping_skills)
                 ? coping_skills.map((skill, index) => {
-                    return <Collapsible
+                    return <SkillCollapsible
                         title = {skill['title']}
                         text={skill['description']}
                         index={index}
@@ -134,7 +130,6 @@ class CopingSkills extends React.Component {
                         allowAdd={skill['user_id'] === user_id ? false : true}
                         shared={skill['shared']}
                         shareable={skill['shareable']}
-                        onExpand={this.onCollapisbleClick}
                         onAddSkill={this.onAddSkillClick}
                         onShareSkill={this.onShareSkillClick}
                     />
@@ -142,8 +137,7 @@ class CopingSkills extends React.Component {
                 : error
                 ? <ErrorBox error={error}/>
                 : null
-                }
-                
+                }           
             </section>
         )
     }

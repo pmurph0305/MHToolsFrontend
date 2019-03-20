@@ -27,9 +27,6 @@ function copingSkillsReducer(state = [initialState], action) {
 
 function setCopingSkillsList(state, action) {
     if (Array.isArray(action.payload)) {
-        let skills = action.payload.map(item => {
-            return item;
-        })
         return updateObject(state, { coping_skills: action.payload })
     } else {
         return updateObject(state, { error: action.payload })

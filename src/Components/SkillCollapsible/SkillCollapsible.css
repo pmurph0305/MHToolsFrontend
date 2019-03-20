@@ -27,8 +27,8 @@
 
 /* Inner text for coping skill. */
 .collapsibleText {
-    padding: 1rem 2rem;
-    float: left
+    padding: 1rem 0.5rem 1rem 2rem;
+    float: left;
 }
 
 /* Inner share button. */
