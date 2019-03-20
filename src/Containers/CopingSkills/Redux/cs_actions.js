@@ -3,14 +3,11 @@ import {
     REQUEST_CS_USER_SUCCESS,
     REQUEST_CS_USER_PENDING,
     REQUEST_CS_USER_FAILED,
-    // GET shared coping skills.
-    REQUEST_CS_SHARED_SUCCESS,
-    REQUEST_CS_FAILED
+
 } from './cs_constants'
 
 export const getCopingSkills = (id) => (dispatch) => {
     // dispatch action
-    console.log("GET COPING SKILLS");
     dispatch({ type: REQUEST_CS_USER_PENDING });
     fetch('http://localhost:3001/copingskills/'+id)
     .then(response => response.json())
@@ -19,6 +16,16 @@ export const getCopingSkills = (id) => (dispatch) => {
     // catch error.
     .catch(err=> {dispatch({ type:REQUEST_CS_USER_FAILED, payload: err})})
 }
+
+export const getSharedCopingSkills = (id, type) => (dispatch) => {
+    // request shared coping skills for user.
+    dispatch({ type: REQUEST_CS_USER_PENDING });
+    fetch('http://localhost:3001/copingskills/shared/'+id+'/'+type)
+    .then(response => response.json())
+    .then(data => {dispatch({ type: REQUEST_CS_USER_SUCCESS, payload: data })})
+    .catch(err => dispatch({ type: REQUEST_CS_USER_FAILED, payload: err }))
+}
+
 
 
 // // Coping Skills Routes

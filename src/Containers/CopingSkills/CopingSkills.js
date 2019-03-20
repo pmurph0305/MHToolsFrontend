@@ -6,7 +6,8 @@ import Collapsible from '../../Components/Collapsible/Collapsible'
 import SelectionBox from '../../Components/SelectionBox/SelectionBox'
 
 import {
-    getCopingSkills
+    getCopingSkills,
+    getSharedCopingSkills
 } from './Redux/cs_actions'
 import { createInflate } from 'zlib';
 
@@ -19,7 +20,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onGetUserTasks: (id) => dispatch(getCopingSkills(id))
+        onGetUserSkills: (id) => dispatch(getCopingSkills(id)),
+        onGetSharedSkills: (id, type) => dispatch(getSharedCopingSkills(id,type))
     }
 }
 
@@ -36,7 +38,7 @@ class CopingSkills extends React.Component {
 
     componentDidMount() {
         if (!this.props.coping_skills) {
-            this.props.onGetUserTasks(1);
+            this.props.onGetUserSkills(1);
         }
     }
 
@@ -66,12 +68,14 @@ class CopingSkills extends React.Component {
         }
         if (Number(event.target.value) === 0) {
             console.log("change to my skills")
-            
+            this.props.onGetUserSkills(1);
         } else {
             console.log("change to shared")
+            this.props.onGetSharedSkills(2, 'rand')
           //  this.setState({displayedSkills: sharedSkills})
             // display shared coping skills
         }
+        
         //this.setState({displayedSkills: displayedSkills})
     }
 
@@ -126,7 +130,7 @@ np
                         index={index}
                         key={index}
                         skill_id={skill['skill_id']}
-                        allowAdd={skill['user_id'] ? false : true}
+                        allowAdd={skill['user_id'] === 1 ? false : true}
                         shared={skill['shared']}
                         shareable={skill['shareable']}
                         onExpand={this.onCollapisbleClick}

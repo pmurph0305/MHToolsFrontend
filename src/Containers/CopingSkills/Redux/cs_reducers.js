@@ -4,7 +4,7 @@ import {updateObject, updateItemByIndexInArray} from '../../../ReduxHelpers/redu
 
 import {
     REQUEST_CS_USER_SUCCESS,
-    REQUEST_CS_USER_FAILED
+    REQUEST_CS_USER_FAILED,
 } from './cs_constants'
 
 const initialState = {
@@ -23,6 +23,7 @@ function copingSkillsReducer(state = [initialState], action) {
             return state;
     }
 }
+
 
 function setCopingSkillsList(state, action) {
     if (Array.isArray(action.payload) && action.payload.length) {
