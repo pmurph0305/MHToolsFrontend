@@ -6,6 +6,7 @@ import SkillCollapsible from '../../Components/SkillCollapsible/SkillCollapsible
 import SelectionBox from '../../Components/SelectionBox/SelectionBox'
 
 import {
+    addCopingSkill,
     getCopingSkills,
     getSharedCopingSkills
 } from './Redux/cs_actions'
@@ -20,6 +21,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        onAddCopingSkill: (id, title, desc, shared) => dispatch(addCopingSkill(id,title,desc,shared)),
         onGetUserSkills: (id) => dispatch(getCopingSkills(id)),
         onGetSharedSkills: (id, type) => dispatch(getSharedCopingSkills(id,type))
     }
@@ -40,6 +42,7 @@ class CopingSkills extends React.Component {
         super(props);
         // this.state=initialState;
         this.onChangeSkillDisplay = this.onChangeSkillDisplay.bind(this);
+        this.onAddNewSkillClick = this.onAddNewSkillClick.bind(this);
     }
 
     componentDidMount() {
@@ -85,6 +88,11 @@ class CopingSkills extends React.Component {
         console.log("Share:" + index);
     }
 
+    onAddNewSkillClick() {
+        // get title, desc & shared properties of new skill to be added.
+        // dispatch action to add to database.
+        this.props.onAddCopingSkill();
+    }
 
     render() {
         const { coping_skills, error, user_id } = this.props;
@@ -114,7 +122,7 @@ class CopingSkills extends React.Component {
                     A list of coping skills to use in situations to help tolerate stress and conflict.
                 </p>
                 <SelectionBox
-                    className='black ma2 pa1 hover-bg-black-20 fl db'
+                    className='black ma2 bg-black-10 pa1 hover-bg-black-20 fl db'
                     options={['My coping skills', 'Shared coping skills']}
                     onChange={this.onChangeSkillDisplay}
 
@@ -134,10 +142,18 @@ class CopingSkills extends React.Component {
                         onShareSkill={this.onShareSkillClick}
                     />
                 })
-                : error
-                ? <ErrorBox error={error}/>
                 : null
-                }           
+                }
+                <button
+                    type='button'
+                    onClick={this.onAddNewSkillClick}
+                >Add new skill but not really.
+                </button>
+                {
+                    error
+                    ? <ErrorBox error={error}/>
+                    : null
+                }
             </section>
         )
     }

@@ -1,5 +1,7 @@
 .ErrorBox {
     background-color: lightcoral;
-    display: inline-block;
+    display: block;
+    width: fit-content;
+    margin: auto;
     padding: 0.5rem;
 }
