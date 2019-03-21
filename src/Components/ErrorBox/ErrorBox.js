@@ -3,17 +3,28 @@ import React from 'react';
 import './ErrorBox.css'
 
 const ErrorBox = ({error}) => {
-    if (error) {
+    var displayedError;
+    if (error && error.length) {
         // Removes error passed from database.
-        var displayedError = error.split('error:')
+        displayedError = error.split('error:')
         // Still console log the actual database error in console though.
         if (displayedError[1]) {
             console.log(displayedError[1]);
         }
+        displayedError = displayedError[0].toString();
+    } else if (error) {
+        // otherwise it's a type error of some kind.
+        displayedError = error.toString();
     }
+
     return (
-        <div class='ErrorBox'>
-            {displayedError[0]}
+        <div>
+            {displayedError
+            ? <div class='ErrorBox'>
+                {displayedError}
+              </div>
+            : null
+            }
         </div>
     )
 }

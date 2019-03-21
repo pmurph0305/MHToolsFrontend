@@ -8,6 +8,7 @@ import SelectionBox from '../../Components/SelectionBox/SelectionBox'
 
 import {
     addCopingSkill,
+    addSharedCopingSkill,
     getCopingSkills,
     getSharedCopingSkills,
     deleteCopingSkill,
@@ -24,6 +25,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onAddCopingSkill: (id, title, desc, shared) => dispatch(addCopingSkill(id,title,desc,shared)),
+        onAddSharedCopingSkill: (id, skill_id) => dispatch(addSharedCopingSkill(id, skill_id)),
         onDeleteCopingSkill: (id, skill_id) => dispatch(deleteCopingSkill(id, skill_id)),
         onGetUserSkills: (id) => dispatch(getCopingSkills(id)),
         onGetSharedSkills: (id, type) => dispatch(getSharedCopingSkills(id,type))
@@ -47,6 +49,7 @@ class CopingSkills extends React.Component {
         // this.state=initialState;
         this.onChangeSkillDisplay = this.onChangeSkillDisplay.bind(this);
         this.onAddNewSkillClick = this.onAddNewSkillClick.bind(this);
+        this.onAddSharedSkillClick = this.onAddSharedSkillClick.bind(this);
     }
 
     componentDidMount() {
@@ -55,11 +58,12 @@ class CopingSkills extends React.Component {
         }
     }
 
-    onAddSkillClick(coping_id) {
-        // console.log("Add skill:", coping_id);
+    onAddSharedSkillClick(skill_id) {
+        console.log("Add skill:", skill_id);
         // let skill = displayedSkills.filter(skill => skill['coping_id'] === coping_id);
         // console.log("Found skill:", skill)
         // Use action to send fetch to server to add to coping skills list.
+        this.props.onAddSharedCopingSkill(this.props.user_id, skill_id);
     }
 
 
@@ -151,7 +155,7 @@ class CopingSkills extends React.Component {
                         allowAdd={skill['user_id'] === user_id ? false : true}
                         shared={skill['shared']}
                         shareable={skill['shareable']}
-                        onAddSkill={this.onAddSkillClick}
+                        onAddSharedSkill={this.onAddSharedSkillClick}
                         onShareSkill={this.onShareSkillClick}
                         onDeleteSkill={(skill_id) => this.props.onDeleteCopingSkill(user_id, skill_id)}
                     />

@@ -15,6 +15,9 @@ import {
     DELETE_CS_USER_FAILED,
 
     // Add shared coping skill to user list.
+    ADD_CS_SHARED_SUCCESS,
+    ADD_CS_SHARED_PENDING,
+    ADD_CS_SHARED_FAILED,
 
     // Update user's coping skill.
     
@@ -68,6 +71,15 @@ export const getSharedCopingSkills = (id, type) => (dispatch) => {
     .catch(err => dispatch({ type: REQUEST_CS_USER_FAILED, payload: err }))
 }
 
+export const addSharedCopingSkill = (id, skill_id) => (dispatch) => {
+    dispatch({ type: ADD_CS_SHARED_PENDING });
+    fetch(URL+'copingskills/shared/'+id+'/'+skill_id, {
+        method: 'POST'
+    })
+    .then(response => response.json())
+    .then(data => {dispatch({ type: ADD_CS_SHARED_SUCCESS, payload: data })})
+    .catch(err => dispatch({ type: ADD_CS_SHARED_FAILED, payload: err }))
+}
 
 
 // // Coping Skills Routes

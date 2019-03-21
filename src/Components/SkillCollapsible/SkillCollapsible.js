@@ -2,7 +2,7 @@ import React from 'react'
 
 import './SkillCollapsible.css'
 
-const Collapsible = ({allowAdd, skill_id, index, shared, shareable, text, title, onAddSkill, onDeleteSkill, onShareSkill}) => {
+const Collapsible = ({allowAdd, skill_id, index, shared, shareable, text, title, onAddSharedSkill, onDeleteSkill, onShareSkill}) => {
 
     function onCollapisbleClick(title, index) {
         // Get text content element for the skill clicked on.
@@ -38,7 +38,7 @@ const Collapsible = ({allowAdd, skill_id, index, shared, shareable, text, title,
                 { allowAdd // Addable to users own list, viewing shared skills.
                 ? <button
                     className='collapsibleInnerButton'
-                    onClick={() => onAddSkill(skill_id)}
+                    onClick={() => onAddSharedSkill(skill_id)}
                 >
                     Add to my coping skills
                 </button>
