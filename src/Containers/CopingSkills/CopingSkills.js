@@ -8,7 +8,8 @@ import SelectionBox from '../../Components/SelectionBox/SelectionBox'
 import {
     addCopingSkill,
     getCopingSkills,
-    getSharedCopingSkills
+    getSharedCopingSkills,
+    deleteCopingSkill,
 } from './Redux/cs_actions'
 
 const mapStateToProps = state => {
@@ -22,6 +23,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onAddCopingSkill: (id, title, desc, shared) => dispatch(addCopingSkill(id,title,desc,shared)),
+        onDeleteCopingSkill: (id, skill_id) => dispatch(deleteCopingSkill(id, skill_id)),
         onGetUserSkills: (id) => dispatch(getCopingSkills(id)),
         onGetSharedSkills: (id, type) => dispatch(getSharedCopingSkills(id,type))
     }
@@ -32,6 +34,7 @@ const heightTransition = 'max-height 0.3s ease';
 
 class CopingSkills extends React.Component {
 
+    //TODO: delete skills.
     //TODO: add skills.
     //TODO: share skills.
     //TODO: sort shared skills.
@@ -94,6 +97,10 @@ class CopingSkills extends React.Component {
         this.props.onAddCopingSkill();
     }
 
+    onDeleteSkillClick(skill_id) {
+
+    }
+
     render() {
         const { coping_skills, error, user_id } = this.props;
         var resizeTimeout;
@@ -140,6 +147,7 @@ class CopingSkills extends React.Component {
                         shareable={skill['shareable']}
                         onAddSkill={this.onAddSkillClick}
                         onShareSkill={this.onShareSkillClick}
+                        onDeleteSkill={(skill_id) => this.props.onDeleteCopingSkill(user_id, skill_id)}
                     />
                 })
                 : null

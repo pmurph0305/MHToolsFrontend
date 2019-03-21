@@ -1,13 +1,23 @@
 import {
-    // GET Coping skills.
+    // GET users or shared coping skills.
     REQUEST_CS_USER_SUCCESS,
     REQUEST_CS_USER_PENDING,
     REQUEST_CS_USER_FAILED,
 
-    // ADD Copng skill.
+    // ADD entered Coping skill to user list.
     ADD_CS_USER_SUCCESS,
     ADD_CS_USER_PENDING,
     ADD_CS_USER_FAILED,
+
+    // DELETE coping skill from user list.
+    DELETE_CS_USER_SUCCESS,
+    DELETE_CS_USER_PENDING,
+    DELETE_CS_USER_FAILED,
+
+    // Add shared coping skill to user list.
+
+    // Update user's coping skill.
+    
 } from './cs_constants'
 
 const URL = 'http://localhost:3001/'
@@ -25,7 +35,17 @@ export const addCopingSkill = (id, title, desc, shared) => (dispatch) => {
     })
     .then(response => response.json())
     .then(data => { dispatch({ type: ADD_CS_USER_SUCCESS, payload: data })})
-    .catch(err => { dispatch({ type: ADD_CS_USER_FAILED, payload: err})})
+    .catch(err => { dispatch({ type: ADD_CS_USER_FAILED, payload: err })})
+}
+
+export const deleteCopingSkill = (id, skill_id) => (dispatch) => {
+    dispatch({ type: DELETE_CS_USER_PENDING });
+    fetch(URL+'copingskills/'+id+'/'+skill_id, {
+        method: 'DELETE'
+    })
+    .then(response => response.json())
+    .then(data => dispatch({ type: DELETE_CS_USER_SUCCESS, payload: data }))
+    .catch(err => { dispatch({ type: DELETE_CS_USER_FAILED, payload: err })})
 }
 
 export const getCopingSkills = (id) => (dispatch) => {
@@ -36,7 +56,7 @@ export const getCopingSkills = (id) => (dispatch) => {
     // dispatch success.
     .then(data => {dispatch({ type: REQUEST_CS_USER_SUCCESS, payload: data })})
     // catch error.
-    .catch(err=> {dispatch({ type:REQUEST_CS_USER_FAILED, payload: err})})
+    .catch(err=> {dispatch({ type:REQUEST_CS_USER_FAILED, payload: err })})
 }
 
 export const getSharedCopingSkills = (id, type) => (dispatch) => {

@@ -2,7 +2,7 @@ import React from 'react'
 
 import './SkillCollapsible.css'
 
-const Collapsible = ({allowAdd, skill_id, index, shared, shareable, text, title, onAddSkill, onShareSkill}) => {
+const Collapsible = ({allowAdd, skill_id, index, shared, shareable, text, title, onAddSkill, onDeleteSkill, onShareSkill}) => {
 
     function onCollapisbleClick(title, index) {
         // Get text content element for the skill clicked on.
@@ -48,6 +48,15 @@ const Collapsible = ({allowAdd, skill_id, index, shared, shareable, text, title,
                     onClick={() => onShareSkill(skill_id)}
                 >
                     Share
+                </button>
+                : null
+                }
+                { !allowAdd // Not viewing shared skills.
+                ?  <button
+                    className='collapsibleDeleteButton'
+                    onClick={() => onDeleteSkill(skill_id)}
+                >
+                    Delete
                 </button>
                 : null
                 }

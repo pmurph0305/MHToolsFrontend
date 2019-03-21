@@ -9,6 +9,8 @@ import {
     ADD_CS_USER_SUCCESS,
     ADD_CS_USER_FAILED,
 
+    DELETE_CS_USER_SUCCESS,
+    DELETE_CS_USER_FAILED,
 } from './cs_constants'
 
 const initialState = {
@@ -27,6 +29,10 @@ function copingSkillsReducer(state = [initialState], action) {
             return addNewCopingSkill(state, action);
         case ADD_CS_USER_FAILED:
             return setCopingSkillsError(state, action);
+        case DELETE_CS_USER_SUCCESS:
+            return removeSkillFromSkillList(state,action);
+        case DELETE_CS_USER_FAILED:
+            return setCopingSkillsError(state, action);
         default:
             return state;
     }
@@ -42,6 +48,16 @@ function addNewCopingSkill(state, action) {
         return updateObject(state, { coping_skills: skills });
     } else {
         return setCopingSkillsError(state, action);
+    }
+}
+
+function removeSkillFromSkillList(state, action) {
+    let removeId = parseInt(action.payload.skill_id);
+    if (removeId) {
+        let skills = state.coping_skills.filter(skill => skill.skill_id !== removeId)
+        return updateObject(state, { coping_skills: skills});
+    } else {
+        console.log("UNKNOWN DELETE ISSUE", action.payload);
     }
 }
 

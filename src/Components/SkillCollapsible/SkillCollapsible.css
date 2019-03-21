@@ -40,3 +40,13 @@
     padding: 0.5rem;
     margin: 0.5rem;
 }
+
+/* Inner delete button. */
+.collapsibleDeleteButton {
+    float: right;
+    background-color: lightcoral;
+    color: black;
+    cursor: pointer;
+    padding: 0.5rem;
+    margin: 0.5rem;
+}
