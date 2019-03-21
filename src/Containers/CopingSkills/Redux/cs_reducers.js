@@ -14,15 +14,18 @@ import {
 
     ADD_CS_SHARED_SUCCESS,
     ADD_CS_SHARED_FAILED,
+
+    CHANGE_CS_VIEWING,
 } from './cs_constants'
 
 const initialState = {
     coping_skills: [],
     error: '',
+    viewing: 'user',
 }
 
 
-function copingSkillsReducer(state = [initialState], action) {
+function copingSkillsReducer(state = initialState, action={}) {
     switch(action.type) {
         case REQUEST_CS_USER_SUCCESS:
             return setCopingSkillsList(state, action);
@@ -39,16 +42,23 @@ function copingSkillsReducer(state = [initialState], action) {
         case ADD_CS_SHARED_SUCCESS:
             // Need to handle case where user clicks add to coping lists and switches back to their own
             // coping list before the fetch's return in the action.
-            return state;
+            return addSharedCopingSkill(state, action);
         case ADD_CS_SHARED_FAILED:
             return setCopingSkillsError(state, action);
-        
+        case CHANGE_CS_VIEWING:
+            return changeCSViewing(state, action);
         default:
             return state;
     }
 }
 
-
+function changeCSViewing(state, action) {
+    if (action.payload) {
+        return updateObject(state, {viewing: action.payload})
+    } else {
+        return state;
+    }
+}
 
 function addNewCopingSkill(state, action) {
     if (Array.isArray(action.payload) && action.payload[0]) {
@@ -60,6 +70,16 @@ function addNewCopingSkill(state, action) {
         return updateObject(state, { coping_skills: skills });
     } else {
         return setCopingSkillsError(state, action);
+    }
+}
+
+function addSharedCopingSkill(state, action) {
+    // if user is viewing the shared list still, don't add to the state.
+    if (state.viewing === 'shared') {
+        return state;
+    } else {
+        // otherwise they are viewing their own list, so add the skill to the state.
+        return addNewCopingSkill(state, action);
     }
 }
 
@@ -75,6 +95,7 @@ function removeSkillFromSkillList(state, action) {
 
 function setCopingSkillsList(state, action) {
     // no length as no coping skills returns empty array.
+    console.log(action.payload);
     if (Array.isArray(action.payload)) {
         return updateObject(state, { coping_skills: action.payload })
     } else {

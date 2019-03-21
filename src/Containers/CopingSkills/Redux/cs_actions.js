@@ -20,6 +20,9 @@ import {
     ADD_CS_SHARED_FAILED,
 
     // Update user's coping skill.
+
+    // CHANGE VIEWING
+    CHANGE_CS_VIEWING,
     
 } from './cs_constants'
 
@@ -39,6 +42,20 @@ export const addCopingSkill = (id, title, desc, shared) => (dispatch) => {
     .then(response => response.json())
     .then(data => { dispatch({ type: ADD_CS_USER_SUCCESS, payload: data })})
     .catch(err => { dispatch({ type: ADD_CS_USER_FAILED, payload: err })})
+}
+
+export const addSharedCopingSkill = (id, skill_id) => (dispatch) => {
+    dispatch({ type: ADD_CS_SHARED_PENDING });
+    fetch(URL+'copingskills/shared/'+id+'/'+skill_id, {
+        method: 'POST'
+    })
+    .then(response => response.json())
+    .then(data => {dispatch({ type: ADD_CS_SHARED_SUCCESS, payload: data })})
+    .catch(err => dispatch({ type: ADD_CS_SHARED_FAILED, payload: err }))
+}
+
+export const changeCSViewing = (viewing) => (dispatch) => {
+    dispatch({ type: CHANGE_CS_VIEWING, payload: viewing });
 }
 
 export const deleteCopingSkill = (id, skill_id) => (dispatch) => {
@@ -71,15 +88,7 @@ export const getSharedCopingSkills = (id, type) => (dispatch) => {
     .catch(err => dispatch({ type: REQUEST_CS_USER_FAILED, payload: err }))
 }
 
-export const addSharedCopingSkill = (id, skill_id) => (dispatch) => {
-    dispatch({ type: ADD_CS_SHARED_PENDING });
-    fetch(URL+'copingskills/shared/'+id+'/'+skill_id, {
-        method: 'POST'
-    })
-    .then(response => response.json())
-    .then(data => {dispatch({ type: ADD_CS_SHARED_SUCCESS, payload: data })})
-    .catch(err => dispatch({ type: ADD_CS_SHARED_FAILED, payload: err }))
-}
+
 
 
 // // Coping Skills Routes

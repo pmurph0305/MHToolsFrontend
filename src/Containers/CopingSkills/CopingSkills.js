@@ -9,6 +9,7 @@ import SelectionBox from '../../Components/SelectionBox/SelectionBox'
 import {
     addCopingSkill,
     addSharedCopingSkill,
+    changeCSViewing,
     getCopingSkills,
     getSharedCopingSkills,
     deleteCopingSkill,
@@ -19,6 +20,7 @@ const mapStateToProps = state => {
         user_id: state.appReducer.user_id,
         coping_skills: state.CSReducer.skills.coping_skills,
         error: state.CSReducer.skills.error,
+        viewing: state.CSReducer.skills.viewing,
     }
 }
 
@@ -26,6 +28,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         onAddCopingSkill: (id, title, desc, shared) => dispatch(addCopingSkill(id,title,desc,shared)),
         onAddSharedCopingSkill: (id, skill_id) => dispatch(addSharedCopingSkill(id, skill_id)),
+        onChangeViewing: (viewing) => dispatch(changeCSViewing(viewing)),
         onDeleteCopingSkill: (id, skill_id) => dispatch(deleteCopingSkill(id, skill_id)),
         onGetUserSkills: (id) => dispatch(getCopingSkills(id)),
         onGetSharedSkills: (id, type) => dispatch(getSharedCopingSkills(id,type))
@@ -37,8 +40,6 @@ const heightTransition = 'max-height 0.3s ease';
 
 class CopingSkills extends React.Component {
 
-    //TODO: delete skills.
-    //TODO: add skills.
     //TODO: share skills.
     //TODO: sort shared skills.
     //TODO: edit skills.
@@ -46,23 +47,20 @@ class CopingSkills extends React.Component {
 
     constructor(props) {
         super(props);
-        // this.state=initialState;
-        this.onChangeSkillDisplay = this.onChangeSkillDisplay.bind(this);
         this.onAddNewSkillClick = this.onAddNewSkillClick.bind(this);
         this.onAddSharedSkillClick = this.onAddSharedSkillClick.bind(this);
+        this.onChangeSkillDisplay = this.onChangeSkillDisplay.bind(this);
+        this.onDeleteSkillClick = this.onDeleteSkillClick.bind(this);
     }
 
     componentDidMount() {
-        if (!this.props.coping_skills) {
+        if (!this.props.coping_skills.length) {
             this.props.onGetUserSkills(this.props.user_id);
         }
     }
 
     onAddSharedSkillClick(skill_id) {
         console.log("Add skill:", skill_id);
-        // let skill = displayedSkills.filter(skill => skill['coping_id'] === coping_id);
-        // console.log("Found skill:", skill)
-        // Use action to send fetch to server to add to coping skills list.
         this.props.onAddSharedCopingSkill(this.props.user_id, skill_id);
     }
 
@@ -86,9 +84,11 @@ class CopingSkills extends React.Component {
         if (Number(event.target.value) === 0) {
             // Get User's coping skills
             this.props.onGetUserSkills(this.props.user_id);
+            this.props.onChangeViewing('user');
         } else {
             // Get Shared coping skills, default to 'top' for now.
             this.props.onGetSharedSkills(this.props.user_id, 'top')
+            this.props.onChangeViewing('shared');
         }
     }
 
@@ -99,26 +99,36 @@ class CopingSkills extends React.Component {
     onAddNewSkillClick() {
         // get title, desc & shared properties of new skill to be added.
         // dispatch action to add to database.
-        //this.props.onAddCopingSkill();
-        let title = document.getElementById("add_skill_title").value;
-        let description = document.getElementById("add_skill_description").value;
+        let title = document.getElementById("add_skill_title");
+        let description = document.getElementById("add_skill_description");
         let shared = document.getElementById("add_skill_share").checked;
-
-        if (description !== '' && title !== '') {
-            this.props.onAddCopingSkill(this.props.user_id, title, description, shared);
+        if (description.value !== '' && title.value !== '') {
+            this.props.onAddCopingSkill(this.props.user_id, title.value, description.value, shared);
+            title.value = '';
+            description.value = '';
         } else {
-            console.log('er')
+            // Display something to alert user that they have to enter both a description and a title to add it to their list.
         }
     }
 
-    render() {
-        const { coping_skills, error, user_id } = this.props;
-        var resizeTimeout;
+    onDeleteSkillClick(index, skill_id) {
+        let item = document.getElementById('cText_'+index);
+        if (item.style.maxHeight) {
+            item.style.transition = 'max-height 0s'
+            item.style.maxHeight = null;
+        }
+        this.props.onDeleteCopingSkill(this.props.user_id, skill_id);
+    }
 
+    render() {
+        const { coping_skills, error, user_id, viewing } = this.props;
+        var resizeTimeout;
+        
         // Resize expanded collapsibles when window is resized.
         window.onresize = function () {
             clearTimeout(resizeTimeout);
             resizeTimeout = setTimeout(function() {
+                console.log("RESIZE");
                 coping_skills.forEach((item, index) => {
                     let text = document.getElementById('cText_'+index);
                     if (text && text.style.maxHeight) {
@@ -130,8 +140,8 @@ class CopingSkills extends React.Component {
 
         console.log('skills:', coping_skills);
         console.log('error:', error);
-        console.log('user', user_id)
-
+        console.log('user:', user_id)
+        console.log('viewing:', viewing)
         return( 
             <section className='ma0 pa1 pa3-ns bt black-90 bg-light-gray tc'>
                 <h1 className='ma1 mh2'>Coping Skills</h1>
@@ -157,7 +167,7 @@ class CopingSkills extends React.Component {
                         shareable={skill['shareable']}
                         onAddSharedSkill={this.onAddSharedSkillClick}
                         onShareSkill={this.onShareSkillClick}
-                        onDeleteSkill={(skill_id) => this.props.onDeleteCopingSkill(user_id, skill_id)}
+                        onDeleteSkill={this.onDeleteSkillClick}
                     />
                 })
                 : null

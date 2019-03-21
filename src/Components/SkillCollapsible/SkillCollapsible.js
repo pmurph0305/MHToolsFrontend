@@ -54,7 +54,7 @@ const Collapsible = ({allowAdd, skill_id, index, shared, shareable, text, title,
                 { !allowAdd // Not viewing shared skills.
                 ?  <button
                     className='collapsibleDeleteButton'
-                    onClick={() => onDeleteSkill(skill_id)}
+                    onClick={() => onDeleteSkill(index, skill_id)}
                 >
                     Delete
                 </button>

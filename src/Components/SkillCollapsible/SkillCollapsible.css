@@ -9,7 +9,7 @@
 }
 
 /* Change title background color on hover */
-.active, .collapsible:hover {
+:focus, .active, .collapsible:hover {
     background-color: rgb(221, 219, 219);
 }
 
