@@ -4,7 +4,7 @@ export const AddSkill = ({onAddSkill, addError}) => {
 
     return(
         <div className="pv4">
-            <label for="add_skill_title" class="f6 tl b db mb2">Add new coping skill:</label>
+            <label htmlFor="add_skill_title" className="f6 tl b db mb2">Add new coping skill:</label>
             <input 
                 placeholder="Coping Skill Title"
                 id="add_skill_title" 

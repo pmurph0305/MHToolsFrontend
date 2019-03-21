@@ -44,7 +44,6 @@ function addNewCopingSkill(state, action) {
         if (state.coping_skills.length) {
             skills = state.coping_skills.map(skill => {return skill});
         }
-        console.log("PAYLOAD ADD", action.payload[0]);
         skills.push(action.payload[0]);
         return updateObject(state, { coping_skills: skills });
     } else {
