@@ -28,6 +28,7 @@
 /* Inner text for coping skill. */
 .collapsibleText {
     padding: 1rem 0.5rem 1rem 2rem;
+    white-space: pre-wrap;
     float: left;
 }
 

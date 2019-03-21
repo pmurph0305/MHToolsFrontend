@@ -39,12 +39,13 @@ function copingSkillsReducer(state = [initialState], action) {
 }
 
 function addNewCopingSkill(state, action) {
-    if (Array.isArray(action.payload) && action.payload.length) {
+    if (Array.isArray(action.payload) && action.payload[0]) {
         let skills = [];
         if (state.coping_skills.length) {
             skills = state.coping_skills.map(skill => {return skill});
         }
-        skills.push(action.payload);
+        console.log("PAYLOAD ADD", action.payload[0]);
+        skills.push(action.payload[0]);
         return updateObject(state, { coping_skills: skills });
     } else {
         return setCopingSkillsError(state, action);

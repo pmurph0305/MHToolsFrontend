@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import React from 'react'
 
+import AddSkill from '../../Components/AddSkill/AddSkill'
 import ErrorBox from '../../Components/ErrorBox/ErrorBox'
 import SkillCollapsible from '../../Components/SkillCollapsible/SkillCollapsible'
 import SelectionBox from '../../Components/SelectionBox/SelectionBox'
@@ -94,11 +95,16 @@ class CopingSkills extends React.Component {
     onAddNewSkillClick() {
         // get title, desc & shared properties of new skill to be added.
         // dispatch action to add to database.
-        this.props.onAddCopingSkill();
-    }
+        //this.props.onAddCopingSkill();
+        let title = document.getElementById("add_skill_title").value;
+        let description = document.getElementById("add_skill_description").value;
+        let shared = document.getElementById("add_skill_share").checked;
 
-    onDeleteSkillClick(skill_id) {
-
+        if (description !== '' && title !== '') {
+            this.props.onAddCopingSkill(this.props.user_id, title, description, shared);
+        } else {
+            console.log('er')
+        }
     }
 
     render() {
@@ -152,11 +158,9 @@ class CopingSkills extends React.Component {
                 })
                 : null
                 }
-                <button
-                    type='button'
-                    onClick={this.onAddNewSkillClick}
-                >Add new skill but not really.
-                </button>
+                <AddSkill 
+                    onAddSkill={this.onAddNewSkillClick}
+                />
                 {
                     error
                     ? <ErrorBox error={error}/>
