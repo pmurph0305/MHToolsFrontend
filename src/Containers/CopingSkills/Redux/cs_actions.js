@@ -24,6 +24,11 @@ import {
     // CHANGE VIEWING
     CHANGE_CS_VIEWING,
     CHANGE_CS_SHARED_ORDER,
+
+    // PUT Share a user's coping skill.
+    REQUEST_CS_SHARE_PENDING,
+    REQUEST_CS_SHARE_SUCCESS,
+    REQUEST_CS_SHARE_FAILED,
     
 } from './cs_constants'
 
@@ -93,6 +98,23 @@ export const getSharedCopingSkills = (id, type) => (dispatch) => {
     .catch(err => dispatch({ type: REQUEST_CS_USER_FAILED, payload: err }))
 }
 
+export const putShareCopingSkill = (id, skill_id) => (dispatch) => {
+    dispatch({ type: REQUEST_CS_SHARE_PENDING});
+    fetch(URL+'copingskills/share/'+id+'/'+skill_id, {
+        method: 'PUT'
+    })
+    // .then(response => {
+    //     if (response.ok) {
+    //         dispatch({ type: REQUEST_CS_SHARE_SUCCESS, payload: skill_id })
+    //     } else {
+    //         response.json().then(err=> dispatch({ type: REQUEST_CS_SHARE_FAILED, payload: err }))
+    //     }
+        
+    // })
+    .then(response => response.json())
+    .then(data => dispatch({ type: REQUEST_CS_SHARE_SUCCESS, payload: data }))
+    .catch(err => dispatch({ type: REQUEST_CS_SHARE_FAILED, payload: err }))
+}
 
 
 

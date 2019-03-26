@@ -14,3 +14,17 @@ export function updateItemByIndexInArray(array, itemIndex, updateItemCallback) {
     })
     return updatedItems;
 }
+
+export function updateItemByPropertyStringInArray(array, propertyStr, propertyValue, updateItemCallback) {
+    if (typeof propertyStr === 'string' || propertyStr instanceof String) {
+        const updatedItems = array.map((item) => {
+            if (item[propertyStr] !== propertyValue) {
+                return item;
+            } else {
+                const updatedItem = updateItemCallback(item);
+                return updatedItem;
+            }
+        })
+        return updatedItems;
+    }
+}

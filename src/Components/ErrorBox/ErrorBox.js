@@ -4,6 +4,8 @@ import './ErrorBox.css'
 
 const ErrorBox = ({error}) => {
     var displayedError;
+    // convert error to string to split.
+    error = error.toString();
     if (error && error.length) {
         // Removes error passed from database.
         displayedError = error.split('error:')
@@ -11,16 +13,13 @@ const ErrorBox = ({error}) => {
         if (displayedError[1]) {
             console.log(displayedError[1]);
         }
-        displayedError = displayedError[0].toString();
-    } else if (error) {
-        // otherwise it's a type error of some kind.
-        displayedError = error.toString();
+        displayedError = displayedError[0];
     }
 
     return (
         <div>
             {displayedError
-            ? <div class='ErrorBox'>
+            ? <div className='ErrorBox'>
                 {displayedError}
               </div>
             : null

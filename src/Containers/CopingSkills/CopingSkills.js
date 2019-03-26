@@ -14,6 +14,7 @@ import {
     getCopingSkills,
     getSharedCopingSkills,
     deleteCopingSkill,
+    putShareCopingSkill,
 } from './Redux/cs_actions'
 
 const mapStateToProps = state => {
@@ -34,7 +35,8 @@ const mapDispatchToProps = (dispatch) => {
         onChangeViewing: (viewing) => dispatch(changeCSViewing(viewing)),
         onDeleteCopingSkill: (id, skill_id) => dispatch(deleteCopingSkill(id, skill_id)),
         onGetUserSkills: (id) => dispatch(getCopingSkills(id)),
-        onGetSharedSkills: (id, type) => dispatch(getSharedCopingSkills(id,type))
+        onGetSharedSkills: (id, type) => dispatch(getSharedCopingSkills(id,type)),
+        onShareUserCopingSkill: (id, skill_id) => dispatch(putShareCopingSkill(id, skill_id))
     }
 }
 
@@ -45,8 +47,9 @@ class CopingSkills extends React.Component {
 
 
     //TODO: share skills.
-    //TODO: sort shared skills.
     //TODO: edit skills.
+
+    //TODO: Change refresh button to an icon.
 
 
     constructor(props) {
@@ -56,6 +59,10 @@ class CopingSkills extends React.Component {
         this.onChangeSkillDisplay = this.onChangeSkillDisplay.bind(this);
         this.onChangeSharedViewType = this.onChangeSharedViewType.bind(this);   
         this.onDeleteSkillClick = this.onDeleteSkillClick.bind(this);
+        this.onRefreshSharedClick = this.onRefreshSharedClick.bind(this);
+        this.onShareSkillClick = this.onShareSkillClick.bind(this);
+        
+        this.getSharedSkills = this.getSharedSkills.bind(this);
     }
 
     componentDidMount() {
@@ -68,13 +75,12 @@ class CopingSkills extends React.Component {
         } else {
             document.getElementById("cs_viewing_box").selectedIndex = "0"
         }
-        //document.getElementById("")//cs_viewing_box
-        //document.getElementById('cs_shared_order')
     }
 
     onAddSharedSkillClick(skill_id) {
         this.props.onAddSharedCopingSkill(this.props.user_id, skill_id);
     }
+
 
 
     onChangeSkillDisplay(event) {
@@ -105,8 +111,16 @@ class CopingSkills extends React.Component {
     }
 
     onChangeSharedViewType(event) {
-       // console.log(event.target.value);
-        switch(parseInt(event.target.value)) {
+        this.getSharedSkills(event.target.value);
+    }
+
+    onRefreshSharedClick() {
+        let order = document.getElementById('cs_shared_order').value;
+        this.getSharedSkills(order);
+    }
+
+    getSharedSkills(order) {
+        switch(parseInt(order)) {
             case(0):
                 console.log("TOP")
                 this.props.onGetSharedSkills(this.props.user_id, 'top');
@@ -125,8 +139,9 @@ class CopingSkills extends React.Component {
         }
     }
 
-    onShareSkillClick(index) {
-        console.log("Share:" + index);
+    onShareSkillClick(skill_id) {
+        console.log("Share:" + skill_id);
+        this.props.onShareUserCopingSkill(this.props.user_id, skill_id);
     }
 
     onAddNewSkillClick() {
@@ -152,6 +167,7 @@ class CopingSkills extends React.Component {
         }
         this.props.onDeleteCopingSkill(this.props.user_id, skill_id);
     }
+
 
     render() {
         const { coping_skills, error, user_id, viewing } = this.props;
@@ -196,8 +212,9 @@ class CopingSkills extends React.Component {
                     onChange={this.onChangeSharedViewType}
 
                 />
-                <button
+                <button 
                     className='black ma2 bg-black-10 pa1 hover-bg-black-20 fl db'
+                    onClick={this.onRefreshSharedClick}
                 >Refresh</button>
                 
                 </>

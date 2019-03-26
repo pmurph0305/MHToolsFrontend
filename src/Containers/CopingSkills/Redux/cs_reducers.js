@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-import {updateObject, updateItemByIndexInArray} from '../../../ReduxHelpers/reduxHelpers'
+import {updateObject, updateItemByIndexInArray, updateItemByPropertyStringInArray} from '../../../ReduxHelpers/reduxHelpers'
 
 import {
     REQUEST_CS_USER_SUCCESS,
@@ -17,6 +17,9 @@ import {
 
     CHANGE_CS_VIEWING,
     CHANGE_CS_SHARED_ORDER,
+
+    REQUEST_CS_SHARE_SUCCESS,
+    REQUEST_CS_SHARE_FAILED,
 } from './cs_constants'
 
 const initialState = {
@@ -33,26 +36,47 @@ function copingSkillsReducer(state = initialState, action={}) {
             return setCopingSkillsList(state, action);
         case REQUEST_CS_USER_FAILED:
             return setCopingSkillsError(state, action);
+
         case ADD_CS_USER_SUCCESS:
             return addNewCopingSkill(state, action);
         case ADD_CS_USER_FAILED:
             return setCopingSkillsError(state, action);
+
         case DELETE_CS_USER_SUCCESS:
             return removeSkillFromSkillList(state,action);
         case DELETE_CS_USER_FAILED:
             return setCopingSkillsError(state, action);
+
         case ADD_CS_SHARED_SUCCESS:
             // Need to handle case where user clicks add to coping lists and switches back to their own
             // coping list before the fetch's return in the action.
             return addSharedCopingSkill(state, action);
         case ADD_CS_SHARED_FAILED:
             return setCopingSkillsError(state, action);
+
         case CHANGE_CS_VIEWING:
             return changeCSViewing(state, action);
         case CHANGE_CS_SHARED_ORDER:
             return changeCSSharedOrder(state, action);
+
+        case REQUEST_CS_SHARE_SUCCESS:
+            return setCopingSkillAsShared(state, action);
+        case REQUEST_CS_SHARE_FAILED:
+            return setCopingSkillsError(state, action);
         default:
             return state;
+    }
+}
+
+function setCopingSkillAsShared(state, action) {
+    console.log("SET CS SHARED PAYLOAD: " + action.payload);
+    if (Array.isArray(action.payload) && action.payload[0]) {
+        let updatedSkills = updateItemByPropertyStringInArray(state.coping_skills, 'skill_id', action.payload[0]['skill_id'], skill => {
+            return updateObject(skill, { shared: true })
+        })
+        return updateObject(state, { coping_skills: updatedSkills })
+    } else {
+        return updateObject(state, {error: action.payload })
     }
 }
 
