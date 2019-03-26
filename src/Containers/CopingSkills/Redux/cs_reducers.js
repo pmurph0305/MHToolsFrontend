@@ -16,12 +16,14 @@ import {
     ADD_CS_SHARED_FAILED,
 
     CHANGE_CS_VIEWING,
+    CHANGE_CS_SHARED_ORDER,
 } from './cs_constants'
 
 const initialState = {
     coping_skills: [],
     error: '',
     viewing: 'user',
+    shared_order : 0,
 }
 
 
@@ -47,6 +49,8 @@ function copingSkillsReducer(state = initialState, action={}) {
             return setCopingSkillsError(state, action);
         case CHANGE_CS_VIEWING:
             return changeCSViewing(state, action);
+        case CHANGE_CS_SHARED_ORDER:
+            return changeCSSharedOrder(state, action);
         default:
             return state;
     }
@@ -54,7 +58,15 @@ function copingSkillsReducer(state = initialState, action={}) {
 
 function changeCSViewing(state, action) {
     if (action.payload) {
-        return updateObject(state, {viewing: action.payload})
+        return updateObject(state, {viewing: action.payload});
+    } else {
+        return state;
+    }
+}
+
+function changeCSSharedOrder(state, action) {
+    if (action.payload) {
+        return updateObject(state, {shared_order: action.payload});
     } else {
         return state;
     }

@@ -23,6 +23,7 @@ import {
 
     // CHANGE VIEWING
     CHANGE_CS_VIEWING,
+    CHANGE_CS_SHARED_ORDER,
     
 } from './cs_constants'
 
@@ -52,6 +53,10 @@ export const addSharedCopingSkill = (id, skill_id) => (dispatch) => {
     .then(response => response.json())
     .then(data => {dispatch({ type: ADD_CS_SHARED_SUCCESS, payload: data })})
     .catch(err => dispatch({ type: ADD_CS_SHARED_FAILED, payload: err }))
+}
+
+export const changeCSSharedOrder = (order) => (dispatch) => {
+    dispatch({ type: CHANGE_CS_SHARED_ORDER, payload: order })
 }
 
 export const changeCSViewing = (viewing) => (dispatch) => {

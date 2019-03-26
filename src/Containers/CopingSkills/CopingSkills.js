@@ -10,6 +10,7 @@ import {
     addCopingSkill,
     addSharedCopingSkill,
     changeCSViewing,
+    changeCSSharedOrder,
     getCopingSkills,
     getSharedCopingSkills,
     deleteCopingSkill,
@@ -20,6 +21,7 @@ const mapStateToProps = state => {
         user_id: state.appReducer.user_id,
         coping_skills: state.CSReducer.skills.coping_skills,
         error: state.CSReducer.skills.error,
+        shared_order: state.CSReducer.skills.shared_order,
         viewing: state.CSReducer.skills.viewing,
     }
 }
@@ -28,6 +30,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         onAddCopingSkill: (id, title, desc, shared) => dispatch(addCopingSkill(id,title,desc,shared)),
         onAddSharedCopingSkill: (id, skill_id) => dispatch(addSharedCopingSkill(id, skill_id)),
+        onChangeCSSharedOrder: (order) => dispatch(changeCSSharedOrder(order)),
         onChangeViewing: (viewing) => dispatch(changeCSViewing(viewing)),
         onDeleteCopingSkill: (id, skill_id) => dispatch(deleteCopingSkill(id, skill_id)),
         onGetUserSkills: (id) => dispatch(getCopingSkills(id)),
@@ -59,6 +62,14 @@ class CopingSkills extends React.Component {
         if (!this.props.coping_skills.length) {
             this.props.onGetUserSkills(this.props.user_id);
         }
+        if (this.props.viewing === 'shared') {
+            document.getElementById("cs_viewing_box").selectedIndex = "1"
+            document.getElementById('cs_shared_order').selectedIndex = this.props.shared_order.toString();
+        } else {
+            document.getElementById("cs_viewing_box").selectedIndex = "0"
+        }
+        //document.getElementById("")//cs_viewing_box
+        //document.getElementById('cs_shared_order')
     }
 
     onAddSharedSkillClick(skill_id) {
@@ -99,12 +110,15 @@ class CopingSkills extends React.Component {
             case(0):
                 console.log("TOP")
                 this.props.onGetSharedSkills(this.props.user_id, 'top');
+                this.props.onChangeCSSharedOrder(0);
                 return;
             case(1):
                 this.props.onGetSharedSkills(this.props.user_id, 'new');
+                this.props.onChangeCSSharedOrder(1);
                 return;
             case(2):
                 this.props.onGetSharedSkills(this.props.user_id, 'rand');
+                this.props.onChangeCSSharedOrder(2);
                 return;
             default:
                 return;
@@ -168,6 +182,7 @@ class CopingSkills extends React.Component {
                     A list of coping skills to use in situations to help tolerate stress and conflict.
                 </p>
                 <SelectionBox
+                    id='cs_viewing_box'
                     className='black ma2 bg-black-10 pa1 hover-bg-black-20 fl db'
                     options={['My coping skills', 'Shared coping skills']}
                     onChange={this.onChangeSkillDisplay}
@@ -175,6 +190,7 @@ class CopingSkills extends React.Component {
                 />
                 { viewing === 'shared' // if viewing shared, display view by selection box.
                 ? <><SelectionBox
+                    id='cs_shared_order'
                     className='black ma2 bg-black-10 pa1 hover-bg-black-20 fl db'
                     options={['Top', 'Newest', 'Random']}
                     onChange={this.onChangeSharedViewType}
@@ -183,10 +199,10 @@ class CopingSkills extends React.Component {
                 <button
                     className='black ma2 bg-black-10 pa1 hover-bg-black-20 fl db'
                 >Refresh</button>
+                
                 </>
                 : null
                 }
-                
                 { coping_skills && Array.isArray(coping_skills)
                 ? coping_skills.map((skill, index) => {
                     return <SkillCollapsible
