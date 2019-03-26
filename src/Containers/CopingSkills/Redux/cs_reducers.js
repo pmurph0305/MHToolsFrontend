@@ -89,13 +89,12 @@ function removeSkillFromSkillList(state, action) {
         let skills = state.coping_skills.filter(skill => skill.skill_id !== removeId)
         return updateObject(state, { coping_skills: skills});
     } else {
-        console.log("UNKNOWN DELETE ISSUE", action.payload);
+        console.log("TODO: UNKNOWN DELETE ISSUE", action.payload);
     }
 }
 
 function setCopingSkillsList(state, action) {
     // no length as no coping skills returns empty array.
-    console.log(action.payload);
     if (Array.isArray(action.payload)) {
         return updateObject(state, { coping_skills: action.payload })
     } else {

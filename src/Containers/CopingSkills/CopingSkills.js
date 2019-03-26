@@ -40,6 +40,7 @@ const heightTransition = 'max-height 0.3s ease';
 
 class CopingSkills extends React.Component {
 
+
     //TODO: share skills.
     //TODO: sort shared skills.
     //TODO: edit skills.
@@ -50,6 +51,7 @@ class CopingSkills extends React.Component {
         this.onAddNewSkillClick = this.onAddNewSkillClick.bind(this);
         this.onAddSharedSkillClick = this.onAddSharedSkillClick.bind(this);
         this.onChangeSkillDisplay = this.onChangeSkillDisplay.bind(this);
+        this.onChangeSharedViewType = this.onChangeSharedViewType.bind(this);   
         this.onDeleteSkillClick = this.onDeleteSkillClick.bind(this);
     }
 
@@ -60,7 +62,6 @@ class CopingSkills extends React.Component {
     }
 
     onAddSharedSkillClick(skill_id) {
-        console.log("Add skill:", skill_id);
         this.props.onAddSharedCopingSkill(this.props.user_id, skill_id);
     }
 
@@ -89,6 +90,24 @@ class CopingSkills extends React.Component {
             // Get Shared coping skills, default to 'top' for now.
             this.props.onGetSharedSkills(this.props.user_id, 'top')
             this.props.onChangeViewing('shared');
+        }
+    }
+
+    onChangeSharedViewType(event) {
+       // console.log(event.target.value);
+        switch(parseInt(event.target.value)) {
+            case(0):
+                console.log("TOP")
+                this.props.onGetSharedSkills(this.props.user_id, 'top');
+                return;
+            case(1):
+                this.props.onGetSharedSkills(this.props.user_id, 'new');
+                return;
+            case(2):
+                this.props.onGetSharedSkills(this.props.user_id, 'rand');
+                return;
+            default:
+                return;
         }
     }
 
@@ -128,7 +147,6 @@ class CopingSkills extends React.Component {
         window.onresize = function () {
             clearTimeout(resizeTimeout);
             resizeTimeout = setTimeout(function() {
-                console.log("RESIZE");
                 coping_skills.forEach((item, index) => {
                     let text = document.getElementById('cText_'+index);
                     if (text && text.style.maxHeight) {
@@ -142,6 +160,7 @@ class CopingSkills extends React.Component {
         console.log('error:', error);
         console.log('user:', user_id)
         console.log('viewing:', viewing)
+
         return( 
             <section className='ma0 pa1 pa3-ns bt black-90 bg-light-gray tc'>
                 <h1 className='ma1 mh2'>Coping Skills</h1>
@@ -154,6 +173,20 @@ class CopingSkills extends React.Component {
                     onChange={this.onChangeSkillDisplay}
 
                 />
+                { viewing === 'shared' // if viewing shared, display view by selection box.
+                ? <><SelectionBox
+                    className='black ma2 bg-black-10 pa1 hover-bg-black-20 fl db'
+                    options={['Top', 'Newest', 'Random']}
+                    onChange={this.onChangeSharedViewType}
+
+                />
+                <button
+                    className='black ma2 bg-black-10 pa1 hover-bg-black-20 fl db'
+                >Refresh</button>
+                </>
+                : null
+                }
+                
                 { coping_skills && Array.isArray(coping_skills)
                 ? coping_skills.map((skill, index) => {
                     return <SkillCollapsible
