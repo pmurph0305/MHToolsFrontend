@@ -12,6 +12,7 @@ import { setDMEditing, requestDMTasks, onDMSaveClick, swapDMTaskRanks,
     } from './Redux/dm_actions'
 
 const inputPlaceholder = "Enter a task to add..."
+const currentDate = new Date().toISOString().slice(0,10);
 
 const mapStateToProps = state => {
     return {
@@ -40,7 +41,7 @@ const mapDispatchToProps = (dispatch) => {
 // Displays a list of tasks for a specific day
 // and renders them in a table where each task can be marked as completed or not.
 class DailyMaintenance extends React.Component {
-    
+
     constructor(props) {
         super(props);
         this.onCheck = this.onCheck.bind(this);
@@ -136,24 +137,29 @@ class DailyMaintenance extends React.Component {
                 })
                 : null
                 }
-                <InputField
+                { date === currentDate 
+                ? <InputField
                     placeholder={inputPlaceholder}
                     onClick={this.onAddTaskClick}
                 />
-                { editing ?
+                : null
+                }
+                
+                { editing && date === currentDate ?
                     <button 
                     type="button"
                     className="f6 fr dim ph3 pv2 mb2 dib white bg-black w-20 pa3 ma2"
                     onClick={this.onSaveClick}
                     value='false'
                     >Save</button>
-                :
+                : date === currentDate ?
                     <button 
                         type="button"
                         className="f6 fr dim ph3 pv2 mb2 dib white bg-black w-20 pa3 ma2"
                         onClick={() => onEditToggle(true)}
                         value='true'
                     >Edit</button>
+                : null
                 }
             </section>
         )
