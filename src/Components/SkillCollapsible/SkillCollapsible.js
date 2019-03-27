@@ -2,7 +2,8 @@ import React from 'react'
 
 import './SkillCollapsible.css'
 
-const Collapsible = ({allowAdd, skill_id, index, shared, shareable, text, title, onAddSharedSkill, onDeleteSkill, onShareSkill}) => {
+
+const Collapsible = ({allowAdd, editing, index, shared, shareable, skill_id, text, title, onAddSharedSkill, onDeleteSkill, onEditSkill, onShareSkill}) => {
 
     function onCollapisbleClick(title, index) {
         // Get text content element for the skill clicked on.
@@ -21,10 +22,12 @@ const Collapsible = ({allowAdd, skill_id, index, shared, shareable, text, title,
         }
     }
 
+
     return(
         <div>
             <button className='collapsible'
                 id={'cTitle_'+index}
+                value={title}
                 onClick={(event) => onCollapisbleClick(event.target, index)}
             >{title}
             </button>    
@@ -32,33 +35,54 @@ const Collapsible = ({allowAdd, skill_id, index, shared, shareable, text, title,
                 id={'cText_'+index}
                 className='collapsibleContent'
             >
-                <p className='collapsibleText'>
+            { editing 
+            ? <textarea
+                id={'cDesc_'+index}
+                defaultValue={text}
+                rows="4"
+                placeholder="Coping Skill Description"
+                
+                type="text" 
+                aria-describedby="New Task"
+                className="f6 f5-l input-reset fl black-80 bg-white mv2 pa2 lh-solid w-80 br2-ns br--left-ns"
+            ></textarea>
+            : 
+                <p className='collapsibleText' id={'cDesc_'+index}>
                     {text}
                 </p>
-                { allowAdd // Addable to users own list, viewing shared skills.
-                ? <button
-                    className='collapsibleInnerButton'
-                    onClick={() => onAddSharedSkill(skill_id)}
-                >
-                    Add to my coping skills
-                </button>
-                : shareable && !shared // Is a user's created skill, and able to be shared.
+            }
+                { shareable && !shared // Is a user's created skill, and able to be shared.
                 ? <button
                     className='collapsibleInnerButton'
                     onClick={() => onShareSkill(skill_id)}
-                >
-                    Share
+                >Share
                 </button>
                 : null
                 }
-                { !allowAdd // Not viewing shared skills.
-                ?  <button
-                    className='collapsibleDeleteButton'
-                    onClick={() => onDeleteSkill(index, skill_id)}
-                >
-                    Delete
+                { !allowAdd && !editing// Not viewing shared skills, allow editing and deletion.
+                ? 
+                <>  <button
+                        className='collapsibleDeleteButton'
+                        onClick={() => onDeleteSkill(index, skill_id)}
+                    >Delete
+                    </button>
+                    <button
+                        className='collapsibleDeleteButton'
+                        onClick={() => onEditSkill(index)}
+                    >Edit
+                    </button>
+                </>
+                : editing
+                ? <button
+                        className='collapsibleInnerButton'
+                        onClick={() => onEditSkill(index)}
+                    >Save
+                    </button>
+                : <button // viewing shared skills, can only add skill.
+                    className='collapsibleInnerButton'
+                    onClick={() => onAddSharedSkill(skill_id)}
+                >Add to my coping skills
                 </button>
-                : null
                 }
             </div>
         </div>

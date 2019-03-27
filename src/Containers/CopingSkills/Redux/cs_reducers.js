@@ -17,9 +17,13 @@ import {
 
     CHANGE_CS_VIEWING,
     CHANGE_CS_SHARED_ORDER,
+    CHANGE_CS_EDITING,
 
     REQUEST_CS_SHARE_SUCCESS,
     REQUEST_CS_SHARE_FAILED,
+
+    UPDATE_CS_SUCCESS,
+    UPDATE_CS_FAILED,
 } from './cs_constants'
 
 const initialState = {
@@ -58,18 +62,37 @@ function copingSkillsReducer(state = initialState, action={}) {
             return changeCSViewing(state, action);
         case CHANGE_CS_SHARED_ORDER:
             return changeCSSharedOrder(state, action);
-
+        case CHANGE_CS_EDITING:
+            return changeCSEditing(state, action);
+        
         case REQUEST_CS_SHARE_SUCCESS:
             return setCopingSkillAsShared(state, action);
         case REQUEST_CS_SHARE_FAILED:
             return setCopingSkillsError(state, action);
+
+        case UPDATE_CS_SUCCESS:
+            return updateCopingSkill(state, action);
+        case UPDATE_CS_FAILED:
+            return setCopingSkillsError(state, action);
+        
+        
         default:
             return state;
     }
 }
 
+function updateCopingSkill (state,action) {
+    if (Array.isArray(action.payload) && action.payload[0]) {
+        let updatedSkills = updateItemByPropertyStringInArray(state.coping_skills, 'skill_id', action.payload[0]['skill_id'], skill => {
+            return updateObject(skill, action.payload[0])
+        })
+        return updateObject(state, { coping_skills: updatedSkills })
+    } else {
+        return updateObject(state, { error: action.payload })
+    }
+}
+
 function setCopingSkillAsShared(state, action) {
-    console.log("SET CS SHARED PAYLOAD: " + action.payload);
     if (Array.isArray(action.payload) && action.payload[0]) {
         let updatedSkills = updateItemByPropertyStringInArray(state.coping_skills, 'skill_id', action.payload[0]['skill_id'], skill => {
             return updateObject(skill, { shared: true })
@@ -78,6 +101,13 @@ function setCopingSkillAsShared(state, action) {
     } else {
         return updateObject(state, {error: action.payload })
     }
+}
+
+function changeCSEditing(state, action) {
+    let updatedSkills = updateItemByIndexInArray(state.coping_skills, action.payload, skill => {
+        return updateObject(skill, { editing: !skill['editing'] })
+    })
+    return updateObject(state, { coping_skills: updatedSkills })
 }
 
 function changeCSViewing(state, action) {

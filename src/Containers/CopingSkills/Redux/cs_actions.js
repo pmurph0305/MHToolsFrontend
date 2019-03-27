@@ -20,6 +20,9 @@ import {
     ADD_CS_SHARED_FAILED,
 
     // Update user's coping skill.
+    UPDATE_CS_SUCCESS,
+    UPDATE_CS_PENDING,
+    UPDATE_CS_FAILED,
 
     // CHANGE VIEWING
     CHANGE_CS_VIEWING,
@@ -29,6 +32,7 @@ import {
     REQUEST_CS_SHARE_PENDING,
     REQUEST_CS_SHARE_SUCCESS,
     REQUEST_CS_SHARE_FAILED,
+    CHANGE_CS_EDITING,
     
 } from './cs_constants'
 
@@ -58,6 +62,10 @@ export const addSharedCopingSkill = (id, skill_id) => (dispatch) => {
     .then(response => response.json())
     .then(data => {dispatch({ type: ADD_CS_SHARED_SUCCESS, payload: data })})
     .catch(err => dispatch({ type: ADD_CS_SHARED_FAILED, payload: err }))
+}
+
+export const changeCSEditing = (index) => (dispatch) => {
+    dispatch({ type: CHANGE_CS_EDITING, payload: index });
 }
 
 export const changeCSSharedOrder = (order) => (dispatch) => {
@@ -116,6 +124,20 @@ export const putShareCopingSkill = (id, skill_id) => (dispatch) => {
     .catch(err => dispatch({ type: REQUEST_CS_SHARE_FAILED, payload: err }))
 }
 
+export const updateUserCopingSkill = (id, skill_id, title, desc) => (dispatch) => {
+    dispatch({ type: UPDATE_CS_PENDING });
+    fetch(URL+'copingskills/'+id+'/'+skill_id, {
+        method: 'PUT',
+        headers: {'Content-Type' : 'application/json'},
+        body: JSON.stringify({
+            title: title,
+            desc: desc,
+        })
+    })
+    .then(response => response.json())
+    .then(data => dispatch({ type: UPDATE_CS_SUCCESS, payload: data }))
+    .catch(err => dispatch({ type: UPDATE_CS_FAILED, payload: err }))
+}
 
 
 // // Coping Skills Routes

@@ -9,12 +9,14 @@ import SelectionBox from '../../Components/SelectionBox/SelectionBox'
 import {
     addCopingSkill,
     addSharedCopingSkill,
-    changeCSViewing,
+    changeCSEditing,
     changeCSSharedOrder,
+    changeCSViewing,
     getCopingSkills,
     getSharedCopingSkills,
     deleteCopingSkill,
     putShareCopingSkill,
+    updateUserCopingSkill,
 } from './Redux/cs_actions'
 
 const mapStateToProps = state => {
@@ -31,12 +33,14 @@ const mapDispatchToProps = (dispatch) => {
     return {
         onAddCopingSkill: (id, title, desc, shared) => dispatch(addCopingSkill(id,title,desc,shared)),
         onAddSharedCopingSkill: (id, skill_id) => dispatch(addSharedCopingSkill(id, skill_id)),
+        onChangeCSEditing: (index) => dispatch(changeCSEditing(index)),
         onChangeCSSharedOrder: (order) => dispatch(changeCSSharedOrder(order)),
         onChangeViewing: (viewing) => dispatch(changeCSViewing(viewing)),
         onDeleteCopingSkill: (id, skill_id) => dispatch(deleteCopingSkill(id, skill_id)),
         onGetUserSkills: (id) => dispatch(getCopingSkills(id)),
         onGetSharedSkills: (id, type) => dispatch(getSharedCopingSkills(id,type)),
-        onShareUserCopingSkill: (id, skill_id) => dispatch(putShareCopingSkill(id, skill_id))
+        onShareUserCopingSkill: (id, skill_id) => dispatch(putShareCopingSkill(id, skill_id)),
+        onUpdateUserCopingSkill: (id, skill_id, title, desc) => dispatch(updateUserCopingSkill(id, skill_id, title, desc))
     }
 }
 
@@ -59,6 +63,7 @@ class CopingSkills extends React.Component {
         this.onChangeSkillDisplay = this.onChangeSkillDisplay.bind(this);
         this.onChangeSharedViewType = this.onChangeSharedViewType.bind(this);   
         this.onDeleteSkillClick = this.onDeleteSkillClick.bind(this);
+        this.onEditSkillClick = this.onEditSkillClick.bind(this);
         this.onRefreshSharedClick = this.onRefreshSharedClick.bind(this);
         this.onShareSkillClick = this.onShareSkillClick.bind(this);
         
@@ -122,7 +127,6 @@ class CopingSkills extends React.Component {
     getSharedSkills(order) {
         switch(parseInt(order)) {
             case(0):
-                console.log("TOP")
                 this.props.onGetSharedSkills(this.props.user_id, 'top');
                 this.props.onChangeCSSharedOrder(0);
                 return;
@@ -140,7 +144,6 @@ class CopingSkills extends React.Component {
     }
 
     onShareSkillClick(skill_id) {
-        console.log("Share:" + skill_id);
         this.props.onShareUserCopingSkill(this.props.user_id, skill_id);
     }
 
@@ -168,6 +171,16 @@ class CopingSkills extends React.Component {
         this.props.onDeleteCopingSkill(this.props.user_id, skill_id);
     }
 
+    onEditSkillClick(index) {
+        if (this.props.coping_skills[index].editing) {
+            let title = document.getElementById('cTitle_'+index).innerText;
+            let desc = document.getElementById('cDesc_'+index).value;
+            if (title !== this.props.coping_skills[index]['title'] || desc !== this.props.coping_skills[index]['description']) {
+                this.props.onUpdateUserCopingSkill(this.props.user_id, this.props.coping_skills[index]['skill_id'], title, desc);
+            }
+        }
+        this.props.onChangeCSEditing(index);
+    }
 
     render() {
         const { coping_skills, error, user_id, viewing } = this.props;
@@ -223,15 +236,17 @@ class CopingSkills extends React.Component {
                 { coping_skills && Array.isArray(coping_skills)
                 ? coping_skills.map((skill, index) => {
                     return <SkillCollapsible
-                        title = {skill['title']}
-                        text={skill['description']}
+                        allowAdd={skill['user_id'] === user_id ? false : true}
+                        editing={skill['editing']}
                         index={index}
                         key={index}
-                        skill_id={skill['skill_id']}
-                        allowAdd={skill['user_id'] === user_id ? false : true}
-                        shared={skill['shared']}
                         shareable={skill['shareable']}
+                        shared={skill['shared']}
+                        skill_id={skill['skill_id']}
+                        text={skill['description']}
+                        title={skill['title']}
                         onAddSharedSkill={this.onAddSharedSkillClick}
+                        onEditSkill={this.onEditSkillClick}
                         onShareSkill={this.onShareSkillClick}
                         onDeleteSkill={this.onDeleteSkillClick}
                     />
