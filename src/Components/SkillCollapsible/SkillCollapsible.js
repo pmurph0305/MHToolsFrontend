@@ -8,20 +8,30 @@ const Collapsible = ({allowAdd, editing, index, shared, shareable, skill_id, tex
     function onCollapisbleClick(title, index) {
         // Get text content element for the skill clicked on.
         let text = document.getElementById('cText_'+index);     
-        if (text.style.maxHeight) {
+        if (text.style.maxHeight !== '0px' && text.style.maxHeight) {
             // Add border back to the title.
             title.style.borderBottom = '1px solid black'
+            text.style.borderBottom = '0px'
             text.style.display = 'none';
-            text.style.maxHeight = null;
+            text.style.maxHeight = '0px';
         } else {
             // Remove border from the title.
             title.style.borderBottom = '0px';
+            text.style.borderBottom = '1px solid black'
             text.style.display = 'block';
             // Set max height to add transition to expanding card.
             text.style.maxHeight = text.scrollHeight + 'px';
         }
     }
 
+    function onDescriptionChange(area) {
+        if (area) {
+            let text = document.getElementById('cText_'+index);
+            area.style.height = null;
+            area.style.height = area.scrollHeight + 'px';     
+            text.style.maxHeight = text.scrollHeight + 'px';
+        }
+    }
 
     return(
         <div>
@@ -37,14 +47,13 @@ const Collapsible = ({allowAdd, editing, index, shared, shareable, skill_id, tex
             >
             { editing 
             ? <textarea
-                id={'cDesc_'+index}
+                id={'cDescArea_'+index}
                 defaultValue={text}
-                rows="4"
                 placeholder="Coping Skill Description"
-                
                 type="text" 
                 aria-describedby="New Task"
                 className="f6 f5-l input-reset fl black-80 bg-white mv2 pa2 lh-solid w-80 br2-ns br--left-ns"
+                onChange={(event)=> onDescriptionChange(event.target)}
             ></textarea>
             : 
                 <p className='collapsibleText' id={'cDesc_'+index}>

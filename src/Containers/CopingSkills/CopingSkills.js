@@ -68,6 +68,7 @@ class CopingSkills extends React.Component {
         this.onShareSkillClick = this.onShareSkillClick.bind(this);
         
         this.getSharedSkills = this.getSharedSkills.bind(this);
+        this.modifyExpandedCollapsibleSize = this.modifyExpandedCollapsibleSize.bind(this);
     }
 
     componentDidMount() {
@@ -171,14 +172,37 @@ class CopingSkills extends React.Component {
         this.props.onDeleteCopingSkill(this.props.user_id, skill_id);
     }
 
+    componentDidUpdate() {
+        if (this.props.viewing === 'user') {
+            this.modifyExpandedCollapsibleSize();
+        }
+    }
+
+    modifyExpandedCollapsibleSize() {
+        this.props.coping_skills.forEach((skill, index) => {
+            if (skill.hasOwnProperty('editing')) {
+            
+                console.log("MODIFY EXPANDED", index);
+                let text = document.getElementById('cText_'+index);
+                if (text && text.style.maxHeight) {
+                    let desc = document.getElementById('cDescArea_'+index);
+                    if (desc) {
+                        desc.style.height = desc.scrollHeight + 'px';
+                    }
+                    text.style.maxHeight = text.scrollHeight + 'px';
+                }
+            }
+        })
+    }
+
     onEditSkillClick(index) {
         if (this.props.coping_skills[index].editing) {
             let title = document.getElementById('cTitle_'+index).innerText;
-            let desc = document.getElementById('cDesc_'+index).value;
+            let desc = document.getElementById('cDescArea_'+index).value;
             if (title !== this.props.coping_skills[index]['title'] || desc !== this.props.coping_skills[index]['description']) {
                 this.props.onUpdateUserCopingSkill(this.props.user_id, this.props.coping_skills[index]['skill_id'], title, desc);
             }
-        }
+        } 
         this.props.onChangeCSEditing(index);
     }
 
