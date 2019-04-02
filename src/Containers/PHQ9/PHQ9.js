@@ -84,8 +84,14 @@ class PHQ9 extends React.Component {
             return [question, selection];
         })
 
-        const footers = [
-            this.props.submissionResult,
+        console.log(this.props.submissionResult);
+
+        const footers =  [
+            !this.props.submissionResult 
+            ? ''
+            : this.props.submissionResult === 'PHQ-9 submission successful.'
+            ? <p className='dib f6 ma0 pa1 bg-dark-green near-white'>{this.props.submissionResult}</p>
+            : <p className='dib f6 ma0 pa1 bg-light-red'>{this.props.submissionResult}</p>,
             <button 
                 className='f6 pointer dim ph4 ph4-m ph5-l pv2 ma0 tl db white bg-near-black'
                 onClick={this.onSubmitPHQ9}
@@ -95,6 +101,7 @@ class PHQ9 extends React.Component {
 
         return (
             <section className="ma0 pa2-ns bt black-90 bg-light-gray tc">
+                <p className=''>abc</p>
                 <h1 className="ma1 mh2 ">PHQ-9</h1>
                 <p className="ma2 mh4">
                     The Patient Health Questionnaire (PHQ-9) is a multipurpose tool used for screening, diagnosing, and monitoring
