@@ -8,8 +8,16 @@
     border-bottom: 1px solid black;
 }
 
+.collapsibleTitleInput {
+    padding: 1rem;
+    width: 100%;
+    text-align: left;
+    background: whitesmoke;
+    border-bottom: 1px solid black;
+}
+
 /* Change title background color on hover */
-:focus, .active, .collapsible:hover {
+.collapsible:focus, .collapsible:active, .collapsible:hover {
     background-color: rgb(221, 219, 219);
 }
 
@@ -27,11 +35,19 @@
 
 /* Inner text for coping skill. */
 .collapsibleText {
+    width: 100%;
     padding: 1rem 0.5rem 1rem 2rem;
     white-space: pre-wrap;
     float: left;
 }
 
+.collapsibleTextArea {
+    width: 100%;
+    padding: 1rem 0.5rem 1rem 2rem;
+    background: white;
+    white-space: pre-wrap;
+
+}
 
 /* Inner share button. */
 .collapsibleInnerButton {

@@ -49,12 +49,9 @@ const heightTransition = 'max-height 0.3s ease';
 
 class CopingSkills extends React.Component {
 
-
-    //TODO: share skills.
-    //TODO: edit skills.
-
-    //TODO: Change refresh button to an icon.
-
+    //TODO: Change buttons to icons.
+    //TODO: Edit coping skill title.
+    //TODO: Fix edit description textarea jiggling.
 
     constructor(props) {
         super(props);
@@ -95,6 +92,7 @@ class CopingSkills extends React.Component {
         for (let i = 0; i < expanded.length; i++) {
             // only do it on collapsibles currently expanded.
             if (expanded[i].style.maxHeight) {
+                console.log("expanded", i)
                 // use a short time, but still some time so that transitionend fires.
                 expanded[i].style.transition = 'max-height 0.001s'
                 // set height to null so it collapses.
@@ -102,6 +100,8 @@ class CopingSkills extends React.Component {
                 // event listener that only occurs ONCE, to reset transition style.
                 expanded[i].addEventListener('transitionend', function() {
                     expanded[i].style.transition = heightTransition;
+                    document.getElementById('cDescContainer_'+i).style.borderBottom = '0px';
+                    document.getElementById('cTitle_'+i).style.borderBottom = '1px solid black';
                 }, {once: true})
             }
         }
@@ -164,10 +164,11 @@ class CopingSkills extends React.Component {
     }
 
     onDeleteSkillClick(index, skill_id) {
-        let item = document.getElementById('cText_'+index);
+        let item = document.getElementById('cDescContainer_'+index);
         if (item.style.maxHeight) {
             item.style.transition = 'max-height 0s'
             item.style.maxHeight = null;
+            item.style.borderBottom = '0px';
         }
         this.props.onDeleteCopingSkill(this.props.user_id, skill_id);
     }
@@ -181,9 +182,7 @@ class CopingSkills extends React.Component {
     modifyExpandedCollapsibleSize() {
         this.props.coping_skills.forEach((skill, index) => {
             if (skill.hasOwnProperty('editing')) {
-            
-                console.log("MODIFY EXPANDED", index);
-                let text = document.getElementById('cText_'+index);
+                let text = document.getElementById('cDescContainer_'+index);
                 if (text && text.style.maxHeight) {
                     let desc = document.getElementById('cDescArea_'+index);
                     if (desc) {
@@ -197,13 +196,14 @@ class CopingSkills extends React.Component {
 
     onEditSkillClick(index) {
         if (this.props.coping_skills[index].editing) {
-            let title = document.getElementById('cTitle_'+index).innerText;
+            let title = document.getElementById('cTitle_'+index).value;
+            //console.log('tv',title.value);
             let desc = document.getElementById('cDescArea_'+index).value;
             if (title !== this.props.coping_skills[index]['title'] || desc !== this.props.coping_skills[index]['description']) {
-                this.props.onUpdateUserCopingSkill(this.props.user_id, this.props.coping_skills[index]['skill_id'], title, desc);
+               this.props.onUpdateUserCopingSkill(this.props.user_id, this.props.coping_skills[index]['skill_id'], title, desc);
             }
         } 
-        this.props.onChangeCSEditing(index);
+       this.props.onChangeCSEditing(index);
     }
 
     render() {
@@ -215,19 +215,13 @@ class CopingSkills extends React.Component {
             clearTimeout(resizeTimeout);
             resizeTimeout = setTimeout(function() {
                 coping_skills.forEach((item, index) => {
-                    let text = document.getElementById('cText_'+index);
+                    let text = document.getElementById('cDescContainer_'+index);
                     if (text && text.style.maxHeight) {
                         text.style.maxHeight = text.scrollHeight + 'px';
                     }
                 })
             }, 100);
         }
-
-        console.log('skills:', coping_skills);
-        console.log('error:', error);
-        console.log('user:', user_id)
-        console.log('viewing:', viewing)
-
         return( 
             <section className='ma0 pa1 pa3-ns bt black-90 bg-light-gray tc'>
                 <h1 className='ma1 mh2'>Coping Skills</h1>
@@ -277,9 +271,15 @@ class CopingSkills extends React.Component {
                 })
                 : null
                 }
+                { viewing === 'user'
+                ?
                 <AddSkill 
                     onAddSkill={this.onAddNewSkillClick}
                 />
+                :
+                null
+                }
+               
                 {
                     error
                     ? <ErrorBox error={error}/>
