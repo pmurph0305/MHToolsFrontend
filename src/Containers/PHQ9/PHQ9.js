@@ -82,6 +82,7 @@ class PHQ9 extends React.Component {
                     className='black ma0 pa0 hover-bg-black-20'
                     id={index}
                     key={index}
+                    label={'select answer for question ' + (index+1)}
                     value={this.state.answers[index]}
                     options={phq9SelectionOptions}
                     onChange={this.onSelectAnswer}
@@ -91,6 +92,7 @@ class PHQ9 extends React.Component {
                     className='black ma0 pa0 hover-bg-black-20'
                     id={index}
                     key={index}
+                    label={'select answer for question ' + (index+1)}
                     value={this.state.answers[index]}
                     options={phq9Q10SelectionOptions}
                     onChange={this.onSelectAnswer}
@@ -103,7 +105,6 @@ class PHQ9 extends React.Component {
 
         return (
             <section className="ma0 pa2-ns bt black-90 bg-light-gray tc">
-                <p className=''>abc</p>
                 <h1 className="ma1 mh2 ">PHQ-9</h1>
                 <p className="ma2 mh4">
                     The Patient Health Questionnaire (PHQ-9) is a multipurpose tool used for screening, diagnosing, and monitoring

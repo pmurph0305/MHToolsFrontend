@@ -25,11 +25,12 @@ import {
 } from './dm_constants'
 
 // Editing state managment 
-// const initialEditState = {
-//     dm_editing: false
-// }
+const initialEditState = {
+    dm_editing: false
+}
+
 // Handles switching the state of being in task list editing.
-function editingReducer(state=false, action) {
+function editingReducer(state=initialEditState, action) {
     switch(action.type) {
         case CHANGE_DM_EDITING:
             return updateObject(state, { dm_editing: !state.dm_editing })

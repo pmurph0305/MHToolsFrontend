@@ -13,7 +13,8 @@ const InputField = ({onClick, placeholder}) => {
                 placeholder={placeholder}
                 id="newtask" 
                 type="text" 
-                aria-describedby="New Task"
+                label="New task text input"
+                aria-label="New task text input"
                 className="f6 f5-l input-reset fl black-80 bg-white pa2 lh-solid w-100 w-75-m w-80-l br2-ns br--left-ns"
             />
             <button 
