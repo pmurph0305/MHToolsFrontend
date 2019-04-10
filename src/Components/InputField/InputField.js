@@ -1,9 +1,15 @@
 import React from 'react';
 
 const InputField = ({onClick, placeholder}) => {
+    let textInput = React.createRef();
+    function handleClick() {
+        onClick(textInput.current);
+    }
+
     return (
         <div className="pa2">
             <input 
+                ref={textInput}
                 placeholder={placeholder}
                 id="newtask" 
                 type="text" 
@@ -12,7 +18,8 @@ const InputField = ({onClick, placeholder}) => {
             />
             <button 
                 value="add_task"
-                onClick={() => onClick(document.getElementById("newtask"))}
+                onClick={handleClick}
+                 //onClick={() => onClick(document.getElementById("newtask").value)}
                 className="f6 f5-l babutton-reset fl pv2 tc bn bg-animate bg-black hover-bg-black-70 white pointer w-100 w-25-m w-20-l br2-ns br--right-ns"
             >Add New Task</button>
         </div>

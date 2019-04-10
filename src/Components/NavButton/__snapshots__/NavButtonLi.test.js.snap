@@ -1,0 +1,106 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NavButtonLi tests Matches snapshot 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <NavButtonLi
+    buttonLabel="test label"
+    liClass="tc"
+    onRouteChange={[MockFunction]}
+    route="test route"
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "checkPropTypes": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "host",
+    "props": Object {
+      "children": <button
+        className="f6 f5-l pointer link dim white-80 pa3 ph4-l"
+        onClick={[Function]}
+      >
+        test label
+      </button>,
+      "className": "tc",
+    },
+    "ref": null,
+    "rendered": Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": "test label",
+        "className": "f6 f5-l pointer link dim white-80 pa3 ph4-l",
+        "onClick": [Function],
+      },
+      "ref": null,
+      "rendered": "test label",
+      "type": "button",
+    },
+    "type": "li",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": <button
+          className="f6 f5-l pointer link dim white-80 pa3 ph4-l"
+          onClick={[Function]}
+        >
+          test label
+        </button>,
+        "className": "tc",
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": "test label",
+          "className": "f6 f5-l pointer link dim white-80 pa3 ph4-l",
+          "onClick": [Function],
+        },
+        "ref": null,
+        "rendered": "test label",
+        "type": "button",
+      },
+      "type": "li",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "legacyContextMode": "parent",
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getChildContext": Object {
+            "calledByRenderer": false,
+          },
+          "getDerivedStateFromError": true,
+          "getDerivedStateFromProps": Object {
+            "hasShouldComponentUpdateBug": false,
+          },
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+  },
+}
+`;

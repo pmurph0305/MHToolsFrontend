@@ -30,4 +30,5 @@ describe('DMDateNav tests', () => {
         wrapClick.find('button').last().simulate('click');
         expect(mockClick).toHaveBeenCalledTimes(2);
     })
+    
 })

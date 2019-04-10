@@ -1,0 +1,164 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`InputField tests Matches snapshot 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <InputField
+    onClick={[MockFunction]}
+    placeholder="test"
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "checkPropTypes": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "host",
+    "props": Object {
+      "children": Array [
+        <input
+          aria-describedby="New Task"
+          className="f6 f5-l input-reset fl black-80 bg-white pa2 lh-solid w-100 w-75-m w-80-l br2-ns br--left-ns"
+          id="newtask"
+          placeholder="test"
+          type="text"
+        />,
+        <button
+          className="f6 f5-l babutton-reset fl pv2 tc bn bg-animate bg-black hover-bg-black-70 white pointer w-100 w-25-m w-20-l br2-ns br--right-ns"
+          onClick={[Function]}
+          value="add_task"
+        >
+          Add New Task
+        </button>,
+      ],
+      "className": "pa2",
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "aria-describedby": "New Task",
+          "className": "f6 f5-l input-reset fl black-80 bg-white pa2 lh-solid w-100 w-75-m w-80-l br2-ns br--left-ns",
+          "id": "newtask",
+          "placeholder": "test",
+          "type": "text",
+        },
+        "ref": Object {
+          "current": null,
+        },
+        "rendered": null,
+        "type": "input",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": "Add New Task",
+          "className": "f6 f5-l babutton-reset fl pv2 tc bn bg-animate bg-black hover-bg-black-70 white pointer w-100 w-25-m w-20-l br2-ns br--right-ns",
+          "onClick": [Function],
+          "value": "add_task",
+        },
+        "ref": null,
+        "rendered": "Add New Task",
+        "type": "button",
+      },
+    ],
+    "type": "div",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <input
+            aria-describedby="New Task"
+            className="f6 f5-l input-reset fl black-80 bg-white pa2 lh-solid w-100 w-75-m w-80-l br2-ns br--left-ns"
+            id="newtask"
+            placeholder="test"
+            type="text"
+          />,
+          <button
+            className="f6 f5-l babutton-reset fl pv2 tc bn bg-animate bg-black hover-bg-black-70 white pointer w-100 w-25-m w-20-l br2-ns br--right-ns"
+            onClick={[Function]}
+            value="add_task"
+          >
+            Add New Task
+          </button>,
+        ],
+        "className": "pa2",
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "aria-describedby": "New Task",
+            "className": "f6 f5-l input-reset fl black-80 bg-white pa2 lh-solid w-100 w-75-m w-80-l br2-ns br--left-ns",
+            "id": "newtask",
+            "placeholder": "test",
+            "type": "text",
+          },
+          "ref": Object {
+            "current": null,
+          },
+          "rendered": null,
+          "type": "input",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "Add New Task",
+            "className": "f6 f5-l babutton-reset fl pv2 tc bn bg-animate bg-black hover-bg-black-70 white pointer w-100 w-25-m w-20-l br2-ns br--right-ns",
+            "onClick": [Function],
+            "value": "add_task",
+          },
+          "ref": null,
+          "rendered": "Add New Task",
+          "type": "button",
+        },
+      ],
+      "type": "div",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "legacyContextMode": "parent",
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getChildContext": Object {
+            "calledByRenderer": false,
+          },
+          "getDerivedStateFromError": true,
+          "getDerivedStateFromProps": Object {
+            "hasShouldComponentUpdateBug": false,
+          },
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+  },
+}
+`;
