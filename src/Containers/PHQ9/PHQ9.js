@@ -59,6 +59,21 @@ class PHQ9 extends React.Component {
         this.setState(Object.assign(this.state.answers, answers));
     }
 
+    getFooters = () => {
+        return [
+            ! this.props.submissionResult 
+            ? ''
+            : this.props.submissionResult === 'PHQ-9 submission successful.'
+            ? <p className='dib f6 ma0 pa1 bg-dark-green near-white'>{this.props.submissionResult}</p>
+            : <p className='dib f6 ma0 pa1 bg-light-red'>{this.props.submissionResult}</p>,
+            <button 
+                className='f6 pointer dim ph4 ph4-m ph5-l pv2 ma0 tl db white bg-near-black'
+                onClick={this.onSubmitPHQ9}
+            >Submit
+            </button>
+        ]
+    }
+
     render() {
         const rows = phq9Questions.map((question, index) => {
             var selection;
@@ -84,20 +99,7 @@ class PHQ9 extends React.Component {
             return [question, selection];
         })
 
-        console.log(this.props.submissionResult);
-
-        const footers =  [
-            !this.props.submissionResult 
-            ? ''
-            : this.props.submissionResult === 'PHQ-9 submission successful.'
-            ? <p className='dib f6 ma0 pa1 bg-dark-green near-white'>{this.props.submissionResult}</p>
-            : <p className='dib f6 ma0 pa1 bg-light-red'>{this.props.submissionResult}</p>,
-            <button 
-                className='f6 pointer dim ph4 ph4-m ph5-l pv2 ma0 tl db white bg-near-black'
-                onClick={this.onSubmitPHQ9}
-            >Submit
-            </button>
-        ]
+        
 
         return (
             <section className="ma0 pa2-ns bt black-90 bg-light-gray tc">
@@ -110,7 +112,7 @@ class PHQ9 extends React.Component {
                 <Table
                     headers={phq9Headers}
                     rows={rows}
-                    footers={footers}
+                    footers={this.getFooters()}
                     thClass="fw6 tl pa3 bg-white bb br"
                     tdClass="pa3 tl bb br"
                     tClass="f6 ma2 pa2 w-100 mw8 center lh-copy"

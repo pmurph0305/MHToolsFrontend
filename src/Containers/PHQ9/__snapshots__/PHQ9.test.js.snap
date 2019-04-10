@@ -1,0 +1,994 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PHQ9 tests renders PHQ9 snapshot correctly 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <PHQ9 />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "checkPropTypes": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "host",
+    "props": Object {
+      "children": Array [
+        <p
+          className=""
+        >
+          abc
+        </p>,
+        <h1
+          className="ma1 mh2 "
+        >
+          PHQ-9
+        </h1>,
+        <p
+          className="ma2 mh4"
+        >
+          The Patient Health Questionnaire (PHQ-9) is a multipurpose tool used for screening, diagnosing, and monitoring the severity of depression.
+        </p>,
+        <Table
+          footers={
+            Array [
+              "",
+              <button
+                className="f6 pointer dim ph4 ph4-m ph5-l pv2 ma0 tl db white bg-near-black"
+                onClick={[Function]}
+              >
+                Submit
+              </button>,
+            ]
+          }
+          headers={
+            Array [
+              "Over the past 2 weeks, how often have you been bothered by any of the following problems?",
+              "Select an answer",
+            ]
+          }
+          rows={
+            Array [
+              Array [
+                "1. Little interest or pleasure in doing things",
+                <SelectionBox
+                  className="black ma0 pa0 hover-bg-black-20"
+                  id={0}
+                  onChange={[Function]}
+                  options={
+                    Array [
+                      "Not at all",
+                      "Several days",
+                      "More than half days",
+                      "Nearly every day",
+                    ]
+                  }
+                  value={0}
+                />,
+              ],
+              Array [
+                "2. Feeling down, depressed, or hopeless",
+                <SelectionBox
+                  className="black ma0 pa0 hover-bg-black-20"
+                  id={1}
+                  onChange={[Function]}
+                  options={
+                    Array [
+                      "Not at all",
+                      "Several days",
+                      "More than half days",
+                      "Nearly every day",
+                    ]
+                  }
+                  value={0}
+                />,
+              ],
+              Array [
+                "3. Trouble falling asleep, staying asleep, or sleeping too much",
+                <SelectionBox
+                  className="black ma0 pa0 hover-bg-black-20"
+                  id={2}
+                  onChange={[Function]}
+                  options={
+                    Array [
+                      "Not at all",
+                      "Several days",
+                      "More than half days",
+                      "Nearly every day",
+                    ]
+                  }
+                  value={0}
+                />,
+              ],
+              Array [
+                "4. Feeling tired or having little energy",
+                <SelectionBox
+                  className="black ma0 pa0 hover-bg-black-20"
+                  id={3}
+                  onChange={[Function]}
+                  options={
+                    Array [
+                      "Not at all",
+                      "Several days",
+                      "More than half days",
+                      "Nearly every day",
+                    ]
+                  }
+                  value={0}
+                />,
+              ],
+              Array [
+                "5. Poor appetite or overeating",
+                <SelectionBox
+                  className="black ma0 pa0 hover-bg-black-20"
+                  id={4}
+                  onChange={[Function]}
+                  options={
+                    Array [
+                      "Not at all",
+                      "Several days",
+                      "More than half days",
+                      "Nearly every day",
+                    ]
+                  }
+                  value={0}
+                />,
+              ],
+              Array [
+                "6. Feeling bad about yourself - or that you're a failure or have let yourself or your family down",
+                <SelectionBox
+                  className="black ma0 pa0 hover-bg-black-20"
+                  id={5}
+                  onChange={[Function]}
+                  options={
+                    Array [
+                      "Not at all",
+                      "Several days",
+                      "More than half days",
+                      "Nearly every day",
+                    ]
+                  }
+                  value={0}
+                />,
+              ],
+              Array [
+                "7. Trouble concentrating on things, such as reading the newspaper or watching television",
+                <SelectionBox
+                  className="black ma0 pa0 hover-bg-black-20"
+                  id={6}
+                  onChange={[Function]}
+                  options={
+                    Array [
+                      "Not at all",
+                      "Several days",
+                      "More than half days",
+                      "Nearly every day",
+                    ]
+                  }
+                  value={0}
+                />,
+              ],
+              Array [
+                "8. Moving or speaking so slowly that other people could have noticed. Or, the opposite - being so fidgety or restless that you have been moving around a lot more than usual",
+                <SelectionBox
+                  className="black ma0 pa0 hover-bg-black-20"
+                  id={7}
+                  onChange={[Function]}
+                  options={
+                    Array [
+                      "Not at all",
+                      "Several days",
+                      "More than half days",
+                      "Nearly every day",
+                    ]
+                  }
+                  value={0}
+                />,
+              ],
+              Array [
+                "9. Thoughts that you would be better off dead or of hurting yourself in some way",
+                <SelectionBox
+                  className="black ma0 pa0 hover-bg-black-20"
+                  id={8}
+                  onChange={[Function]}
+                  options={
+                    Array [
+                      "Not at all",
+                      "Several days",
+                      "More than half days",
+                      "Nearly every day",
+                    ]
+                  }
+                  value={0}
+                />,
+              ],
+              Array [
+                "10. If you checked off any problems, how difficult have those problems made it for you to do your work, take care of things at home, or get along with other people?",
+                <SelectionBox
+                  className="black ma0 pa0 hover-bg-black-20"
+                  id={9}
+                  onChange={[Function]}
+                  options={
+                    Array [
+                      "Not difficult at all",
+                      "Somewhat difficult",
+                      "Very difficult",
+                      "Extremely difficult",
+                    ]
+                  }
+                  value={0}
+                />,
+              ],
+            ]
+          }
+          tClass="f6 ma2 pa2 w-100 mw8 center lh-copy"
+          tdClass="pa3 tl bb br"
+          tfClass="pa3 tr bb br"
+          thClass="fw6 tl pa3 bg-white bb br"
+          trClass="striped--moon-gray"
+        />,
+        <p />,
+      ],
+      "className": "ma0 pa2-ns bt black-90 bg-light-gray tc",
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": "abc",
+          "className": "",
+        },
+        "ref": null,
+        "rendered": "abc",
+        "type": "p",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": "PHQ-9",
+          "className": "ma1 mh2 ",
+        },
+        "ref": null,
+        "rendered": "PHQ-9",
+        "type": "h1",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": "The Patient Health Questionnaire (PHQ-9) is a multipurpose tool used for screening, diagnosing, and monitoring the severity of depression.",
+          "className": "ma2 mh4",
+        },
+        "ref": null,
+        "rendered": "The Patient Health Questionnaire (PHQ-9) is a multipurpose tool used for screening, diagnosing, and monitoring the severity of depression.",
+        "type": "p",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "footers": Array [
+            "",
+            <button
+              className="f6 pointer dim ph4 ph4-m ph5-l pv2 ma0 tl db white bg-near-black"
+              onClick={[Function]}
+            >
+              Submit
+            </button>,
+          ],
+          "headers": Array [
+            "Over the past 2 weeks, how often have you been bothered by any of the following problems?",
+            "Select an answer",
+          ],
+          "rows": Array [
+            Array [
+              "1. Little interest or pleasure in doing things",
+              <SelectionBox
+                className="black ma0 pa0 hover-bg-black-20"
+                id={0}
+                onChange={[Function]}
+                options={
+                  Array [
+                    "Not at all",
+                    "Several days",
+                    "More than half days",
+                    "Nearly every day",
+                  ]
+                }
+                value={0}
+              />,
+            ],
+            Array [
+              "2. Feeling down, depressed, or hopeless",
+              <SelectionBox
+                className="black ma0 pa0 hover-bg-black-20"
+                id={1}
+                onChange={[Function]}
+                options={
+                  Array [
+                    "Not at all",
+                    "Several days",
+                    "More than half days",
+                    "Nearly every day",
+                  ]
+                }
+                value={0}
+              />,
+            ],
+            Array [
+              "3. Trouble falling asleep, staying asleep, or sleeping too much",
+              <SelectionBox
+                className="black ma0 pa0 hover-bg-black-20"
+                id={2}
+                onChange={[Function]}
+                options={
+                  Array [
+                    "Not at all",
+                    "Several days",
+                    "More than half days",
+                    "Nearly every day",
+                  ]
+                }
+                value={0}
+              />,
+            ],
+            Array [
+              "4. Feeling tired or having little energy",
+              <SelectionBox
+                className="black ma0 pa0 hover-bg-black-20"
+                id={3}
+                onChange={[Function]}
+                options={
+                  Array [
+                    "Not at all",
+                    "Several days",
+                    "More than half days",
+                    "Nearly every day",
+                  ]
+                }
+                value={0}
+              />,
+            ],
+            Array [
+              "5. Poor appetite or overeating",
+              <SelectionBox
+                className="black ma0 pa0 hover-bg-black-20"
+                id={4}
+                onChange={[Function]}
+                options={
+                  Array [
+                    "Not at all",
+                    "Several days",
+                    "More than half days",
+                    "Nearly every day",
+                  ]
+                }
+                value={0}
+              />,
+            ],
+            Array [
+              "6. Feeling bad about yourself - or that you're a failure or have let yourself or your family down",
+              <SelectionBox
+                className="black ma0 pa0 hover-bg-black-20"
+                id={5}
+                onChange={[Function]}
+                options={
+                  Array [
+                    "Not at all",
+                    "Several days",
+                    "More than half days",
+                    "Nearly every day",
+                  ]
+                }
+                value={0}
+              />,
+            ],
+            Array [
+              "7. Trouble concentrating on things, such as reading the newspaper or watching television",
+              <SelectionBox
+                className="black ma0 pa0 hover-bg-black-20"
+                id={6}
+                onChange={[Function]}
+                options={
+                  Array [
+                    "Not at all",
+                    "Several days",
+                    "More than half days",
+                    "Nearly every day",
+                  ]
+                }
+                value={0}
+              />,
+            ],
+            Array [
+              "8. Moving or speaking so slowly that other people could have noticed. Or, the opposite - being so fidgety or restless that you have been moving around a lot more than usual",
+              <SelectionBox
+                className="black ma0 pa0 hover-bg-black-20"
+                id={7}
+                onChange={[Function]}
+                options={
+                  Array [
+                    "Not at all",
+                    "Several days",
+                    "More than half days",
+                    "Nearly every day",
+                  ]
+                }
+                value={0}
+              />,
+            ],
+            Array [
+              "9. Thoughts that you would be better off dead or of hurting yourself in some way",
+              <SelectionBox
+                className="black ma0 pa0 hover-bg-black-20"
+                id={8}
+                onChange={[Function]}
+                options={
+                  Array [
+                    "Not at all",
+                    "Several days",
+                    "More than half days",
+                    "Nearly every day",
+                  ]
+                }
+                value={0}
+              />,
+            ],
+            Array [
+              "10. If you checked off any problems, how difficult have those problems made it for you to do your work, take care of things at home, or get along with other people?",
+              <SelectionBox
+                className="black ma0 pa0 hover-bg-black-20"
+                id={9}
+                onChange={[Function]}
+                options={
+                  Array [
+                    "Not difficult at all",
+                    "Somewhat difficult",
+                    "Very difficult",
+                    "Extremely difficult",
+                  ]
+                }
+                value={0}
+              />,
+            ],
+          ],
+          "tClass": "f6 ma2 pa2 w-100 mw8 center lh-copy",
+          "tdClass": "pa3 tl bb br",
+          "tfClass": "pa3 tr bb br",
+          "thClass": "fw6 tl pa3 bg-white bb br",
+          "trClass": "striped--moon-gray",
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": undefined,
+        },
+        "ref": null,
+        "rendered": null,
+        "type": "p",
+      },
+    ],
+    "type": "section",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <p
+            className=""
+          >
+            abc
+          </p>,
+          <h1
+            className="ma1 mh2 "
+          >
+            PHQ-9
+          </h1>,
+          <p
+            className="ma2 mh4"
+          >
+            The Patient Health Questionnaire (PHQ-9) is a multipurpose tool used for screening, diagnosing, and monitoring the severity of depression.
+          </p>,
+          <Table
+            footers={
+              Array [
+                "",
+                <button
+                  className="f6 pointer dim ph4 ph4-m ph5-l pv2 ma0 tl db white bg-near-black"
+                  onClick={[Function]}
+                >
+                  Submit
+                </button>,
+              ]
+            }
+            headers={
+              Array [
+                "Over the past 2 weeks, how often have you been bothered by any of the following problems?",
+                "Select an answer",
+              ]
+            }
+            rows={
+              Array [
+                Array [
+                  "1. Little interest or pleasure in doing things",
+                  <SelectionBox
+                    className="black ma0 pa0 hover-bg-black-20"
+                    id={0}
+                    onChange={[Function]}
+                    options={
+                      Array [
+                        "Not at all",
+                        "Several days",
+                        "More than half days",
+                        "Nearly every day",
+                      ]
+                    }
+                    value={0}
+                  />,
+                ],
+                Array [
+                  "2. Feeling down, depressed, or hopeless",
+                  <SelectionBox
+                    className="black ma0 pa0 hover-bg-black-20"
+                    id={1}
+                    onChange={[Function]}
+                    options={
+                      Array [
+                        "Not at all",
+                        "Several days",
+                        "More than half days",
+                        "Nearly every day",
+                      ]
+                    }
+                    value={0}
+                  />,
+                ],
+                Array [
+                  "3. Trouble falling asleep, staying asleep, or sleeping too much",
+                  <SelectionBox
+                    className="black ma0 pa0 hover-bg-black-20"
+                    id={2}
+                    onChange={[Function]}
+                    options={
+                      Array [
+                        "Not at all",
+                        "Several days",
+                        "More than half days",
+                        "Nearly every day",
+                      ]
+                    }
+                    value={0}
+                  />,
+                ],
+                Array [
+                  "4. Feeling tired or having little energy",
+                  <SelectionBox
+                    className="black ma0 pa0 hover-bg-black-20"
+                    id={3}
+                    onChange={[Function]}
+                    options={
+                      Array [
+                        "Not at all",
+                        "Several days",
+                        "More than half days",
+                        "Nearly every day",
+                      ]
+                    }
+                    value={0}
+                  />,
+                ],
+                Array [
+                  "5. Poor appetite or overeating",
+                  <SelectionBox
+                    className="black ma0 pa0 hover-bg-black-20"
+                    id={4}
+                    onChange={[Function]}
+                    options={
+                      Array [
+                        "Not at all",
+                        "Several days",
+                        "More than half days",
+                        "Nearly every day",
+                      ]
+                    }
+                    value={0}
+                  />,
+                ],
+                Array [
+                  "6. Feeling bad about yourself - or that you're a failure or have let yourself or your family down",
+                  <SelectionBox
+                    className="black ma0 pa0 hover-bg-black-20"
+                    id={5}
+                    onChange={[Function]}
+                    options={
+                      Array [
+                        "Not at all",
+                        "Several days",
+                        "More than half days",
+                        "Nearly every day",
+                      ]
+                    }
+                    value={0}
+                  />,
+                ],
+                Array [
+                  "7. Trouble concentrating on things, such as reading the newspaper or watching television",
+                  <SelectionBox
+                    className="black ma0 pa0 hover-bg-black-20"
+                    id={6}
+                    onChange={[Function]}
+                    options={
+                      Array [
+                        "Not at all",
+                        "Several days",
+                        "More than half days",
+                        "Nearly every day",
+                      ]
+                    }
+                    value={0}
+                  />,
+                ],
+                Array [
+                  "8. Moving or speaking so slowly that other people could have noticed. Or, the opposite - being so fidgety or restless that you have been moving around a lot more than usual",
+                  <SelectionBox
+                    className="black ma0 pa0 hover-bg-black-20"
+                    id={7}
+                    onChange={[Function]}
+                    options={
+                      Array [
+                        "Not at all",
+                        "Several days",
+                        "More than half days",
+                        "Nearly every day",
+                      ]
+                    }
+                    value={0}
+                  />,
+                ],
+                Array [
+                  "9. Thoughts that you would be better off dead or of hurting yourself in some way",
+                  <SelectionBox
+                    className="black ma0 pa0 hover-bg-black-20"
+                    id={8}
+                    onChange={[Function]}
+                    options={
+                      Array [
+                        "Not at all",
+                        "Several days",
+                        "More than half days",
+                        "Nearly every day",
+                      ]
+                    }
+                    value={0}
+                  />,
+                ],
+                Array [
+                  "10. If you checked off any problems, how difficult have those problems made it for you to do your work, take care of things at home, or get along with other people?",
+                  <SelectionBox
+                    className="black ma0 pa0 hover-bg-black-20"
+                    id={9}
+                    onChange={[Function]}
+                    options={
+                      Array [
+                        "Not difficult at all",
+                        "Somewhat difficult",
+                        "Very difficult",
+                        "Extremely difficult",
+                      ]
+                    }
+                    value={0}
+                  />,
+                ],
+              ]
+            }
+            tClass="f6 ma2 pa2 w-100 mw8 center lh-copy"
+            tdClass="pa3 tl bb br"
+            tfClass="pa3 tr bb br"
+            thClass="fw6 tl pa3 bg-white bb br"
+            trClass="striped--moon-gray"
+          />,
+          <p />,
+        ],
+        "className": "ma0 pa2-ns bt black-90 bg-light-gray tc",
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "abc",
+            "className": "",
+          },
+          "ref": null,
+          "rendered": "abc",
+          "type": "p",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "PHQ-9",
+            "className": "ma1 mh2 ",
+          },
+          "ref": null,
+          "rendered": "PHQ-9",
+          "type": "h1",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "The Patient Health Questionnaire (PHQ-9) is a multipurpose tool used for screening, diagnosing, and monitoring the severity of depression.",
+            "className": "ma2 mh4",
+          },
+          "ref": null,
+          "rendered": "The Patient Health Questionnaire (PHQ-9) is a multipurpose tool used for screening, diagnosing, and monitoring the severity of depression.",
+          "type": "p",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "footers": Array [
+              "",
+              <button
+                className="f6 pointer dim ph4 ph4-m ph5-l pv2 ma0 tl db white bg-near-black"
+                onClick={[Function]}
+              >
+                Submit
+              </button>,
+            ],
+            "headers": Array [
+              "Over the past 2 weeks, how often have you been bothered by any of the following problems?",
+              "Select an answer",
+            ],
+            "rows": Array [
+              Array [
+                "1. Little interest or pleasure in doing things",
+                <SelectionBox
+                  className="black ma0 pa0 hover-bg-black-20"
+                  id={0}
+                  onChange={[Function]}
+                  options={
+                    Array [
+                      "Not at all",
+                      "Several days",
+                      "More than half days",
+                      "Nearly every day",
+                    ]
+                  }
+                  value={0}
+                />,
+              ],
+              Array [
+                "2. Feeling down, depressed, or hopeless",
+                <SelectionBox
+                  className="black ma0 pa0 hover-bg-black-20"
+                  id={1}
+                  onChange={[Function]}
+                  options={
+                    Array [
+                      "Not at all",
+                      "Several days",
+                      "More than half days",
+                      "Nearly every day",
+                    ]
+                  }
+                  value={0}
+                />,
+              ],
+              Array [
+                "3. Trouble falling asleep, staying asleep, or sleeping too much",
+                <SelectionBox
+                  className="black ma0 pa0 hover-bg-black-20"
+                  id={2}
+                  onChange={[Function]}
+                  options={
+                    Array [
+                      "Not at all",
+                      "Several days",
+                      "More than half days",
+                      "Nearly every day",
+                    ]
+                  }
+                  value={0}
+                />,
+              ],
+              Array [
+                "4. Feeling tired or having little energy",
+                <SelectionBox
+                  className="black ma0 pa0 hover-bg-black-20"
+                  id={3}
+                  onChange={[Function]}
+                  options={
+                    Array [
+                      "Not at all",
+                      "Several days",
+                      "More than half days",
+                      "Nearly every day",
+                    ]
+                  }
+                  value={0}
+                />,
+              ],
+              Array [
+                "5. Poor appetite or overeating",
+                <SelectionBox
+                  className="black ma0 pa0 hover-bg-black-20"
+                  id={4}
+                  onChange={[Function]}
+                  options={
+                    Array [
+                      "Not at all",
+                      "Several days",
+                      "More than half days",
+                      "Nearly every day",
+                    ]
+                  }
+                  value={0}
+                />,
+              ],
+              Array [
+                "6. Feeling bad about yourself - or that you're a failure or have let yourself or your family down",
+                <SelectionBox
+                  className="black ma0 pa0 hover-bg-black-20"
+                  id={5}
+                  onChange={[Function]}
+                  options={
+                    Array [
+                      "Not at all",
+                      "Several days",
+                      "More than half days",
+                      "Nearly every day",
+                    ]
+                  }
+                  value={0}
+                />,
+              ],
+              Array [
+                "7. Trouble concentrating on things, such as reading the newspaper or watching television",
+                <SelectionBox
+                  className="black ma0 pa0 hover-bg-black-20"
+                  id={6}
+                  onChange={[Function]}
+                  options={
+                    Array [
+                      "Not at all",
+                      "Several days",
+                      "More than half days",
+                      "Nearly every day",
+                    ]
+                  }
+                  value={0}
+                />,
+              ],
+              Array [
+                "8. Moving or speaking so slowly that other people could have noticed. Or, the opposite - being so fidgety or restless that you have been moving around a lot more than usual",
+                <SelectionBox
+                  className="black ma0 pa0 hover-bg-black-20"
+                  id={7}
+                  onChange={[Function]}
+                  options={
+                    Array [
+                      "Not at all",
+                      "Several days",
+                      "More than half days",
+                      "Nearly every day",
+                    ]
+                  }
+                  value={0}
+                />,
+              ],
+              Array [
+                "9. Thoughts that you would be better off dead or of hurting yourself in some way",
+                <SelectionBox
+                  className="black ma0 pa0 hover-bg-black-20"
+                  id={8}
+                  onChange={[Function]}
+                  options={
+                    Array [
+                      "Not at all",
+                      "Several days",
+                      "More than half days",
+                      "Nearly every day",
+                    ]
+                  }
+                  value={0}
+                />,
+              ],
+              Array [
+                "10. If you checked off any problems, how difficult have those problems made it for you to do your work, take care of things at home, or get along with other people?",
+                <SelectionBox
+                  className="black ma0 pa0 hover-bg-black-20"
+                  id={9}
+                  onChange={[Function]}
+                  options={
+                    Array [
+                      "Not difficult at all",
+                      "Somewhat difficult",
+                      "Very difficult",
+                      "Extremely difficult",
+                    ]
+                  }
+                  value={0}
+                />,
+              ],
+            ],
+            "tClass": "f6 ma2 pa2 w-100 mw8 center lh-copy",
+            "tdClass": "pa3 tl bb br",
+            "tfClass": "pa3 tr bb br",
+            "thClass": "fw6 tl pa3 bg-white bb br",
+            "trClass": "striped--moon-gray",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": undefined,
+          },
+          "ref": null,
+          "rendered": null,
+          "type": "p",
+        },
+      ],
+      "type": "section",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "legacyContextMode": "parent",
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getChildContext": Object {
+            "calledByRenderer": false,
+          },
+          "getDerivedStateFromError": true,
+          "getDerivedStateFromProps": Object {
+            "hasShouldComponentUpdateBug": false,
+          },
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+  },
+  Symbol(enzyme.__childContext__): null,
+}
+`;

@@ -67,7 +67,7 @@ const Table = ({headers, rows, footers, tdClass, thClass, tClass, trClass, tfCla
                     </tr>
                 }
             </tbody>
-            {footers ?
+            {footers && footers.length ?
                 <tfoot>
                     <tr className={trClass}>
                         {footers.map((footer, index)=> {
