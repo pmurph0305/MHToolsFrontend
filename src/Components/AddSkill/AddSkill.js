@@ -8,8 +8,9 @@ export const AddSkill = ({onAddSkill, addError}) => {
             <input 
                 placeholder="Coping Skill Title"
                 id="add_skill_title" 
-                type="text" 
-                aria-describedby="New Task"
+                type="text"
+                label='Coping Skill Title Input' 
+                aria-label='Coping Skill Title Input' 
                 className="f6 f5-l input-reset fl black-80 bg-white pa2 lh-solid w-100 br2-ns br--left-ns"
             />
 
@@ -19,11 +20,12 @@ export const AddSkill = ({onAddSkill, addError}) => {
                 placeholder="Coping Skill Description"
                 id="add_skill_description" 
                 type="text" 
-                aria-describedby="New Task"
+                label='Coping Skill Description Input'
+                aria-label='Coping Skill Description Input'
                 className="f6 f5-l input-reset fl black-80 bg-white mv2 pa2 lh-solid w-100 br2-ns br--left-ns"
             ></textarea>
             <div className='fl' >
-                Share skill: <input type="checkbox" id="add_skill_share"/>
+                Share skill: <input type="checkbox" label="share skill checkbox" aria-label="share skill checkbox" id="add_skill_share"/>
             </div>
             { addError
             ? <p>{addError}</p>

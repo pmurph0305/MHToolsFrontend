@@ -8,13 +8,15 @@ import React from 'react';
  * @param {type}   onChange onChange function when selection is changed,
  * @param {number} value    default value of select element,
  */
-const SelectionBox = ({options, id, onChange, value, className}) => {
+const SelectionBox = ({options, id, label, onChange, value, className}) => {
     return(
         <select
             id={id}
             onChange={onChange}
             value = {value}
             className={className}
+            label={label}
+            aria-label={label}
         >
             {options.map((option, index) => {
                 return (

@@ -231,6 +231,7 @@ class CopingSkills extends React.Component {
                 <SelectionBox
                     id='cs_viewing_box'
                     className='black ma2 bg-black-10 pa1 hover-bg-black-20 fl db'
+                    label='Display skills selection'
                     options={['My coping skills', 'Shared coping skills']}
                     onChange={this.onChangeSkillDisplay}
 
@@ -239,6 +240,7 @@ class CopingSkills extends React.Component {
                 ? <><SelectionBox
                     id='cs_shared_order'
                     className='black ma2 bg-black-10 pa1 hover-bg-black-20 fl db'
+                    label='Sort displayed skills by selection'
                     options={['Top', 'Newest', 'Random']}
                     onChange={this.onChangeSharedViewType}
 
