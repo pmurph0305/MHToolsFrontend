@@ -28,3 +28,22 @@ $font-weight-base: 600;
         transition: opacity .15s ease-out;
     }
 }
+
+// Each discrete section of the site. (DM, PHQ9, Coping Skills etc.)
+%SectionBase {
+    margin: 0;
+    color: rgba(0, 0, 0, 0.90);
+    text-align: center;
+    background-color: $primary-background;
+    padding: 0.5rem;
+}
+
+// Titles for each section of site.
+%TitleBase {
+    margin: 0.25rem 0.5rem;
+}
+
+// Descrption text, if present, for section of site.
+%DescriptionBase {
+    padding: 1rem;
+}

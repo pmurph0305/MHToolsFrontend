@@ -1,19 +1,15 @@
 @import '../../styles/shared.scss';
 
 .PHQ9Section {
-    margin: 0;
-    color: rgba(0, 0, 0, 0.90);
-    text-align: center;
-    background-color: $primary-background;
-    padding: 0.5rem;
+    @extend %SectionBase;
 }
 
 .PHQ9Title {
-    margin: 0.25rem 0.5rem;
+    @extend %TitleBase;
 }
 
 .PHQ9Description {
-    padding: 1rem;
+    @extend %DescriptionBase;
 }
 
 .TableClass {

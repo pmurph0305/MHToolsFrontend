@@ -8,7 +8,7 @@ const InputField = ({onClick, placeholder}) => {
     }
 
     return (
-        <div className="pa2">
+        <div className="InputContainer">
             <input 
                 ref={textInput}
                 placeholder={placeholder}

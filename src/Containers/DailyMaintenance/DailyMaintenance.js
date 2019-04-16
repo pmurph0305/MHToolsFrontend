@@ -4,6 +4,7 @@ import DMDateNav from '../../Components/DMDateNav/DMDateNav'
 import React from 'react'
 import TaskItem from './TaskItem/TaskItem'
 
+import './DailyMaintenance.scss'
 
 import { setDMEditing, requestDMTasks, onDMSaveClick, swapDMTaskRanks,
      addDMTask, toggleDMTask, changeDMTaskName,
@@ -108,9 +109,9 @@ class DailyMaintenance extends React.Component {
     render() {
         const { date, editing, taskList, onEditToggle, onTaskTextChange } = this.props;
         return (
-            <section className="ma0 pa1 pa3-ns bt black-90 bg-light-gray tc">
-                <h1 className="ma1 mh2 ">Daily Maintenance</h1>
-                <p className="ma2 mh4">
+            <section className="DMSection">
+                <h1 className="DMTitle">Daily Maintenance</h1>
+                <p className="DMDescrption">
                     A list of tasks you need to get done throughout the day to stay healthy.
                 </p>
                 <DMDateNav
@@ -144,23 +145,24 @@ class DailyMaintenance extends React.Component {
                 />
                 : null
                 }
-                
-                { editing && date === currentDate ?
-                    <button 
-                    type="button"
-                    className="f6 fr dim ph3 pv2 mb2 dib white bg-black w-20 pa3 ma2"
-                    onClick={this.onSaveClick}
-                    value='false'
-                    >Save</button>
-                : date === currentDate ?
-                    <button 
+                <div className="EditContainer">
+                    { editing && date === currentDate ?
+                        <button 
                         type="button"
-                        className="f6 fr dim ph3 pv2 mb2 dib white bg-black w-20 pa3 ma2"
-                        onClick={() => onEditToggle(true)}
-                        value='true'
-                    >Edit</button>
-                : null
-                }
+                        className="EditButton"
+                        onClick={this.onSaveClick}
+                        value='false'
+                        >Save</button>
+                    : date === currentDate ?
+                        <button 
+                            type="button"
+                            className="EditButton"
+                            onClick={() => onEditToggle(true)}
+                            value='true'
+                        >Edit</button>
+                    : null
+                    }
+                </div>
             </section>
         )
     }
