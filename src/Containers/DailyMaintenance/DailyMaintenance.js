@@ -138,6 +138,7 @@ class DailyMaintenance extends React.Component {
                 })
                 : null
                 }
+                {/* Display input field only if on current date. */}
                 { date === currentDate 
                 ? <InputField
                     placeholder={inputPlaceholder}
@@ -145,24 +146,25 @@ class DailyMaintenance extends React.Component {
                 />
                 : null
                 }
-                <div className="EditContainer">
-                    { editing && date === currentDate ?
-                        <button 
+                
+                {/* Edit & Save Buttons */}
+                { editing && date === currentDate ?
+                    <button 
+                    type="button"
+                    className="EditButton"
+                    onClick={this.onSaveClick}
+                    value='false'
+                    >Save</button>
+                : date === currentDate ?
+                    <button 
                         type="button"
                         className="EditButton"
-                        onClick={this.onSaveClick}
-                        value='false'
-                        >Save</button>
-                    : date === currentDate ?
-                        <button 
-                            type="button"
-                            className="EditButton"
-                            onClick={() => onEditToggle(true)}
-                            value='true'
-                        >Edit</button>
-                    : null
-                    }
-                </div>
+                        onClick={() => onEditToggle(true)}
+                        value='true'
+                    >Edit</button>
+                : null
+                }
+            
             </section>
         )
     }
