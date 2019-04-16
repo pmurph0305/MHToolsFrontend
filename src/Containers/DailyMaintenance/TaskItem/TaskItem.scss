@@ -1,0 +1,92 @@
+// Holds rank arrows, task input field, delete button when editing.
+.orderContainer {
+	display: flex;
+	flex-direction: column;
+	float: left;
+	justify-content: center;
+	margin: 0.33rem 0rem;
+	border: 1px solid;
+}
+
+.rankButton {
+	border-width: 1px 1px 1px 1px;
+	padding: .125rem;
+	font-size: 1rem;
+	cursor: pointer;
+}
+
+.rankButton:hover {
+	background-color: lightgray;
+}
+
+.rankButton:focus {
+  	background-color:lightgray;
+}
+
+// Padding so the custom checkbox isn't covering text.
+.taskText {
+	padding-left: 2rem;
+}
+
+/* Hide default checkbox */
+.hiddenCheckbox {
+	position: absolute;
+	opacity: 0;
+	height: 0;
+	width: 0;
+	// Focus for background-color of following checkmark when it has focus
+//   &:focus +.checkmark {
+// 	background-color:rgb(225, 225, 225)
+//   }
+}
+
+/* Custom checkmark box beside each task. 
+Background color changes depend if checked and if hovered. */
+.checkmark {
+	position: absolute;
+	left: 0.2rem;
+	top: 0.33rem;
+	height: 1.5rem;
+	width: 1.5rem;
+	background-color: rgb(200, 200, 200);
+	cursor: pointer;
+
+	&:hover{
+		background-color: rgb(225, 225, 225)
+	}
+
+	&:after{
+		/* Create the checkmark/indicator (hidden when not checked) */
+		content: "";
+		position: absolute;
+		display: none;
+		/* Checkmark is a rotated no content span */
+		left: 0.5rem;
+		top: 0.2rem;
+		width: 0.33rem;
+		height: 0.75rem;
+		border: solid rgb(0, 41, 0);
+		border-width: 0 0.2rem 0.2rem 0;
+		-webkit-transform: rotate(45deg);
+		-ms-transform: rotate(45deg);
+		transform: rotate(45deg);
+	}
+}
+
+// Holds task and checkbox when not editing.
+.taskContainer {
+	display: block;
+	position: relative;
+	border-bottom: 0.1rem solid grey;
+	text-align: left;
+	font-size: 1.5rem;
+	padding: 0.2rem;
+	
+	input:checked ~.checkmark:hover{
+		background-color: rgb(225, 225, 225)
+	}
+	/* Show the checkmark when checked */
+	input:checked ~ .checkmark:after {
+		display: block;
+	}
+}
