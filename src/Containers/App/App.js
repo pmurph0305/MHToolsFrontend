@@ -8,7 +8,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import 'tachyons';
-import './App.css';
+import './App.scss';
 
 const serverURL = 'http://localhost:3001'
 
@@ -30,7 +30,7 @@ class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			route: 'dm',
+			route: 'phq9',
 			phq9_result: '',
 		}
 	}

@@ -1,0 +1,113 @@
+@import '../../styles/shared.scss';
+
+.PHQ9Section {
+    margin: 0;
+    color: rgba(0, 0, 0, 0.90);
+    text-align: center;
+    background-color: $primary-background;
+    padding: 0.5rem;
+}
+
+.PHQ9Title {
+    margin: 0.25rem 0.5rem;
+}
+
+.PHQ9Description {
+    padding: 1rem;
+}
+
+.TableClass {
+    font-weight: 600;
+    margin: auto;
+    line-height: 1.5;
+    text-align: left;
+    width: 100%;
+    max-width: 75rem;
+    padding: 1rem;
+
+    // Striping every other row for easier visibilty.
+    .TableRow:nth-child(even) {
+        background-color: $secondary-background;
+    }
+
+    %TableCell-shared {
+        padding: 1rem;
+        border-bottom: 1px solid black;
+        border-right: 1px solid black;
+        &:first-child{ border-left: 1px solid black; }
+    }
+
+    .TableCell {
+        @extend %TableCell-shared;
+    }
+
+    .TableFooter {
+        @extend %TableCell-shared;
+        text-align: right;
+        // Align button center.
+        &:last-child{ text-align: center }
+    }
+    
+    .TableHeader {
+        @extend %TableCell-shared;
+        background-color: $secondary-background;
+        border-top: 1px solid black;
+        font-weight: bold;
+    }
+}
+
+%SubmissionResult-shared {
+    text-align: right;
+    display: inline-block;
+    font-weight: 600;
+    margin: 0;
+    padding: 0.25rem;
+    color: $primary-text-color;
+}
+
+.SubmissionSuccess {
+    @extend %SubmissionResult-shared;
+    background-color: #73c7a8;
+}
+
+.SubmissionFailed {
+    @extend %SubmissionResult-shared;
+    background-color:  #ff9999;
+}
+
+.SubmitButton {
+    background-color: $button-background-color;
+    color: $button-text-color;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    opacity: 1;
+    transition: opacity .15s ease-in;
+    &:hover{
+        cursor: pointer;
+        opacity: 0.9;
+    }
+    &:focus{
+        opacity: 0.9;
+    }
+    &:active{
+        opacity: 0.8;
+        transition: opacity .15s ease-out;
+    }
+
+    // Large screens
+    @media screen and (min-width:60em) {
+        padding-left: 4rem;
+        padding-right: 4rem;
+    }
+    // Medium
+    @media screen and (min-width:30em) and (max-width: 60em) {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+    // Small
+    @media screen and (max-width: 30em) {
+        padding-left: 0.5rem;
+        padding-right:0.5rem;
+    }
+
+}

@@ -2,6 +2,9 @@ import React from 'react';
 import Table from '../../Components/Table/Table'
 import SelectionBox from '../../Components/SelectionBox/SelectionBox'
 
+import './PHQ9.scss'
+
+
 const phq9Headers = [
     'Over the past 2 weeks, how often have you been bothered by any of the following problems?',
     'Select an answer'
@@ -64,10 +67,10 @@ class PHQ9 extends React.Component {
             ! this.props.submissionResult 
             ? ''
             : this.props.submissionResult === 'PHQ-9 submission successful.'
-            ? <p className='dib f6 ma0 pa1 bg-dark-green near-white'>{this.props.submissionResult}</p>
-            : <p className='dib f6 ma0 pa1 bg-light-red'>{this.props.submissionResult}</p>,
+            ? <p className='SubmissionSuccess'>{this.props.submissionResult}</p>
+            : <p className='SubmissionFailed'>{this.props.submissionResult}</p>,
             <button 
-                className='f6 pointer dim ph4 ph4-m ph5-l pv2 ma0 tl db white bg-near-black'
+                className="SubmitButton"
                 onClick={this.onSubmitPHQ9}
             >Submit
             </button>
@@ -79,7 +82,7 @@ class PHQ9 extends React.Component {
             var selection;
             if (index < 9) {
                 selection = <SelectionBox
-                    className='black ma0 pa0 hover-bg-black-20'
+                    
                     id={index}
                     key={index}
                     label={'select answer for question ' + (index+1)}
@@ -89,7 +92,6 @@ class PHQ9 extends React.Component {
                 />
             } else {
                 selection = <SelectionBox
-                    className='black ma0 pa0 hover-bg-black-20'
                     id={index}
                     key={index}
                     label={'select answer for question ' + (index+1)}
@@ -104,21 +106,29 @@ class PHQ9 extends React.Component {
         
 
         return (
-            <section className="ma0 pa2-ns bt black-90 bg-light-gray tc">
-                <h1 className="ma1 mh2 ">PHQ-9</h1>
-                <p className="ma2 mh4">
+            <section 
+               className="PHQ9Section"
+            >
+                <h1 className="PHQ9Title">PHQ-9</h1>
+                <p className="PHQ9Description">
                     The Patient Health Questionnaire (PHQ-9) is a multipurpose tool used for screening, diagnosing, and monitoring
                     the severity of depression.
                 </p>
                 <Table
+                    tClass="TableClass"
+                    trClass="TableRow"
+                    tdClass="TableCell"
+                    thClass="TableHeader"
+                    tfClass="TableFooter"
                     headers={phq9Headers}
                     rows={rows}
                     footers={this.getFooters()}
-                    thClass="fw6 tl pa3 bg-white bb br"
-                    tdClass="pa3 tl bb br"
-                    tClass="f6 ma2 pa2 w-100 mw8 center lh-copy"
-                    trClass="striped--moon-gray"
-                    tfClass="pa3 tr bb br"
+                    // thClass="TableHeaders"
+                    // thClass= "fw6 tl pa3 bg-white bb br"
+                    // tdClass="pa3 tl bb br"
+                    // tClass="f6 ma2 pa2 w-100 mw8 center lh-copy"
+                    // trClass="striped--moon-gray"
+                    // tfClass="pa3 tr bb br"
                 />
                 <p>{this.state.total}</p>
             </section>
