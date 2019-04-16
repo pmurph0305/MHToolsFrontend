@@ -1,0 +1,37 @@
+// className="f6 f5-l input-reset fl black-80 bg-white pa2 lh-solid w-100 w-75-m w-80-l br2-ns br--left-ns"
+@import '../../styles/shared.scss';
+
+.InputField {
+    padding: 0.5rem;
+    background-color: white;
+    color: $primary-text-color;
+    // Large screens
+    @media screen and (min-width:60em) {
+        width: 80%;
+    }
+    // Medium
+    @media screen and (min-width:30em) and (max-width: 60em) {
+        width: 75%;
+    }
+    // Small
+    @media screen and (max-width: 30em) {
+       width: 100%;
+    }
+}
+
+.AddTaskButton {
+    @extend %ButtonBase;
+    float: right;
+
+    @media screen and (min-width:60em) {
+        width: 20%;
+    }
+    // Medium
+    @media screen and (min-width:30em) and (max-width: 60em) {
+        width: 25%;
+    }
+    // Small
+    @media screen and (max-width: 30em) {
+       width: 100%;
+    }
+}

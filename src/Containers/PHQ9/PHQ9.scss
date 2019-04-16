@@ -76,23 +76,7 @@
 }
 
 .SubmitButton {
-    background-color: $button-background-color;
-    color: $button-text-color;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    opacity: 1;
-    transition: opacity .15s ease-in;
-    &:hover{
-        cursor: pointer;
-        opacity: 0.9;
-    }
-    &:focus{
-        opacity: 0.9;
-    }
-    &:active{
-        opacity: 0.8;
-        transition: opacity .15s ease-out;
-    }
+    @extend %ButtonBase;
 
     // Large screens
     @media screen and (min-width:60em) {

@@ -6,3 +6,25 @@ $primary-text-color: rgb(20, 20, 20);
 
 $button-background-color: rgb(20,20,20);
 $button-text-color: rgb(220, 220, 220);
+
+$font-weight-base: 600;
+
+%ButtonBase {
+    background-color: $button-background-color;
+    color: $button-text-color;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    opacity: 1;
+    transition: opacity .15s ease-in;
+    &:hover{
+        cursor: pointer;
+        opacity: 0.9;
+    }
+    &:focus{
+        opacity: 0.9;
+    }
+    &:active{
+        opacity: 0.8;
+        transition: opacity .15s ease-out;
+    }
+}

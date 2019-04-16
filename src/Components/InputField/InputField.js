@@ -1,4 +1,5 @@
 import React from 'react';
+import './InputField.scss'
 
 const InputField = ({onClick, placeholder}) => {
     let textInput = React.createRef();
@@ -15,13 +16,14 @@ const InputField = ({onClick, placeholder}) => {
                 type="text" 
                 label="New task text input"
                 aria-label="New task text input"
-                className="f6 f5-l input-reset fl black-80 bg-white pa2 lh-solid w-100 w-75-m w-80-l br2-ns br--left-ns"
+                className="InputField"
+
             />
             <button 
                 value="add_task"
                 onClick={handleClick}
                  //onClick={() => onClick(document.getElementById("newtask").value)}
-                className="f6 f5-l babutton-reset fl pv2 tc bn bg-animate bg-black hover-bg-black-70 white pointer w-100 w-25-m w-20-l br2-ns br--right-ns"
+                className="AddTaskButton"
             >Add New Task</button>
         </div>
     )
