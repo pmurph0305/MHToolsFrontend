@@ -6,35 +6,47 @@ const TaskItem = ({task, id, onCheck, onRemove, onChange, onRankChange, onEditCl
     
     return (
         <div className='taskContainer'>
-            {!editing ? 
-                <div>
-                    <ul className='arrowContainer'>
-                        <li><ClickableIcon iconName="arrow-up" iconSize="small" onClick={() => onRankChange(id, -1)}/></li>
-                        <li><ClickableIcon iconName="arrow-down" iconSize="small"  onClick={() => onRankChange(id, 1)}/></li>
-                    </ul>
-                   
-                    
-                    <div className='iconContainer'>
-                        <ClickableIcon iconName="close" onClick={() => onRemove(id)}/>
-                        <ClickableIcon iconName="create" onClick={() => onEditClick(id)}/>
-                    </div>
-                    <label htmlFor={id}>
+            <div>
+                <ul className='arrowContainer'>
+                    <li><ClickableIcon iconName="arrow-up" iconSize="small" onClick={() => onRankChange(id, -1)}/></li>
+                    <li><ClickableIcon iconName="arrow-down" iconSize="small"  onClick={() => onRankChange(id, 1)}/></li>
+                </ul>
+                
+                <div className='iconContainer'>
+                    <ClickableIcon iconName="close" onClick={() => onRemove(id)}/>
+                    {editing
+                    ?   <ClickableIcon iconName="save" onClick={() => onEditClick(id)}/>
+                    :   <ClickableIcon iconName="create" onClick={() => onEditClick(id)}/>
+                    }
+                </div>
+
+                <label htmlFor={id}>
+          
+                    { editing
+                    ?   <input
+                            id={"task_"+id}
+                            //className="f4 input-reset fl black-80 bg-white pa2 lh-solid w-100 w-75-m w-80-l br2-ns br--left-ns"
+                            className="taskInput" 
+                            value={task}
+                            label={'Edit task ' + id + ' text field'}
+                            aria-label={'Edit task ' + id + ' text field'}
+                            onChange={(event) => onChange(id, event.target.value)}
+                        />
+                    :   
                         <div className='taskText'>
                             {task}
                         </div>
-                        <input type='checkbox'
-                            className='hiddenCheckbox'
-                            id={id}
-                            onClick={onCheck}
-                            defaultChecked={checked}
-                        />
-                        <span className='checkmark'/>
-                    </label>
-                </div>
-            :
-                null
-            }
-       
+                    }
+              
+                    <input type='checkbox'
+                        className='hiddenCheckbox'
+                        id={id}
+                        onClick={onCheck}
+                        defaultChecked={checked}
+                    />
+                    <span className='checkmark'/>
+                </label>
+            </div>
         </div>
 
     )

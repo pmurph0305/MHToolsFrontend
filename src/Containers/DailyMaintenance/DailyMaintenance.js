@@ -7,7 +7,7 @@ import TaskItem from './TaskItem/TaskItem'
 import './DailyMaintenance.scss'
 
 import { setDMEditing, requestDMTasks, onDMSaveClick, swapDMTaskRanks,
-     addDMTask, toggleDMTask, changeDMTaskName,
+     addDMTask, toggleDMTask, changeDMTaskName, changeDMTaskEditing,
      removeDMTask
     
     } from './Redux/dm_actions'
@@ -36,6 +36,7 @@ const mapDispatchToProps = (dispatch) => {
         onToggleDMTask: (id, task_id, index, checked) => dispatch(toggleDMTask(id, task_id, index, checked)), 
         onTaskTextChange: (id, text) => dispatch(changeDMTaskName(id, text)),
         onRemoveTask: (id, task_id) => dispatch(removeDMTask(id, task_id)),
+        onChangeDMTaskEditing: (index) => dispatch(changeDMTaskEditing(index)),
     }
 }
 
@@ -109,8 +110,13 @@ class DailyMaintenance extends React.Component {
         }
     }
 
-    onEditClick(id) {
-        console.log("edit:", id)
+    // Handles when edit task icon is clicked.
+    onEditClick = (id) => {
+        if (this.props.taskList[id]['editing'] === true) {
+            console.log("done editing")
+            this.onSaveClick();
+        }
+        this.props.onChangeDMTaskEditing(id);
     }
 
     render() {
@@ -132,7 +138,7 @@ class DailyMaintenance extends React.Component {
                         <TaskItem
                             checkbox={"checkbox"}
                             checked={task['completed']}
-                            editing={editing}
+                            editing={task['editing']}
                             id={index}
                             key={task['task_id']}
                             onChange={onTaskTextChange}

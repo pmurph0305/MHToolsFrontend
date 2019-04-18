@@ -24,12 +24,27 @@
 }
 
 // Padding so the custom checkbox isn't covering text.
-.taskText {
-	display: inline-block;
-	padding: 0.5rem 0 0 2rem;
-	vertical-align: super;
-	max-width: 80%;
-}
+
+
+
+	.taskText {
+		display: inline-block;
+		padding: 0.5rem 0 0 2rem;
+		vertical-align: super;
+		width: 80%;
+	}
+
+	.taskInput {
+		background-color: white;
+		width: 80%;
+		margin-left: 2rem;
+		margin-top: 0.25rem;
+		padding: 0.25rem 0rem;
+		vertical-align: super;
+	}
+
+
+
 
 /* Hide default checkbox */
 .hiddenCheckbox {

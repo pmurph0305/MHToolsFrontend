@@ -17,6 +17,8 @@ import {
     UPDATE_DM_TASK_SUCCESS,
     UPDATE_DM_TASK_FAILED,
 
+    CHANGE_DM_TASK_EDITING,
+
     CHANGE_DM_EDITING,
     CHANGE_DM_TASK_TEXT,
     SWAP_DM_TASK_RANKS
@@ -127,3 +129,6 @@ export const removeDMTask = (id, task_id) => (dispatch) => {
     .catch(err => dispatch({ type: REMOVE_DM_TASK_FAILED , payload: err}))
 }
 
+export const changeDMTaskEditing = (index) => (dispatch) => {
+    dispatch({type: CHANGE_DM_TASK_EDITING, payload: {index: index}})
+}

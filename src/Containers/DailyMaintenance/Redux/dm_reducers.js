@@ -21,7 +21,8 @@ import {
 
     CHANGE_DM_EDITING,
     CHANGE_DM_TASK_TEXT,
-    SWAP_DM_TASK_RANKS
+    SWAP_DM_TASK_RANKS,
+    CHANGE_DM_TASK_EDITING,
 } from './dm_constants'
 
 // Editing state managment 
@@ -69,6 +70,8 @@ function dmTasksReducer(state = [initialState], action) {
             return removeDMTask(state, action);
         case UPDATE_DM_TASK_SUCCESS:
             return updateDMTasksCompleted(state, action)
+        case CHANGE_DM_TASK_EDITING:
+            return changeDMTaskEditing(state, action);
         default: 
             return state
     }
@@ -79,6 +82,15 @@ export const DMReducer = combineReducers({
     editing: editingReducer,
 })
 
+function changeDMTaskEditing(state, action) {
+    const tasks = updateItemByIndexInArray(state.dm_taskList, action.payload.index, task => {
+        console.log(task);
+        task['editing'] = !task['editing'];
+        return task;
+    });
+    console.log('red', tasks);
+    return updateObject(state, { dm_taskList: tasks })
+}
 
 
 // helper function to update objects properly.
