@@ -1,23 +1,49 @@
 import React from 'react';
+import ClickableIcon from '../../../Components/ClickableIcon/ClickableIcon'
 import './TaskItem.scss'
 
-const TaskItem = ({task, id, onCheck, onRemove, onChange, onRankChange, checked, editing}) => {
+const TaskItem = ({task, id, onCheck, onRemove, onChange, onRankChange, onEditClick, checked, editing}) => {
+    
     return (
-        <label htmlFor={id} className='taskContainer'>
+        <div className='taskContainer'>
             {!editing ? 
                 <div>
-                    <div className='taskText'>{task}</div>
-                    <input type='checkbox'
-                        className='hiddenCheckbox'
-                        onClick={onCheck}
-                        id={id}
-                        defaultChecked={checked}
-                    />
-                    <span className='checkmark'
-                    ></span>
+                    <ul className='arrowContainer'>
+                        <li><ClickableIcon iconName="arrow-up" iconSize="small" onClick={() => onRankChange(id, -1)}/></li>
+                        <li><ClickableIcon iconName="arrow-down" iconSize="small"  onClick={() => onRankChange(id, 1)}/></li>
+                    </ul>
+                   
+                    
+                    <div className='iconContainer'>
+                        <ClickableIcon iconName="close" onClick={() => onRemove(id)}/>
+                        <ClickableIcon iconName="create" onClick={() => onEditClick(id)}/>
+                    </div>
+                    <label htmlFor={id}>
+                        <div className='taskText'>
+                            {task}
+                        </div>
+                        <input type='checkbox'
+                            className='hiddenCheckbox'
+                            id={id}
+                            onClick={onCheck}
+                            defaultChecked={checked}
+                        />
+                        <span className='checkmark'/>
+                    </label>
                 </div>
             :
-                <div>
+                null
+            }
+       
+        </div>
+
+    )
+};
+
+export default TaskItem;
+
+
+{/* <div>
                     <div className='flex'>
                         <div className='orderContainer'>
                             <button 
@@ -55,12 +81,4 @@ const TaskItem = ({task, id, onCheck, onRemove, onChange, onRankChange, checked,
                         
                         
                     </div>
-                </div>
-            }
-       
-        </label>
-
-    )
-};
-
-export default TaskItem;
+                </div> */}

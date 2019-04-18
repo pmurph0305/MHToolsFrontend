@@ -66,6 +66,7 @@ class DailyMaintenance extends React.Component {
     onCheck(event) {
         // Send toggling task action.
         this.props.onToggleDMTask(this.props.user_id, this.props.taskList[event.target.id]['task_id'], event.target.id, event.target.checked) 
+        console.log(event.target.id, event.target.checked)
     }
 
     // Change date when the button is clicked.
@@ -93,7 +94,9 @@ class DailyMaintenance extends React.Component {
     // Handles changing the order of tasks on the task list when editing is enabled.
     onRankChange(id, change) {
         if (id + change >= 0 && id + change < this.props.taskList.length) {
+            console.log("rank change");
             this.props.onSwapTaskRanks(id, id+change);
+
         }
     }
 
@@ -104,6 +107,10 @@ class DailyMaintenance extends React.Component {
         if (tasksToUpdate.length) {
             this.props.onSaveClick(this.props.user_id, tasksToUpdate);
         }
+    }
+
+    onEditClick(id) {
+        console.log("edit:", id)
     }
 
     render() {
@@ -130,6 +137,7 @@ class DailyMaintenance extends React.Component {
                             key={task['task_id']}
                             onChange={onTaskTextChange}
                             onCheck={this.onCheck}
+                            onEditClick={this.onEditClick}
                             onRemove={this.onRemoveTask}
                             onRankChange={this.onRankChange}
                             task={task['task']}
