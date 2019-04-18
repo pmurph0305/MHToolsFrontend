@@ -1,0 +1,36 @@
+@import '../../styles/shared.scss';
+
+.DMSection {
+    @extend %SectionBase;
+}
+
+.DMTitle {
+    @extend %TitleBase;
+}
+
+.DMDescription {
+    @extend %DescriptionBase;
+}
+
+.EditButton {
+    //className="f6 fr dim ph3 pv2 mb2 dib white bg-black w-20 pa3 ma2"
+    @extend %ButtonBase;
+    float: right;
+   // Large
+    @media screen and (min-width:60em) {
+    width: 20%;
+    }
+    // Medium
+    @media screen and (min-width:30em) and (max-width: 60em) {
+        width: 25%;
+    }
+    // Small
+    @media screen and (max-width: 30em) {
+        margin-top: 0.5rem;
+        width: 100%;
+    }
+}
+
+.EditContainer {
+    text-align: right;
+}

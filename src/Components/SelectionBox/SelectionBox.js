@@ -1,5 +1,5 @@
 import React from 'react';
-
+import './SelectionBox.scss'
 
 /**
  * Creates a select element with the parameters passed in.
@@ -7,6 +7,7 @@ import React from 'react';
  * @param {Array}    [options] options displayed in the selection box. 
  * @param {string}   id        id of the select element.
  * @param {string}   label     label used for label and aria-label attributes.
+ * @param {string}   className css className for select element. Default if not specified.
  * @param {callback} onChange  onChange function when selection is changed.
  * @param {string}   value     default value of select element.
  * @return {<select/>} Returns the select element.
@@ -17,7 +18,7 @@ const SelectionBox = ({options, id, label, onChange, value, className}) => {
             id={id}
             onChange={onChange}
             value = {value}
-            className={className}
+            className={className ? className : "DefaultSelect"}
             label={label}
             aria-label={label}
         >

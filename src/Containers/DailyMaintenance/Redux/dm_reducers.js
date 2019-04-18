@@ -19,26 +19,10 @@ import {
     UPDATE_DM_TASK_SUCCESS,
    // UPDATE_DM_TASK_FAILED,
 
-    CHANGE_DM_EDITING,
     CHANGE_DM_TASK_TEXT,
-    SWAP_DM_TASK_RANKS
+    SWAP_DM_TASK_RANKS,
+    CHANGE_DM_TASK_EDITING,
 } from './dm_constants'
-
-// Editing state managment 
-const initialEditState = {
-    dm_editing: false
-}
-
-// Handles switching the state of being in task list editing.
-function editingReducer(state=initialEditState, action) {
-    switch(action.type) {
-        case CHANGE_DM_EDITING:
-            return updateObject(state, { dm_editing: !state.dm_editing })
-        default:
-            return state;
-    }
-}
-
 
 // Task list state management
 const initialState = {
@@ -69,16 +53,27 @@ function dmTasksReducer(state = [initialState], action) {
             return removeDMTask(state, action);
         case UPDATE_DM_TASK_SUCCESS:
             return updateDMTasksCompleted(state, action)
+        case CHANGE_DM_TASK_EDITING:
+            return changeDMTaskEditing(state, action);
         default: 
             return state
     }
 }
 
-export const DMReducer = combineReducers({
-    tasks: dmTasksReducer,
-    editing: editingReducer,
-})
+export const DMReducer = dmTasksReducer;
+// export const DMReducer = combineReducers({
+//     tasks: dmTasksReducer,
+// })
 
+function changeDMTaskEditing(state, action) {
+    const tasks = updateItemByIndexInArray(state.dm_taskList, action.payload.index, task => {
+        console.log(task);
+        task['editing'] = !task['editing'];
+        return task;
+    });
+    console.log('red', tasks);
+    return updateObject(state, { dm_taskList: tasks })
+}
 
 
 // helper function to update objects properly.

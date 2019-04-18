@@ -23,21 +23,22 @@ ShallowWrapper {
     "props": Object {
       "children": Array [
         <input
-          aria-describedby="New Task"
-          className="f6 f5-l input-reset fl black-80 bg-white pa2 lh-solid w-100 w-75-m w-80-l br2-ns br--left-ns"
+          aria-label="New task text input"
+          className="InputField"
           id="newtask"
+          label="New task text input"
           placeholder="test"
           type="text"
         />,
         <button
-          className="f6 f5-l babutton-reset fl pv2 tc bn bg-animate bg-black hover-bg-black-70 white pointer w-100 w-25-m w-20-l br2-ns br--right-ns"
+          className="AddTaskButton"
           onClick={[Function]}
           value="add_task"
         >
           Add New Task
         </button>,
       ],
-      "className": "pa2",
+      "className": "InputContainer",
     },
     "ref": null,
     "rendered": Array [
@@ -46,9 +47,10 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "host",
         "props": Object {
-          "aria-describedby": "New Task",
-          "className": "f6 f5-l input-reset fl black-80 bg-white pa2 lh-solid w-100 w-75-m w-80-l br2-ns br--left-ns",
+          "aria-label": "New task text input",
+          "className": "InputField",
           "id": "newtask",
+          "label": "New task text input",
           "placeholder": "test",
           "type": "text",
         },
@@ -64,7 +66,7 @@ ShallowWrapper {
         "nodeType": "host",
         "props": Object {
           "children": "Add New Task",
-          "className": "f6 f5-l babutton-reset fl pv2 tc bn bg-animate bg-black hover-bg-black-70 white pointer w-100 w-25-m w-20-l br2-ns br--right-ns",
+          "className": "AddTaskButton",
           "onClick": [Function],
           "value": "add_task",
         },
@@ -83,21 +85,22 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <input
-            aria-describedby="New Task"
-            className="f6 f5-l input-reset fl black-80 bg-white pa2 lh-solid w-100 w-75-m w-80-l br2-ns br--left-ns"
+            aria-label="New task text input"
+            className="InputField"
             id="newtask"
+            label="New task text input"
             placeholder="test"
             type="text"
           />,
           <button
-            className="f6 f5-l babutton-reset fl pv2 tc bn bg-animate bg-black hover-bg-black-70 white pointer w-100 w-25-m w-20-l br2-ns br--right-ns"
+            className="AddTaskButton"
             onClick={[Function]}
             value="add_task"
           >
             Add New Task
           </button>,
         ],
-        "className": "pa2",
+        "className": "InputContainer",
       },
       "ref": null,
       "rendered": Array [
@@ -106,9 +109,10 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "host",
           "props": Object {
-            "aria-describedby": "New Task",
-            "className": "f6 f5-l input-reset fl black-80 bg-white pa2 lh-solid w-100 w-75-m w-80-l br2-ns br--left-ns",
+            "aria-label": "New task text input",
+            "className": "InputField",
             "id": "newtask",
+            "label": "New task text input",
             "placeholder": "test",
             "type": "text",
           },
@@ -124,7 +128,7 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": "Add New Task",
-            "className": "f6 f5-l babutton-reset fl pv2 tc bn bg-animate bg-black hover-bg-black-70 white pointer w-100 w-25-m w-20-l br2-ns br--right-ns",
+            "className": "AddTaskButton",
             "onClick": [Function],
             "value": "add_task",
           },

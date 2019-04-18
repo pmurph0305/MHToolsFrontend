@@ -8,7 +8,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import 'tachyons';
-import './App.css';
+import './App.scss';
 
 const serverURL = 'http://localhost:3001'
 
