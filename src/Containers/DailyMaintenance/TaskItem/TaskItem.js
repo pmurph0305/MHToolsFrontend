@@ -2,24 +2,27 @@ import React from 'react';
 import ClickableIcon from '../../../Components/ClickableIcon/ClickableIcon'
 import './TaskItem.scss'
 
-const TaskItem = ({task, id, onCheck, onRemove, onChange, onRankChange, onEditClick, checked, editing}) => {
+const TaskItem = ({task, id, onCheck, onRemove, onChange, onRankChange, onEditClick, checked, editing, allowEditing}) => {
     
     return (
         <div className='taskContainer'>
             <div>
                 <ul className='arrowContainer'>
-                    <li><ClickableIcon iconName="arrow-up" iconSize="small" onClick={() => onRankChange(id, -1)}/></li>
-                    <li><ClickableIcon iconName="arrow-down" iconSize="small"  onClick={() => onRankChange(id, 1)}/></li>
-                </ul>
-                
-                <div className='iconContainer'>
-                    <ClickableIcon iconName="close" onClick={() => onRemove(id)}/>
-                    {editing
-                    ?   <ClickableIcon iconName="save" onClick={() => onEditClick(id)}/>
-                    :   <ClickableIcon iconName="create" onClick={() => onEditClick(id)}/>
-                    }
-                </div>
+                        <li><ClickableIcon iconName="arrow-up" iconSize="small" onClick={() => onRankChange(id, -1)}/></li>
+                        <li><ClickableIcon iconName="arrow-down" iconSize="small"  onClick={() => onRankChange(id, 1)}/></li>
+                    </ul>
+          
 
+                {allowEditing 
+                ?   <div className='iconContainer'>
+                        <ClickableIcon iconName="close" onClick={() => onRemove(id)}/>
+                        {editing
+                        ?   <ClickableIcon iconName="save" onClick={() => onEditClick(id)}/>
+                        :   <ClickableIcon iconName="create" onClick={() => onEditClick(id)}/>
+                        }
+                    </div>  
+                : null}
+            
                 <label htmlFor={id}>
           
                     { editing
@@ -32,8 +35,7 @@ const TaskItem = ({task, id, onCheck, onRemove, onChange, onRankChange, onEditCl
                             aria-label={'Edit task ' + id + ' text field'}
                             onChange={(event) => onChange(id, event.target.value)}
                         />
-                    :   
-                        <div className='taskText'>
+                    :   <div className='taskText'>
                             {task}
                         </div>
                     }

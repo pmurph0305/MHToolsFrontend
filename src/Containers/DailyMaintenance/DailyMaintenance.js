@@ -44,16 +44,6 @@ const mapDispatchToProps = (dispatch) => {
 // and renders them in a table where each task can be marked as completed or not.
 class DailyMaintenance extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.onCheck = this.onCheck.bind(this);
-        this.onDateButtonClick = this.onDateButtonClick.bind(this);
-        this.onAddTaskClick = this.onAddTaskClick.bind(this);
-        this.onSaveClick = this.onSaveClick.bind(this);
-        this.onRemoveTask = this.onRemoveTask.bind(this);
-        this.onRankChange = this.onRankChange.bind(this);
-    }
-
     componentDidMount() {
         // Don't get data on remounting if the data is already in the state.
         if (!this.props.taskList) {
@@ -64,19 +54,19 @@ class DailyMaintenance extends React.Component {
     }
 
     // On check event for each task.
-    onCheck(event) {
+    onCheck = (event) => {
         // Send toggling task action.
         this.props.onToggleDMTask(this.props.user_id, this.props.taskList[event.target.id]['task_id'], event.target.id, event.target.checked) 
         console.log(event.target.id, event.target.checked)
     }
 
     // Change date when the button is clicked.
-    onDateButtonClick(event) {
+    onDateButtonClick = (event) => {
         // Send request for date change.
         this.props.onRequestDMTaskList(this.props.user_id, this.props.date, Number(event.target.value));
     }
 
-    onAddTaskClick(inputField) {
+    onAddTaskClick = (inputField) => {
         // create new task array item.
         if(inputField.value !== '') {
             // calculate rank by finding max of current ranks + 1.
@@ -88,16 +78,16 @@ class DailyMaintenance extends React.Component {
     }
 
     // Handles removing the task from the task list and updating state when editing is enabled.
-    onRemoveTask(id) {
+    onRemoveTask = (id) => {
         this.props.onRemoveTask(this.props.user_id, this.props.taskList[id]['task_id']);
     }
 
     // Handles changing the order of tasks on the task list when editing is enabled.
-    onRankChange(id, change) {
+    onRankChange = (id, change) => {
+        // TODO: SAVE ON RANK CHANGE
         if (id + change >= 0 && id + change < this.props.taskList.length) {
             console.log("rank change");
             this.props.onSwapTaskRanks(id, id+change);
-
         }
     }
 
@@ -121,6 +111,9 @@ class DailyMaintenance extends React.Component {
 
     render() {
         const { date, editing, taskList, onEditToggle, onTaskTextChange } = this.props;
+        // Only allow editing / deleting tasks if it is the list for the current date.
+        const allowEditing = (date === currentDate) ? true : false
+        
         return (
             <section className="DMSection">
                 <h1 className="DMTitle">Daily Maintenance</h1>
@@ -136,6 +129,7 @@ class DailyMaintenance extends React.Component {
                 ? taskList.map((task, index) => {
                     return (
                         <TaskItem
+                            allowEditing={allowEditing}
                             checkbox={"checkbox"}
                             checked={task['completed']}
                             editing={task['editing']}
