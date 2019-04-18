@@ -15,77 +15,89 @@ import "./TaskItem.scss";
  * @param  {function} onEditClick EventHandler - the edit/save task icon is clicked
  */
 const TaskItem = ({
-  task,
-  id,
-  onCheck,
-  onRemove,
-  onChange,
-  onRankChange,
-  onEditClick,
-  checked,
-  editing,
-  allowEditing
+	task,
+	id,
+	onCheck,
+	onRemove,
+	onChange,
+	onRankChange,
+	onEditClick,
+	checked,
+	editing,
+	allowEditing
 }) => {
-  return (
-    <div className="taskContainer">
-      <div>
-        <ul className="arrowContainer">
-          <li>
-            <ClickableIcon
-              iconName="arrow-up"
-              iconSize="small"
-              onClick={() => onRankChange(id, -1)}
-            />
-          </li>
-          <li>
-            <ClickableIcon
-              iconName="arrow-down"
-              iconSize="small"
-              onClick={() => onRankChange(id, 1)}
-            />
-          </li>
-        </ul>
+	return (
+		<div className="taskContainer">
+			<div>
+                {/* Rank Change Arrows */}
+				<ul className="arrowContainer">
+					<li>
+						<ClickableIcon
+							iconName="arrow-up"
+							iconSize="small"
+							onClick={() => onRankChange(id, -1)}
+						/>
+					</li>
+					<li>
+						<ClickableIcon
+							iconName="arrow-down"
+							iconSize="small"
+							onClick={() => onRankChange(id, 1)}
+						/>
+					</li>
+				</ul>
 
-        {allowEditing ? (
-          <div className="iconContainer">
-            <ClickableIcon iconName="close" onClick={() => onRemove(id)} />
-            {editing ? (
-              <ClickableIcon iconName="save" onClick={() => onEditClick(id)} />
-            ) : (
-              <ClickableIcon
-                iconName="create"
-                onClick={() => onEditClick(id)}
-              />
-            )}
-          </div>
-        ) : null}
-
-        <label htmlFor={id}>
-          {editing ? (
-            <input
-              id={"task_" + id}
-              className="taskInput"
-              value={task}
-              label={"Edit task " + id + " text field"}
-              aria-label={"Edit task " + id + " text field"}
-              onChange={event => onChange(id, event.target.value)}
-            />
-          ) : (
-            <div className="taskText">{task}</div>
-          )}
-
-          <input
-            type="checkbox"
-            className="hiddenCheckbox"
-            id={id}
-            onClick={onCheck}
-            defaultChecked={checked}
-          />
-          <span className="checkmark" />
-        </label>
-      </div>
-    </div>
-  );
+                {/* Edit / Delete Icons */}
+				{allowEditing ? (
+					<div className="iconContainer">
+						<ClickableIcon
+							iconName="close"
+							onClick={() => onRemove(id)}
+						/>
+						{editing ? (
+							<ClickableIcon
+								iconName="save"
+								onClick={() => onEditClick(id)}
+							/>
+						) : (
+							<ClickableIcon
+								iconName="create"
+								onClick={() => onEditClick(id)}
+							/>
+						)}
+					</div>
+				) : null}
+                
+                {/* Task text display and input field when editing */}
+				<label htmlFor={id}>
+					{editing ? (
+						<input
+							id={"task_" + id}
+							className="taskInput"
+							value={task}
+							label={"Edit task " + id + " text field"}
+							aria-label={"Edit task " + id + " text field"}
+							onChange={(event) =>
+								onChange(id, event.target.value)
+							}
+						/>
+					) : (
+						<div className="taskText">{task}</div>
+					)}
+                    
+                    {/* Custom checkbox */}
+					<input
+						type="checkbox"
+						className="hiddenCheckbox"
+						id={id}
+						onClick={onCheck}
+						defaultChecked={checked}
+					/>
+					<span className="checkmark" />
+				</label>
+			</div>
+		</div>
+	);
 };
 
 export default TaskItem;
