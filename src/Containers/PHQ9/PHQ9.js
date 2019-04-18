@@ -1,15 +1,16 @@
 import React from 'react';
-import Table from '../../Components/Table/Table'
+import Table from './Table/Table'
 import SelectionBox from '../../Components/SelectionBox/SelectionBox'
 
 import './PHQ9.scss'
 
-
+// Headers for the PHQ-9.
 const phq9Headers = [
     'Over the past 2 weeks, how often have you been bothered by any of the following problems?',
     'Select an answer'
 ]
 
+// Standard PHQ-9 questions.
 const phq9Questions = [
     "1. Little interest or pleasure in doing things",
     "2. Feeling down, depressed, or hopeless",
@@ -23,6 +24,7 @@ const phq9Questions = [
     "10. If you checked off any problems, how difficult have those problems made it for you to do your work, take care of things at home, or get along with other people?",
 ]
 
+// Standard selection options for PHQ-9 Questions 1-9.
 const phq9SelectionOptions = [
     'Not at all',
     'Several days',
@@ -30,6 +32,7 @@ const phq9SelectionOptions = [
     'Nearly every day'
 ]
 
+// Selection options for PHQ-9 Question 10.
 const phq9Q10SelectionOptions = [
     "Not difficult at all",
     "Somewhat difficult",
@@ -37,6 +40,7 @@ const phq9Q10SelectionOptions = [
     "Extremely difficult"
 ]
 
+// Initial state of the PHQ-9 Answers.
 const initialState = {
     answers: [0,0,0,0,0,0,0,0,0,0],
 }
@@ -49,10 +53,12 @@ class PHQ9 extends React.Component {
         this.state = initialState;
     }
 
+    // Handles submitting the phq9 when the submit button is clicked.
     onSubmitPHQ9 = () => {
         this.props.onSubmitPHQ9(this.state.answers);
     }
 
+    // Handles updating state when a question is answered.
     onSelectAnswer = (event) => {
         // get current state's answers
         let answers = this.state.answers;
@@ -62,6 +68,7 @@ class PHQ9 extends React.Component {
         this.setState(Object.assign(this.state.answers, answers));
     }
 
+    // Builds the footers based on the current state of submission.
     getFooters = () => {
         return [
             ! this.props.submissionResult 
@@ -77,12 +84,12 @@ class PHQ9 extends React.Component {
         ]
     }
 
-    render() {
-        const rows = phq9Questions.map((question, index) => {
-            var selection;
+    // Builds an array of the html elements for the PHQ-9 table.
+    getRows = () => {
+        return phq9Questions.map((question, index) => {
+            let selection;
             if (index < 9) {
-                selection = <SelectionBox
-                    
+                selection = <SelectionBox     
                     id={index}
                     key={index}
                     label={'select answer for question ' + (index+1)}
@@ -102,9 +109,9 @@ class PHQ9 extends React.Component {
             }
             return [question, selection];
         })
+    }
 
-        
-
+    render() {
         return (
             <section 
                className="PHQ9Section"
@@ -121,14 +128,8 @@ class PHQ9 extends React.Component {
                     thClass="TableHeader"
                     tfClass="TableFooter"
                     headers={phq9Headers}
-                    rows={rows}
+                    rows={this.getRows()}
                     footers={this.getFooters()}
-                    // thClass="TableHeaders"
-                    // thClass= "fw6 tl pa3 bg-white bb br"
-                    // tdClass="pa3 tl bb br"
-                    // tClass="f6 ma2 pa2 w-100 mw8 center lh-copy"
-                    // trClass="striped--moon-gray"
-                    // tfClass="pa3 tr bb br"
                 />
                 <p>{this.state.total}</p>
             </section>

@@ -1,93 +1,96 @@
-@import '../../styles/shared.scss';
+@import "../../styles/shared.scss";
 
 .PHQ9Section {
-    @extend %SectionBase;
+	@extend %SectionBase;
 }
 
 .PHQ9Title {
-    @extend %TitleBase;
+	@extend %TitleBase;
 }
 
 .PHQ9Description {
-    @extend %DescriptionBase;
+	@extend %DescriptionBase;
 }
 
 .TableClass {
-    font-weight: 600;
-    margin: auto;
-    line-height: 1.5;
-    text-align: left;
-    width: 100%;
-    max-width: 75rem;
-    padding: 1rem;
+	font-weight: 600;
+	margin: auto;
+	line-height: 1.5;
+	text-align: left;
+	width: 100%;
+	max-width: 75rem;
+	padding: 1rem;
 
-    // Striping every other row for easier visibilty.
-    .TableRow:nth-child(even) {
-        background-color: $secondary-background;
-    }
+	// Striping every other row for easier visibilty.
+	.TableRow:nth-child(even) {
+		background-color: $secondary-background;
+	}
 
-    %TableCell-shared {
-        padding: 1rem;
-        border-bottom: 1px solid black;
-        border-right: 1px solid black;
-        &:first-child{ border-left: 1px solid black; }
-    }
+	%TableCell-shared {
+		padding: 1rem;
+		border-bottom: 1px solid black;
+		border-right: 1px solid black;
+		&:first-child {
+			border-left: 1px solid black;
+		}
+	}
 
-    .TableCell {
-        @extend %TableCell-shared;
-    }
+	.TableCell {
+		@extend %TableCell-shared;
+	}
 
-    .TableFooter {
-        @extend %TableCell-shared;
-        text-align: right;
-        // Align button center.
-        &:last-child{ text-align: center }
-    }
-    
-    .TableHeader {
-        @extend %TableCell-shared;
-        background-color: $secondary-background;
-        border-top: 1px solid black;
-        font-weight: bold;
-    }
+	.TableFooter {
+		@extend %TableCell-shared;
+		text-align: right;
+		// Align button center.
+		&:last-child {
+			text-align: center;
+		}
+	}
+
+	.TableHeader {
+		@extend %TableCell-shared;
+		background-color: $secondary-background;
+		border-top: 1px solid black;
+		font-weight: bold;
+	}
 }
 
 %SubmissionResult-shared {
-    text-align: right;
-    display: inline-block;
-    font-weight: 600;
-    margin: 0;
-    padding: 0.25rem;
-    color: $primary-text-color;
+	text-align: right;
+	display: inline-block;
+	font-weight: 600;
+	margin: 0;
+	padding: 0.25rem;
+	color: $primary-text-color;
 }
 
 .SubmissionSuccess {
-    @extend %SubmissionResult-shared;
-    background-color: #73c7a8;
+	@extend %SubmissionResult-shared;
+	background-color: #73c7a8;
 }
 
 .SubmissionFailed {
-    @extend %SubmissionResult-shared;
-    background-color:  #ff9999;
+	@extend %SubmissionResult-shared;
+	background-color: #ff9999;
 }
 
 .SubmitButton {
-    @extend %ButtonBase;
+	@extend %ButtonBase;
 
-    // Large screens
-    @media screen and (min-width:60em) {
-        padding-left: 4rem;
-        padding-right: 4rem;
-    }
-    // Medium
-    @media screen and (min-width:30em) and (max-width: 60em) {
-        padding-left: 2rem;
-        padding-right: 2rem;
-    }
-    // Small
-    @media screen and (max-width: 30em) {
-        padding-left: 0.5rem;
-        padding-right:0.5rem;
-    }
-
+	// Large screens
+	@media screen and (min-width: 60em) {
+		padding-left: 4rem;
+		padding-right: 4rem;
+	}
+	// Medium
+	@media screen and (min-width: 30em) and (max-width: 60em) {
+		padding-left: 2rem;
+		padding-right: 2rem;
+	}
+	// Small
+	@media screen and (max-width: 30em) {
+		padding-left: 0.5rem;
+		padding-right: 0.5rem;
+	}
 }

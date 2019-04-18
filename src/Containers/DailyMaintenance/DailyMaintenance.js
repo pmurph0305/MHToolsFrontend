@@ -7,7 +7,6 @@ import TaskItem from './TaskItem/TaskItem'
 import './DailyMaintenance.scss'
 
 import {
-	setDMEditing,
 	requestDMTasks,
 	onDMSaveClick,
 	swapDMTaskRanks,
@@ -24,17 +23,15 @@ const currentDate = new Date().toISOString().slice(0,10);
 const mapStateToProps = (state) => {
 	return {
 		user_id: state.appReducer.user_id,
-		editing: state.DMReducer.editing.dm_editing,
-		taskList: state.DMReducer.tasks.dm_taskList,
-		taskListError: state.DMReducer.tasks.dm_error,
-		taskListIsPending: state.DMReducer.tasks.dm_isPending,
-		date: state.DMReducer.tasks.dm_date
+		taskList: state.DMReducer.dm_taskList,
+		taskListError: state.DMReducer.dm_error,
+		taskListIsPending: state.DMReducer.dm_isPending,
+		date: state.DMReducer.dm_date
 	};
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onEditToggle: (bool) => dispatch(setDMEditing(bool)),
         onSaveClick: (id, updatedTasks) => dispatch(onDMSaveClick(id, updatedTasks)),
         onSwapTaskRanks: (index1, index2) => dispatch(swapDMTaskRanks(index1, index2)),
         onRequestDMTaskList: (id, date, change) => dispatch(requestDMTasks(id, date, change)),
@@ -70,12 +67,18 @@ class DailyMaintenance extends React.Component {
 		// create new task array item.
 		if (inputField.value !== "") {
 			// calculate rank by finding max of current ranks + 1.
-			let rank = Math.max.apply(
-				Math,
-				this.props.taskList.map((task) => {
-					return task.rank + 1;
-				})
-			);
+			let rank;
+			if (this.props.taskList.length) {
+				rank = Math.max.apply(
+					Math,
+					this.props.taskList.map((task) => {
+						return task.rank + 1;
+					})
+				);
+			} else {
+				// if rank list doesn't have a length, start at rank 0.
+				rank = 0;
+			}
 			this.props.onAddDMTask(this.props.user_id, inputField.value, rank);
 			// clear input field.
 			inputField.value = "";
@@ -146,9 +149,7 @@ class DailyMaintenance extends React.Component {
 	render() {
 		const {
 			date,
-			editing,
 			taskList,
-			onEditToggle,
 			onTaskTextChange
 		} = this.props;
 		// Only allow editing / deleting tasks if it is the list for the current date.

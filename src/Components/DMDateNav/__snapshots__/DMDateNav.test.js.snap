@@ -22,18 +22,18 @@ ShallowWrapper {
     "props": Object {
       "children": Array [
         <button
-          className="f6 dim ph3 pv2 mb2 dib white bg-black pointer"
+          className="DateNavButton"
           value="-1"
         >
           Previous
         </button>,
         <p
-          className="f3"
+          className="DateDisplay"
         >
           01-01-0101
         </p>,
         <button
-          className="f6 dim ph3 pv2 mb2 dib white bg-black pointer"
+          className="DateNavButton"
           value="1"
         >
           Next
@@ -49,7 +49,7 @@ ShallowWrapper {
         "nodeType": "host",
         "props": Object {
           "children": "Previous",
-          "className": "f6 dim ph3 pv2 mb2 dib white bg-black pointer",
+          "className": "DateNavButton",
           "onClick": undefined,
           "value": "-1",
         },
@@ -63,7 +63,7 @@ ShallowWrapper {
         "nodeType": "host",
         "props": Object {
           "children": "01-01-0101",
-          "className": "f3",
+          "className": "DateDisplay",
         },
         "ref": null,
         "rendered": "01-01-0101",
@@ -75,7 +75,7 @@ ShallowWrapper {
         "nodeType": "host",
         "props": Object {
           "children": "Next",
-          "className": "f6 dim ph3 pv2 mb2 dib white bg-black pointer",
+          "className": "DateNavButton",
           "onClick": undefined,
           "value": "1",
         },
@@ -94,18 +94,18 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <button
-            className="f6 dim ph3 pv2 mb2 dib white bg-black pointer"
+            className="DateNavButton"
             value="-1"
           >
             Previous
           </button>,
           <p
-            className="f3"
+            className="DateDisplay"
           >
             01-01-0101
           </p>,
           <button
-            className="f6 dim ph3 pv2 mb2 dib white bg-black pointer"
+            className="DateNavButton"
             value="1"
           >
             Next
@@ -121,7 +121,7 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": "Previous",
-            "className": "f6 dim ph3 pv2 mb2 dib white bg-black pointer",
+            "className": "DateNavButton",
             "onClick": undefined,
             "value": "-1",
           },
@@ -135,7 +135,7 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": "01-01-0101",
-            "className": "f3",
+            "className": "DateDisplay",
           },
           "ref": null,
           "rendered": "01-01-0101",
@@ -147,7 +147,7 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": "Next",
-            "className": "f6 dim ph3 pv2 mb2 dib white bg-black pointer",
+            "className": "DateNavButton",
             "onClick": undefined,
             "value": "1",
           },
