@@ -13,12 +13,13 @@ import { applyMiddleware, combineReducers, createStore } from 'redux';
 import { appReducer } from './Containers/App/Redux/app_reducers';
 import { DMReducer } from './Containers/DailyMaintenance/Redux/dm_reducers';
 import { CSReducer } from './Containers/CopingSkills/Redux/cs_reducers';
+import { historyReducer } from './Containers/History/Redux/history_reducers';
 
 //Redux middleware.
 import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 
-const rootReducer = combineReducers({ appReducer, DMReducer, CSReducer })
+const rootReducer = combineReducers({ appReducer, DMReducer, CSReducer, historyReducer })
 const logger = createLogger();
 const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, logger));
 
