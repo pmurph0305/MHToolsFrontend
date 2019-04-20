@@ -2,6 +2,7 @@ import { loginUser } from './Redux/app_actions'
 import CBT from '../CBT/CBT'
 import CopingSkills from '../CopingSkills/CopingSkills'
 import DailyMaintenance from '../DailyMaintenance/DailyMaintenance'
+import History from '../History/History'
 import NavBar from '../../Components/Navigation/NavBar'
 import PHQ9 from '../PHQ9/PHQ9'
 import React, { Component } from 'react';
@@ -30,7 +31,7 @@ class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			route: 'dm',
+			route: 'history',
 			phq9_result: '',
 		}
 	}
@@ -77,6 +78,8 @@ class App extends Component {
 					user_id={this.state.user_id}
 					serverURL={serverURL}
 				/>
+				: this.state.route === 'history'
+				? <History />
 				: this.state.route === 'coping'
 				? <CopingSkills/>
 				: <section className="pa2-ns bt black-90 bg-light-gray">
