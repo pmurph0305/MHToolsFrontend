@@ -31,7 +31,7 @@ class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			route: 'history',
+			route: 'hist',
 			phq9_result: '',
 		}
 	}
@@ -78,7 +78,7 @@ class App extends Component {
 					user_id={this.state.user_id}
 					serverURL={serverURL}
 				/>
-				: this.state.route === 'history'
+				: this.state.route === 'hist'
 				? <History />
 				: this.state.route === 'coping'
 				? <CopingSkills/>
