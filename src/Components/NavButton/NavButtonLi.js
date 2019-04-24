@@ -1,16 +1,15 @@
 import React from 'react';
 
 /**
- * @buttonLabel Text displayed on the button
- * @liClass className for each button li element {"dib"}
- * @onRouteChange onClick function
- * @route Text to give to onRouteChange when clicked
+ * @param {string} buttonLabel text displayed on the button
+ * @param {string} liClasss className for each button li element default: null
+ * @param {eventHandler} onRouteChange onClick function callback
+ * @param {string} route Text to give to onRouteChange when clicked
  */
 const NavButtonLi = ({ buttonLabel, onRouteChange, route, liClass}) => {
     return(
-        <li className={liClass ? liClass : "dib"}>
+        <li className={liClass ? liClass : null}>
             <button
-                className="f6 f5-l pointer link dim white-80 pa3 ph4-l"
                 onClick={() => onRouteChange(route)}>
                 {buttonLabel}
             </button>

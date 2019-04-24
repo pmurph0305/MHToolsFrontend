@@ -15,17 +15,10 @@ $font-weight-base: 600;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
     opacity: 1;
-    transition: opacity .15s ease-in;
-    &:hover{
+    &:focus, &:hover, &:active {
+        transition: opacity .15s ease-in;
         cursor: pointer;
         opacity: 0.9;
-    }
-    &:focus{
-        opacity: 0.9;
-    }
-    &:active{
-        opacity: 0.8;
-        transition: opacity .15s ease-out;
     }
 }
 
