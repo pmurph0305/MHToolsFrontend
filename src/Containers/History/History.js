@@ -1,6 +1,9 @@
 import React from "react";
+import { CartesianGrid, Legend, LineChart, Line, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
+
 import { connect } from "react-redux";
 import { requestDMHistory, requestPHQ9History } from "./Redux/history_actions";
+
 
 const mapStateToProps = (state) => {
 	return {
@@ -26,6 +29,20 @@ class History extends React.Component {
         this.props.onRequestPHQ9History(this.props.user_id);
     }
 
+    dmDataProcess() {
+        if (this.props.dm.length) {
+            let data = this.props.dm.map( (item, index) => {
+                return ({
+                    "date" : item.date.slice(0,10),
+                    "dmCompletePercent": Math.floor((item.completed/item.total)*1000)/10
+                })
+            })
+            console.log(data);
+            return data;
+        }
+
+    }
+
 	render() {
         const { dm , phq9, error, isPending } = this.props;
         return(
@@ -33,7 +50,7 @@ class History extends React.Component {
                 DM
                 { dm.length
                 ? dm.map(item => {
-                    return(<p key={item.date}>{item.date + "|" + item.total + "|" + item.completed}</p>)
+                    return(<p key={item.date}>{item.date.slice(0,10) + "|" + item.total + "|" + item.completed}</p>)
                 })
                 : null
                 }
@@ -49,6 +66,20 @@ class History extends React.Component {
                 }
                 {
                     error ? error.toString() : null
+                }
+                {dm.length ?
+                <ResponsiveContainer width={700} height={400}>
+                    <LineChart data={this.dmDataProcess()}>
+                        <CartesianGrid strokeDasharray="1 1" />
+                        <Line name='% Tasks Completed' type='monotone' dataKey='dmCompletePercent' stroke='#8884d8'/>
+                        <XAxis dataKey="date"/>
+                        <YAxis label={{ value: '% Tasks Completed', angle: -90, position: 'insideLeft' }}/>
+                        <Tooltip />
+                        <Legend />
+                    </LineChart>
+                </ResponsiveContainer>
+                : null
+
                 }
             </div>
         );
