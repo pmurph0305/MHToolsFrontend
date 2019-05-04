@@ -31,7 +31,7 @@ class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			route: 'hist',
+			route: 'coping',
 			phq9_result: '',
 		}
 	}

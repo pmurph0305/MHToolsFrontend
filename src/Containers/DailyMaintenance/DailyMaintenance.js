@@ -110,7 +110,6 @@ class DailyMaintenance extends React.Component {
 
 	// Handles when edit task icon is clicked.
 	onEditClick = (id) => {
-		console.log(id);
 		if (this.props.taskList[id]["editing"] === true) {
 			this.onSaveClick();
 		}

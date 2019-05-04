@@ -50,21 +50,24 @@ const TaskItem = ({
                 {/* Edit / Delete Icons */}
 				{allowEditing ? (
 					<div className="iconContainer">
-						<ClickableIcon
-							iconName="close"
-							onClick={() => onRemove(id)}
-						/>
 						{editing ? (
 							<ClickableIcon
 								iconName="save"
+								iconDesc="Save task"
 								onClick={() => onEditClick(id)}
 							/>
 						) : (
 							<ClickableIcon
 								iconName="create"
+								iconDesc="Edit task"
 								onClick={() => onEditClick(id)}
 							/>
 						)}
+						<ClickableIcon
+							iconName="close"
+							iconDesc="Delete task"
+							onClick={() => onRemove(id)}
+						/>
 					</div>
 				) : null}
                 

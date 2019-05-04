@@ -68,3 +68,10 @@
     padding: 0.5rem;
     margin: 0.5rem;
 }
+
+ion-icon {
+    font-size: 24px;
+    float: right;
+    padding: 0.2rem;
+    padding-bottom: 0.5rem;
+}

@@ -142,6 +142,7 @@ function addNewCopingSkill(state, action) {
 function addSharedCopingSkill(state, action) {
     // if user is viewing the shared list still, don't add to the state.
     if (state.viewing === 'shared') {
+        console.log('shared', action.payload);
         return state;
     } else {
         // otherwise they are viewing their own list, so add the skill to the state.

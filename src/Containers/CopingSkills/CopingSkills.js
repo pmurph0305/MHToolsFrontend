@@ -202,8 +202,8 @@ class CopingSkills extends React.Component {
             if (title !== this.props.coping_skills[index]['title'] || desc !== this.props.coping_skills[index]['description']) {
                this.props.onUpdateUserCopingSkill(this.props.user_id, this.props.coping_skills[index]['skill_id'], title, desc);
             }
-        } 
-       this.props.onChangeCSEditing(index);
+        }
+        this.props.onChangeCSEditing(index);
     }
 
     render() {
