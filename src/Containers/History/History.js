@@ -1,9 +1,10 @@
 import React from "react";
 import { CartesianGrid, Legend, LineChart, Line, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
-
+import { ResponsiveLine } from 'nivo'
 import { connect } from "react-redux";
 import { requestDMHistory, requestPHQ9History } from "./Redux/history_actions";
 
+import './History.scss'
 
 const mapStateToProps = (state) => {
 	return {
@@ -37,10 +38,29 @@ class History extends React.Component {
                     "dmCompletePercent": Math.floor((item.completed/item.total)*1000)/10
                 })
             })
-            console.log(data);
+            console.log("recharts data", data);
             return data;
         }
 
+    }
+
+    dmDataProcessNivo() {
+        if (this.props.dm.length) {
+            let data = []
+            let calcData = this.props.dm.map((item, index) => {
+                return ({
+                    "x": item.date.slice(0,10),
+                    "y": Math.floor((item.completed/item.total)*1000)/10
+                })
+            })
+            data.push({
+                "id": "dm",
+                "color": "hsl(291, 70%, 50%)",
+                "data": calcData
+            })
+            console.log("nivo data", data)
+            return data;
+        }
     }
 
 	render() {
@@ -67,6 +87,7 @@ class History extends React.Component {
                 {
                     error ? error.toString() : null
                 }
+                <p>RECHARTS LINE</p>
                 {dm.length ?
                 <ResponsiveContainer width={700} height={400}>
                     <LineChart data={this.dmDataProcess()}>
@@ -81,6 +102,48 @@ class History extends React.Component {
                 : null
 
                 }
+                
+                <p>NIVO RESPONSIVE LINE</p>
+                { dm.length ?
+                    <div className='nivoContainer'>
+                    <ResponsiveLine
+                        data={this.dmDataProcessNivo()}
+                        margin={{
+                            "top": 50,
+                            "right": 110,
+                            "bottom": 50,
+                            "left": 60
+                        }}
+                        xScale={{
+                            "type": "point"
+                        }}
+                        yScale={{
+                            "type": "linear",
+                            "stacked": true,
+                            "min": "auto",
+                            "max": "auto"
+                        }}
+
+                        axisBottom={{
+                            "orient": "bottom",
+                            "legend": "date",
+                            "legendOffset": 40,
+                            "legendPosition": "center"
+                        }}
+                        axisLeft={{
+                            "orient": "left",
+                            "legend": "% completed",
+                            "legendOffset": -40,
+                            "legendPosition": "center"
+                        }}
+                        
+                    />
+                </div>
+                : null
+
+                }
+                
+                
             </div>
         );
 	}
