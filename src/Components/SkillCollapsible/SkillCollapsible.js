@@ -1,6 +1,6 @@
 import React from "react";
 import ClickableIcon from '../ClickableIcon/ClickableIcon'
-import "./SkillCollapsible.css";
+import "./SkillCollapsible.scss";
 
 const Collapsible = ({
     allowAdd,
@@ -43,7 +43,7 @@ const Collapsible = ({
             // set new container maxHeight to be large enough so there's no jiggle when redoing area height.
             container.style.maxHeight = area.scrollHeight * 2 + "px";
             area.style.height = 0;
-            area.style.height = Math.max(16, area.scrollHeight) + "px";
+            area.style.height = area.scrollHeight + "px";
         }
     }
 
@@ -83,7 +83,7 @@ const Collapsible = ({
                         {text}
                     </p>
                 )}
-                {shareable && !shared ? ( // Is a user's created skill, and able to be shared.
+                {shareable && !shared && !editing ? ( // Is a user's created skill, and able to be shared.
 
                     <ClickableIcon
                         iconName="share-alt"

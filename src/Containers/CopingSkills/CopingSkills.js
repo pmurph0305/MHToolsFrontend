@@ -260,7 +260,7 @@ class CopingSkills extends React.Component {
                         editing={skill['editing']}
                         index={index}
                         key={index}
-                        shareable={skill['shareable']}
+                        shareable={skill['shared_from_id'] > 0 ? false : true}
                         shared={skill['shared']}
                         skill_id={skill['skill_id']}
                         text={skill['description']}
