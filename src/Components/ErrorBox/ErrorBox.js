@@ -1,10 +1,14 @@
 import React from 'react';
 
 import './ErrorBox.css'
-
+/**
+ * @param  {string} {error} Error to display from fetch
+ */
 const ErrorBox = ({error}) => {
     var displayedError;
+    
     if (error && error.length) {
+        
         // convert error to string to split.
         error = error.toString();
         // Removes error passed from database.
