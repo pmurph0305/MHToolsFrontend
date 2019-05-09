@@ -28,3 +28,21 @@ export function updateItemByPropertyStringInArray(array, propertyStr, propertyVa
         return updatedItems;
     }
 }
+/**
+ * Sends a fetch request with window.sessionStorage.getItem('token')
+ * and headers of application/json and authorization token.
+ * @param  {string} url Url to send fetch request to.
+ * @param  {string} method Method of the fetch request (default GET)
+ * @param  {Object} body Object sent with fetch if it exists. (default null)
+ */
+export const fetchURLWithJsonAuth = (url, method, body) => {
+    const token = window.sessionStorage.getItem('token');
+	return fetch(url, {
+		method: method ? method : "GET",
+		headers: {
+			"Content-Type" : "application/json",
+			"Authorization" : token
+        },
+        body: body ? JSON.stringify(body) : null
+	})
+}

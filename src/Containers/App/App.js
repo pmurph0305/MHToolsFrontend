@@ -31,12 +31,30 @@ class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			route: 'hist',
+			route: 'a',
 			phq9_result: '',
 		}
 	}
 
-
+	componentDidMount() {
+		const token = window.sessionStorage.getItem('token');
+		if (token) {
+			fetch(serverURL+'/signin', {
+				method: 'POST',
+				headers: {
+					'Content-Type' : 'application/json',
+					'Authorization' : token
+				},
+			})
+			.then(response => response.json())
+			.then(response => {
+				console.log(response);
+			})
+			.catch(error => {
+				console.log(error);
+			})
+		}
+	}
 
 	onRouteChange = (route) => {
 		console.log('state from:', this.state.route);
@@ -57,6 +75,29 @@ class App extends Component {
 		.then(response => response.json())
 		.then(response => this.setState({phq9_result: response}))
 		.catch(err => console.log(err));
+	}
+
+	onSignin = () => {
+		fetch(serverURL+'/signin', {
+			method: 'POST',
+			headers: {
+				'Content-Type' : 'application/json',
+			},
+			body: JSON.stringify({
+				email: 'test@test',
+				password: 'a'
+			})
+		})
+		.then(response => response.json())
+		.then(data => {
+			console.log(data);
+			if (data.token && data.id) {
+				window.sessionStorage.setItem('token', data.token);
+			}
+		})
+		.catch(err => {
+			console.log(err);
+		})
 	}
 
 // pa5-ns
@@ -91,6 +132,9 @@ class App extends Component {
 					<CBT/>
 					<CopingSkills/>
 					<History/> */}
+				<button onClick={this.onSignin}>
+					Signin
+				</button>
 			</div>
 			
 		);

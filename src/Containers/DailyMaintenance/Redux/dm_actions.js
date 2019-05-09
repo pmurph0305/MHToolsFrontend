@@ -17,19 +17,17 @@ import {
 	SWAP_DM_TASK_RANKS
 } from "./dm_constants";
 
+import {fetchURLWithJsonAuth} from '../../../ReduxHelpers/reduxHelpers'
+
+const DM_URL = 'http://localhost:3001/dm'
+
 /** Dispatches actions that saves all dm tasks that have been updating through text or rank changes.
  * @param  {number} id user_id
  * @param  {Object[]} updatedTasks list of dm_tasks that need to be updated
  */
 export const onDMSaveClick = (id, updatedTasks) => (dispatch) => {
 	dispatch({ type: UPDATE_DM_TASK_PENDING });
-	fetch("http://localhost:3001/dm/" + id, {
-		method: "PUT",
-		headers: { "Content-Type": "application/json" },
-		body: JSON.stringify({
-			tasks: updatedTasks
-		})
-	})
+	fetchURLWithJsonAuth(`${DM_URL}/${id}`, 'PUT', { tasks: updatedTasks })
 		.then((response) => response.json())
 		.then((data) =>
 			dispatch({ type: UPDATE_DM_TASK_SUCCESS, payload: data })
@@ -45,12 +43,10 @@ export const onDMSaveClick = (id, updatedTasks) => (dispatch) => {
  * @param  {number} change 0 for current date, (-1 or 1) increase or decrease from current date.
  */
 export const requestDMTasks = (id, date, change) => (dispatch) => {
+	const token = window.sessionStorage.getItem('token');
 	dispatch({ type: REQUEST_DM_TASKS_PENDING });
 	if (change) {
-		fetch("http://localhost:3001/dm/" + id + "/" + date + "/" + change, {
-			method: "GET",
-			headers: { "Content-Type": "application/json" }
-		})
+		fetchURLWithJsonAuth(`${DM_URL}/${id}/${date}/${change}`, 'GET')
 			.then((response) => response.json())
 			.then((data) => {
 				dispatch({ type: REQUEST_DM_TASKS_SUCCESS, payload: data });
@@ -60,10 +56,7 @@ export const requestDMTasks = (id, date, change) => (dispatch) => {
 			});
 	} else {
 		dispatch({ type: REQUEST_DM_TASKS_PENDING });
-		fetch("http://localhost:3001/dm/" + id + "/" + date, {
-			method: "GET",
-			headers: { "Content-Type": "application/json" }
-		})
+		fetchURLWithJsonAuth(`${DM_URL}/${id}/${date}`, 'GET')
 			.then((response) => response.json())
 			.then((data) => {
 				dispatch({ type: REQUEST_DM_TASKS_SUCCESS, payload: data });
@@ -81,13 +74,9 @@ export const requestDMTasks = (id, date, change) => (dispatch) => {
  */
 export const addDMTask = (id, task, rank) => (dispatch) => {
 	dispatch({ type: REQUEST_ADD_DM_TASK_PENDING });
-	fetch("http://localhost:3001/dm/" + id, {
-		method: "POST",
-		headers: { "Content-Type": "application/json" },
-		body: JSON.stringify({
-			task: task,
-			rank: rank
-		})
+	fetchURLWithJsonAuth(`${DM_URL}/${id}`, 'POST', {
+		task: task,
+		rank: rank
 	})
 		.then((response) => response.json())
 		.then((data) => {
@@ -105,9 +94,7 @@ export const addDMTask = (id, task, rank) => (dispatch) => {
  * @param  {} checked is the task completed
  */
 export const toggleDMTask = (id, task_id, index, checked) => (dispatch) => {
-	fetch("http://localhost:3001/dm/" + id + "/" + task_id + "/" + checked, {
-		method: "PUT"
-	})
+	fetchURLWithJsonAuth(`${DM_URL}/${id}/${task_id}/${checked}`, 'PUT')
 		.then((response) => response.json())
 		.then((data) => {
 			dispatch({
@@ -159,10 +146,7 @@ export const changeDMTaskEditing = (index) => (dispatch) => {
  */
 export const removeDMTask = (id, task_id) => (dispatch) => {
 	dispatch({ type: REMOVE_DM_TASK_PENDING });
-	fetch("http://localhost:3001/dm/" + id + "/" + task_id, {
-		method: "DELETE",
-		headers: { "Content-Type": "application/json" }
-	})
+	fetchURLWithJsonAuth(`${DM_URL}/${id}/${task_id}`, 'DELETE')
 		.then((response) => response.json())
 		.then((response) => {
 			dispatch({ type: REMOVE_DM_TASK_SUCCESS, payload: task_id });
