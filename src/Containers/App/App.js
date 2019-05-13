@@ -26,7 +26,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		onLoginUser: () => dispatch(loginUser())
+		onLoginUser: (id) => dispatch(loginUser(id))
 	}
 }
 
@@ -43,6 +43,7 @@ class App extends Component {
 	componentDidMount() {
 		const token = window.sessionStorage.getItem('token');
 		if (token) {
+			// Verify token, don't just immediately call onLoginUser.
 			fetch(serverURL+'/signin', {
 				method: 'POST',
 				headers: {
@@ -52,7 +53,9 @@ class App extends Component {
 			})
 			.then(response => response.json())
 			.then(response => {
-				console.log(response);
+				if (Number.isInteger(Number.parseInt(response))) {
+					this.props.onLoginUser(response);
+				}
 			})
 			.catch(error => {
 				console.log(error);
@@ -106,6 +109,7 @@ class App extends Component {
 			if (data.token && data.id) {
 				window.sessionStorage.setItem('token', data.token);
 				this.onToggleModal();
+				this.props.onLoginUser(data.id);
 			} else {
 				// Display error in modal like "Incorrect login info"
 				// Track # of attempts,
