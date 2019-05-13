@@ -3,8 +3,11 @@ import CBT from '../CBT/CBT'
 import CopingSkills from '../CopingSkills/CopingSkills'
 import DailyMaintenance from '../DailyMaintenance/DailyMaintenance'
 import History from '../History/History'
+import Modal from '../../Components/Modal/Modal'
+import ModalForm from '../../Components/ModalForm/ModalForm'
 import NavBar from '../../Components/Navigation/NavBar'
 import PHQ9 from '../PHQ9/PHQ9'
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
@@ -31,6 +34,7 @@ class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			isModalOpen: false,
 			route: 'a',
 			phq9_result: '',
 		}
@@ -60,6 +64,9 @@ class App extends Component {
 		console.log('state from:', this.state.route);
 		console.log('state to:', route);
 		this.setState({route: route})
+		if (route === 'signin') {
+			this.onToggleModal();
+		}
 	}
 
 	onSubmitPHQ9 = (data) => {
@@ -77,15 +84,16 @@ class App extends Component {
 		.catch(err => console.log(err));
 	}
 
-	onSignin = () => {
+	onSignin = (email, password, hidden) => {
 		fetch(serverURL+'/signin', {
 			method: 'POST',
 			headers: {
 				'Content-Type' : 'application/json',
 			},
 			body: JSON.stringify({
-				email: 'test@test',
-				password: 'a'
+				email: email,
+				password: password,
+				hidden: hidden
 			})
 		})
 		.then(response => response.json())
@@ -93,17 +101,45 @@ class App extends Component {
 			console.log(data);
 			if (data.token && data.id) {
 				window.sessionStorage.setItem('token', data.token);
+				this.onToggleModal();
+			} else {
+				// Display error in modal like "Incorrect login info"
+				// Track # of attempts,
+				// Provide forgot your password eventually.
 			}
 		})
 		.catch(err => {
-			console.log(err);
+			console.log('Error', err);
 		})
 	}
 
-// pa5-ns
+	onSubmitSigninForm = (e) => {
+		e.preventDefault();
+		if (e.target.elements[0].value && e.target.elements[1].value && e.target.elements[2].value) {
+			this.onSignin(e.target.elements[0].value, e.target.elements[1].value, e.target.elements[2].value);
+		}	
+	}
+
+	onToggleModal = () => {
+		this.setState(prevState => ({
+			...prevState,
+			isModalOpen: !prevState.isModalOpen
+		}))
+	}
+
 	render() {
 		return (
 			<div className="App">
+				{this.state.isModalOpen && (
+					<Modal>
+						<ModalForm 
+							onSubmitForm={this.onSubmitSigninForm}
+							onToggleModal={this.onToggleModal}
+							/>
+					</Modal>
+				)}
+
+
 				<NavBar 
 					onRouteChange={this.onRouteChange}
 				/>
@@ -128,11 +164,7 @@ class App extends Component {
 					<p>Temporary text</p>
 				</section>
 				}
-				{/* <DailyMaintenance/>
-					<CBT/>
-					<CopingSkills/>
-					<History/> */}
-				<button onClick={this.onSignin}>
+				<button onClick={this.onToggleModal}>
 					Signin
 				</button>
 			</div>

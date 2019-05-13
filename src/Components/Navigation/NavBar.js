@@ -45,6 +45,12 @@ const NavBar = (props) => {
                         route='hist'
                     />
                     <NavButtonLi
+                        liClass="register"
+                        buttonLabel="Register"
+                        onRouteChange={props.onRouteChange}
+                        route='register'
+                    />
+                    <NavButtonLi
                         buttonLabel="Sign in"
                         onRouteChange={props.onRouteChange}
                         route='signin'

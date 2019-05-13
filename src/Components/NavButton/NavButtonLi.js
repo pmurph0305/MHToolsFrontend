@@ -6,7 +6,7 @@ import React from 'react';
  * @param {eventHandler} onRouteChange onClick function callback
  * @param {string} route Text to give to onRouteChange when clicked
  */
-const NavButtonLi = ({ buttonLabel, onRouteChange, route, liClass}) => {
+const NavButtonLi = ({ buttonLabel, onRouteChange, route, style, liClass}) => {
     return(
         <li className={liClass ? liClass : null}>
             <button
