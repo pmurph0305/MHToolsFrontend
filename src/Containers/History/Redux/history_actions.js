@@ -7,9 +7,14 @@ import {
 	REQUEST_PHQ9_HISTORY_FAILED
 } from "./history_constants";
 
+
+
+import {fetchURLWithJsonAuth} from '../../../ReduxHelpers/reduxHelpers'
+const HISTORY_URL = 'http://localhost:3001/history'
+
 export const requestDMHistory = id => dispatch => {
     dispatch({ type: REQUEST_DM_HISTORY_PENDING });
-    fetch("http://localhost:3001/history/dm/" + id)
+    fetchURLWithJsonAuth(`${HISTORY_URL}/dm/${id}`)
 		.then(response => response.json())
 		.then(data =>
 			dispatch({ type: REQUEST_DM_HISTORY_SUCCESS, payload: data })
@@ -21,7 +26,7 @@ export const requestDMHistory = id => dispatch => {
 
 export const requestPHQ9History = id => dispatch => {
 	dispatch({ type: REQUEST_PHQ9_HISTORY_PENDING });
-	fetch("http://localhost:3001/history/phq9/" + id)
+	fetchURLWithJsonAuth(`${HISTORY_URL}/phq9/${id}`)
 		.then(response => response.json())
 		.then(data =>
 			dispatch({ type: REQUEST_PHQ9_HISTORY_SUCCESS, payload: data })

@@ -62,7 +62,6 @@ class History extends React.Component {
     }
 
     onSelectHistoryDisplayed = event => {
-        console.log(event.target.value);
         switch (event.target.value) {
             case "0":
                 if (!this.props.dm.length) {

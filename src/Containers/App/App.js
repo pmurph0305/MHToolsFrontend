@@ -71,9 +71,13 @@ class App extends Component {
 
 	onSubmitPHQ9 = (data) => {
 		let score = data.reduce((acc, cur, i) => i < 9 ? acc + cur : acc);
+		let token = window.sessionStorage.getItem('token');
 		fetch(serverURL+'/phq9/'+this.props.user_id, {
 			method: 'POST',
-			headers: {'Content-Type' : 'application/json'},
+			headers: {
+				'Content-Type' : 'application/json',
+				'Authorization': token
+			},
 			body: JSON.stringify({
 				scores: data,
 				score: score,
@@ -81,7 +85,7 @@ class App extends Component {
 		})
 		.then(response => response.json())
 		.then(response => this.setState({phq9_result: response}))
-		.catch(err => console.log(err));
+		.catch(err => console.log(err));	
 	}
 
 	onSignin = (email, password, hidden) => {
