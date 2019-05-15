@@ -11,6 +11,14 @@ jobs:
       # Like npm test, you can force the build to perform a linter warning check by setting the environment variable CI.
       # If any warnings are encountered then the build fails. (CI=true)
       - run: CI=true npm run build
+  test_coverage:
+    docker:
+      - image: circleci/node:10.15.1
+    steps:
+      - checkout
+      - run: echo "Test and test coverage"
+      - run: npm install
+      - run: npm run testcoverage
 # Orchestrate or schedule a set of jobs, see https://circleci.com/docs/2.0/workflows/
 workflows:
   # Name the workflow "Welcome"
@@ -18,3 +26,4 @@ workflows:
     # Run the welcome/run job in its own container
     jobs:
       - build
+      - test_coverage
