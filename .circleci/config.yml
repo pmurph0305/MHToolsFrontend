@@ -10,7 +10,7 @@ jobs:
       # When creating a build of your application with npm run build linter warnings are not checked by default.
       # Like npm test, you can force the build to perform a linter warning check by setting the environment variable CI.
       # If any warnings are encountered then the build fails. (CI=true)
-      - run: CI=true npm build
+      - run: CI=true npm run build
 # Orchestrate or schedule a set of jobs, see https://circleci.com/docs/2.0/workflows/
 workflows:
   # Name the workflow "Welcome"
