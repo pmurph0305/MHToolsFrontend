@@ -24,7 +24,6 @@ ShallowWrapper {
     "nodeType": "host",
     "props": Object {
       "children": <button
-        className="f6 f5-l pointer link dim white-80 pa3 ph4-l"
         onClick={[Function]}
       >
         test label
@@ -38,7 +37,6 @@ ShallowWrapper {
       "nodeType": "host",
       "props": Object {
         "children": "test label",
-        "className": "f6 f5-l pointer link dim white-80 pa3 ph4-l",
         "onClick": [Function],
       },
       "ref": null,
@@ -54,7 +52,6 @@ ShallowWrapper {
       "nodeType": "host",
       "props": Object {
         "children": <button
-          className="f6 f5-l pointer link dim white-80 pa3 ph4-l"
           onClick={[Function]}
         >
           test label
@@ -68,7 +65,6 @@ ShallowWrapper {
         "nodeType": "host",
         "props": Object {
           "children": "test label",
-          "className": "f6 f5-l pointer link dim white-80 pa3 ph4-l",
           "onClick": [Function],
         },
         "ref": null,

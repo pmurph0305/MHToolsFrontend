@@ -43,7 +43,6 @@ export const onDMSaveClick = (id, updatedTasks) => (dispatch) => {
  * @param  {number} change 0 for current date, (-1 or 1) increase or decrease from current date.
  */
 export const requestDMTasks = (id, date, change) => (dispatch) => {
-	const token = window.sessionStorage.getItem('token');
 	dispatch({ type: REQUEST_DM_TASKS_PENDING });
 	if (change) {
 		fetchURLWithJsonAuth(`${DM_URL}/${id}/${date}/${change}`, 'GET')
