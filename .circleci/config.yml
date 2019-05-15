@@ -1,19 +1,20 @@
 version: 2.1
-orbs:
-  # Declare a dependency on the welcome-orb
-  welcome: circleci/welcome-orb@0.3.1
 jobs:
-  echo_job:
+  build:
     docker:
       - image: circleci/node:10.15.1
     steps:
       - checkout
-      - run: echo "A first hello"
+      - run: echo "Build job"
+      - run: npm install
+      # When creating a build of your application with npm run build linter warnings are not checked by default.
+      # Like npm test, you can force the build to perform a linter warning check by setting the environment variable CI.
+      # If any warnings are encountered then the build fails. (CI=true)
+      - run: CI=true npm build
 # Orchestrate or schedule a set of jobs, see https://circleci.com/docs/2.0/workflows/
 workflows:
   # Name the workflow "Welcome"
   Welcome:
     # Run the welcome/run job in its own container
     jobs:
-      - welcome/run
-      - echo_job
+      - build
