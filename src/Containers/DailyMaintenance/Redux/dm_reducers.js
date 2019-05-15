@@ -1,5 +1,3 @@
-import { combineReducers } from 'redux';
-
 import {
    // REQUEST_DM_TASKS_PENDING,
     REQUEST_DM_TASKS_SUCCESS,
