@@ -9,7 +9,8 @@ describe("Selection Box tests", () => {
     id: 1,
     value: 3,
     className: "TestClass",
-    label: "TestLabel"
+    label: "TestLabel",
+    onChange: mockOnChange
   };
   const wrapper = shallow(<SelectionBox {...mockProps} />);
 
@@ -40,5 +41,10 @@ describe("Selection Box tests", () => {
   const wrapper2 = shallow(<SelectionBox />);
   it("correctly sets class to default", () => {
     expect(wrapper2.prop("className")).toBe("DefaultSelect");
+  });
+
+  it("calls on change properly", () => {
+    wrapper.find("select").simulate("change");
+    expect(mockOnChange).toHaveBeenCalledTimes(1);
   });
 });
