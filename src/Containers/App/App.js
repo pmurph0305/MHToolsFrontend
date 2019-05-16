@@ -7,7 +7,6 @@ import Modal from "../../Components/Modal/Modal";
 import ModalForm from "../../Components/ModalForm/ModalForm";
 import NavBar from "../../Components/Navigation/NavBar";
 import PHQ9 from "../PHQ9/PHQ9";
-
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
