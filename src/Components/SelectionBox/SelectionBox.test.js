@@ -15,7 +15,7 @@ describe("Selection Box tests", () => {
   const wrapper = shallow(<SelectionBox {...mockProps} />);
 
   it("has correct props", () => {
-    expect(wrapper.prop("id")).toBe(mockProps.id);
+    expect(wrapper.props().id).toBe(mockProps.id);
     expect(wrapper.prop("value")).toBe(mockProps.value);
     expect(wrapper.prop("className")).toBe(mockProps.className);
     expect(wrapper.prop("label")).toBe(mockProps.label);
