@@ -1,7 +1,6 @@
 import { shallow, mount } from "enzyme";
 import React from "react";
 import NavButtonLi from "./NavButtonLi";
-import { timeout } from "q";
 
 describe("NavButtonLi tests", () => {
   let wrapper;
