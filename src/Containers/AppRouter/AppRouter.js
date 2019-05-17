@@ -9,10 +9,6 @@ import NavBar from "../../Components/Navigation/NavBar";
 import PHQ9 from "../PHQ9/PHQ9";
 
 class AppRouter extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   PHQ9 = routeProps => {
     return (
       <PHQ9
