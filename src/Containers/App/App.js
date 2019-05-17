@@ -1,4 +1,4 @@
-import { loginUser } from "./Redux/app_actions";
+import { loginUser, logoutUser } from "./Redux/app_actions";
 
 import Modal from "../../Components/Modal/Modal";
 import RegisterForm from "../../Components/ModalForms/RegisterForm";
@@ -21,7 +21,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onLoginUser: id => dispatch(loginUser(id))
+    onLoginUser: id => dispatch(loginUser(id)),
+    onLogoutUser: () => dispatch(logoutUser())
   };
 };
 
@@ -191,13 +192,22 @@ class App extends Component {
     }));
   };
 
+  onSignOut = () => {
+    window.sessionStorage.removeItem("token");
+    this.props.onLogoutUser();
+  };
+
   onModalChange = modalType => {
     console.log("modal change", modalType);
-    this.setState(prevState => ({
-      ...prevState,
-      isModalOpen: !prevState.isModalOpen,
-      formDisplayed: modalType
-    }));
+    if (modalType === "signout") {
+      this.onSignOut();
+    } else {
+      this.setState(prevState => ({
+        ...prevState,
+        isModalOpen: !prevState.isModalOpen,
+        formDisplayed: modalType
+      }));
+    }
   };
 
   render() {
@@ -221,6 +231,7 @@ class App extends Component {
           </Modal>
         )}
         <AppRouter
+          user_id={this.props.user_id}
           onModalChange={this.onModalChange}
           onSubmitPHQ9={this.onSubmitPHQ9}
           submissionResult={this.state.phq9_result}

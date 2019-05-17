@@ -19,16 +19,26 @@ const NavBar = props => {
           <NavButtonLi buttonLabel="CBT" route="cbt" />
           <NavButtonLi buttonLabel="Coping Skills" route="coping" />
           <NavButtonLi buttonLabel="History" route="hist" />
-          <li className="register">
-            <button onClick={() => props.onModalChange("register")}>
-              Register
-            </button>
-          </li>
-          <li>
-            <button onClick={() => props.onModalChange("signin")}>
-              Sign in
-            </button>
-          </li>
+          {!props.isSignedIn ? (
+            <>
+              <li className="sign-ins">
+                <button onClick={() => props.onModalChange("register")}>
+                  Register
+                </button>
+              </li>
+              <li className="sign-ins">
+                <button onClick={() => props.onModalChange("signin")}>
+                  Sign in
+                </button>
+              </li>
+            </>
+          ) : (
+            <li className="sign-ins">
+              <button onClick={() => props.onModalChange("signout")}>
+                Sign out
+              </button>
+            </li>
+          )}
         </ul>
       </nav>
     </header>

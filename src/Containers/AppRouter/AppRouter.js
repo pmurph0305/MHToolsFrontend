@@ -42,7 +42,10 @@ class AppRouter extends React.Component {
   render() {
     return (
       <Router>
-        <NavBar onModalChange={this.props.onModalChange} />
+        <NavBar
+          onModalChange={this.props.onModalChange}
+          isSignedIn={this.props.user_id >= 0}
+        />
         <Route exact path="/" render={routeProps => this.Home(routeProps)} />
         <Route path="/cbt" render={routeProps => this.CBT(routeProps)} />
         <Route

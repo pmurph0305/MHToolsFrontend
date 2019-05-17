@@ -1,23 +1,22 @@
-import {
-    SET_USER_ID
-} from './app_constants'
+import { SET_USER_ID, LOG_OUT_USER } from "./app_constants";
 
-import { updateObject } from '../../../ReduxHelpers/reduxHelpers'
+import { updateObject, resetState } from "../../../ReduxHelpers/reduxHelpers";
 
 const initialState = {
-    user_id: -1
-}
+  user_id: -1
+};
 
-export const appReducer = (state = initialState, action ={}) => {
-    switch(action.type) {
-        case SET_USER_ID:
-            return setUserID(state, action)
-        default:
-            return state;
-    }
-}
+export const appReducer = (state = initialState, action = {}) => {
+  switch (action.type) {
+    case SET_USER_ID:
+      return setUserID(state, action);
+    case LOG_OUT_USER:
+      return resetState(state, initialState);
+    default:
+      return state;
+  }
+};
 
-function setUserID (state, action) {
-    return updateObject(state, { user_id: action.payload });
+function setUserID(state, action) {
+  return updateObject(state, { user_id: action.payload });
 }
-
