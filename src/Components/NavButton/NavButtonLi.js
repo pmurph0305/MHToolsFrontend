@@ -1,20 +1,18 @@
-import React from 'react';
-
+import React from "react";
+import { Link } from "react-router-dom";
 /**
  * @param {string} buttonLabel text displayed on the button
  * @param {string} liClasss className for each button li element default: null
- * @param {eventHandler} onRouteChange onClick function callback
- * @param {string} route Text to give to onRouteChange when clicked
+ * @param {string} route Route for react router
  */
-const NavButtonLi = ({ buttonLabel, onRouteChange, route, style, liClass}) => {
-    return(
-        <li className={liClass ? liClass : null}>
-            <button
-                onClick={() => onRouteChange(route)}>
-                {buttonLabel}
-            </button>
-        </li>
-    )
-}
+const NavButtonLi = ({ buttonLabel, route, liClass }) => {
+  return (
+    <li className={liClass ? liClass : null}>
+      <Link to={`/${route}`}>
+        <button>{buttonLabel}</button>
+      </Link>
+    </li>
+  );
+};
 
 export default NavButtonLi;

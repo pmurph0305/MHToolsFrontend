@@ -1,64 +1,38 @@
-import logo from './mh_logo_white.png';
-import NavButtonLi from '../NavButton/NavButtonLi';
-import React from 'react';
+import logo from "./mh_logo_white.png";
+import NavButtonLi from "../NavButton/NavButtonLi";
+import React from "react";
+import { Link } from "react-router-dom";
 
-import './NavBar.scss';
-
-const NavBar = (props) => {
-    return(
-        <header className='navHeader'>
-            <nav className="navClass"
-                role='navigation'
-                >
-                <ul>
-                    <li>
-                        <img 
-                            className="" 
-                            alt='home' 
-                            src={logo}
-                            onClick={() => props.onRouteChange('home')}
-                        />
-                    </li>
-                    <NavButtonLi
-                        buttonLabel="Daily Maintenance"
-                        onRouteChange={props.onRouteChange}
-                        route='dm'
-                    />
-                    <NavButtonLi
-                        buttonLabel="PHQ-9"
-                        onRouteChange={props.onRouteChange}
-                        route='phq9'
-                    />
-                    <NavButtonLi
-                        buttonLabel="CBT"
-                        onRouteChange={props.onRouteChange}
-                        route='cbt'
-                    />
-                    <NavButtonLi
-                        buttonLabel="Coping Skills"
-                        onRouteChange={props.onRouteChange}
-                        route='coping'
-                    />
-                    <NavButtonLi
-                        buttonLabel="History"
-                        onRouteChange={props.onRouteChange}
-                        route='hist'
-                    />
-                    <NavButtonLi
-                        liClass="register"
-                        buttonLabel="Register"
-                        onRouteChange={props.onRouteChange}
-                        route='register'
-                    />
-                    <NavButtonLi
-                        buttonLabel="Sign in"
-                        onRouteChange={props.onRouteChange}
-                        route='signin'
-                    />
-                </ul>
-            </nav>
-        </header>
-    )
-}
+import "./NavBar.scss";
+const NavBar = props => {
+  return (
+    <header className="navHeader">
+      <nav className="navClass" role="navigation">
+        <ul>
+          <li>
+            <Link to="/">
+              <img className="" alt="home" src={logo} />
+            </Link>
+          </li>
+          <NavButtonLi buttonLabel="Daily Maintenance" route="dm" />
+          <NavButtonLi buttonLabel="PHQ-9" route="phq9" />
+          <NavButtonLi buttonLabel="CBT" route="cbt" />
+          <NavButtonLi buttonLabel="Coping Skills" route="coping" />
+          <NavButtonLi buttonLabel="History" route="hist" />
+          <li className="register">
+            <button onClick={() => props.onModalChange("register")}>
+              Register
+            </button>
+          </li>
+          <li>
+            <button onClick={() => props.onModalChange("signin")}>
+              Sign in
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </header>
+  );
+};
 
 export default NavBar;

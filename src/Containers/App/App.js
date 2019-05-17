@@ -1,13 +1,10 @@
 import { loginUser } from "./Redux/app_actions";
-import CBT from "../CBT/CBT";
-import CopingSkills from "../CopingSkills/CopingSkills";
-import DailyMaintenance from "../DailyMaintenance/DailyMaintenance";
-import History from "../History/History";
+
 import Modal from "../../Components/Modal/Modal";
 import RegisterForm from "../../Components/ModalForms/RegisterForm";
+import AppRouter from "../AppRouter/AppRouter";
 import SignInForm from "../../Components/ModalForms/SignInForm";
-import NavBar from "../../Components/Navigation/NavBar";
-import PHQ9 from "../PHQ9/PHQ9";
+
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
@@ -34,7 +31,6 @@ class App extends Component {
     this.state = {
       formDisplayed: "",
       isModalOpen: false,
-      route: "a",
       phq9_result: ""
     };
   }
@@ -61,22 +57,6 @@ class App extends Component {
         });
     }
   }
-
-  onRouteChange = route => {
-    console.log("state from:", this.state.route);
-    console.log("state to:", route);
-
-    if (route === "signin") {
-      this.onToggleModal();
-      this.onSetFormDisplayed("signin");
-      return;
-    } else if (route === "register") {
-      this.onToggleModal();
-      this.onSetFormDisplayed("register");
-      return;
-    }
-    this.setState({ route: route });
-  };
 
   onSetFormDisplayed = formDisplayed => {
     this.setState(prevState => ({ ...prevState, formDisplayed }));
@@ -158,6 +138,15 @@ class App extends Component {
     }));
   };
 
+  onModalChange = modalType => {
+    console.log("modal change", modalType);
+    this.setState(prevState => ({
+      ...prevState,
+      isModalOpen: !prevState.isModalOpen,
+      formDisplayed: modalType
+    }));
+  };
+
   render() {
     return (
       <div className="App">
@@ -176,31 +165,11 @@ class App extends Component {
             )}
           </Modal>
         )}
-
-        <NavBar onRouteChange={this.onRouteChange} />
-        {this.state.route === "phq9" ? (
-          <PHQ9
-            onSubmitPHQ9={this.onSubmitPHQ9}
-            submissionResult={this.state.phq9_result}
-          />
-        ) : this.state.route === "cbt" ? (
-          <CBT />
-        ) : this.state.route === "dm" ? (
-          <DailyMaintenance
-            user_id={this.state.user_id}
-            serverURL={serverURL}
-          />
-        ) : this.state.route === "hist" ? (
-          <History />
-        ) : this.state.route === "coping" ? (
-          <CopingSkills />
-        ) : (
-          <section className="pa2-ns bt black-90 bg-light-gray">
-            <h1 className="pa1 ma0">TITLE!</h1>
-            <p>Temporary text</p>
-          </section>
-        )}
-        <button onClick={this.onToggleModal}>Signin</button>
+        <AppRouter
+          onModalChange={this.onModalChange}
+          onSubmitPHQ9={this.onSubmitPHQ9}
+          submissionResult={this.state.phq9_result}
+        />
       </div>
     );
   }
