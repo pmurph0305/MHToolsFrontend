@@ -1,12 +1,10 @@
 import { loginUser } from "./Redux/app_actions";
-import CBT from "../CBT/CBT";
-import CopingSkills from "../CopingSkills/CopingSkills";
-import DailyMaintenance from "../DailyMaintenance/DailyMaintenance";
-import History from "../History/History";
+
 import Modal from "../../Components/Modal/Modal";
-import ModalForm from "../../Components/ModalForm/ModalForm";
-import NavBar from "../../Components/Navigation/NavBar";
-import PHQ9 from "../PHQ9/PHQ9";
+import RegisterForm from "../../Components/ModalForms/RegisterForm";
+import AppRouter from "../AppRouter/AppRouter";
+import SignInForm from "../../Components/ModalForms/SignInForm";
+
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
@@ -31,8 +29,9 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      formError: "",
+      formDisplayed: "",
       isModalOpen: false,
-      route: "a",
       phq9_result: ""
     };
   }
@@ -60,13 +59,8 @@ class App extends Component {
     }
   }
 
-  onRouteChange = route => {
-    console.log("state from:", this.state.route);
-    console.log("state to:", route);
-    this.setState({ route: route });
-    if (route === "signin") {
-      this.onToggleModal();
-    }
+  onSetFormDisplayed = formDisplayed => {
+    this.setState(prevState => ({ ...prevState, formDisplayed }));
   };
 
   onSubmitPHQ9 = data => {
@@ -133,10 +127,76 @@ class App extends Component {
     }
   };
 
+  onRegister = (username, email, password, hidden) => {
+    fetch(serverURL + "/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        username: username,
+        email: email,
+        password: password,
+        hidden: hidden
+      })
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.token && data.id) {
+          window.sessionStorage.setItem("token", data.token);
+          this.onToggleModal();
+          this.props.onLoginUser(data.id);
+        }
+      });
+  };
+
+  onSubmitRegisterForm = e => {
+    e.preventDefault();
+    if (
+      e.target.elements[0].value &&
+      e.target.elements[1].value &&
+      e.target.elements[2].value &&
+      e.target.elements[3].value
+    ) {
+      if (e.target.elements[2].value !== e.target.elements[3].value) {
+        return this.setFormError("Passwords do not match.");
+      } else if (e.target.elements[0].value.length > 255) {
+        return this.setFormError("Username is too long");
+      } else if (e.target.elements[1].value.length > 255) {
+        return this.setFormError("Email is too long");
+      } else if (e.target.elements[2].value.length > 255) {
+        return this.setFormError("Password is too long");
+      }
+      console.log(e.target.elements[4].value);
+      this.onRegister(
+        e.target.elements[0].value,
+        e.target.elements[1].value,
+        e.target.elements[2].value,
+        e.target.elements[4].value
+      );
+    }
+  };
+
+  setFormError = formError => {
+    this.setState(prevState => ({
+      ...prevState,
+      formError
+    }));
+  };
+
   onToggleModal = () => {
     this.setState(prevState => ({
       ...prevState,
       isModalOpen: !prevState.isModalOpen
+    }));
+  };
+
+  onModalChange = modalType => {
+    console.log("modal change", modalType);
+    this.setState(prevState => ({
+      ...prevState,
+      isModalOpen: !prevState.isModalOpen,
+      formDisplayed: modalType
     }));
   };
 
@@ -145,37 +205,26 @@ class App extends Component {
       <div className="App">
         {this.state.isModalOpen && (
           <Modal>
-            <ModalForm
-              onSubmitForm={this.onSubmitSigninForm}
-              onToggleModal={this.onToggleModal}
-            />
+            {this.state.formDisplayed === "signin" ? (
+              <SignInForm
+                onSubmitForm={this.onSubmitSigninForm}
+                onToggleModal={this.onToggleModal}
+                formError={this.state.formError}
+              />
+            ) : (
+              <RegisterForm
+                onSubmitForm={this.onSubmitRegisterForm}
+                onToggleModal={this.onToggleModal}
+                formError={this.state.formError}
+              />
+            )}
           </Modal>
         )}
-
-        <NavBar onRouteChange={this.onRouteChange} />
-        {this.state.route === "phq9" ? (
-          <PHQ9
-            onSubmitPHQ9={this.onSubmitPHQ9}
-            submissionResult={this.state.phq9_result}
-          />
-        ) : this.state.route === "cbt" ? (
-          <CBT />
-        ) : this.state.route === "dm" ? (
-          <DailyMaintenance
-            user_id={this.state.user_id}
-            serverURL={serverURL}
-          />
-        ) : this.state.route === "hist" ? (
-          <History />
-        ) : this.state.route === "coping" ? (
-          <CopingSkills />
-        ) : (
-          <section className="pa2-ns bt black-90 bg-light-gray">
-            <h1 className="pa1 ma0">TITLE!</h1>
-            <p>Temporary text</p>
-          </section>
-        )}
-        <button onClick={this.onToggleModal}>Signin</button>
+        <AppRouter
+          onModalChange={this.onModalChange}
+          onSubmitPHQ9={this.onSubmitPHQ9}
+          submissionResult={this.state.phq9_result}
+        />
       </div>
     );
   }

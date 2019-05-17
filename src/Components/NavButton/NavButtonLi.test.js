@@ -32,12 +32,4 @@ describe("NavButtonLi tests", () => {
     const noclasswrapper = shallow(<NavButtonLi />);
     expect(noclasswrapper.prop("className")).toBe(null);
   });
-
-  // simulate a click, make sure correct route value is returned with click.
-  it("On Click is called and sends route prop", () => {
-    let wrapClick = shallow(<NavButtonLi {...mockProps} />);
-    wrapClick.find("button").simulate("click");
-    expect(mockRouteChange.mock.results[0].value).toBe("test route");
-    expect(mockRouteChange).toHaveBeenCalledTimes(1);
-  });
 });
