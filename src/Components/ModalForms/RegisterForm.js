@@ -1,7 +1,7 @@
 import React from "react";
 import "./SignInForm.scss";
 
-const RegisterForm = ({ onSubmitForm, onToggleModal }) => {
+const RegisterForm = ({ onSubmitForm, onToggleModal, formError }) => {
   return (
     <div className="form-container">
       <form className="form-modal" onSubmit={onSubmitForm}>
@@ -64,6 +64,7 @@ const RegisterForm = ({ onSubmitForm, onToggleModal }) => {
           name="hidden"
           value="hiddenValue"
         />
+        {formError}
         <input className="form-submit" type="submit" value="Register" />
       </form>
     </div>

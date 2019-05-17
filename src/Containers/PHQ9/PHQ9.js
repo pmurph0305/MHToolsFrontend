@@ -53,7 +53,6 @@ class PHQ9 extends React.Component {
 
   // Handles submitting the phq9 when the submit button is clicked.
   onSubmitPHQ9 = () => {
-    console.log(this.props);
     this.props.onSubmitPHQ9(this.state.answers);
   };
 

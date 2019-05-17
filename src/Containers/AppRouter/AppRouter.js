@@ -13,18 +13,17 @@ class AppRouter extends React.Component {
     super(props);
   }
 
-  PHQ9 = () => {
-    console.log("phq9");
-    console.log(this.props);
+  PHQ9 = routeProps => {
     return (
       <PHQ9
-        onSubmitPHQ9={answers => this.props.onSubmitPHQ9}
+        {...routeProps}
+        onSubmitPHQ9={this.props.onSubmitPHQ9}
         submissionResult={this.props.submissionResult}
       />
     );
   };
 
-  CBT = () => {
+  CBT = routeProps => {
     return <CBT />;
   };
 
@@ -32,15 +31,15 @@ class AppRouter extends React.Component {
     return <DailyMaintenance />;
   };
 
-  History = () => {
+  History = routeProps => {
     return <History />;
   };
 
-  CopingSkills = () => {
+  CopingSkills = routeProps => {
     return <CopingSkills />;
   };
 
-  Home = () => {
+  Home = routeProps => {
     return <div>Home.</div>;
   };
 
@@ -48,21 +47,18 @@ class AppRouter extends React.Component {
     return (
       <Router>
         <NavBar onModalChange={this.props.onModalChange} />
-        <Route exact path="/" component={this.Home} />
-        <Route path="/cbt" component={CBT} />
-        <Route path="/coping" component={CopingSkills} />
-        <Route path="/dm" component={DailyMaintenance} />
-        <Route path="/hist" component={History} />
+        <Route exact path="/" render={routeProps => this.Home(routeProps)} />
+        <Route path="/cbt" render={routeProps => this.CBT(routeProps)} />
         <Route
-          path="/phq9"
-          render={routeProps => (
-            <PHQ9
-              {...routeProps}
-              onSubmitPHQ9={this.props.onSubmitPHQ9}
-              submissionResult={this.props.submissionResult}
-            />
-          )}
+          path="/coping"
+          render={routeProps => this.CopingSkills(routeProps)}
         />
+        <Route
+          path="/dm"
+          render={routeProps => this.DailyMaintenance(routeProps)}
+        />
+        <Route path="/hist" render={routeProps => this.History(routeProps)} />
+        <Route path="/phq9" render={routeProps => this.PHQ9(routeProps)} />
       </Router>
     );
   }
