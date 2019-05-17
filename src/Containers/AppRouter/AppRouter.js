@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import CBT from "../CBT/CBT";
 import CopingSkills from "../CopingSkills/CopingSkills";
