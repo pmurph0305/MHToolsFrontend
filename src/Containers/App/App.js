@@ -4,7 +4,8 @@ import CopingSkills from "../CopingSkills/CopingSkills";
 import DailyMaintenance from "../DailyMaintenance/DailyMaintenance";
 import History from "../History/History";
 import Modal from "../../Components/Modal/Modal";
-import ModalForm from "../../Components/ModalForm/ModalForm";
+import RegisterForm from "../../Components/ModalForms/RegisterForm";
+import SignInForm from "../../Components/ModalForms/SignInForm";
 import NavBar from "../../Components/Navigation/NavBar";
 import PHQ9 from "../PHQ9/PHQ9";
 import React, { Component } from "react";
@@ -31,6 +32,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      formDisplayed: "",
       isModalOpen: false,
       route: "a",
       phq9_result: ""
@@ -63,10 +65,21 @@ class App extends Component {
   onRouteChange = route => {
     console.log("state from:", this.state.route);
     console.log("state to:", route);
-    this.setState({ route: route });
+
     if (route === "signin") {
       this.onToggleModal();
+      this.onSetFormDisplayed("signin");
+      return;
+    } else if (route === "register") {
+      this.onToggleModal();
+      this.onSetFormDisplayed("register");
+      return;
     }
+    this.setState({ route: route });
+  };
+
+  onSetFormDisplayed = formDisplayed => {
+    this.setState(prevState => ({ ...prevState, formDisplayed }));
   };
 
   onSubmitPHQ9 = data => {
@@ -133,6 +146,11 @@ class App extends Component {
     }
   };
 
+  onSubmitRegisterForm = e => {
+    e.preventDefault();
+    // register
+  };
+
   onToggleModal = () => {
     this.setState(prevState => ({
       ...prevState,
@@ -145,10 +163,17 @@ class App extends Component {
       <div className="App">
         {this.state.isModalOpen && (
           <Modal>
-            <ModalForm
-              onSubmitForm={this.onSubmitSigninForm}
-              onToggleModal={this.onToggleModal}
-            />
+            {this.state.formDisplayed === "signin" ? (
+              <SignInForm
+                onSubmitForm={this.onSubmitSigninForm}
+                onToggleModal={this.onToggleModal}
+              />
+            ) : (
+              <RegisterForm
+                onSubmitForm={this.onSubmitRegisterForm}
+                onToggleModal={this.onToggleModal}
+              />
+            )}
           </Modal>
         )}
 
