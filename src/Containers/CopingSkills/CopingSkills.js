@@ -285,7 +285,9 @@ class CopingSkills extends React.Component {
           ? coping_skills.map((skill, index) => {
               return (
                 <SkillCollapsible
-                  allowAdd={skill["user_id"] == user_id ? false : true}
+                  allowAdd={
+                    skill["user_id"] === parseInt(user_id) ? false : true
+                  }
                   editing={skill["editing"]}
                   index={index}
                   key={index}
