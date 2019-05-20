@@ -1,0 +1,27 @@
+.input-container-textarea {
+  display: block;
+  margin: 1rem;
+
+  .input-textarea-labels {
+    display: flex;
+    align-items: baseline;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    padding: 0.5rem;
+    .input-textarea-explanation {
+      text-align: left;
+      font-size: 1rem;
+    }
+
+    .input-textarea-description {
+      text-align: left;
+      font-size: 1.25rem;
+      padding-right: 1rem;
+    }
+  }
+
+  .form-input-textarea {
+    width: 100%;
+    padding: 0rem 0.5rem;
+  }
+}
