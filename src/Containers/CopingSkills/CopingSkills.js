@@ -77,16 +77,18 @@ class CopingSkills extends React.Component {
   }
 
   componentDidMount() {
-    if (!this.props.coping_skills.length) {
-      this.props.onGetUserSkills(this.props.user_id);
-    }
-    if (this.props.viewing === "shared") {
-      document.getElementById("cs_viewing_box").selectedIndex = "1";
-      document.getElementById(
-        "cs_shared_order"
-      ).selectedIndex = this.props.shared_order.toString();
-    } else {
-      document.getElementById("cs_viewing_box").selectedIndex = "0";
+    if (this.props.user_id) {
+      if (!this.props.coping_skills.length) {
+        this.props.onGetUserSkills(this.props.user_id);
+      }
+      if (this.props.viewing === "shared") {
+        document.getElementById("cs_viewing_box").selectedIndex = "1";
+        document.getElementById(
+          "cs_shared_order"
+        ).selectedIndex = this.props.shared_order.toString();
+      } else {
+        document.getElementById("cs_viewing_box").selectedIndex = "0";
+      }
     }
   }
 
@@ -195,6 +197,12 @@ class CopingSkills extends React.Component {
   componentDidUpdate() {
     if (this.props.viewing === "user") {
       this.modifyExpandedCollapsibleSize();
+    }
+    if (this.props.user_id) {
+      // make sure on refresh, once user_id is set, and no state for coping skills, we request it.
+      if (!this.props.coping_skills.length) {
+        this.props.onGetUserSkills(this.props.user_id);
+      }
     }
   }
 

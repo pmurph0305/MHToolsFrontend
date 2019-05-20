@@ -36,13 +36,29 @@ class History extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      displayedHistory: "dm"
+      displayedHistory: ""
     };
   }
 
   componentDidMount() {
-    if (this.props.user_id > 0) {
-      this.onRequestHistory(this.state.displayedHistory);
+    // make sure we have a user_id before requesting history.
+    if (this.props.user_id && this.state.displayedHistory === "") {
+      if (this.state.displayedHistory === "") {
+        this.onRequestHistory("dm");
+      } else {
+        // re-get current history on mount, as user can update
+        // data between mounts.
+        this.onRequestHistory(this.state.displayedHistory);
+      }
+    }
+  }
+
+  componentDidUpdate() {
+    if (this.props.user_id) {
+      // only update history on update if we don't have state yet.
+      if (this.state.displayedHistory === "") {
+        this.onRequestHistory("dm");
+      }
     }
   }
 

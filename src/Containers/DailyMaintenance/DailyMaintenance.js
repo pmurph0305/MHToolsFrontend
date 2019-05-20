@@ -54,7 +54,16 @@ class DailyMaintenance extends React.Component {
   // Lifecycles:
   componentDidMount() {
     // Don't get data on remounting if the data is already in the state.
-    if (!this.props.taskList) {
+    if (!this.props.taskList && this.props.user_id) {
+      // get the current date, slice it to work with database.
+      let date = new Date().toISOString().slice(0, 10);
+      this.props.onRequestDMTaskList(this.props.user_id, date);
+    }
+  }
+
+  componentDidUpdate() {
+    // Don't get data on update if the data is already in the state.
+    if (!this.props.taskList && this.props.user_id) {
       // get the current date, slice it to work with database.
       let date = new Date().toISOString().slice(0, 10);
       this.props.onRequestDMTaskList(this.props.user_id, date);

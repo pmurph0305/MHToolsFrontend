@@ -3,7 +3,7 @@ import { SET_USER_ID, LOG_OUT_USER } from "./app_constants";
 import { updateObject, resetState } from "../../../ReduxHelpers/reduxHelpers";
 
 const initialState = {
-  user_id: -1
+  user_id: null
 };
 
 export const appReducer = (state = initialState, action = {}) => {
