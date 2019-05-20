@@ -3,40 +3,44 @@ $secondary-background: rgb(220, 220, 220);
 
 $primary-text-color: rgb(20, 20, 20);
 
-
-$button-background-color: rgb(20,20,20);
+$button-background-color: rgb(20, 20, 20);
 $button-text-color: rgb(220, 220, 220);
 
 $font-weight-base: 600;
 
 %ButtonBase {
-    background-color: $button-background-color;
-    color: $button-text-color;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    opacity: 1;
-    &:focus, &:hover, &:active {
-        transition: opacity .15s ease-in;
-        cursor: pointer;
-        opacity: 0.9;
-    }
+  background-color: $button-background-color;
+  color: $button-text-color;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  opacity: 1;
+  &:focus,
+  &:hover,
+  &:active {
+    transition: opacity 0.15s ease-in;
+    cursor: pointer;
+    opacity: 0.9;
+  }
 }
 
 // Each discrete section of the site. (DM, PHQ9, Coping Skills etc.)
 %SectionBase {
-    margin: 0;
-    color: rgba(0, 0, 0, 0.90);
-    text-align: center;
-    background-color: $primary-background;
-    padding: 0.5rem;
+  margin: 0;
+  color: rgba(0, 0, 0, 0.9);
+  text-align: center;
+  background-color: $primary-background;
+  padding: 0.5rem;
 }
 
 // Titles for each section of site.
 %TitleBase {
-    margin: 0.25rem 0.5rem;
+  text-align: center;
+  padding: 0.5rem 1rem;
+  margin: 0;
 }
 
 // Descrption text, if present, for section of site.
 %DescriptionBase {
-    padding: 1rem;
+  padding: 0.5rem 1rem;
+  text-align: left;
 }

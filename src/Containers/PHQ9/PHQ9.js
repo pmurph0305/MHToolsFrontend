@@ -1,5 +1,6 @@
 import React from "react";
 import Table from "./Table/Table";
+import SectionInfo from "../../Components/SectionInfo/SectionInfo";
 import SelectionBox from "../../Components/SelectionBox/SelectionBox";
 
 import "./PHQ9.scss";
@@ -116,11 +117,12 @@ class PHQ9 extends React.Component {
   render() {
     return (
       <section className="PHQ9Section">
-        <h1 className="PHQ9Title">PHQ-9</h1>
-        <p className="PHQ9Description">
-          The Patient Health Questionnaire (PHQ-9) is a multipurpose tool used
-          for screening, diagnosing, and monitoring the severity of depression.
-        </p>
+        <SectionInfo
+          title={"PHQ-9"}
+          description={
+            "The Patient Health Questionnaire (PHQ-9) is a multipurpose tool used for screening, diagnosing, and monitoring the severity of depression."
+          }
+        />
         <Table
           tClass="TableClass"
           trClass="TableRow"

@@ -1,0 +1,11 @@
+@import "../../styles/shared.scss";
+
+.section-title {
+  @extend %TitleBase;
+}
+
+.section-description-container {
+  @extend %DescriptionBase;
+  display: flex;
+  justify-content: center;
+}

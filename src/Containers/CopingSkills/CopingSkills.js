@@ -3,6 +3,7 @@ import React from "react";
 
 import AddSkill from "../../Components/AddSkill/AddSkill";
 import ErrorBox from "../../Components/ErrorBox/ErrorBox";
+import SectionInfo from "../../Components/SectionInfo/SectionInfo";
 import SkillCollapsible from "../../Components/SkillCollapsible/SkillCollapsible";
 import SelectionBox from "../../Components/SelectionBox/SelectionBox";
 
@@ -18,6 +19,8 @@ import {
   putShareCopingSkill,
   updateUserCopingSkill
 } from "./Redux/cs_actions";
+
+import "./CopingSkills.scss";
 
 const mapStateToProps = state => {
   return {
@@ -247,12 +250,13 @@ class CopingSkills extends React.Component {
       }, 100);
     };
     return (
-      <section className="ma0 pa1 pa3-ns bt black-90 bg-light-gray tc">
-        <h1 className="ma1 mh2">Coping Skills</h1>
-        <p className="ma2 mh4">
-          A list of coping skills to use in situations to help tolerate stress
-          and conflict.
-        </p>
+      <section className="CSSection">
+        <SectionInfo
+          title={"Coping Skills"}
+          description={
+            "A list of coping skills to use in situations to help tolerate stress and conflict."
+          }
+        />
         <SelectionBox
           id="cs_viewing_box"
           className="black ma2 bg-black-10 pa1 hover-bg-black-20 fl db"
