@@ -4,35 +4,43 @@ import "./InputRange.scss";
 
 const InputRange = ({
   defaultValue,
-  endDesc,
   idAndName,
-  inputDesc,
+  inputLabel,
   min,
+  minLabel,
   max,
-  startDesc
+  maxLabel
 }) => {
   return (
     <div className="input-range-container-outer">
-      <label
-        htmlFor={idAndName ? idAndName : "input-range"}
-        className="input-range-description"
-      >
-        {inputDesc ? inputDesc : null}
-      </label>
+      {inputLabel && (
+        <label
+          htmlFor={idAndName ? idAndName : "input-range"}
+          className="input-range-label"
+        >
+          {inputLabel}
+        </label>
+      )}
+
       <div className="input-range-container">
-        <p className="input-range-label-start">
-          {startDesc ? startDesc : null}
-        </p>
+        {minLabel && <p className="input-range-label-start">{minLabel}</p>}
+
         <input
           className="input-range"
           type="range"
           min={min ? min : 0}
           max={max ? max : 100}
-          defaultValue={defaultValue ? defaultValue : 50}
+          defaultValue={
+            defaultValue
+              ? defaultValue
+              : min && max
+              ? parseInt((min + max) / 2)
+              : 50
+          }
           id={idAndName ? idAndName : "input-range"}
           name={idAndName ? idAndName : "input-range"}
         />
-        <p className="input-range-label-end">{endDesc ? endDesc : null}</p>
+        {maxLabel && <p className="input-range-label-end">{maxLabel}</p>}
       </div>
     </div>
   );

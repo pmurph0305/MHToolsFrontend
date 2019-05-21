@@ -3,7 +3,7 @@
   margin: 1rem;
   border: 1px solid black;
 
-  .input-range-description {
+  .input-range-label {
     display: block;
     padding: 0.5rem;
     text-align: center;
@@ -41,9 +41,9 @@
       &::-webkit-moz-range-thumb,
       &::-webkit-slider-thumb {
         -webkit-appearance: none;
-        width: 1.5rem; /* Set a specific slider handle width */
-        height: 1.5rem; /* Slider handle height */
-        border-radius: 1rem;
+        width: 1.25rem; /* Set a specific slider handle width */
+        height: 1.25rem; /* Slider handle height */
+        border-radius: 0.625rem;
         background: rgb(100, 100, 100); /* Green background */
         cursor: pointer; /* Cursor on hover */
       }

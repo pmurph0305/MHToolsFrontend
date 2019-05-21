@@ -2,19 +2,21 @@ import React from "react";
 import "./InputText.scss";
 const InputText = ({
   defaultValue,
-  inputDesc,
+  inputLabel,
   onChange,
   placeholder,
   idAndName
 }) => {
   return (
     <div className="input-container-text">
-      <label
-        className="input-text-description"
-        htmlFor={idAndName ? idAndName : "input-text"}
-      >
-        {inputDesc}
-      </label>
+      {inputLabel && (
+        <label
+          className="input-text-label"
+          htmlFor={idAndName ? idAndName : "input-text"}
+        >
+          {inputLabel}
+        </label>
+      )}
       <input
         className="input-text"
         id={idAndName ? idAndName : "input-text"}

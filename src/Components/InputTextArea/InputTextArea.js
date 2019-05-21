@@ -8,21 +8,24 @@ class InputTextArea extends React.Component {
   };
 
   render() {
-    const { idAndName, inputDesc, inputExpl, placeholder } = this.props;
+    const { idAndName, inputLabel, inputDesc, placeholder } = this.props;
     return (
       <div className="input-container-textarea">
-        <div className="input-textarea-labels">
-          <label
-            className="input-textarea-description"
-            htmlFor={idAndName ? idAndName : "form-input-textarea"}
-          >
-            {inputDesc ? inputDesc : null}
-          </label>
-          <p className="input-textarea-explanation">
-            {inputExpl ? inputExpl : null}
-          </p>
-        </div>
-
+        {(inputLabel || inputDesc) && (
+          <div className="input-textarea-labels">
+            {inputLabel && (
+              <label
+                className="input-textarea-label"
+                htmlFor={idAndName ? idAndName : "form-input-textarea"}
+              >
+                {inputLabel}
+              </label>
+            )}
+            {inputDesc && (
+              <p className="input-textarea-description">{inputDesc}</p>
+            )}
+          </div>
+        )}
         <textarea
           className="form-input-textarea"
           id={idAndName ? idAndName : "form-input-textarea"}
