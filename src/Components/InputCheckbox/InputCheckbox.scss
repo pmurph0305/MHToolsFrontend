@@ -1,0 +1,71 @@
+.input-checkbox-container {
+  padding: 0.5rem;
+  display: inline-block;
+  flex-wrap: nowrap;
+
+  .input-checkbox-label {
+    float: right;
+    padding-left: 0.5rem;
+  }
+
+  .input-checkbox {
+    position: absolute;
+    left: -100000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+
+    &:focus ~ .input-checkbox-span {
+      border-color: #a0a0a0;
+      box-shadow: 0 0 0 2px #a7a7a7;
+    }
+
+    &:hover ~ .input-checkbox-span {
+      border-color: #757575;
+    }
+
+    &:checked ~ .input-checkbox-span {
+      border-color: #969696;
+      background: #969696
+        url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cG9seWxpbmUgcG9pbnRzPSIyMCA2IDkgMTcgNCAxMiI+PC9wb2x5bGluZT48L3N2Zz4=)
+        center no-repeat;
+      background-size: 75%;
+    }
+
+    ~ .input-checkbox-span {
+      width: 1rem;
+      height: 1rem;
+      position: relative;
+      display: inline-block;
+      border: 2px solid #969696;
+      cursor: pointer;
+    }
+  }
+
+  // .input-checkbox ~ .input-checkbox-span {
+  //     width: 1rem;
+  //     height: 1rem;
+  //     position: relative;
+  //     display: inline-block;
+  //     vertical-align: middle;
+  //     border: 2px solid #969696;
+  //     border-radius: 50%;
+  //     cursor: pointer;
+
+  //     &:hover {
+  //         border-color: #4a4a4a;
+  //     }
+
+  //     &:focus {
+  //         border-color: #b0d5ff;
+  //         box-shadow: 0 0 0 2px rgba(23, 133, 255, 0.25);
+  //     }
+
+  //     &:checked ~{
+  //         border-color: #1785ff;
+  //         background: #1785ff url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cG9seWxpbmUgcG9pbnRzPSIyMCA2IDkgMTcgNCAxMiI+PC9wb2x5bGluZT48L3N2Zz4=) center no-repeat;
+  //         background-size: 75%;
+  //     }
+
+  // }
+}

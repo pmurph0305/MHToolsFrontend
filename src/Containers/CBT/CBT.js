@@ -26,6 +26,16 @@ class CBT extends React.Component {
     let eventDescription = event.target.elements[0].value;
     console.log(eventDescription);
     console.log(event.target.elements);
+    let situation = event.target.elements.namedItem("cbtSituation").value;
+    let automaticThoughts = event.target.elements.namedItem(
+      "cbtAutomaticThoughts"
+    ).value;
+    let beforeBelief = event.target.elements.namedItem("cbtBeforeRange").value;
+    let afterBelief = event.target.elements.namedItem("cbtAfterRange").value;
+    console.log("s", situation);
+    console.log("at", automaticThoughts);
+    console.log("rb", beforeBelief);
+    console.log("ra", afterBelief);
   };
 
   render() {
