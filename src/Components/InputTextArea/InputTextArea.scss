@@ -1,12 +1,13 @@
 .input-container-textarea {
   display: block;
   margin: 1rem;
+  border: 1px solid black;
 
   .input-textarea-labels {
     display: flex;
     align-items: baseline;
     justify-content: flex-start;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     padding: 0.5rem;
     .input-textarea-explanation {
       text-align: left;
@@ -22,6 +23,9 @@
 
   .form-input-textarea {
     width: 100%;
-    padding: 0rem 0.5rem;
+    padding: 0.5rem 0.5rem;
+    resize: none;
+    min-height: 50px;
+    max-height: 300px;
   }
 }

@@ -3,16 +3,22 @@ import React from "react";
 import "./InputRange.scss";
 
 const InputRange = ({
-  startDesc,
+  defaultValue,
   endDesc,
+  idAndName,
   inputDesc,
   min,
   max,
-  defaultValue
+  startDesc
 }) => {
   return (
-    <div className="input-range-container-range">
-      <p className="input-range-description">{inputDesc ? inputDesc : null}</p>
+    <div className="input-range-container-outer">
+      <label
+        htmlFor={idAndName ? idAndName : "input-range"}
+        className="input-range-description"
+      >
+        {inputDesc ? inputDesc : null}
+      </label>
       <div className="input-range-container">
         <p className="input-range-label-start">
           {startDesc ? startDesc : null}
@@ -23,8 +29,8 @@ const InputRange = ({
           min={min ? min : 0}
           max={max ? max : 100}
           defaultValue={defaultValue ? defaultValue : 50}
-          id="cbtAutomaticThoughtsBelief"
-          name="cbtAutomaticThoughtsBelief"
+          id={idAndName ? idAndName : "input-range"}
+          name={idAndName ? idAndName : "input-range"}
         />
         <p className="input-range-label-end">{endDesc ? endDesc : null}</p>
       </div>

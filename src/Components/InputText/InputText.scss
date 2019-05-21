@@ -1,0 +1,15 @@
+.input-container-text {
+  text-align: left;
+  display: flex;
+  margin: 1rem;
+  border: 1px solid black;
+  .input-text-description {
+    padding: 0.5rem;
+    font-size: 1.25rem;
+  }
+  .input-text {
+    padding: 0.5rem;
+    line-height: 1rem;
+    width: 100%;
+  }
+}

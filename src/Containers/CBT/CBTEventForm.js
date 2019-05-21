@@ -1,6 +1,7 @@
 import React from "react";
 
 import InputRange from "../../Components/InputRange/InputRange";
+import InputText from "../../Components/InputText/InputText";
 import InputTextArea from "../../Components/InputTextArea/InputTextArea";
 
 class CBTEventForm extends React.Component {
@@ -9,18 +10,12 @@ class CBTEventForm extends React.Component {
 
     return (
       <form onSubmit={onSubmit}>
-        <div className="form-input-container">
-          <label className="form-label" htmlFor="cbtSituation">
-            Situation:
-          </label>
-          <input
-            className="form-input"
-            type="text"
-            placeholder="Enter a short description of the situation"
-            defaultValue={cbtSituation}
-            name="cbtSituation"
-          />
-        </div>
+        <InputText
+          inputDesc="Situation"
+          placeholder="Enter a short description of the situation"
+          idAndName="cbtSituation"
+          defaultValue={cbtSituation}
+        />
         {/* <div className="form-input-container">
           <label className="form-label" htmlFor="cbtAutomaticThoughts">
             Automatic Negative Thoughts
@@ -33,6 +28,7 @@ class CBTEventForm extends React.Component {
           />
         </div> */}
         <InputTextArea
+          idAndName={"cbtAutomaticThoughts"}
           inputDesc={"Automatic Thoughts"}
           inputExpl={
             "Write down some automatic thoughts and predictions you had about the situation."
@@ -42,6 +38,7 @@ class CBTEventForm extends React.Component {
           }
         />
         <InputRange
+          idAndName={"cbtBeforeRange"}
           inputDesc={
             "Rate your belief in your automatic thoughts and predictions when the situation happened."
           }
@@ -50,12 +47,14 @@ class CBTEventForm extends React.Component {
         />
 
         <InputRange
+          idAndName={"cbtAfterRange"}
           inputDesc={
             "Rate your belief in your automatic thoughts and predictions now."
           }
           startDesc={"Less"}
           endDesc={"More"}
         />
+        <input type="submit" value="Submit" />
       </form>
     );
   }
