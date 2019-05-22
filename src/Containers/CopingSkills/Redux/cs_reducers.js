@@ -183,15 +183,23 @@ function removeSkillFromSkillList(state, action) {
 function setCopingSkillsList(state, action) {
   // no length as no coping skills returns empty array.
   if (Array.isArray(action.payload)) {
-    return updateObject(state, { coping_skills: action.payload });
+    return updateObject(state, { coping_skills: action.payload, error: "" });
   } else {
     return setCopingSkillsError(state, action);
   }
 }
 
 function setCopingSkillsError(state, action) {
-  if (action.payload) {
-    return updateObject(state, { error: action.payload });
+  if (action.payload === "Unauthorized Request") {
+    return updateObject(state, {
+      coping_skills: [],
+      error: "You are not logged in."
+    });
+  } else {
+    return updateObject(state, {
+      coping_skills: [],
+      error: "Error getting Coping skills."
+    });
   }
 }
 

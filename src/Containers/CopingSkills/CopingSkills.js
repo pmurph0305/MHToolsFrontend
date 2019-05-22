@@ -312,11 +312,11 @@ class CopingSkills extends React.Component {
               );
             })
           : null}
-        {viewing === "user" ? (
+        {viewing === "user" && user_id && (
           <AddSkill onAddSkill={this.onAddNewSkillClick} />
-        ) : null}
+        )}
 
-        {error ? <ErrorBox error={error} /> : null}
+        {error && <ErrorBox error={error} />}
       </section>
     );
   }
