@@ -23,26 +23,27 @@ class CBTEventForm extends React.Component {
     let automaticThoughts = event.target.elements.namedItem(
       "cbtAutomaticThoughts"
     ).value;
-    let beforeBelief = event.target.elements.namedItem("cbtBeforeRange").value;
+    let ratingBefore = event.target.elements.namedItem("cbtBeforeRange").value;
     let thinkingStyles = checkboxList.map(item => {
       return event.target.elements.namedItem(item).checked;
     });
     let alternativeThoughts = event.target.elements.namedItem(
       "cbtAlternativeThoughts"
     ).value;
-    let evidence = event.target.elements.namedItem("cbtEvidenceConclusions")
-      .value;
-    let afterBelief = event.target.elements.namedItem("cbtAfterRange").value;
+    let evidenceConclusions = event.target.elements.namedItem(
+      "cbtEvidenceConclusions"
+    ).value;
+    let ratingAfter = event.target.elements.namedItem("cbtAfterRange").value;
 
     this.props.onSubmit({
       date: new Date().toISOString().slice(0, 10),
       situation,
       automaticThoughts,
-      beforeBelief,
+      ratingBefore,
       thinkingStyles,
       alternativeThoughts,
-      evidence,
-      afterBelief
+      evidenceConclusions,
+      ratingAfter
     });
   };
 
