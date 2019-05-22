@@ -127,7 +127,7 @@ class History extends React.Component {
           {isPending ? (
             <p>Loading Data...</p>
           ) : error ? (
-            <ErrorBox error="Error getting history data, please try again" />
+            <ErrorBox error={error} />
           ) : this.state.displayedHistory === "dm" ? (
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={this.dmDataProcess()} margin={{ bottom: 20 }}>

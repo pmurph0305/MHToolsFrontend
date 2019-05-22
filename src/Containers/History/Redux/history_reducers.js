@@ -57,6 +57,22 @@ function setDailyMaintenanceHistory(state, action) {
       isPending: false,
       error: ""
     });
+  } else {
+    return handleErrors(state, action);
+  }
+}
+
+function handleErrors(state, action) {
+  if (action.payload === "Unauthorized Request") {
+    return updateObject(state, {
+      isPending: false,
+      error: "You are not logged in."
+    });
+  } else {
+    return updateObject(state, {
+      isPending: false,
+      error: "Error getting history data."
+    });
   }
 }
 
@@ -67,5 +83,7 @@ function setPHQ9History(state, action) {
       isPending: false,
       error: ""
     });
+  } else {
+    return handleErrors(state, action);
   }
 }
