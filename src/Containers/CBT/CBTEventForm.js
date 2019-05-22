@@ -37,8 +37,7 @@ class CBTEventForm extends React.Component {
     this.props.onSubmit({
       date: new Date().toISOString().slice(0, 10),
       situation,
-      automaticThoughts: event.target.elements.namedItem("cbtAutomaticThoughts")
-        .value,
+      automaticThoughts,
       beforeBelief,
       thinkingStyles,
       alternativeThoughts,

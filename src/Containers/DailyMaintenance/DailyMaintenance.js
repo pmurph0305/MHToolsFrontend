@@ -4,6 +4,7 @@ import DMDateNav from "../../Components/DMDateNav/DMDateNav";
 import React from "react";
 import SectionInfo from "../../Components/SectionInfo/SectionInfo";
 import TaskItem from "./TaskItem/TaskItem";
+import ErrorBox from "../../Components/ErrorBox/ErrorBox";
 
 import "./DailyMaintenance.scss";
 
@@ -158,7 +159,13 @@ class DailyMaintenance extends React.Component {
   };
 
   render() {
-    const { date, taskList, onTaskTextChange } = this.props;
+    const {
+      date,
+      onTaskTextChange,
+      taskList,
+      taskListError,
+      user_id
+    } = this.props;
     // Only allow editing / deleting tasks if it is the list for the current date.
     const allowEditing = date === currentDate ? true : false;
 
@@ -193,13 +200,14 @@ class DailyMaintenance extends React.Component {
             })
           : null}
         {/* Display input field only if on current date. */}
-        {date === currentDate ? (
+        {date === currentDate && user_id && (
           <InputField
             placeholder={inputPlaceholder}
             buttonTitle={"Add new task"}
             onClick={this.onAddTaskClick}
           />
-        ) : null}
+        )}
+        {taskListError && <ErrorBox error={taskListError} />}
       </section>
     );
   }

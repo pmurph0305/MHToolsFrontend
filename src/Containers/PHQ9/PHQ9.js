@@ -75,7 +75,11 @@ class PHQ9 extends React.Component {
       ) : this.props.submissionResult === "PHQ-9 submission successful." ? (
         <p className="SubmissionSuccess">{this.props.submissionResult}</p>
       ) : (
-        <p className="SubmissionFailed">{this.props.submissionResult}</p>
+        <p className="SubmissionFailed">
+          {this.props.submissionResult === "Unauthorized Request"
+            ? "You are not logged in."
+            : this.props.submissionResult}
+        </p>
       ),
       <button className="SubmitButton" onClick={this.onSubmitPHQ9}>
         Submit
@@ -133,7 +137,6 @@ class PHQ9 extends React.Component {
           rows={this.getRows()}
           footers={this.getFooters()}
         />
-        <p>{this.state.total}</p>
       </section>
     );
   }

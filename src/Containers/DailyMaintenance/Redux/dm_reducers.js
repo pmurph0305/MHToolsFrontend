@@ -150,10 +150,15 @@ function setDMTaskList(state, action) {
       dm_taskList: tasks,
       dm_date: tasks[0]["date"].slice(0, 10)
     });
+  } else if (action.payload === "Unauthorized Request") {
+    return updateObject(state, {
+      dm_isPending: false,
+      dm_error: "You are not logged in."
+    });
   } else {
     return updateObject(state, {
       dm_isPending: false,
-      dm_error: action.payload
+      dm_error: "Error getting Daily Maintenance list."
     });
   }
 }
