@@ -22,10 +22,12 @@
   }
 
   .form-input-textarea {
+    overflow: hidden;
+    vertical-align: top;
     width: 100%;
     padding: 0.5rem 0.5rem;
     resize: none;
-    min-height: 50px;
+    min-height: 100%;
     max-height: 300px;
   }
 }

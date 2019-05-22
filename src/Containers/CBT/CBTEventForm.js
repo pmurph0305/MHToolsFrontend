@@ -23,7 +23,7 @@ class CBTEventForm extends React.Component {
       <form onSubmit={onSubmit}>
         <InputText
           inputLabel="Situation"
-          placeholder="Enter a short description of the situation"
+          placeholder="Gave a presentation. Went on a date. Meeting at work."
           idAndName="cbtSituation"
           defaultValue={cbtSituation}
         />
@@ -31,41 +31,43 @@ class CBTEventForm extends React.Component {
           idAndName={"cbtAutomaticThoughts"}
           inputLabel={"Automatic Thoughts"}
           inputDesc={
-            "Write down some automatic thoughts and predictions you had about the situation."
+            "Write down some anxious thoughts you had that occured during or when thinking about the situation."
           }
-          placeholder={
-            "I'm going to embarass myself. Everyone is going to laugh at me and think I'm stupid. I should have prepared more."
-          }
+          placeholder={"I'm going to embarass myself."}
         />
         <InputRange
           idAndName={"cbtBeforeRange"}
           inputLabel={
-            "Rate your belief in your automatic thoughts and predictions when the situation happened."
+            "Rate your belief in your automatic thoughts and predictions."
           }
           minLabel={"Less"}
           maxLabel={"More"}
         />
         <InputCheckboxList
-          inputLabel={"Cognitive Distortions"}
+          inputLabel={"Unhelpful Thinking Styles"}
           inputDesc={
-            "Identify unhelpful thinking styles that are present in your automatic thoughts"
+            "Identify unhelpful thinking styles that are present in your automatic thoughts."
           }
           checkboxList={checkboxList}
         />
-        <InputCheckboxList
-          inputLabel={"Cognitive Distortions"}
+        <InputTextArea
+          idAndName={"cbtAlternativeThoughts"}
+          inputLabel={"Alternative Thoughts"}
           inputDesc={
-            "Identify unhelpful thinking styles that are present in your automatic thoughts"
+            "Write down alternative thoughts and predictions that are more positive."
+          }
+          placeholder={
+            "I'll give a good presentation. No one will be able to tell that I am anxious. People who notice my anxiety will understand, because most people are nervous for presentations."
           }
         />
         <InputTextArea
-          idAndName={"cbtChallengeThoughts"}
-          inputLabel={"Alternative Thoughts"}
+          idAndName={"cbtEvidenceConclusions"}
+          inputLabel={"Evidence and Realistic Conclusions"}
           inputDesc={
-            "Write down and challenge the automatic thoughts that you had with more realistic thoughts"
+            "Try to look at the evidence for your automatic thoughts, as well as your alternative thoughts. Write down a more realistic conclusion based on your evidence."
           }
           placeholder={
-            "I don't have to be perfect in everything. More examples More examples...."
+            "No one really notices my anxiety, in fact some people have commented that I appear confident. I've given presentations in the past, and people said I did a good job. I was asked to give a presentation again, so I must be good at it."
           }
         />
 
