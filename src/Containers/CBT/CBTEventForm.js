@@ -16,11 +16,42 @@ const checkboxList = [
 ];
 
 class CBTEventForm extends React.Component {
+  onSubmitForm = event => {
+    console.log("submit!");
+    event.preventDefault();
+    let situation = event.target.elements.namedItem("cbtSituation").value;
+    let automaticThoughts = event.target.elements.namedItem(
+      "cbtAutomaticThoughts"
+    ).value;
+    let beforeBelief = event.target.elements.namedItem("cbtBeforeRange").value;
+    let thinkingStyles = checkboxList.map(item => {
+      return event.target.elements.namedItem(item).checked;
+    });
+    let alternativeThoughts = event.target.elements.namedItem(
+      "cbtAlternativeThoughts"
+    ).value;
+    let evidence = event.target.elements.namedItem("cbtEvidenceConclusions")
+      .value;
+    let afterBelief = event.target.elements.namedItem("cbtAfterRange").value;
+
+    this.props.onSubmit({
+      date: new Date().toISOString().slice(0, 10),
+      situation,
+      automaticThoughts: event.target.elements.namedItem("cbtAutomaticThoughts")
+        .value,
+      beforeBelief,
+      thinkingStyles,
+      alternativeThoughts,
+      evidence,
+      afterBelief
+    });
+  };
+
   render() {
-    const { onSubmit, cbtSituation } = this.props;
+    const { cbtSituation } = this.props;
 
     return (
-      <form onSubmit={onSubmit}>
+      <form onSubmit={event => this.onSubmitForm(event)}>
         <InputText
           inputLabel="Situation"
           placeholder="Gave a presentation. Went on a date. Meeting at work."

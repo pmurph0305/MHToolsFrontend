@@ -24,7 +24,6 @@ class InputTextArea extends React.Component {
   }
 
   onTextAreaChange = event => {
-    console.log("change");
     this.textArea.current.style.height = "5px";
     this.textArea.current.style.height =
       this.textArea.current.scrollHeight + this.getBottomPadding() + "px";

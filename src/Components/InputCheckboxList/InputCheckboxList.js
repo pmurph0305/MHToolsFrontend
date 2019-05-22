@@ -24,7 +24,7 @@ class InputCheckboxList extends React.Component {
         {checkboxList && Array.isArray(checkboxList) && (
           <div className="input-checkbox-list-container">
             {checkboxList.map(item => {
-              return <InputCheckbox label={item} key={item} />;
+              return <InputCheckbox label={item} key={item} idAndName={item} />;
             })}
           </div>
         )}
