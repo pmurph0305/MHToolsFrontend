@@ -1,10 +1,24 @@
 import React from "react";
+import { connect } from "react-redux";
 
 import CBTEventForm from "./CBTEventForm";
 import InputField from "../../Components/InputField/InputField";
 import SectionInfo from "../../Components/SectionInfo/SectionInfo";
 
+import { onSubmitCBTEvent } from "./Redux/cbt_actions";
 import "./CBT.scss";
+
+const mapStateToProps = state => {
+  return {
+    user_id: state.appReducer.user_id
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onSubmitCBTEvent: (id, data) => dispatch(onSubmitCBTEvent(id, data))
+  };
+};
 
 class CBT extends React.Component {
   constructor(props) {
@@ -22,6 +36,7 @@ class CBT extends React.Component {
 
   onSubmitCBTForm = data => {
     console.log("cbt data", data);
+    this.props.onSubmitCBTEvent(this.props.user_id, data);
   };
 
   render() {
@@ -53,4 +68,7 @@ class CBT extends React.Component {
   }
 }
 
-export default CBT;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CBT);

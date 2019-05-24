@@ -36,14 +36,16 @@ class CBTEventForm extends React.Component {
     let ratingAfter = event.target.elements.namedItem("cbtAfterRange").value;
 
     this.props.onSubmit({
-      date: new Date().toISOString().slice(0, 10),
-      situation,
-      automaticThoughts,
-      ratingBefore,
-      thinkingStyles,
-      alternativeThoughts,
-      evidenceConclusions,
-      ratingAfter
+      data: {
+        date: new Date().toISOString().slice(0, 10),
+        situation,
+        automaticThoughts,
+        ratingBefore,
+        thinkingStyles,
+        alternativeThoughts,
+        evidenceConclusions,
+        ratingAfter
+      }
     });
   };
 
