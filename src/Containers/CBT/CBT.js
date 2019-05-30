@@ -5,18 +5,20 @@ import CBTEventForm from "./CBTEventForm";
 import InputField from "../../Components/InputField/InputField";
 import SectionInfo from "../../Components/SectionInfo/SectionInfo";
 
-import { onSubmitCBTEvent } from "./Redux/cbt_actions";
+import { onGetCBTEvents, onSubmitCBTEvent } from "./Redux/cbt_actions";
 import "./CBT.scss";
 
 const mapStateToProps = state => {
   return {
-    user_id: state.appReducer.user_id
+    user_id: state.appReducer.user_id,
+    cbt_events: state.CBTReducer.cbt_events
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onSubmitCBTEvent: (id, data) => dispatch(onSubmitCBTEvent(id, data))
+    onSubmitCBTEvent: (id, data) => dispatch(onSubmitCBTEvent(id, data)),
+    onGetCBTEvents: id => dispatch(onGetCBTEvents(id))
   };
 };
 

@@ -1,7 +1,10 @@
 import {
   SUBMIT_CBT_EVENT_PENDING,
   SUBMIT_CBT_EVENT_SUCCESS,
-  SUBMIT_CBT_EVENT_FAILED
+  SUBMIT_CBT_EVENT_FAILED,
+  GET_CBT_EVENTS_PENDING,
+  GET_CBT_EVENTS_FAILED,
+  GET_CBT_EVENTS_SUCCESS
 } from "./cbt_constants";
 
 import { fetchURLWithJsonAuth } from "../../../ReduxHelpers/reduxHelpers";
@@ -17,5 +20,17 @@ export const onSubmitCBTEvent = (id, data) => dispatch => {
     })
     .catch(err => {
       dispatch({ type: SUBMIT_CBT_EVENT_FAILED, payload: err });
+    });
+};
+
+export const onGetCBTEvents = id => dispatch => {
+  dispatch({ type: GET_CBT_EVENTS_PENDING });
+  fetchURLWithJsonAuth(`${CBT_URL}/events/${id}`)
+    .then(response => response.json())
+    .then(data => {
+      dispatch({ type: GET_CBT_EVENTS_SUCCESS, payload: data });
+    })
+    .catch(err => {
+      dispatch({ type: GET_CBT_EVENTS_FAILED, payload: err });
     });
 };
