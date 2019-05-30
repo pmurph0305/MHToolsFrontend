@@ -1,6 +1,7 @@
 import React from "react";
 
 import DisplayListItems from "../../Components/DisplayListItems/DisplayListItems";
+import DisplayMultipleItems from "../../Components/DisplayMultipleItems/DisplayMultipleItems";
 import DisplayTextBox from "../../Components/DisplayTextBox/DisplayTextBox";
 
 const UNHELPFUL_THINKING_STYLES = [
@@ -20,13 +21,23 @@ const CBTEventDisplay = ({ event }) => {
       return UNHELPFUL_THINKING_STYLES[index];
     });
 
+  let multiple_items_displayed = [
+    { label: "Date", value: event.date.slice(0, 10) },
+    { label: "Belief in Automatic Thoughts:", value: event.rating_before },
+    { label: "After:", value: event.rating_after }
+  ];
+
   return (
     <div key={"cbt_event_" + event.cbt_id}>
-      <DisplayTextBox
+      {event.rating_before && event.rating_after && event.date && (
+        <DisplayMultipleItems items={multiple_items_displayed} />
+      )}
+
+      {/* <DisplayTextBox
         text={event.date.slice(0, 10)}
         label={"Date"}
         idAndName={event.cbt_id + "_dat"}
-      />
+      /> */}
 
       <DisplayTextBox
         text={event.situation}
@@ -64,9 +75,13 @@ const CBTEventDisplay = ({ event }) => {
           key_id={event.cbt_id}
         />
       )}
-      {event.thinking_styles}
-      {event.rating_before}
-      {event.rating_after}
+      {/* {event.rating_before && event.rating_after && (
+        <DisplayTextBox
+          text={"Before: "+event.rating_before + " After: " + event.rating_after}
+          label={"Belief Rating"}
+          idAndName={event.cbt_id + "_rat"}
+        />
+      )} */}
     </div>
   );
 };
