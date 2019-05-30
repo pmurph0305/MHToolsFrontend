@@ -14,4 +14,8 @@ describe("TextBox Tests", () => {
     wrapper.setProps({ text: "testing" });
     expect(wrapper.text()).toEqual("testing");
   });
+
+  it("Should match snapshot", () => {
+    expect(wrapper).toMatchSnapshot();
+  });
 });
