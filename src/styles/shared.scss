@@ -44,3 +44,35 @@ $font-weight-base: 600;
   padding: 0.5rem 1rem;
   text-align: left;
 }
+
+%DisplayContainer {
+  display: flex;
+  text-align: left;
+  background-color: $primary-background;
+  margin: 1rem;
+  line-height: 1.4rem;
+}
+
+%DisplayText {
+  background-color: $primary-background;
+  color: $primary-text-color;
+
+  display: block;
+  white-space: pre-line;
+  padding: 0.5rem;
+}
+
+%DisplayLabel {
+  background-color: $primary-background;
+  color: $primary-text-color;
+
+  display: block;
+  padding: 0.5rem;
+
+  font-size: 1.25rem;
+}
+
+%DisplayContainer-Bordered {
+  @extend %DisplayContainer;
+  border: 1px solid black;
+}

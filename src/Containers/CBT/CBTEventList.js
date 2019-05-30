@@ -5,13 +5,8 @@ const CBTEventList = ({ cbtEvents }) => {
   return (
     <>
       {cbtEvents && cbtEvents.length > 0
-        ? cbtEvents.map(event => {
-            return (
-              <CBTEVentDisplay
-                key={"cbt_event_" + event.cbt_id}
-                event={event}
-              />
-            );
+        ? cbtEvents.map((event, index) => {
+            return <CBTEVentDisplay key={"cbt_event_" + index} event={event} />;
           })
         : null}
     </>

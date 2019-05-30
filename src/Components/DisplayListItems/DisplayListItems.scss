@@ -1,0 +1,13 @@
+@import "../../styles/shared.scss";
+
+.listitems-container {
+  @extend %DisplayContainer-Bordered;
+
+  .listitems-item {
+    @extend %DisplayText;
+  }
+
+  .listitems-label {
+    @extend %DisplayLabel;
+  }
+}
