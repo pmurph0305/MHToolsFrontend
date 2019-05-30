@@ -4,7 +4,7 @@ import DisplayTextBox from "./DisplayTextBox";
 
 describe("TextBox Tests", () => {
   let wrapper;
-  beforeEach(() => (wrapper = shallow(<TextBox />)));
+  beforeEach(() => (wrapper = shallow(<DisplayTextBox />)));
 
   it("Renders a div", () => {
     expect(wrapper.find("div").length).toEqual(1);
