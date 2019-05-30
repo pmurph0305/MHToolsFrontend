@@ -43,18 +43,23 @@ function setIsPending(state, action) {
 }
 
 function addCBTEvents(state, action) {
-  if (action.payload.data) {
+  if (action.type === SUBMIT_CBT_EVENT_SUCCESS && action.payload.data) {
     let events =
       state.cbt_events.length <= 0 ? [] : state.cbt_events.map(event => event);
-    if (action.type === GET_CBT_EVENTS_SUCCESS) {
-      // it's an array returned from getting all the previous events
-      action.payload.data.forEach(item => {
-        events.push(item);
-      });
-    } else {
-      // user added a new event
-      events.push(action.payload.data);
-    }
+    // user added a new event
+    events.push(action.payload.data);
+    return updateObject(state, { cbt_events: events, cbt_isPending: false });
+  } else if (
+    action.type === GET_CBT_EVENTS_SUCCESS &&
+    action.payload.length > 0
+  ) {
+    let events =
+      state.cbt_events.length <= 0 ? [] : state.cbt_events.map(event => event);
+
+    // it's an array returned from getting all the previous events
+    action.payload.forEach(item => {
+      events.push(item);
+    });
     return updateObject(state, { cbt_events: events, cbt_isPending: false });
   } else {
     return setCBTError(state, action);
