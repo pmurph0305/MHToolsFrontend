@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 
 import CBTEventForm from "./CBTEventForm";
+import CBTEventList from "./CBTEventList";
 import InputField from "../../Components/InputField/InputField";
 import SectionInfo from "../../Components/SectionInfo/SectionInfo";
 
@@ -76,6 +77,7 @@ class CBT extends React.Component {
           placeholder="Enter a new situation"
           buttonTitle="Create new CBT record"
         />
+        <CBTEventList cbtEvents={this.props.cbt_events} />
       </section>
     );
   }
