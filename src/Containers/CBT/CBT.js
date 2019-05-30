@@ -75,7 +75,9 @@ class CBT extends React.Component {
           placeholder="Enter a new situation"
           buttonTitle="Create new CBT record"
         />
-        <CBTEventList cbtEvents={this.props.cbt_events} />
+        {this.props.cbt_events.length > 0 && (
+          <CBTEventList cbtEvents={this.props.cbt_events} />
+        )}
       </section>
     );
   }

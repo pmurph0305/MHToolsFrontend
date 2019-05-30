@@ -2,16 +2,25 @@ import React from "react";
 
 import "./DisplayListItems.scss";
 
-const DisplayListItems = ({ items, label, idAndName }) => {
+const DisplayListItems = ({ items, label, idAndName, key_id }) => {
   return (
     <div className="listitems-container">
       <label className="listitems-label" htmlFor={idAndName}>
         {label}
       </label>
-      <div className="listitems-items" id={idAndName} name={idAndName}>
+      <div
+        className="listitems-items-container"
+        id={idAndName}
+        name={idAndName}
+      >
         {items &&
-          items.map(item => {
-            return <div key={item}>{item}</div>;
+          items.length &&
+          items.map((item, index) => {
+            return (
+              <p className="listitems-item" key={"uts_" + key_id + index}>
+                {item}
+              </p>
+            );
           })}
       </div>
     </div>

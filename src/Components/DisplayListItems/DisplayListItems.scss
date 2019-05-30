@@ -7,6 +7,12 @@
     @extend %DisplayText;
   }
 
+  .listitems-items-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
   .listitems-label {
     @extend %DisplayLabel;
   }

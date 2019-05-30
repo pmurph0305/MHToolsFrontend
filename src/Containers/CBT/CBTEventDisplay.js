@@ -3,7 +3,23 @@ import React from "react";
 import DisplayListItems from "../../Components/DisplayListItems/DisplayListItems";
 import DisplayTextBox from "../../Components/DisplayTextBox/DisplayTextBox";
 
+const UNHELPFUL_THINKING_STYLES = [
+  "Probability Overestimation",
+  "Mind Reading",
+  "Personalization",
+  '"Should" Statements',
+  "Catastrophic Thinking",
+  "All-or-Nothing Thinking",
+  "Selective Attention and Memory"
+];
+
 const CBTEventDisplay = ({ event }) => {
+  let thinking_styles = event.thinking_styles
+    .filter(item => item)
+    .map((item, index) => {
+      return UNHELPFUL_THINKING_STYLES[index];
+    });
+
   return (
     <div key={"cbt_event_" + event.cbt_id}>
       <DisplayTextBox
@@ -40,11 +56,12 @@ const CBTEventDisplay = ({ event }) => {
           idAndName={event.cbt_id + "_evi"}
         />
       )}
-      {event.thinking_styles && (
+      {thinking_styles.length > 0 && (
         <DisplayListItems
-          items={event.thinking_styles}
+          items={thinking_styles}
           label="Unhelpful Thinking Styles"
           idAndName={event.cbt_id + "_uts"}
+          key_id={event.cbt_id}
         />
       )}
       {event.thinking_styles}
