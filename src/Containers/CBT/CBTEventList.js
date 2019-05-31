@@ -1,12 +1,18 @@
 import React from "react";
-import CBTEVentDisplay from "./CBTEventDisplay";
+import CBTEventDisplay from "./CBTEventDisplay";
 
 const CBTEventList = ({ cbtEvents }) => {
   return (
     <>
       {cbtEvents && cbtEvents.length > 0
         ? cbtEvents.map((event, index) => {
-            return <CBTEVentDisplay key={"cbt_event_" + index} event={event} />;
+            return (
+              <CBTEventDisplay
+                key={"cbt_event_" + index}
+                cbt_event={event}
+                id={"cbt_event_" + index}
+              />
+            );
           })
         : null}
     </>

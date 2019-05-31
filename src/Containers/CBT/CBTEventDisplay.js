@@ -1,8 +1,10 @@
 import React from "react";
 
 import DisplayListItems from "../../Components/DisplayListItems/DisplayListItems";
-import DisplayMultipleItems from "../../Components/DisplayMultipleItems/DisplayMultipleItems";
 import DisplayTextBox from "../../Components/DisplayTextBox/DisplayTextBox";
+import ClickableIcon from "../../Components/ClickableIcon/ClickableIcon";
+
+import "./CBTEventDisplay.scss";
 
 const UNHELPFUL_THINKING_STYLES = [
   "Probability Overestimation",
@@ -14,76 +16,149 @@ const UNHELPFUL_THINKING_STYLES = [
   "Selective Attention and Memory"
 ];
 
-const CBTEventDisplay = ({ event }) => {
-  let thinking_styles = event.thinking_styles
-    .filter(item => item)
-    .map((item, index) => {
-      return UNHELPFUL_THINKING_STYLES[index];
-    });
+class CBTEventDisplay extends React.Component {
+  constructor(props) {
+    super(props);
 
-  let multiple_items_displayed = [
-    { label: "Date", value: event.date.slice(0, 10) },
-    { label: "Belief in Automatic Thoughts:", value: event.rating_before },
-    { label: "After:", value: event.rating_after }
-  ];
+    this.state = {
+      expanded: false
+    };
+  }
 
-  return (
-    <div key={"cbt_event_" + event.cbt_id}>
-      {event.rating_before && event.rating_after && event.date && (
-        <DisplayMultipleItems items={multiple_items_displayed} />
-      )}
+  onGetThinkingStyles = () => {
+    return this.props.cbt_event.thinking_styles
+      .filter(item => item)
+      .map((item, index) => {
+        return UNHELPFUL_THINKING_STYLES[index];
+      });
+  };
 
-      {/* <DisplayTextBox
-        text={event.date.slice(0, 10)}
-        label={"Date"}
-        idAndName={event.cbt_id + "_dat"}
-      /> */}
+  onGetBelifeRatings = () => {
+    return [
+      {
+        label: "Belief in Automatic Thoughts Before:",
+        value: this.props.cbt_event.rating_before
+      },
+      { label: "After:", value: this.props.cbt_event.rating_after }
+    ];
+  };
 
-      <DisplayTextBox
-        text={event.situation}
-        label={"Situation"}
-        idAndName={event.cbt_id + "_sit"}
-      />
+  onCollapsibleClick(cbt_id) {
+    console.log("click");
+    let container = document.getElementById("cbt-event-display_" + cbt_id);
+    console.log(container.style.maxHeight);
+    if (container.style.maxHeight !== "0px" && container.style.maxHeight) {
+      console.log("collapse");
+      // hide container div border & display.
+      container.style.borderBottom = "0px";
+      container.style.display = "none";
+      container.style.maxHeight = "0px";
+    } else {
+      console.log("expanding");
+      // collapsible is expanding, so add a border to the container div
+      container.style.borderBottom = "1px solid black";
+      container.style.display = "block";
+      // Set max height to add transition to expanding card.
+      container.style.maxHeight = container.scrollHeight + "px";
+    }
+  }
 
-      {event.automatic_thoughts && (
-        <DisplayTextBox
-          text={event.automatic_thoughts}
-          label={"Automatic Thoughts"}
-          idAndName={event.cbt_id + "_aut"}
-        />
-      )}
+  onExpand = () => {
+    console.log("expand");
+    this.setState({ expanded: !this.state.expanded });
+  };
 
-      {event.alternative_thoughts && (
-        <DisplayTextBox
-          text={event.alternative_thoughts}
-          label={"Alternative Thoughts"}
-          idAndName={event.cbt_id + "_alt"}
-        />
-      )}
-      {event.evidence_conclusions && (
-        <DisplayTextBox
-          text={event.evidence_conclusions}
-          label={"Evidence and Realistic Conclusions"}
-          idAndName={event.cbt_id + "_evi"}
-        />
-      )}
-      {thinking_styles.length > 0 && (
-        <DisplayListItems
-          items={thinking_styles}
-          label="Unhelpful Thinking Styles"
-          idAndName={event.cbt_id + "_uts"}
-          key_id={event.cbt_id}
-        />
-      )}
-      {/* {event.rating_before && event.rating_after && (
-        <DisplayTextBox
-          text={"Before: "+event.rating_before + " After: " + event.rating_after}
-          label={"Belief Rating"}
-          idAndName={event.cbt_id + "_rat"}
-        />
-      )} */}
-    </div>
-  );
-};
+  render() {
+    const { cbt_event } = this.props;
+    return (
+      <div
+        className="cbt-event-display"
+        id={"cbt-event-display_" + cbt_event.cbt_id}
+      >
+        {!this.state.expanded ? (
+          <>
+            <div style={{ float: "left" }}>
+              <ClickableIcon
+                iconName={"arrow-dropright"}
+                onClick={() => this.onExpand()}
+              />
+            </div>
+
+            <DisplayTextBox
+              text={cbt_event.situation}
+              label={"Situation"}
+              idAndName={cbt_event.cbt_id + "_sit"}
+            />
+          </>
+        ) : (
+          <div className="cbt-event-display-situation">
+            <div style={{ float: "left" }}>
+              <ClickableIcon
+                iconName={"arrow-dropleft"}
+                onClick={() => this.onExpand()}
+              />
+            </div>
+            <DisplayTextBox
+              text={cbt_event.situation}
+              label={"Situation"}
+              idAndName={cbt_event.cbt_id + "_sit"}
+            />
+
+            <DisplayTextBox
+              text={cbt_event.date.slice(0, 10)}
+              label={"Date"}
+              idAndName={cbt_event.cbt_id + "_dat"}
+            />
+            <DisplayTextBox
+              text={`Before: ${cbt_event.rating_before} After: ${
+                cbt_event.rating_after
+              }`}
+              label="Anxiety/Belief Ratings"
+              idAndName={cbt_event.cbt_id + "_bel"}
+            />
+            {cbt_event.automatic_thoughts && (
+              <DisplayTextBox
+                text={cbt_event.automatic_thoughts}
+                label={"Automatic Thoughts"}
+                idAndName={cbt_event.cbt_id + "_aut"}
+              />
+            )}
+
+            {cbt_event.alternative_thoughts && (
+              <DisplayTextBox
+                text={cbt_event.alternative_thoughts}
+                label={"Alternative Thoughts"}
+                idAndName={cbt_event.cbt_id + "_alt"}
+              />
+            )}
+            {cbt_event.evidence_conclusions && (
+              <DisplayTextBox
+                text={cbt_event.evidence_conclusions}
+                label={"Evidence and Realistic Conclusions"}
+                idAndName={cbt_event.cbt_id + "_evi"}
+              />
+            )}
+            {this.onGetThinkingStyles().length > 0 && (
+              <DisplayListItems
+                items={this.onGetThinkingStyles()}
+                label="Unhelpful Thinking Styles"
+                idAndName={cbt_event.cbt_id + "_uts"}
+                key_id={cbt_event.cbt_id}
+              />
+            )}
+          </div>
+        )}
+
+        {/* {cbt_event.rating_before && cbt_event.rating_after && (
+          <DisplayTextBox
+            text={"Before: "+cbt_event.rating_before + " After: " + cbt_event.rating_after}
+            label={"Belief Rating"}
+            idAndName={cbt_event.cbt_id + "_rat"}
+          />
+        )} */}
+      </div>
+    );
+  }
+}
 
 export default CBTEventDisplay;

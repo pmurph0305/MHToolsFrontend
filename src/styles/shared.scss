@@ -53,6 +53,11 @@ $font-weight-base: 600;
   align-items: baseline;
 }
 
+%DisplayContainer-Bordered {
+  @extend %DisplayContainer;
+  border: 1px solid black;
+}
+
 %DisplayText {
   background-color: $primary-background;
   color: $primary-text-color;
@@ -70,9 +75,4 @@ $font-weight-base: 600;
   padding: 0.5rem;
 
   font-size: 1.25rem;
-}
-
-%DisplayContainer-Bordered {
-  @extend %DisplayContainer;
-  border: 1px solid black;
 }
