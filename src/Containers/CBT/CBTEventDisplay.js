@@ -2,7 +2,6 @@ import React from "react";
 
 import DisplayListItems from "../../Components/DisplayListItems/DisplayListItems";
 import DisplayTextBox from "../../Components/DisplayTextBox/DisplayTextBox";
-import ClickableIcon from "../../Components/ClickableIcon/ClickableIcon";
 
 import "./CBTEventDisplay.scss";
 
