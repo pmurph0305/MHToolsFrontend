@@ -21,8 +21,11 @@ class CBTEventDisplay extends React.Component {
     super(props);
 
     this.state = {
-      expanded: false
+      expanded: false,
+      justExpanded: false
     };
+
+    this.expandRef = React.createRef();
   }
 
   onGetThinkingStyles = () => {
@@ -63,9 +66,16 @@ class CBTEventDisplay extends React.Component {
     }
   }
 
+  componentDidUpdate() {
+    if (this.state.justExpanded) {
+      console.log(this.expandRef.current);
+      this.setState({ justExpanded: false });
+      this.expandRef.current.focus();
+    }
+  }
+
   onExpand = () => {
-    console.log("expand");
-    this.setState({ expanded: !this.state.expanded });
+    this.setState({ expanded: !this.state.expanded, justExpanded: true });
   };
 
   render() {
@@ -77,13 +87,13 @@ class CBTEventDisplay extends React.Component {
       >
         {!this.state.expanded ? (
           <>
-            <div style={{ float: "left" }}>
-              <ClickableIcon
-                iconName={"arrow-dropright"}
-                onClick={() => this.onExpand()}
-              />
-            </div>
-
+            <button
+              style={{ float: "left" }}
+              onClick={() => this.onExpand()}
+              ref={this.expandRef}
+            >
+              <ion-icon name={"arrow-dropright"} />
+            </button>
             <DisplayTextBox
               text={cbt_event.situation}
               label={"Situation"}
@@ -92,12 +102,13 @@ class CBTEventDisplay extends React.Component {
           </>
         ) : (
           <div className="cbt-event-display-situation">
-            <div style={{ float: "left" }}>
-              <ClickableIcon
-                iconName={"arrow-dropleft"}
-                onClick={() => this.onExpand()}
-              />
-            </div>
+            <button
+              style={{ float: "left" }}
+              onClick={() => this.onExpand()}
+              ref={this.expandRef}
+            >
+              <ion-icon name={"arrow-dropleft"} />
+            </button>
             <DisplayTextBox
               text={cbt_event.situation}
               label={"Situation"}
