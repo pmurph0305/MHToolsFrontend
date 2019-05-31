@@ -51,12 +51,18 @@ class CBT extends React.Component {
 
   onCreateNewEvent = textInput => {
     console.log(textInput.value);
-    this.setState({ creatingEvent: true, cbtSituation: textInput.value });
+    this.setState(
+      { creatingEvent: true, cbtSituation: textInput.value },
+      () => {
+        textInput.value = "";
+      }
+    );
   };
 
   onSubmitCBTForm = data => {
     console.log("cbt data", data);
     this.props.onSubmitCBTEvent(this.props.user_id, data);
+    this.setState({ creatingEvent: false, cbtSituation: "" });
   };
 
   render() {

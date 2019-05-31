@@ -47,7 +47,7 @@ function addCBTEvents(state, action) {
     let events =
       state.cbt_events.length <= 0 ? [] : state.cbt_events.map(event => event);
     // user added a new event
-    events.push(action.payload.data);
+    events.unshift(action.payload.data);
     return updateObject(state, { cbt_events: events, cbt_isPending: false });
   } else if (
     action.type === GET_CBT_EVENTS_SUCCESS &&
