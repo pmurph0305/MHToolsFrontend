@@ -7,10 +7,11 @@
   display: flex;
   justify-content: space-between;
   flex-wrap: nowrap;
+
   .cbt-event-display-date {
     flex-shrink: 0;
     font-size: 1.25rem;
-    padding: 1rem;
+    padding: 0.5rem;
     text-align: right;
   }
 }
@@ -33,13 +34,13 @@
 
 .cbt-event-display-label {
   font-size: 1.25rem;
-  padding: 1rem;
+  padding: 0.5rem;
   text-align: left;
 }
 
 .cbt-event-display-text {
   font-size: 1rem;
   text-align: left;
-  padding: 1rem;
+  padding: 0.5rem;
   line-height: 1.4rem;
 }
