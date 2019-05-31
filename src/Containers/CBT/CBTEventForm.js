@@ -20,31 +20,31 @@ class CBTEventForm extends React.Component {
     console.log("submit!");
     event.preventDefault();
     let situation = event.target.elements.namedItem("cbtSituation").value;
-    let automaticThoughts = event.target.elements.namedItem(
+    let automatic_thoughts = event.target.elements.namedItem(
       "cbtAutomaticThoughts"
     ).value;
-    let ratingBefore = event.target.elements.namedItem("cbtBeforeRange").value;
-    let thinkingStyles = checkboxList.map(item => {
+    let rating_before = event.target.elements.namedItem("cbtBeforeRange").value;
+    let thinking_styles = checkboxList.map(item => {
       return event.target.elements.namedItem(item).checked;
     });
-    let alternativeThoughts = event.target.elements.namedItem(
+    let alternative_thoughts = event.target.elements.namedItem(
       "cbtAlternativeThoughts"
     ).value;
-    let evidenceConclusions = event.target.elements.namedItem(
+    let evidence_conclusions = event.target.elements.namedItem(
       "cbtEvidenceConclusions"
     ).value;
-    let ratingAfter = event.target.elements.namedItem("cbtAfterRange").value;
+    let rating_after = event.target.elements.namedItem("cbtAfterRange").value;
 
     this.props.onSubmit({
       data: {
-        date: new Date().toISOString().slice(0, 10),
+        date: new Date().toISOString(),
         situation,
-        automaticThoughts,
-        ratingBefore,
-        thinkingStyles,
-        alternativeThoughts,
-        evidenceConclusions,
-        ratingAfter
+        automatic_thoughts,
+        rating_before,
+        thinking_styles,
+        alternative_thoughts,
+        evidence_conclusions,
+        rating_after
       }
     });
   };
