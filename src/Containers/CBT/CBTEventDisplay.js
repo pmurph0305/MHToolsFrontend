@@ -64,7 +64,7 @@ class CBTEventDisplay extends React.Component {
         >
           <p className="cbt-event-display-label">
             {cbt_event.situation.length > 40
-              ? cbt_event.situation.slice(0, 40)
+              ? cbt_event.situation.slice(0, 40) + "..."
               : cbt_event.situation}
           </p>
           <p className="cbt-event-display-date">
