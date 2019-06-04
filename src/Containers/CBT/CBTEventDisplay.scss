@@ -1,1 +1,35 @@
-@import "../../styles/shared.scss";
+.cbt-event-collapse-container {
+  cursor: pointer;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  background-color: lightgray;
+  border-bottom: 1px solid black;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+
+  .cbt-event-display-date {
+    flex-shrink: 0;
+    font-size: 1.25rem;
+    padding: 0.5rem;
+    text-align: right;
+  }
+}
+
+.cbt-event-display-container {
+  background-color: #f1f1f1;
+  text-align: left;
+  margin-left: 1rem;
+  margin-right: 1rem;
+
+  /* Animated collapsible stuff */
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.3s ease;
+}
+
+.cbt-event-display-label {
+  font-size: 1.25rem;
+  padding: 0.5rem;
+  text-align: left;
+}
