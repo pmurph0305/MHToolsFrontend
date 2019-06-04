@@ -1,5 +1,6 @@
 import React from "react";
 
+import DisplayLabeledText from "../../Components/DisplayLabeledText/DisplayLabeledText";
 import "./CBTEventDisplay.scss";
 
 class CBTEventDisplay extends React.Component {
@@ -9,10 +10,6 @@ class CBTEventDisplay extends React.Component {
   }
 
   onClickSituation = event => {
-    console.log(event.target);
-    console.log("click", this.props.cbt_event.situation);
-    console.log(this.divRef.current);
-    console.log("collapsibleClick");
     // Collapsible is closing.
     if (
       this.divRef.current.style.maxHeight !== "0px" &&
@@ -27,7 +24,8 @@ class CBTEventDisplay extends React.Component {
       this.divRef.current.style.display = "block";
       // Set max height to add transition to expanding card.
       this.divRef.current.style.maxHeight =
-        parseInt(this.divRef.current.scrollHeight) + 8 + "px";
+        this.divRef.current.scrollHeight + "px";
+      // (parseInt(this.divRef.current.scrollHeight) + 8) + "px";
     }
   };
 
@@ -47,18 +45,20 @@ class CBTEventDisplay extends React.Component {
           </p>
         </div>
         <div className="cbt-event-display-container" ref={this.divRef}>
-          <div className="cbt-event-item-container">
-            <label className="cbt-event-display-label">
-              Alternative Thoughts
-            </label>
-            <p className="cbt-event-display-text">
-              {cbt_event.alternative_thoughts}
-            </p>
-          </div>
-
+          <DisplayLabeledText label="Situation" text={cbt_event.situation} />
+          <DisplayLabeledText
+            label="Automatic Thoughts"
+            text={cbt_event.automatic_thoughts}
+          />
+          <DisplayLabeledText
+            label="Alternative Thoughts"
+            text={cbt_event.alternative_thoughts}
+          />
+          <DisplayLabeledText
+            label="Evidence and Realistic Conclusions"
+            text={cbt_event.evidence_conclusions}
+          />
           {cbt_event.thinking_styles}
-          {cbt_event.date}
-          {cbt_event.automatic_thoughts}
         </div>
       </>
     );
