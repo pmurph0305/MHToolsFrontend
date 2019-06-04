@@ -4,6 +4,11 @@ import {
   Legend,
   LineChart,
   Line,
+  PolarGrid,
+  PolarAngleAxis,
+  PolarRadiusAxis,
+  Radar,
+  RadarChart,
   ResponsiveContainer,
   Tooltip,
   XAxis,
@@ -26,6 +31,8 @@ const mapStateToProps = state => {
     user_id: state.appReducer.user_id,
     phq9: state.historyReducer.phq9,
     dm: state.historyReducer.dm,
+    cbtts: state.historyReducer.cbtts,
+    cbtbr: state.historyReducer.cbtbr,
     isPending: state.historyReducer.isPending,
     error: state.historyReducer.error
   };
@@ -41,6 +48,16 @@ const mapDispatchToProps = dispatch => {
       dispatch(requestCBTThoughtHistory(user_id))
   };
 };
+
+const thinkingStyles = [
+  "Probability Overestimation",
+  "Mind Reading",
+  "Personalization",
+  '"Should" Statements',
+  "Catastrophic Thinking",
+  "All-or-Nothing Thinking",
+  "Selective Attention and Memory"
+];
 
 class History extends React.Component {
   constructor(props) {
@@ -93,6 +110,24 @@ class History extends React.Component {
         };
       });
       return data;
+    }
+  }
+
+  cbttsDataProcess() {
+    if (this.props.cbtts.length) {
+      return this.props.cbtts.map((item, index) => {
+        return {
+          "Thinking Style": thinkingStyles[index],
+          total: item
+        };
+      });
+    } else {
+      return thinkingStyles.map(item => {
+        return {
+          "Thinking Style": item,
+          total: 0
+        };
+      });
     }
   }
 
@@ -212,6 +247,22 @@ class History extends React.Component {
                 <Tooltip />
                 <Legend />
               </LineChart>
+            </ResponsiveContainer>
+          ) : this.state.displayedHistory === "cbtts" ? (
+            <ResponsiveContainer width="100%" height="100%">
+              <RadarChart data={this.cbttsDataProcess()}>
+                <PolarGrid />
+                <PolarAngleAxis dataKey="Thinking Style" />
+                <PolarRadiusAxis angle={12.857} />
+                <Radar
+                  name="Total Unhelpful Thinking Styles"
+                  dataKey="total"
+                  stroke="#8884d8"
+                  fill="#8884d8"
+                  fillOpacity={0.3}
+                />
+                <Legend />
+              </RadarChart>
             </ResponsiveContainer>
           ) : null}
         </div>
