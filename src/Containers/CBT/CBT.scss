@@ -8,3 +8,10 @@
   margin: 1rem;
   display: block;
 }
+
+.cbt-event-list-container {
+  // Small
+  @media screen and (max-width: 30em) {
+    margin-top: 2.5em;
+  }
+}

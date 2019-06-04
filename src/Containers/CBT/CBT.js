@@ -88,7 +88,9 @@ class CBT extends React.Component {
           />
         </div>
         {this.props.cbt_events.length > 0 && (
-          <CBTEventList cbtEvents={this.props.cbt_events} />
+          <div class="cbt-event-list-container">
+            <CBTEventList cbtEvents={this.props.cbt_events} />
+          </div>
         )}
       </section>
     );
