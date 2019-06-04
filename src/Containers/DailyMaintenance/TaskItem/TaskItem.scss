@@ -1,120 +1,134 @@
 // Holds rank arrows, task input field, delete button when editing.
 .orderContainer {
-	display: flex;
-	flex-direction: column;
-	float: left;
-	justify-content: center;
-	margin: 0.33rem 0rem;
-	border: 1px solid;
+  display: flex;
+  flex-direction: row;
+  float: left;
+  justify-content: center;
+  margin: 0.33rem 0rem;
+  border: 1px solid;
 }
 
 .rankButton {
-	border-width: 1px 1px 1px 1px;
-	padding: .125rem;
-	font-size: 1rem;
-	cursor: pointer;
+  border-width: 1px 1px 1px 1px;
+  padding: 0.125rem;
+  font-size: 1rem;
+  cursor: pointer;
 }
 
 .rankButton:hover {
-	background-color: lightgray;
+  background-color: lightgray;
 }
 
 .rankButton:focus {
-  	background-color:lightgray;
+  background-color: lightgray;
 }
 
-// Padding so the custom checkbox isn't covering text.
-
-
-
-	.taskText {
-		display: inline-block;
-		padding: 0.5rem 0 0 2rem;
-		vertical-align: super;
-		width: 80%;
-	}
-
-	.taskInput {
-		background-color: white;
-		width: 80%;
-		margin-left: 2rem;
-		margin-top: 0.25rem;
-		padding: 0.25rem 0rem;
-		vertical-align: super;
-	}
-
-
-
-
-/* Hide default checkbox */
-.hiddenCheckbox {
-	position: absolute;
-	opacity: 0;
-	height: 0;
-	width: 0;
-	// Focus for background-color of following checkmark when it has focus
-//   &:focus +.checkmark {
-// 	background-color:rgb(225, 225, 225)
-//   }
+// Task text not editing
+.taskText {
+  display: inline-block;
+  padding: 0.5rem 0 0.5rem 0.5rem;
+  width: auto;
+  vertical-align: text-bottom;
+  line-height: 120%;
 }
-
-/* Custom checkmark box beside each task. 
-Background color changes depend if checked and if hovered. */
-.checkmark {
-	position: absolute;
-	left: 1.5rem;
-	top: 0.85rem;
-	height: 1.5rem;
-	width: 1.5rem;
-	background-color: rgb(200, 200, 200);
-	cursor: pointer;
-
-	&:hover{
-		background-color: rgb(225, 225, 225)
-	}
-
-	&:after{
-		/* Create the checkmark/indicator (hidden when not checked) */
-		content: "";
-		position: absolute;
-		display: none;
-		/* Checkmark is a rotated no content span */
-		left: 0.5rem;
-		top: 0.2rem;
-		width: 0.33rem;
-		height: 0.75rem;
-		border: solid rgb(0, 41, 0);
-		border-width: 0 0.2rem 0.2rem 0;
-		-webkit-transform: rotate(45deg);
-		-ms-transform: rotate(45deg);
-		transform: rotate(45deg);
-	}
+// Task text when editing
+.taskInput {
+  background-color: white;
+  width: auto;
+  margin-left: 0.5rem;
+  margin-top: 0.25rem;
+  padding: 0.25rem 0.5rem;
 }
 
 // Holds task and checkbox when not editing.
 .taskContainer {
-	display: block;
-	position: relative;
-	border-bottom: 0.1rem solid grey;
-	text-align: left;
-	font-size: 1.5rem;
-	padding: 0.2rem;
-	
-	input:checked ~.checkmark:hover{
-		background-color: rgb(225, 225, 225)
-	}
-	/* Show the checkmark when checked */
-	input:checked ~ .checkmark:after {
-		display: block;
-	}
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  overflow: hidden;
+  position: relative;
+  border-bottom: 0.1rem solid grey;
+  text-align: left;
+  font-size: 1.5rem;
+  padding: 0.2rem;
+
+  input:checked ~ .checkmark:hover {
+    background-color: rgb(225, 225, 225);
+  }
+  /* Show the checkmark when checked */
+  input:checked ~ .checkmark:after {
+    display: block;
+  }
 }
 
 .iconContainer {
-	float:right;
-	padding: 0.6rem 0rem;
+  margin-left: auto;
+  padding: 0.6rem 0rem;
 }
 
 .arrowContainer {
-	display: inline-block;
-	line-height: 0;
+  margin: auto 0;
+  display: inline-block;
+  list-style-type: none;
+  line-height: 0;
+}
+
+// https://codepen.io/Vestride/pen/dABHx?editors=1100
+.styled-checkbox {
+  position: absolute; // take it out of document flow
+  opacity: 0; // hide it
+  & + label {
+    position: relative;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  // Box.
+  & + label:before {
+    content: "";
+    display: inline-block;
+    vertical-align: baseline;
+    width: 20px;
+    height: 20px;
+    background: #b8b8b8;
+  }
+
+  // Box hover
+  &:hover + label:before {
+    background: #7a7a7a;
+  }
+
+  // Box focus
+  &:focus + label:before {
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.12);
+  }
+
+  // Box checked
+  &:checked + label:before {
+    background: #b8b8b8;
+  }
+
+  // Checkmark. Could be replaced with an image
+  &:checked + label:after {
+    content: "";
+    position: absolute;
+    left: 4px;
+    top: 12px;
+    background: rgb(33, 71, 45);
+    width: 3px;
+    height: 3px;
+    box-shadow: 2px 0 0 rgb(33, 71, 45), 4px 0 0 rgb(33, 71, 45),
+      4px -2px 0 rgb(33, 71, 45), 4px -4px 0 rgb(33, 71, 45),
+      4px -6px 0 rgb(33, 71, 45), 4px -8px 0 rgb(33, 71, 45),
+      4px -10px 0 rgb(33, 71, 45);
+    transform: rotate(45deg);
+  }
+}
+
+.dm-checkbox-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  padding: 0.25em;
 }
