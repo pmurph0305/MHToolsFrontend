@@ -1,10 +1,16 @@
 import {
   REQUEST_DM_HISTORY_SUCCESS,
   REQUEST_PHQ9_HISTORY_SUCCESS,
+  REQUEST_CBT_BELIEF_HISTORY_SUCCESS,
+  REQUEST_CBT_THOUGHT_HISTORY_SUCCESS,
   REQUEST_DM_HISTORY_PENDING,
   REQUEST_PHQ9_HISTORY_PENDING,
+  REQUEST_CBT_BELIEF_HISTORY_PENDING,
+  REQUEST_CBT_THOUGHT_HISTORY_PENDING,
   REQUEST_DM_HISTORY_FAILED,
-  REQUEST_PHQ9_HISTORY_FAILED
+  REQUEST_PHQ9_HISTORY_FAILED,
+  REQUEST_CBT_BELIEF_HISTORY_FAILED,
+  REQUEST_CBT_THOUGHT_HISTORY_FAILED
 } from "./history_constants";
 
 import { LOG_OUT_USER } from "../../App/Redux/app_constants";
@@ -15,7 +21,9 @@ const initialState = {
   isPending: false,
   error: "",
   phq9: [],
-  dm: []
+  dm: [],
+  cbtts: [],
+  cbtbr: []
 };
 
 export function historyReducer(state = initialState, action) {
@@ -23,16 +31,24 @@ export function historyReducer(state = initialState, action) {
     // fall through for all pending requests
     case REQUEST_DM_HISTORY_PENDING:
     case REQUEST_PHQ9_HISTORY_PENDING:
+    case REQUEST_CBT_BELIEF_HISTORY_PENDING:
+    case REQUEST_CBT_THOUGHT_HISTORY_PENDING:
       return setRequestPending(state, action);
     // fall through for all failed requests
     case REQUEST_DM_HISTORY_FAILED:
     case REQUEST_PHQ9_HISTORY_FAILED:
+    case REQUEST_CBT_BELIEF_HISTORY_FAILED:
+    case REQUEST_CBT_THOUGHT_HISTORY_FAILED:
       return setRequestFailedError(state, action);
 
     case REQUEST_DM_HISTORY_SUCCESS:
       return setDailyMaintenanceHistory(state, action);
     case REQUEST_PHQ9_HISTORY_SUCCESS:
       return setPHQ9History(state, action);
+    case REQUEST_CBT_BELIEF_HISTORY_SUCCESS:
+      return setCBTBeliefHistory(state, action);
+    case REQUEST_CBT_THOUGHT_HISTORY_SUCCESS:
+      return setCBTThoughtHistory(state, action);
 
     case LOG_OUT_USER:
       return resetState(state, initialState);
@@ -48,6 +64,30 @@ function setRequestPending(state, action) {
 
 function setRequestFailedError(state, action) {
   return updateObject(state, { isPending: false, error: action.payload });
+}
+
+function setCBTThoughtHistory(state, action) {
+  if (action.payload && action.payload.thinking_styles) {
+    return updateObject(state, {
+      cbtts: action.payload.thinking_styles,
+      isPending: false,
+      error: ""
+    });
+  } else {
+    return handleErrors(state, action);
+  }
+}
+
+function setCBTBeliefHistory(state, action) {
+  if (Array.isArray(action.payload)) {
+    return updateObject(state, {
+      cbtbr: action.payload,
+      isPending: false,
+      error: ""
+    });
+  } else {
+    return handleErrors(state, action);
+  }
 }
 
 function setDailyMaintenanceHistory(state, action) {

@@ -10,11 +10,17 @@ import {
   YAxis
 } from "recharts";
 import { connect } from "react-redux";
-import { requestDMHistory, requestPHQ9History } from "./Redux/history_actions";
+import {
+  requestDMHistory,
+  requestPHQ9History,
+  requestCBTThoughtHistory,
+  requestCBTBeliefHistory
+} from "./Redux/history_actions";
 
 import "./History.scss";
 import SelectionBox from "../../Components/SelectionBox/SelectionBox";
 import ErrorBox from "../../Components/ErrorBox/ErrorBox";
+
 const mapStateToProps = state => {
   return {
     user_id: state.appReducer.user_id,
@@ -28,7 +34,11 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onRequestDMHistory: user_id => dispatch(requestDMHistory(user_id)),
-    onRequestPHQ9History: user_id => dispatch(requestPHQ9History(user_id))
+    onRequestPHQ9History: user_id => dispatch(requestPHQ9History(user_id)),
+    onRequestCBTBeliefHistory: user_id =>
+      dispatch(requestCBTBeliefHistory(user_id)),
+    onRequestCBTThoughtHistory: user_id =>
+      dispatch(requestCBTThoughtHistory(user_id))
   };
 };
 
@@ -94,6 +104,12 @@ class History extends React.Component {
       case "phq9":
         this.props.onRequestPHQ9History(this.props.user_id);
         return this.setState({ displayedHistory: "phq9" });
+      case "cbtbr":
+        this.props.onRequestCBTBeliefHistory(this.props.user_id);
+        return this.setState({ displayedHistory: "cbtbr" });
+      case "cbtts":
+        this.props.onRequestCBTThoughtHistory(this.props.user_id);
+        return this.setState({ displayedHistory: "cbtts" });
       default:
         break;
     }
@@ -105,6 +121,10 @@ class History extends React.Component {
         return this.onRequestHistory("dm");
       case "1":
         return this.onRequestHistory("phq9");
+      case "2":
+        return this.onRequestHistory("cbtts");
+      case "3":
+        return this.onRequestHistory("cbtbr");
       default:
         break;
     }
@@ -117,7 +137,12 @@ class History extends React.Component {
         <div className="historySelectContainer">
           <p className="historySelectContainerText">Display History For:</p>
           <SelectionBox
-            options={["Daily Maintenance", "PHQ9"]}
+            options={[
+              "Daily Maintenance",
+              "PHQ9",
+              "CBT Thinking Styles",
+              "CBT Automatic Thought Belief"
+            ]}
             id={"historySelectionBox"}
             label={"Select history graph to be displayed"}
             onChange={this.onSelectHistoryDisplayed}
