@@ -1,13 +1,34 @@
 import React from "react";
 
 import DisplayLabeledText from "../../Components/DisplayLabeledText/DisplayLabeledText";
+
+import debounce from "../../HelperScripts/debounce";
 import "./CBTEventDisplay.scss";
 
 class CBTEventDisplay extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      expanded: false
+    };
     this.divRef = React.createRef();
+    this.resizeDebounce = debounce(this.onResizeChange, 150);
   }
+
+  componentDidMount() {
+    window.addEventListener("resize", this.resizeDebounce);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.resizeDebounce);
+  }
+
+  onResizeChange = () => {
+    if (this.state.expanded) {
+      this.divRef.current.style.maxHeight =
+        this.divRef.current.scrollHeight + "px";
+    }
+  };
 
   onClickSituation = event => {
     // Collapsible is closing.
@@ -15,10 +36,12 @@ class CBTEventDisplay extends React.Component {
       this.divRef.current.style.maxHeight !== "0px" &&
       this.divRef.current.style.maxHeight
     ) {
+      this.setState({ expanded: false });
       // hide container div border & display.
       this.divRef.current.style.borderBottom = "0px";
       this.divRef.current.style.maxHeight = "0px";
     } else {
+      this.setState({ expanded: true });
       // collapsible is expanding, so add a border to the container div
       this.divRef.current.style.borderBottom = "1px solid black";
       this.divRef.current.style.display = "block";
@@ -58,7 +81,6 @@ class CBTEventDisplay extends React.Component {
             label="Evidence and Realistic Conclusions"
             text={cbt_event.evidence_conclusions}
           />
-          {cbt_event.thinking_styles}
         </div>
       </>
     );
