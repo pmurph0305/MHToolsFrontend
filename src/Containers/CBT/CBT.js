@@ -80,15 +80,13 @@ class CBT extends React.Component {
             cbtSituation={this.state.cbtSituation}
           />
         )}
-        Date & time (not shown) - Situation - describe the situation or trigger
-        for your thoughts - Automatic Negative thougths and predictions - Belief
-        rating - Identify Cognitive Distortions - Alternative thoughts &
-        predictions - Evidence & realistic conclusions - Belief After
-        <InputField
-          onClick={this.onCreateNewEvent}
-          placeholder="Enter a new situation"
-          buttonTitle="Create new CBT record"
-        />
+        <div className="cbt-event-input-container">
+          <InputField
+            onClick={this.onCreateNewEvent}
+            placeholder="Enter a new situation"
+            buttonTitle="Create new event"
+          />
+        </div>
         {this.props.cbt_events.length > 0 && (
           <CBTEventList cbtEvents={this.props.cbt_events} />
         )}
