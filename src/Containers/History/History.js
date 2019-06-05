@@ -138,8 +138,8 @@ class History extends React.Component {
       let data = this.props.cbtbr.map((item, index) => {
         return {
           date: item.date.slice(0, 10),
-          before: item.rating_before,
-          after: item.rating_after
+          Before: item.rating_before,
+          After: item.rating_after
         };
       });
       console.log(data);
@@ -206,7 +206,10 @@ class History extends React.Component {
             <ErrorBox error={error} />
           ) : this.state.displayedHistory === "dm" ? (
             <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={this.dmDataProcess()} margin={{ bottom: 20 }}>
+              <LineChart
+                data={this.dmDataProcess()}
+                margin={{ right: 10, left: 10 }}
+              >
                 <CartesianGrid />
                 <Line
                   name="Tasks Completed"
@@ -218,7 +221,7 @@ class History extends React.Component {
                   dataKey="x"
                   label={{
                     value: "Date",
-                    position: "insideBottom",
+                    position: "insideBottomRight",
                     offset: -10
                   }}
                 />
@@ -227,18 +230,18 @@ class History extends React.Component {
                   label={{
                     value: "Tasks Completed",
                     angle: -90,
-                    offset: 10,
                     position: "insideLeft"
                   }}
                 />
                 <Tooltip formatter={(value, name, props) => value + "%"} />
+                <Legend formatter={(value, entry, index) => "% " + value} />
               </LineChart>
             </ResponsiveContainer>
           ) : this.state.displayedHistory === "phq9" ? (
             <ResponsiveContainer width="100%" height="100%">
               <LineChart
                 data={this.phq9DataProcess()}
-                margin={{ bottom: 10, right: 10 }}
+                margin={{ right: 10, left: 10 }}
               >
                 <CartesianGrid />
                 <Line
@@ -259,7 +262,6 @@ class History extends React.Component {
                   label={{
                     value: "PHQ9 Score",
                     angle: -90,
-                    offset: 20,
                     position: "insideLeft"
                   }}
                 />
@@ -280,7 +282,17 @@ class History extends React.Component {
                   fill="#8884d8"
                   fillOpacity={0.3}
                 />
-                <Legend />
+                <Tooltip
+                  formatter={(value, name, props) => [
+                    value,
+                    "# of times identified"
+                  ]}
+                />
+                <Legend
+                  formatter={(value, entry, index) =>
+                    "Unhelpful Thinking Styles"
+                  }
+                />
               </RadarChart>
             </ResponsiveContainer>
           ) : this.state.displayedHistory === "cbtbr" ? (
@@ -303,14 +315,16 @@ class History extends React.Component {
                   label={{
                     value: "Belief in Automatic Thoughts",
                     angle: -90,
-                    offset: 0,
                     position: "insideLeft"
                   }}
                 />
-                <Tooltip />
+                <Tooltip
+                  formatter={(value, name, props) => value + "%"}
+                  itemSorter={() => 1}
+                />
                 <Legend verticalAlign="bottom" />
-                <Bar dataKey="before" fill="#ca8282" />
-                <Bar dataKey="after" fill="#82ca9d" />
+                <Bar dataKey="Before" fill="#ca8282" />
+                <Bar dataKey="After" fill="#82ca9d" />
               </BarChart>
             </ResponsiveContainer>
           ) : null}
