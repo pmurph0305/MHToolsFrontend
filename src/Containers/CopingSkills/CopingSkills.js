@@ -265,30 +265,30 @@ class CopingSkills extends React.Component {
             "A list of coping skills to use in situations to help tolerate stress and conflict."
           }
         />
-        <SelectionBox
-          id="cs_viewing_box"
-          className="black ma2 bg-black-10 pa1 hover-bg-black-20 fl db"
-          label="Display skills selection"
-          options={["My coping skills", "Shared coping skills"]}
-          onChange={this.onChangeSkillDisplay}
-        />
-        {viewing === "shared" ? ( // if viewing shared, display view by selection box.
-          <>
-            <SelectionBox
-              id="cs_shared_order"
-              className="black ma2 bg-black-10 pa1 hover-bg-black-20 fl db"
-              label="Sort displayed skills by selection"
-              options={["Top", "Newest", "Random"]}
-              onChange={this.onChangeSharedViewType}
-            />
-            <button
-              className="black ma2 bg-black-10 pa1 hover-bg-black-20 fl db"
-              onClick={this.onRefreshSharedClick}
-            >
-              Refresh
-            </button>
-          </>
-        ) : null}
+        <div className="cs-selection-container">
+          <SelectionBox
+            id="cs_viewing_box"
+            label="Display skills selection"
+            options={["My coping skills", "Shared coping skills"]}
+            onChange={this.onChangeSkillDisplay}
+          />
+          {viewing === "shared" ? ( // if viewing shared, display view by selection box.
+            <>
+              <SelectionBox
+                id="cs_shared_order"
+                label="Sort displayed skills by selection"
+                options={["Top", "Newest", "Random"]}
+                onChange={this.onChangeSharedViewType}
+              />
+              <button
+                className="cs-refresh-button"
+                onClick={this.onRefreshSharedClick}
+              >
+                Refresh
+              </button>
+            </>
+          ) : null}
+        </div>
         {coping_skills && Array.isArray(coping_skills)
           ? coping_skills.map((skill, index) => {
               return (

@@ -24,9 +24,11 @@ import {
   requestCBTBeliefHistory
 } from "./Redux/history_actions";
 
-import "./History.scss";
+import SectionInfo from "../../Components/SectionInfo/SectionInfo";
 import SelectionBox from "../../Components/SelectionBox/SelectionBox";
 import ErrorBox from "../../Components/ErrorBox/ErrorBox";
+
+import "./History.scss";
 
 const mapStateToProps = state => {
   return {
@@ -184,7 +186,11 @@ class History extends React.Component {
   render() {
     const { error, isPending } = this.props;
     return (
-      <div>
+      <section className="HistorySection">
+        <SectionInfo
+          title="History"
+          description="A tool to use to track progress when using other tools available on this website."
+        />
         <div className="historySelectContainer">
           <p className="historySelectContainerText">Display History For:</p>
           <SelectionBox
@@ -329,7 +335,7 @@ class History extends React.Component {
             </ResponsiveContainer>
           ) : null}
         </div>
-      </div>
+      </section>
     );
   }
 }
