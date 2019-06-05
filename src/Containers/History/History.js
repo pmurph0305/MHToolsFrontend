@@ -1,5 +1,7 @@
 import React from "react";
 import {
+  Bar,
+  BarChart,
   CartesianGrid,
   Legend,
   LineChart,
@@ -131,6 +133,20 @@ class History extends React.Component {
     }
   }
 
+  cbtbrDataProcess() {
+    if (this.props.cbtbr.length) {
+      let data = this.props.cbtbr.map((item, index) => {
+        return {
+          date: item.date.slice(0, 10),
+          before: item.rating_before,
+          after: item.rating_after
+        };
+      });
+      console.log(data);
+      return data;
+    }
+  }
+
   onRequestHistory = historyType => {
     switch (historyType) {
       case "dm":
@@ -220,7 +236,10 @@ class History extends React.Component {
             </ResponsiveContainer>
           ) : this.state.displayedHistory === "phq9" ? (
             <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={this.phq9DataProcess()} margin={{ bottom: 20 }}>
+              <LineChart
+                data={this.phq9DataProcess()}
+                margin={{ bottom: 10, right: 10 }}
+              >
                 <CartesianGrid />
                 <Line
                   name="PHQ9 Score"
@@ -230,9 +249,9 @@ class History extends React.Component {
                 />
                 <XAxis
                   dataKey="x"
-                  abel={{
+                  label={{
                     value: "Date",
-                    position: "insideBottom",
+                    position: "insideBottomRight",
                     offset: -10
                   }}
                 />
@@ -264,12 +283,49 @@ class History extends React.Component {
                 <Legend />
               </RadarChart>
             </ResponsiveContainer>
+          ) : this.state.displayedHistory === "cbtbr" ? (
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart
+                data={this.cbtbrDataProcess()}
+                margin={{ right: 10, left: 10 }}
+              >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis
+                  dataKey="date"
+                  label={{
+                    value: "Date",
+                    position: "insideBottomRight",
+                    offset: -10
+                  }}
+                />
+                <YAxis
+                  unit="%"
+                  label={{
+                    value: "Belief in Automatic Thoughts",
+                    angle: -90,
+                    offset: 0,
+                    position: "insideLeft"
+                  }}
+                />
+                <Tooltip />
+                <Legend verticalAlign="bottom" />
+                <Bar dataKey="before" fill="#ca8282" />
+                <Bar dataKey="after" fill="#82ca9d" />
+              </BarChart>
+            </ResponsiveContainer>
           ) : null}
         </div>
       </div>
     );
   }
 }
+
+// dataKey="x"
+//                   label={{
+//                     value: "Date",
+//                     position: "insideBottom",
+//                     offset: -10
+//                   }}
 
 export default connect(
   mapStateToProps,
