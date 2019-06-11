@@ -2,7 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import "./DisplayLabeledText.scss";
-
+/**
+ * @param  {string} label Label displayed above text
+ * @param  {string} text  Text to be displayed
+ */
 const DisplayLabeledText = ({ label, text }) => {
   return (
     <div className="dlt-container">
