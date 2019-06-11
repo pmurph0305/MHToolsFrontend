@@ -1,7 +1,22 @@
 import React from "react";
+import PropTypes from "prop-types";
 import ClickableIcon from "../ClickableIcon/ClickableIcon";
 import "./SkillCollapsible.scss";
-
+/**
+ * Collapsible - A component that displays a coping skills in a collapsible according. There are buttons displayed for adding, deleting, edit/saving, and sharing.
+ * @param  {boolean} allowAdd can the user add this skill to their own coping skills?
+ * @param  {boolean} editing is this coping skill currently being edited?
+ * @param  {number} index index of coping skill
+ * @param  {boolean} shared has the coping skill already been shared?
+ * @param  {boolean} shareable is the coping skill shareable to other users?
+ * @param  {number} skill_id id of the coping skill
+ * @param  {string} text text description of the coping skill
+ * @param  {string} title title of the coping skill
+ * @callback onAddSharedSkill called when add button is clicked
+ * @callback onDeleteSkill called when delete button is clicked.
+ * @callback onEditSkill called when edit skill button is clicked.
+ * @callback onShareSkill called when share skill button is clicked.
+ */
 const Collapsible = ({
   allowAdd,
   editing,
@@ -113,6 +128,21 @@ const Collapsible = ({
       </div>
     </div>
   );
+};
+
+Collapsible.propTypes = {
+  allowAdd: PropTypes.bool.isRequired,
+  editing: PropTypes.bool,
+  index: PropTypes.number.isRequired,
+  shared: PropTypes.bool.isRequired,
+  shareable: PropTypes.bool.isRequired,
+  skill_id: PropTypes.number.isRequired,
+  text: PropTypes.string,
+  title: PropTypes.string,
+  onAddSharedSkill: PropTypes.func.isRequired,
+  onDeleteSkill: PropTypes.func.isRequired,
+  onEditSkill: PropTypes.func.isRequired,
+  onShareSkill: PropTypes.func.isRequired
 };
 
 export default Collapsible;
