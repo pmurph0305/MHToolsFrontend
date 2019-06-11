@@ -1,6 +1,7 @@
 import React from "react";
+import PropTypes from "prop-types";
 
-export const AddSkill = ({ onAddSkill, addError }) => {
+export const AddSkill = ({ onAddSkill }) => {
   return (
     <div className="pv4">
       <label htmlFor="add_skill_title" className="f6 tl b db mb2">
@@ -42,6 +43,10 @@ export const AddSkill = ({ onAddSkill, addError }) => {
       </button>
     </div>
   );
+};
+
+AddSkill.propTypes = {
+  onAddSkill: PropTypes.func.isRequired
 };
 
 export default AddSkill;
