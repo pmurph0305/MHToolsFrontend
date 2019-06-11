@@ -1,6 +1,11 @@
 import React from "react";
+import PropTypes from "prop-types";
 import "./SignInForm.scss";
-
+/** Register form - returns a component that renders a registration form
+ * @callback onSubmitForm called when the user clicks the submit button
+ * @callback onToggleModal called when the user clicks the close (X) button on the modal.
+ * @param  {string} formError error text displayed on the form
+ */
 const RegisterForm = ({ onSubmitForm, onToggleModal, formError }) => {
   return (
     <div className="form-container">
@@ -69,6 +74,12 @@ const RegisterForm = ({ onSubmitForm, onToggleModal, formError }) => {
       </form>
     </div>
   );
+};
+
+RegisterForm.propTypes = {
+  onSubmitForm: PropTypes.func.isRequired,
+  onToggleModal: PropTypes.func.isRequired,
+  formError: PropTypes.string
 };
 
 export default RegisterForm;
