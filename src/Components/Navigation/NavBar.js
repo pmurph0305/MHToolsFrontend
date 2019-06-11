@@ -1,9 +1,14 @@
 import logo from "./mh_logo_white.png";
 import NavButtonLi from "../NavButton/NavButtonLi";
+import PropTypes from "prop-types";
 import React from "react";
 import { Link } from "react-router-dom";
 
 import "./NavBar.scss";
+/**
+ * NavBar - returns a nav bar that is displayed at the top of the screen, doing routing using Links and react-router-dom.
+ * @callback onModalChange called passing a string of the modal to open.
+ */
 const NavBar = props => {
   return (
     <header className="navHeader">
@@ -43,6 +48,10 @@ const NavBar = props => {
       </nav>
     </header>
   );
+};
+
+NavBar.propTypes = {
+  onModalChange: PropTypes.func.isRequired
 };
 
 export default NavBar;
