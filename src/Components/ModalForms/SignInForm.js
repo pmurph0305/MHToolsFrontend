@@ -1,6 +1,10 @@
 import React from "react";
 import "./SignInForm.scss";
 
+/** SignInForm form - returns a component that renders a signin form
+ * @callback onSubmitForm called when the user clicks the submit button
+ * @callback onToggleModal called when the user clicks the close (X) button on the modal.
+ */
 const SignInForm = ({ onSubmitForm, onToggleModal }) => {
   return (
     <div className="form-container">
@@ -43,6 +47,11 @@ const SignInForm = ({ onSubmitForm, onToggleModal }) => {
       </form>
     </div>
   );
+};
+
+SignInForm.propTypes = {
+  onSubmitForm: PropTypes.func.isRequired,
+  onToggleModal: PropTypes.func.isRequired
 };
 
 export default SignInForm;
