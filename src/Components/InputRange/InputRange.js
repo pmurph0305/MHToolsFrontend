@@ -59,7 +59,7 @@ InputRange.defaultProps = {
 };
 
 InputRange.propTypes = {
-  defualtValue: PropTypes.number,
+  defaultValue: PropTypes.number,
   min: PropTypes.number,
   max: PropTypes.number,
   idAndName: PropTypes.string,
