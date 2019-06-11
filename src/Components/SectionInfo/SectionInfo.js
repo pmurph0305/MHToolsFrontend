@@ -29,7 +29,7 @@ const SectionInfo = ({ title, description, descTextIndent }) => {
 
 SectionInfo.propTypes = {
   title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
+  description: PropTypes.string,
   descTextIndent: PropTypes.string
 };
 
