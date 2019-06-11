@@ -1,5 +1,14 @@
 import React from "react";
+import PropTypes from "prop-types";
+
 import "./InputText.scss";
+/**
+ * @param  {string} defaultValue default value for input field.
+ * @param  {string} inputLabel label displayed above input field.
+ * @callback  onChange onChange event handler for input field.
+ * @param  {string} placeholder placeholder displayed in input field.
+ * @param  {string} idAndName id & name attribute for input element.
+ */
 const InputText = ({
   defaultValue,
   inputLabel,
@@ -10,24 +19,33 @@ const InputText = ({
   return (
     <div className="input-container-text">
       {inputLabel && (
-        <label
-          className="input-text-label"
-          htmlFor={idAndName ? idAndName : "input-text"}
-        >
+        <label className="input-text-label" htmlFor={idAndName}>
           {inputLabel}
         </label>
       )}
       <input
         className="input-text"
-        id={idAndName ? idAndName : "input-text"}
+        id={idAndName}
         type="text"
         placeholder={placeholder}
         onChange={onChange}
         defaultValue={defaultValue}
-        name={idAndName ? idAndName : "input-text"}
+        name={idAndName}
       />
     </div>
   );
+};
+
+InputText.defaultProps = {
+  idAndName: "input-text"
+};
+
+InputText.propTypes = {
+  onChange: PropTypes.func.isRequired,
+  inputLabel: PropTypes.string,
+  idAndName: PropTypes.string,
+  placeholder: PropTypes.string,
+  defauleValue: PropTypes.string
 };
 
 export default InputText;
