@@ -23,7 +23,7 @@ const DMDateNav = ({ date, onClick }) => {
 };
 
 DMDateNav.propTypes = {
-  date: PropTypes.string.isRequired,
+  date: PropTypes.string,
   onClick: PropTypes.func.isRequired
 };
 

@@ -1,10 +1,13 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import "./SectionInfo.scss";
 
 /**
- * @param  {string} {title} Title to be displayed
- * @param  {string} {description} Description to be displayed
+ * SectionInfo - Returns a component that displays the title with a description underneath.
+ * @param  {string} title Title to be displayed
+ * @param  {string} description Description to be displayed
+ * @param {string} descTextIndent indent value for textIndent css style for the description element.
  */
 const SectionInfo = ({ title, description, descTextIndent }) => {
   return (
@@ -22,6 +25,12 @@ const SectionInfo = ({ title, description, descTextIndent }) => {
       )}
     </>
   );
+};
+
+SectionInfo.propTypes = {
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  descTextIndent: PropTypes.string
 };
 
 export default SectionInfo;
