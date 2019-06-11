@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 
 import "./InputText.scss";
 /**
+ * InputText - Returns a component that is a text inputfield with a label beside it.
  * @param  {string} defaultValue default value for input field.
  * @param  {string} inputLabel label displayed above input field.
  * @callback  onChange onChange event handler for input field.
@@ -41,7 +42,7 @@ InputText.defaultProps = {
 };
 
 InputText.propTypes = {
-  onChange: PropTypes.func.isRequired,
+  onChange: PropTypes.func,
   inputLabel: PropTypes.string,
   idAndName: PropTypes.string,
   placeholder: PropTypes.string,
