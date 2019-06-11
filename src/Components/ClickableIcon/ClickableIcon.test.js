@@ -29,7 +29,11 @@ describe("ClickableIcon tests", () => {
   });
 
   it("Sets size to default if no size", () => {
-    const defaultwrapper = shallow(<ClickableIcon />);
+    let mockProps2 = {
+      iconName: "share-alt",
+      onClick: mockClick
+    };
+    const defaultwrapper = shallow(<ClickableIcon {...mockProps2} />);
     expect(defaultwrapper.find('[size="default"]').length).toBe(1);
   });
 

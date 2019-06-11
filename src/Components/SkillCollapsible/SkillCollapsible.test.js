@@ -20,7 +20,8 @@ describe("skill collapsible tests", () => {
     title: "test title",
     onDeleteSkill: mockDeleteSkill,
     onEditSkill: mockEditSkill,
-    onShareSkill: mockShareSkill
+    onShareSkill: mockShareSkill,
+    onAddSharedSkill: mockAddSkill
   };
 
   let wrapper = shallow(<SkillCollapsible {...mockProps} />, {
@@ -57,7 +58,8 @@ describe("skill collapsible tests", () => {
     title: "test title",
     onDeleteSkill: mockDeleteSkill,
     onEditSkill: mockEditSkill2,
-    onShareSkill: mockShareSkill
+    onShareSkill: mockShareSkill,
+    onAddSharedSkill: mockAddSkill
   };
   let wrapper2 = shallow(<SkillCollapsible {...mockProps2} />);
 

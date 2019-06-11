@@ -4,7 +4,11 @@ import DisplayLabeledText from "./DisplayLabeledText";
 
 describe("DisplayLabeledText tests", () => {
   let wrapper;
-  beforeEach(() => (wrapper = shallow(<DisplayLabeledText />)));
+  let mockProps = {
+    label: "test",
+    text: "test text"
+  };
+  beforeEach(() => (wrapper = shallow(<DisplayLabeledText {...mockProps} />)));
 
   it("Renders a div", () => {
     expect(wrapper.find("div").length).toEqual(1);
@@ -12,12 +16,12 @@ describe("DisplayLabeledText tests", () => {
 
   it("Displays a label correctly", () => {
     wrapper.setProps({ label: "test" });
-    expect(wrapper.text()).toEqual("test");
+    expect(wrapper.find("label").text()).toEqual("test");
   });
 
   it("Displays text correctly", () => {
     wrapper.setProps({ text: "test text" });
-    expect(wrapper.text()).toEqual("test text");
+    expect(wrapper.find("p").text()).toEqual("test text");
   });
 
   it("Displays both a label and text correctly", () => {

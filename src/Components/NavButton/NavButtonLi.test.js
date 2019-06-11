@@ -29,7 +29,12 @@ describe("NavButtonLi tests", () => {
   });
 
   it("Has null class if not specified", () => {
-    const noclasswrapper = shallow(<NavButtonLi />);
-    expect(noclasswrapper.prop("className")).toBe(null);
+    const mockProps2 = {
+      buttonLabel: "test label",
+      onRouteChange: mockRouteChange,
+      route: "test route"
+    };
+    const noclasswrapper = shallow(<NavButtonLi {...mockProps2} />);
+    expect(noclasswrapper.prop("className")).toBe(undefined);
   });
 });

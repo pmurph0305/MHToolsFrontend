@@ -38,7 +38,14 @@ describe("Selection Box tests", () => {
     ).toBe(mockProps.options[0]);
   });
 
-  const wrapper2 = shallow(<SelectionBox />);
+  const mockProps2 = {
+    options: ["a", "b", "c", "d"],
+    id: 1,
+    value: 3,
+    label: "TestLabel",
+    onChange: mockOnChange
+  };
+  const wrapper2 = shallow(<SelectionBox {...mockProps2} />);
   it("correctly sets class to default", () => {
     expect(wrapper2.prop("className")).toBe("DefaultSelect");
   });
