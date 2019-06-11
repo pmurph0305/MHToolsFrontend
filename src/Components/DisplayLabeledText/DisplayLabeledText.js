@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 
 import "./DisplayLabeledText.scss";
 /**
+ * DisplayLabeledText - Returns a component that displays the label above text in a container.
  * @param  {string} label Label displayed above text
  * @param  {string} text  Text to be displayed
  */

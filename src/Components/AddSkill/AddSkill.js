@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 /**
- * @param  {function} onAddSkill Callback when add skill button is clicked
+ * AddSkill - Returns a component that contains inputs and text areas for creating a new coping skill.
+ * @callback onAddSkill Callback when add skill button is clicked
  */
 export const AddSkill = ({ onAddSkill }) => {
   return (
