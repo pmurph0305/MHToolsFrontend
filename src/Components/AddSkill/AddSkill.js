@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-
+/**
+ * @param  {function} {onAddSkill} Callback when add skill button is clicked
+ */
 export const AddSkill = ({ onAddSkill }) => {
   return (
     <div className="pv4">
