@@ -1,8 +1,15 @@
 import React from "react";
-
+import PropTypes from "prop-types";
 import InputCheckbox from "../InputCheckbox/InputCheckbox";
 
 import "./InputCheckboxList.scss";
+
+/**
+ * InputCheckboxList - A component that displays a label & description above a list of items with checkboxs beside them.
+ * @param {[string]} checkboxList Array of checkbox items to display, each item is the text to go beside the checkbox.
+ * @param {string} inputLabel Label to be displayed
+ * @param {string} inputDesc Description of what the list of checkboxs is for.
+ */
 
 class InputCheckboxList extends React.Component {
   render() {
@@ -32,5 +39,11 @@ class InputCheckboxList extends React.Component {
     );
   }
 }
+
+InputCheckboxList.propTypes = {
+  checkboxList: PropTypes.array.isRequired,
+  inputLabel: PropTypes.string.isRequired,
+  inputDesc: PropTypes.string
+};
 
 export default InputCheckboxList;
