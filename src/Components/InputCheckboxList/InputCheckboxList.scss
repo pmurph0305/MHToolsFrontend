@@ -1,7 +1,9 @@
+@import "../../styles/shared.scss";
+
 .input-checkbox-list-container-outer {
   display: block;
   margin: 1rem;
-  border: 1px solid black;
+  border: 1px solid $primary-color;
 
   .input-checkbox-list-labels {
     display: flex;

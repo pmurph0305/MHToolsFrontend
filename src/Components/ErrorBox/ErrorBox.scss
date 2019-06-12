@@ -1,0 +1,9 @@
+@import "../../styles/shared.scss";
+
+.ErrorBox {
+  background-color: $error-background-color;
+  display: block;
+  width: fit-content;
+  margin: auto;
+  padding: 0.5rem;
+}

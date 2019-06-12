@@ -1,9 +1,10 @@
+@import "../../styles/shared.scss";
+
 .input-container-text {
+  @extend %InputArea-Container-Bordered;
   text-align: left;
   display: flex;
   align-items: baseline;
-  margin: 1rem;
-  border: 1px solid black;
   .input-text-label {
     padding: 0.5rem;
     font-size: 1.25rem;

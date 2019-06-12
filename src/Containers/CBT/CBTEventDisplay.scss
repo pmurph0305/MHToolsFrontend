@@ -1,7 +1,9 @@
+@import "../../styles/shared.scss";
+
 .cbt-event-collapse-container {
   cursor: pointer;
-  background-color: lightgray;
-  border-bottom: 1px solid black;
+  background-color: $secondary-background;
+  border-bottom: 1px solid $primary-color;
   display: flex;
   justify-content: space-between;
   flex-wrap: nowrap;
@@ -15,7 +17,7 @@
 }
 
 .cbt-event-display-container {
-  background-color: #f1f1f1;
+  background-color: $primary-background;
   text-align: left;
   margin-left: 1rem;
   margin-right: 1rem;

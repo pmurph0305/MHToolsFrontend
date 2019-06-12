@@ -1,6 +1,8 @@
+@import "../../styles/shared.scss";
+
 .DefaultSelect {
-  color: black;
-  background-color: rgb(200, 200, 200);
+  color: $primary-text-color;
+  background-color: $secondary-background;
   margin: 0;
   padding: 0;
   &:hover {

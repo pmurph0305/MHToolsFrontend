@@ -1,7 +1,7 @@
+@import "../../styles/shared.scss";
+
 .input-container-textarea {
-  display: block;
-  margin: 1rem;
-  border: 1px solid black;
+  @extend %InputArea-Container-Bordered;
 
   .input-textarea-labels {
     display: flex;

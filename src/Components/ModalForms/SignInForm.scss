@@ -1,5 +1,6 @@
+@import "../../styles/shared.scss";
+
 .form-container {
-  background-color: rgba(255, 255, 255, 0);
   position: fixed;
   height: 100%;
   width: 100%;
@@ -10,17 +11,17 @@
   justify-content: center;
 
   .form-modal {
-    background-color: white;
+    background-color: $primary-background;
     border-radius: 0.5rem;
     border-style: solid;
     border-width: 1px;
-    border-color: rgba(0, 0, 0, 0.15);
+    border-color: $secondary-color;
     margin: 2rem auto;
     text-align: center;
     /* Add Media-queries. */
     width: 75%;
     max-width: 35rem;
-    box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 2px 0px $secondary-color;
     padding-bottom: 2rem;
   }
 
@@ -33,13 +34,14 @@
   }
 
   .modal-close:hover {
-    color: gray;
+    color: $secondary-color;
     cursor: pointer;
   }
 
   .form-input-container {
     display: flex;
     justify-content: center;
+    align-items: center;
     font-size: 1.25rem;
     font-weight: 600;
     margin-top: 1.5rem;
@@ -47,20 +49,22 @@
   }
 
   label {
+    line-height: 1.25rem;
     padding-right: 1rem;
-    width: 35%;
-    text-align: left;
+    width: 20%;
+    text-align: right;
   }
 
   .form-submit {
-    color: white;
-    background-color: black;
+    @extend %ButtonBase;
     padding: 0.5rem 1rem;
     float: right;
     margin-right: 2rem;
   }
 
   .form-input {
-    width: 50%;
+    background-color: $secondary-background;
+    padding: 0.25em 0.5em;
+    width: auto;
   }
 }

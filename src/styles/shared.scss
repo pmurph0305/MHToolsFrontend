@@ -1,26 +1,42 @@
+// background color of the page / containers.
 $primary-background: rgb(240, 240, 240);
-$secondary-background: rgb(220, 220, 220);
-$tertiary-background: rgb(200, 200, 200);
+$secondary-background: rgb(200, 200, 200);
+$tertiary-background: rgb(220, 220, 220);
 
+$success-background-color: rgb(137, 218, 137);
+$error-background-color: rgb(218, 137, 137);
+$editable-text-background: rgb(255, 255, 255);
+
+// primary text color for everything
 $primary-text-color: rgb(20, 20, 20);
+// used on buttons / non primary-tertiary bg color users.
+$secondary-text-color: rgb(220, 220, 220);
+$tertiary-text-color: rgb(240, 240, 240);
 
-$button-background-color: rgb(20, 20, 20);
-$button-text-color: rgb(220, 220, 220);
+// colors buttons and checkboxes.
+$primary-color: rgb(20, 20, 20);
+$secondary-color: rgb(40, 40, 40);
+$tertiary-color: rgb(60, 60, 60);
+
+// $button-background-color: rgb(20, 20, 20);
+// $button-alt-color: rgb(40,40,40);
+// $button-text-color: rgb(220, 220, 220);
+// $button-text-alt-color: rgb(240, 240, 240);
 
 $font-weight-base: 600;
 
 %ButtonBase {
-  background-color: $button-background-color;
-  color: $button-text-color;
+  background-color: $primary-color;
+  color: $secondary-text-color;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   opacity: 1;
   &:focus,
   &:hover,
   &:active {
-    transition: opacity 0.15s ease-in;
+    background-color: $secondary-color;
+    color: $tertiary-text-color;
     cursor: pointer;
-    opacity: 0.9;
   }
 }
 
@@ -76,4 +92,10 @@ $font-weight-base: 600;
   padding: 0.5rem;
 
   font-size: 1.25rem;
+}
+
+%InputArea-Container-Bordered {
+  display: block;
+  margin: 1rem;
+  border: 1px solid $primary-color;
 }

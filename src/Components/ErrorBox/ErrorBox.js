@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import "./ErrorBox.css";
+import "./ErrorBox.scss";
 /**
  * ErrorBox - Returns a component that displays the error. Splits the given error on 'error:'
  * @param  {string} {error} Error to display from fetch

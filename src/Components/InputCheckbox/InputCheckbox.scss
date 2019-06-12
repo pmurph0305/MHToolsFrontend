@@ -1,3 +1,5 @@
+@import "../../styles/shared.scss";
+
 .input-checkbox-container {
   padding: 0.5rem;
   display: inline-block;
@@ -16,20 +18,33 @@
     overflow: hidden;
 
     &:focus ~ .input-checkbox-span {
-      border-color: #a0a0a0;
-      box-shadow: 0 0 0 2px #a7a7a7;
+      border-color: $secondary-color;
+      box-shadow: 0 0 0 2px $tertiary-color;
     }
 
     &:hover ~ .input-checkbox-span {
-      border-color: #757575;
+      border-color: $secondary-color;
+      box-shadow: 0 0 0 2px $tertiary-color;
     }
 
     &:checked ~ .input-checkbox-span {
-      border-color: #969696;
-      background: #969696
+      border-color: $primary-color;
+      background: $primary-color
         url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cG9seWxpbmUgcG9pbnRzPSIyMCA2IDkgMTcgNCAxMiI+PC9wb2x5bGluZT48L3N2Zz4=)
         center no-repeat;
       background-size: 75%;
+    }
+
+    &:checked:hover ~ .input-checkbox-span {
+      background-color: $secondary-color;
+      border-color: $secondary-color;
+      box-shadow: 0 0 0 2px $tertiary-color;
+    }
+
+    &:checked:focus ~ .input-checkbox-span {
+      background-color: $secondary-color;
+      border-color: $secondary-color;
+      box-shadow: 0 0 0 2px $tertiary-color;
     }
 
     ~ .input-checkbox-span {
@@ -37,7 +52,7 @@
       height: 1rem;
       position: relative;
       display: inline-block;
-      border: 2px solid #969696;
+      border: 2px solid $primary-color;
       cursor: pointer;
     }
   }

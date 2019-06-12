@@ -1,7 +1,7 @@
 @import "../../styles/shared.scss";
 
 .navHeader {
-  background-color: $button-background-color;
+  background-color: $primary-color;
   width: 100%;
   // font sizes done for all nav elements based on screen sizes.
   @media screen and (min-width: 60em) {
