@@ -88,7 +88,7 @@ class DailyMaintenance extends React.Component {
     if (inputField.value !== "") {
       // calculate rank by finding max of current ranks + 1.
       let rank;
-      if (this.props.taskList.length) {
+      if (this.props.taskList && this.props.taskList.length) {
         rank = Math.max.apply(
           Math,
           this.props.taskList.map(task => {

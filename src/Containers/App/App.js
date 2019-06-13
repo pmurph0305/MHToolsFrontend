@@ -39,7 +39,6 @@ class App extends Component {
   componentDidMount() {
     const token = window.sessionStorage.getItem("token");
     if (token) {
-      console.log("A");
       // Verify token, don't just immediately call onLoginUser.
       fetch(serverURL + "/signin", {
         method: "POST",

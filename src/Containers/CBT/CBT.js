@@ -42,16 +42,12 @@ class CBT extends React.Component {
   }
 
   getPreviousEventsIfLoggedIn = () => {
-    if (
-      this.props.user_id &&
-      (!this.props.cbt_events || !this.props.cbt_events.length)
-    ) {
+    if (this.props.user_id && !this.props.cbt_events) {
       this.props.onGetCBTEvents(this.props.user_id);
     }
   };
 
   onCreateNewEvent = textInput => {
-    console.log(textInput.value);
     this.setState(
       { creatingEvent: true, cbtSituation: textInput.value },
       () => {

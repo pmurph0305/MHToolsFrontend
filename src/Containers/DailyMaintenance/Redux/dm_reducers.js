@@ -103,8 +103,11 @@ function updateItemByIndexInArray(array, itemIndex, updateItemCallback) {
 function addDMTask(state, action) {
   if (Array.isArray(action.payload) && action.payload.length) {
     // map used to copy array so that it is re-rendered when added.
-    let tasks = state.dm_taskList.map(task => task);
-    action.payload[0]["updated"] = false;
+    let tasks = [];
+    if (state.dm_taskList) {
+      tasks = state.dm_taskList.map(task => task);
+      action.payload[0]["updated"] = false;
+    }
     tasks.push(action.payload[0]);
     return updateObject(state, { dm_isPending: false, dm_taskList: tasks });
   } else {
@@ -158,7 +161,7 @@ function setDMTaskList(state, action) {
   } else {
     return updateObject(state, {
       dm_isPending: false,
-      dm_error: "Error getting Daily Maintenance list."
+      dm_date: new Date().toISOString().slice(0, 10)
     });
   }
 }
