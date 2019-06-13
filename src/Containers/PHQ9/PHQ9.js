@@ -55,7 +55,7 @@ const mapStateToProps = state => {
   };
 };
 
-class PHQ9 extends React.Component {
+export class PHQ9 extends React.Component {
   constructor(props) {
     super(props);
     this.state = initialState;

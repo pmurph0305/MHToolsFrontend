@@ -17,7 +17,6 @@ const checkboxList = [
 
 class CBTEventForm extends React.Component {
   onSubmitForm = event => {
-    console.log("submit!");
     event.preventDefault();
     let situation = event.target.elements.namedItem("cbtSituation").value;
     let automatic_thoughts = event.target.elements.namedItem(

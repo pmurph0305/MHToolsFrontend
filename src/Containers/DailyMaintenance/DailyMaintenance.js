@@ -190,7 +190,6 @@ class DailyMaintenance extends React.Component {
         ) : (
           <>
             <DMDateNav date={date} onClick={this.onDateButtonClick} />
-            {console.log("task state on render", taskList)}
             {taskList && Array.isArray(taskList)
               ? taskList.map((task, index) => {
                   return (

@@ -60,7 +60,6 @@ class CBT extends React.Component {
   };
 
   onSubmitCBTForm = data => {
-    console.log("cbt data", data);
     this.props.onSubmitCBTEvent(this.props.user_id, data);
     this.setState({ creatingEvent: false, cbtSituation: "" });
   };

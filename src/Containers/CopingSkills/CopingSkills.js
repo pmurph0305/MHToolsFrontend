@@ -107,7 +107,6 @@ class CopingSkills extends React.Component {
     for (let i = 0; i < expanded.length; i++) {
       // only do it on collapsibles currently expanded.
       if (expanded[i].style.maxHeight) {
-        console.log("expanded", i);
         // use a short time, but still some time so that transitionend fires.
         expanded[i].style.transition = "max-height 0.001s";
         // set height to null so it collapses.
@@ -229,7 +228,6 @@ class CopingSkills extends React.Component {
   onEditSkillClick(index) {
     if (this.props.coping_skills[index].editing) {
       let title = document.getElementById("cTitle_" + index).value;
-      //console.log('tv',title.value);
       let desc = document.getElementById("cDescArea_" + index).value;
       if (
         title !== this.props.coping_skills[index]["title"] ||

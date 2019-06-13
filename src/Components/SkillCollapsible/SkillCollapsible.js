@@ -33,7 +33,6 @@ const Collapsible = ({
 }) => {
   function onCollapisbleClick(title, index) {
     // Get text content element for the skill clicked on.
-    console.log("collapsibleClick");
     let container = document.getElementById("cDescContainer_" + index);
     // Collapsible is closing.
     if (container.style.maxHeight !== "0px" && container.style.maxHeight) {

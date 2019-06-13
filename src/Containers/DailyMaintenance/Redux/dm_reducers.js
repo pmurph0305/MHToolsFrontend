@@ -73,12 +73,10 @@ function changeDMTaskEditing(state, action) {
     state.dm_taskList,
     action.payload.index,
     task => {
-      console.log(task);
       task["editing"] = !task["editing"];
       return task;
     }
   );
-  console.log("red", tasks);
   return updateObject(state, { dm_taskList: tasks });
 }
 
@@ -185,7 +183,6 @@ function swapDMTaskRanks(state, action) {
       return task;
     }
   });
-  console.log("NewTasks:", newTasks);
   return updateObject(state, { dm_taskList: newTasks });
 }
 

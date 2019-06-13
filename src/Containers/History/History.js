@@ -145,7 +145,6 @@ class History extends React.Component {
           After: item.rating_after
         };
       });
-      console.log(data);
       return data;
     }
   }
