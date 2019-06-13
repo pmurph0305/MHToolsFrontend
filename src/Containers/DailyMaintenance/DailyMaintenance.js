@@ -64,7 +64,11 @@ class DailyMaintenance extends React.Component {
 
   componentDidUpdate() {
     // Don't get data on update if the data is already in the state.
-    if (!this.props.taskList && this.props.user_id) {
+    if (
+      (!this.props.taskList || this.props.taskList.length === 0) &&
+      this.props.user_id
+    ) {
+      console.log("A");
       // get the current date, slice it to work with database.
       let date = new Date().toISOString().slice(0, 10);
       this.props.onRequestDMTaskList(this.props.user_id, date);
