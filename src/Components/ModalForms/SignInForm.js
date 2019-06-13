@@ -13,38 +13,42 @@ const SignInForm = ({ onSubmitForm, onToggleModal }) => {
         <div className="modal-close" onClick={onToggleModal}>
           &times;
         </div>
-        <h1>Sign in</h1>
-        <div className="form-input-container">
-          <label className="form-label" htmlFor="email">
-            Email:
-          </label>
-          <input
-            className="form-input"
-            type="text"
-            placeholder="Example@gmail.com"
-            name="email"
-            required
-          />
+        <div className="form-flex-container">
+          <h1 className="form-title">Sign in</h1>
+          <div className="form-entries-container">
+            <div className="form-input-container">
+              <label className="form-label" htmlFor="email">
+                Email:
+              </label>
+              <input
+                className="form-input"
+                type="text"
+                placeholder="Example@gmail.com"
+                name="email"
+                required
+              />
+            </div>
+            <div className="form-input-container">
+              <label className="form-label" htmlFor="password">
+                Password:
+              </label>
+              <input
+                className="form-input"
+                type="password"
+                placeholder="password"
+                name="password"
+                required
+              />
+            </div>
+            <input
+              type="hidden"
+              id="hiddenFormEl"
+              name="hidden"
+              value="hiddenValue"
+            />
+            <input className="form-submit" type="submit" value="Sign in" />
+          </div>
         </div>
-        <div className="form-input-container">
-          <label className="form-label" htmlFor="password">
-            Password:
-          </label>
-          <input
-            className="form-input"
-            type="password"
-            placeholder="password"
-            name="password"
-            required
-          />
-        </div>
-        <input
-          type="hidden"
-          id="hiddenFormEl"
-          name="hidden"
-          value="hiddenValue"
-        />
-        <input className="form-submit" type="submit" value="Sign in" />
       </form>
     </div>
   );

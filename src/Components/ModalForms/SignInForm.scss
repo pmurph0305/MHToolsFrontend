@@ -10,6 +10,11 @@
   align-items: center;
   justify-content: center;
 
+  .form-title {
+    font-size: 1.5rem;
+    margin: 0.5rem auto;
+  }
+
   .form-modal {
     background-color: $primary-background;
     border-radius: 0.5rem;
@@ -25,8 +30,15 @@
     padding-bottom: 2rem;
   }
 
+  .form-flex-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
   .modal-close {
-    float: right;
+    float: right !important;
     font-size: 2.5rem;
     padding-right: 0.75rem;
     font-style: bold;
@@ -38,33 +50,41 @@
     cursor: pointer;
   }
 
+  .form-entries-container {
+    margin: auto;
+    display: block;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
   .form-input-container {
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 1.25rem;
     font-weight: 600;
-    margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
   }
 
   label {
     line-height: 1.25rem;
     padding-right: 1rem;
-    width: 20%;
     text-align: right;
   }
 
   .form-submit {
     @extend %ButtonBase;
+    display: block;
+    margin-left: auto;
     padding: 0.5rem 1rem;
-    float: right;
-    margin-right: 2rem;
+    margin-top: 0.5rem;
   }
 
   .form-input {
     background-color: $secondary-background;
     padding: 0.25em 0.5em;
-    width: auto;
   }
 }
