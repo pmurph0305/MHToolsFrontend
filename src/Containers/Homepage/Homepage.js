@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import SectionInfo from "../../Components/SectionInfo/SectionInfo";
 
@@ -16,7 +17,9 @@ class Homepage extends React.Component {
         />
         <div className="tool-list-container">
           <div className="tool-item-container">
-            <label htmlFor="dm-tool">Daily Maintenance</label>
+            <Link className="home-link" to="dm">
+              <label htmlFor="dm-tool">Daily Maintenance</label>
+            </Link>
             <p id="dm-tool">
               A list of tasks you need to get done throughout the day to stay
               healthy. Writing these down and remembering to do them daily is an
@@ -30,7 +33,9 @@ class Homepage extends React.Component {
             </p>
           </div>
           <div className="tool-item-container">
-            <label htmlFor="phq9-tool">PHQ-9</label>
+            <Link className="home-link" to="phq9">
+              <label htmlFor="phq9-tool">PHQ-9</label>
+            </Link>
             <p id="phq9-tool">
               The Patient Health Questionnaire (PHQ-9) is a multipurpose tool
               used for screening, diagnosing, and monitoring the severity of
@@ -41,7 +46,9 @@ class Homepage extends React.Component {
             </p>
           </div>
           <div className="tool-item-container">
-            <label htmlFor="cbt-tool">CBT</label>
+            <Link className="home-link" to="cbt">
+              <label htmlFor="cbt-tool">CBT</label>
+            </Link>
             <p id="cbt-tool">
               A tool to use to train yourself to think more positively.
               Cognitive behavioral therapy focuses on challenging and changing
@@ -54,7 +61,9 @@ class Homepage extends React.Component {
             </p>
           </div>
           <div className="tool-item-container">
-            <label htmlFor="cs-tool">Coping Skills</label>
+            <Link className="home-link" to="coping">
+              <label htmlFor="cs-tool">Coping Skills</label>
+            </Link>
             <p id="cs-tool">
               A list of coping skills to use in situations to help tolerate
               stress and conflict. This tool allows you to create a list of
@@ -65,20 +74,25 @@ class Homepage extends React.Component {
             </p>
           </div>
           <div className="tool-item-container">
-            <label htmlFor="history-tool">History</label>
+            <Link className="home-link" to="hist">
+              <label htmlFor="history-tool">History</label>
+            </Link>
             <p id="history-tool">
               A tool to use to track progress when using other tools available
               on this website. This tool allows you to track the usage of other
               tools provided on this website.
               <br />
-              <br />Daily Maintenance history allows you to track the percent of
-              tasks you marked as completed each day.
               <br />
-              <br />PHQ-9 history allows you to track the score of your PHQ-9
+              Daily Maintenance history allows you to track the percent of tasks
+              you marked as completed each day.
+              <br />
+              <br />
+              PHQ-9 history allows you to track the score of your PHQ-9
               submissions over time.
               <br />
-              <br />CBT history allows you to see what unhelpful thinking styles
-              are most present in your thoughts, as well as showing how much you
+              <br />
+              CBT history allows you to see what unhelpful thinking styles are
+              most present in your thoughts, as well as showing how much you
               believe your negative thoughts before and after writing a thought
               record.
             </p>
