@@ -10,8 +10,8 @@ import "./SelectionBox.scss";
  * @param {string}   id        id of the select element.
  * @param {string}   label     label used for label and aria-label attributes.
  * @param {string}   className css className for select element. Default if not specified.
- * @callback onChange  onChange function when selection is changed.
  * @param {number}   value     default value of select element.
+ * @callback onChange  onChange function when selection is changed.
  */
 const SelectionBox = ({ options, id, label, onChange, value, className }) => {
   return (

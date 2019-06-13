@@ -16,7 +16,6 @@ export const AddSkill = ({ onAddSkill }) => {
   const [addNewSkill, setNewSkill] = useState("");
 
   const addSkill = () => {
-    console.log("add skill");
     onAddSkill();
     setNewSkill("");
   };
@@ -45,9 +44,17 @@ export const AddSkill = ({ onAddSkill }) => {
           />
           <div className="add-skill-extras-container">
             <InputCheckbox idAndName="add_skill_share" label="Share Skill" />
-            <button className="add-skill-button" onClick={addSkill}>
-              Add skill
-            </button>
+            <div className="add-skill-buttons-container">
+              <button className="add-skill-button" onClick={addSkill}>
+                Add skill
+              </button>
+              <button
+                className="cancel-skill-button"
+                onClick={() => setNewSkill("")}
+              >
+                Cancel
+              </button>
+            </div>
           </div>
         </>
       )}

@@ -8,7 +8,6 @@ import SignInForm from "../../Components/ModalForms/SignInForm";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import "tachyons";
 import "./App.scss";
 
 const serverURL = "http://localhost:3001";

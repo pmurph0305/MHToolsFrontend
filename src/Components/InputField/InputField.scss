@@ -1,7 +1,10 @@
 @import "../../styles/shared.scss";
 
 .InputContainer {
+  text-align: left;
   padding: 0.5rem 0;
+  width: 100%;
+  display: flex;
 }
 
 .InputField {
@@ -25,6 +28,7 @@
 .AddTaskButton {
   @extend %ButtonBase;
   float: right;
+
   // Large
   @media screen and (min-width: 60em) {
     width: 20%;

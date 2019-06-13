@@ -6,6 +6,13 @@
   color: $primary-color;
 }
 
+.cancel-skill-button {
+  @extend %ButtonBase;
+  background-color: $error-background-color;
+  color: $primary-color;
+  margin-left: 1rem;
+}
+
 .add-skill-extras-container {
   margin: 1rem;
   display: flex;
