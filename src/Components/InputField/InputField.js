@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 import "./InputField.scss";
 /**
  * InputField - Returns a component that displays a text input field, with a button beside it.
- * @callback onClick onClick event handler, is passed the current text field element.
  * @param  {string} placeholder text placeholder for text input
  * @param  {string} buttonTitle text to display on button
+ * @callback onClick onClick event handler, is passed the current text field element.
  */
 const InputField = ({ onClick, placeholder, buttonTitle }) => {
   let textInput = React.createRef();

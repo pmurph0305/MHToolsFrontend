@@ -6,9 +6,9 @@ import "./InputText.scss";
  * InputText - Returns a component that is a text inputfield with a label beside it.
  * @param  {string} defaultValue default value for input field.
  * @param  {string} inputLabel label displayed above input field.
- * @callback  onChange onChange event handler for input field.
  * @param  {string} placeholder placeholder displayed in input field.
  * @param  {string} idAndName id & name attribute for input element.
+ * @callback  onChange onChange event handler for input field.
  */
 const InputText = ({
   defaultValue,

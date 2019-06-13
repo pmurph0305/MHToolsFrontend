@@ -289,6 +289,9 @@ class CopingSkills extends React.Component {
             </>
           ) : null}
         </div>
+        {viewing === "user" && user_id && (
+          <AddSkill onAddSkill={this.onAddNewSkillClick} />
+        )}
         {coping_skills && Array.isArray(coping_skills)
           ? coping_skills.map((skill, index) => {
               return (
@@ -312,9 +315,6 @@ class CopingSkills extends React.Component {
               );
             })
           : null}
-        {viewing === "user" && user_id && (
-          <AddSkill onAddSkill={this.onAddNewSkillClick} />
-        )}
 
         {error && <ErrorBox error={error} />}
       </section>
