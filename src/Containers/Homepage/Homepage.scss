@@ -1,0 +1,33 @@
+.tool-list-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.5em;
+
+  .tool-item-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1em;
+    // large
+    @media screen and (min-width: 60em) {
+      width: 50%;
+    }
+    // Medium
+    @media screen and (min-width: 30em) and (max-width: 60em) {
+      width: 75%;
+    }
+    // Small
+    @media screen and (min-width: 20em) and (max-width: 30em) {
+      width: 100%;
+    }
+
+    label {
+      text-align: left;
+      margin-bottom: 0.25em;
+      font-size: 2em;
+    }
+    p {
+      line-height: 1.4em;
+    }
+  }
+}

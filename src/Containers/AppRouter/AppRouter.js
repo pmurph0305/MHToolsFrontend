@@ -5,6 +5,7 @@ import CBT from "../CBT/CBT";
 import CopingSkills from "../CopingSkills/CopingSkills";
 import DailyMaintenance from "../DailyMaintenance/DailyMaintenance";
 import History from "../History/History";
+import Homepage from "../Homepage/Homepage";
 import NavBar from "../../Components/Navigation/NavBar";
 import PHQ9 from "../PHQ9/PHQ9";
 
@@ -36,7 +37,7 @@ class AppRouter extends React.Component {
   };
 
   Home = routeProps => {
-    return <div>Home.</div>;
+    return <Homepage />;
   };
 
   render() {
