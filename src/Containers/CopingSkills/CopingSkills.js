@@ -204,7 +204,10 @@ class CopingSkills extends React.Component {
     }
     if (this.props.user_id) {
       // make sure on refresh, once user_id is set, and no state for coping skills, we request it.
-      if (!this.props.coping_skills) {
+      if (
+        !Array.isArray(this.props.coping_skills) ||
+        !this.props.coping_skills.length
+      ) {
         this.props.onGetUserSkills(this.props.user_id);
       }
     }
