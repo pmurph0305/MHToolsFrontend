@@ -34,9 +34,9 @@ import {
   REQUEST_CS_SHARE_FAILED,
   CHANGE_CS_EDITING
 } from "./cs_constants";
-
+import { SERVER_URL } from "../../../Constants/constants";
 import { fetchURLWithJsonAuth } from "../../../ReduxHelpers/reduxHelpers";
-const COPINGSKILLS_URL = "http://localhost:3001/copingskills";
+const COPINGSKILLS_URL = SERVER_URL + "copingskills";
 
 export const addCopingSkill = (id, title, desc, shared) => dispatch => {
   dispatch({ type: ADD_CS_USER_PENDING });

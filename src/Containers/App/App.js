@@ -8,9 +8,9 @@ import SignInForm from "../../Components/ModalForms/SignInForm";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import "./App.scss";
+import { SERVER_URL } from "../../Constants/constants";
 
-const serverURL = "http://localhost:3001";
+import "./App.scss";
 
 const mapStateToProps = state => {
   return {
@@ -40,7 +40,7 @@ class App extends Component {
     const token = window.sessionStorage.getItem("token");
     if (token) {
       // Verify token, don't just immediately call onLoginUser.
-      fetch(serverURL + "/signin", {
+      fetch(SERVER_URL + "signin", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -66,7 +66,7 @@ class App extends Component {
   onSubmitPHQ9 = data => {
     let score = data.reduce((acc, cur, i) => (i < 9 ? acc + cur : acc));
     let token = window.sessionStorage.getItem("token");
-    fetch(serverURL + "/phq9/" + this.props.user_id, {
+    fetch(SERVER_URL + "phq9/" + this.props.user_id, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -83,7 +83,7 @@ class App extends Component {
   };
 
   onSignin = (email, password, hidden) => {
-    fetch(serverURL + "/signin", {
+    fetch(SERVER_URL + "signin", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -128,7 +128,7 @@ class App extends Component {
   };
 
   onRegister = (username, email, password, hidden) => {
-    fetch(serverURL + "/register", {
+    fetch(SERVER_URL + "register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

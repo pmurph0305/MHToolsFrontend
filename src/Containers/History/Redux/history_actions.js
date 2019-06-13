@@ -12,9 +12,9 @@ import {
   REQUEST_CBT_BELIEF_HISTORY_FAILED,
   REQUEST_CBT_THOUGHT_HISTORY_FAILED
 } from "./history_constants";
-
+import { SERVER_URL } from "../../../Constants/constants";
 import { fetchURLWithJsonAuth } from "../../../ReduxHelpers/reduxHelpers";
-const HISTORY_URL = "http://localhost:3001/history";
+const HISTORY_URL = SERVER_URL + "history";
 
 export const requestDMHistory = id => dispatch => {
   dispatch({ type: REQUEST_DM_HISTORY_PENDING });

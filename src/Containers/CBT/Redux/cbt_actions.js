@@ -8,8 +8,8 @@ import {
 } from "./cbt_constants";
 
 import { fetchURLWithJsonAuth } from "../../../ReduxHelpers/reduxHelpers";
-
-const CBT_URL = "http://localhost:3001/cbt";
+import { SERVER_URL } from "../../../Constants/constants";
+const CBT_URL = SERVER_URL + "cbt";
 
 export const onSubmitCBTEvent = (id, data) => dispatch => {
   dispatch({ type: SUBMIT_CBT_EVENT_PENDING });
