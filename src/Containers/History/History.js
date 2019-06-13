@@ -24,6 +24,7 @@ import {
   requestCBTBeliefHistory
 } from "./Redux/history_actions";
 
+import AlertNotSignedIn from "../../Components/AlertNotSignedIn/AlertNotSignedIn";
 import SectionInfo from "../../Components/SectionInfo/SectionInfo";
 import SelectionBox from "../../Components/SelectionBox/SelectionBox";
 import ErrorBox from "../../Components/ErrorBox/ErrorBox";
@@ -150,21 +151,23 @@ class History extends React.Component {
   }
 
   onRequestHistory = historyType => {
-    switch (historyType) {
-      case "dm":
-        this.props.onRequestDMHistory(this.props.user_id);
-        return this.setState({ displayedHistory: "dm" });
-      case "phq9":
-        this.props.onRequestPHQ9History(this.props.user_id);
-        return this.setState({ displayedHistory: "phq9" });
-      case "cbtbr":
-        this.props.onRequestCBTBeliefHistory(this.props.user_id);
-        return this.setState({ displayedHistory: "cbtbr" });
-      case "cbtts":
-        this.props.onRequestCBTThoughtHistory(this.props.user_id);
-        return this.setState({ displayedHistory: "cbtts" });
-      default:
-        break;
+    if (this.props.user_id) {
+      switch (historyType) {
+        case "dm":
+          this.props.onRequestDMHistory(this.props.user_id);
+          return this.setState({ displayedHistory: "dm" });
+        case "phq9":
+          this.props.onRequestPHQ9History(this.props.user_id);
+          return this.setState({ displayedHistory: "phq9" });
+        case "cbtbr":
+          this.props.onRequestCBTBeliefHistory(this.props.user_id);
+          return this.setState({ displayedHistory: "cbtbr" });
+        case "cbtts":
+          this.props.onRequestCBTThoughtHistory(this.props.user_id);
+          return this.setState({ displayedHistory: "cbtts" });
+        default:
+          break;
+      }
     }
   };
 
@@ -191,6 +194,9 @@ class History extends React.Component {
           title="History"
           description="A tool to use to track progress when using other tools available on this website."
         />
+        {!this.props.user_id && (
+          <AlertNotSignedIn ThingsTheyCantDo=" track your usage and statistics of various mental health tools" />
+        )}
         <div className="historySelectContainer">
           <p className="historySelectContainerText">Display History For:</p>
           <SelectionBox

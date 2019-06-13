@@ -2,6 +2,7 @@ import { connect } from "react-redux";
 import React from "react";
 
 import AddSkill from "../../Components/AddSkill/AddSkill";
+import AlertNotSignedIn from "../../Components/AlertNotSignedIn/AlertNotSignedIn";
 import ErrorBox from "../../Components/ErrorBox/ErrorBox";
 import SectionInfo from "../../Components/SectionInfo/SectionInfo";
 import SkillCollapsible from "../../Components/SkillCollapsible/SkillCollapsible";
@@ -269,6 +270,9 @@ class CopingSkills extends React.Component {
             "A list of coping skills to use in situations to help tolerate stress and conflict."
           }
         />
+        {!this.props.user_id && (
+          <AlertNotSignedIn ThingsTheyCantDo=" create your own coping skills, or add shared coping skills to your own list" />
+        )}
         <div className="cs-selection-container">
           <SelectionBox
             id="cs_viewing_box"

@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
+import AlertNotSignedIn from "../../Components/AlertNotSignedIn/AlertNotSignedIn";
 import CBTEventForm from "./CBTEventForm";
 import CBTEventList from "./CBTEventList";
 import InputField from "../../Components/InputField/InputField";
@@ -74,6 +75,9 @@ class CBT extends React.Component {
             "A tool to use to train yourself to think more positively"
           }
         />
+        {!this.props.user_id && (
+          <AlertNotSignedIn ThingsTheyCantDo=" submit, view, or keep track of cbt events" />
+        )}
         {this.state.creatingEvent && (
           <CBTEventForm
             onSubmit={this.onSubmitCBTForm}

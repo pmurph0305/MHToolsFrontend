@@ -1,0 +1,11 @@
+@import "../../styles/shared.scss";
+
+.not-signed-in-alert-container {
+  text-align: center;
+  margin: auto;
+  .not-signed-in-alert {
+    display: inline-block;
+    padding: 0.25em 1em;
+    background-color: $error-background-color;
+  }
+}

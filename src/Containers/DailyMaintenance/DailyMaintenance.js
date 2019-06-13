@@ -1,10 +1,12 @@
 import { connect } from "react-redux";
-import InputField from "../../Components/InputField/InputField";
-import DMDateNav from "../../Components/DMDateNav/DMDateNav";
 import React from "react";
+
+import AlertNotSignedIn from "../../Components/AlertNotSignedIn/AlertNotSignedIn";
+import DMDateNav from "../../Components/DMDateNav/DMDateNav";
+import ErrorBox from "../../Components/ErrorBox/ErrorBox";
+import InputField from "../../Components/InputField/InputField";
 import SectionInfo from "../../Components/SectionInfo/SectionInfo";
 import TaskItem from "./TaskItem/TaskItem";
-import ErrorBox from "../../Components/ErrorBox/ErrorBox";
 
 import "./DailyMaintenance.scss";
 
@@ -180,35 +182,41 @@ class DailyMaintenance extends React.Component {
             "A list of tasks you need to get done throughout the day to stay healthy."
           }
         />
-        <DMDateNav date={date} onClick={this.onDateButtonClick} />
-        {console.log("task state on render", taskList)}
-        {taskList && Array.isArray(taskList)
-          ? taskList.map((task, index) => {
-              return (
-                <TaskItem
-                  allowEditing={allowEditing}
-                  checkbox={"checkbox"}
-                  checked={task["completed"]}
-                  editing={task["editing"]}
-                  id={index}
-                  key={task["task_id"]}
-                  onChange={onTaskTextChange}
-                  onCheck={this.onCheck}
-                  onEditClick={this.onEditClick}
-                  onRemove={this.onRemoveTask}
-                  onRankChange={this.onRankChange}
-                  task={task["task"]}
-                />
-              );
-            })
-          : null}
-        {/* Display input field only if on current date. */}
-        {date === currentDate && user_id && (
-          <InputField
-            placeholder={inputPlaceholder}
-            buttonTitle={"Add new task"}
-            onClick={this.onAddTaskClick}
-          />
+        {!this.props.user_id ? (
+          <AlertNotSignedIn ThingsTheyCantDo=" create, or track, your daily maintenance tasks" />
+        ) : (
+          <>
+            <DMDateNav date={date} onClick={this.onDateButtonClick} />
+            {console.log("task state on render", taskList)}
+            {taskList && Array.isArray(taskList)
+              ? taskList.map((task, index) => {
+                  return (
+                    <TaskItem
+                      allowEditing={allowEditing}
+                      checkbox={"checkbox"}
+                      checked={task["completed"]}
+                      editing={task["editing"]}
+                      id={index}
+                      key={task["task_id"]}
+                      onChange={onTaskTextChange}
+                      onCheck={this.onCheck}
+                      onEditClick={this.onEditClick}
+                      onRemove={this.onRemoveTask}
+                      onRankChange={this.onRankChange}
+                      task={task["task"]}
+                    />
+                  );
+                })
+              : null}
+            {/* Display input field only if on current date. */}
+            {date === currentDate && user_id && (
+              <InputField
+                placeholder={inputPlaceholder}
+                buttonTitle={"Add new task"}
+                onClick={this.onAddTaskClick}
+              />
+            )}
+          </>
         )}
         {taskListError && <ErrorBox error={taskListError} />}
       </section>

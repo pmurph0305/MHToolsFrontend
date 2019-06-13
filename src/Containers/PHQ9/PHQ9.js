@@ -1,7 +1,10 @@
 import React from "react";
-import Table from "./Table/Table";
+import { connect } from "react-redux";
+
+import AlertNotSignedIn from "../../Components/AlertNotSignedIn/AlertNotSignedIn";
 import SectionInfo from "../../Components/SectionInfo/SectionInfo";
 import SelectionBox from "../../Components/SelectionBox/SelectionBox";
+import Table from "./Table/Table";
 
 import "./PHQ9.scss";
 
@@ -44,6 +47,12 @@ const phq9Q10SelectionOptions = [
 // Initial state of the PHQ-9 Answers.
 const initialState = {
   answers: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+};
+
+const mapStateToProps = state => {
+  return {
+    user_id: state.appReducer.user_id
+  };
 };
 
 class PHQ9 extends React.Component {
@@ -127,6 +136,9 @@ class PHQ9 extends React.Component {
             "The Patient Health Questionnaire (PHQ-9) is a multipurpose tool used for screening, diagnosing, and monitoring the severity of depression."
           }
         />
+        {!this.props.user_id && (
+          <AlertNotSignedIn ThingsTheyCantDo=" submit, or keep track of your PHQ9 scores" />
+        )}
         <Table
           tClass="TableClass"
           trClass="TableRow"
@@ -142,4 +154,4 @@ class PHQ9 extends React.Component {
   }
 }
 
-export default PHQ9;
+export default connect(mapStateToProps)(PHQ9);
