@@ -68,7 +68,6 @@ class DailyMaintenance extends React.Component {
       (!this.props.taskList || this.props.taskList.length === 0) &&
       this.props.user_id
     ) {
-      console.log("A");
       // get the current date, slice it to work with database.
       let date = new Date().toISOString().slice(0, 10);
       this.props.onRequestDMTaskList(this.props.user_id, date);
