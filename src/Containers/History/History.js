@@ -68,7 +68,7 @@ class History extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      displayedHistory: ""
+      displayedHistory: "dm"
     };
   }
 
@@ -88,11 +88,41 @@ class History extends React.Component {
   componentDidUpdate() {
     if (this.props.user_id) {
       // only update history on update if we don't have state yet.
-      if (this.state.displayedHistory === "") {
-        this.onRequestHistory("dm");
+      if (!this.props.isPending) {
+        if (
+          this.state.displayedHistory === "dm" &&
+          this.isNotArrayOrNoLength(this.props.dm)
+        ) {
+          this.onRequestHistory("dm");
+        } else if (
+          this.state.displayedHistory === "phq9" &&
+          this.isNotArrayOrNoLength(this.props.phq9)
+        ) {
+          this.onRequestHistory("phq9");
+        } else if (
+          this.state.displayedHistory === "cbtbr" &&
+          this.isNotArrayOrNoLength(this.props.cbtbr)
+        ) {
+          this.onRequestHistory("cbtbr");
+        } else if (
+          this.state.displayedHistory === "cbtts" &&
+          this.isNotArrayOrNoLength(this.props.cbtts)
+        ) {
+          this.onRequestHistory("cbtts");
+        }
       }
     }
   }
+
+  isNotArrayOrNoLength = array => {
+    if (!Array.isArray(array) || !array.length) {
+      console.log("false");
+      return true;
+    } else {
+      console.log("true");
+      return false;
+    }
+  };
 
   dmDataProcess() {
     if (this.props.dm.length) {
@@ -153,17 +183,13 @@ class History extends React.Component {
     if (this.props.user_id) {
       switch (historyType) {
         case "dm":
-          this.props.onRequestDMHistory(this.props.user_id);
-          return this.setState({ displayedHistory: "dm" });
+          return this.props.onRequestDMHistory(this.props.user_id);
         case "phq9":
-          this.props.onRequestPHQ9History(this.props.user_id);
-          return this.setState({ displayedHistory: "phq9" });
+          return this.props.onRequestPHQ9History(this.props.user_id);
         case "cbtbr":
-          this.props.onRequestCBTBeliefHistory(this.props.user_id);
-          return this.setState({ displayedHistory: "cbtbr" });
+          return this.props.onRequestCBTBeliefHistory(this.props.user_id);
         case "cbtts":
-          this.props.onRequestCBTThoughtHistory(this.props.user_id);
-          return this.setState({ displayedHistory: "cbtts" });
+          return this.props.onRequestCBTThoughtHistory(this.props.user_id);
         default:
           break;
       }
@@ -173,12 +199,16 @@ class History extends React.Component {
   onSelectHistoryDisplayed = event => {
     switch (event.target.value) {
       case "0":
+        this.setState({ displayedHistory: "dm" });
         return this.onRequestHistory("dm");
       case "1":
+        this.setState({ displayedHistory: "phq9" });
         return this.onRequestHistory("phq9");
       case "2":
+        this.setState({ displayedHistory: "cbtts" });
         return this.onRequestHistory("cbtts");
       case "3":
+        this.setState({ displayedHistory: "cbtbr" });
         return this.onRequestHistory("cbtbr");
       default:
         break;
@@ -197,7 +227,7 @@ class History extends React.Component {
           <AlertNotSignedIn ThingsTheyCantDo=" track your usage and statistics of various mental health tools" />
         )}
         <div className="historySelectContainer">
-          <p className="historySelectContainerText">Display History For:</p>
+          <p className="historySelectContainerText">History:</p>
           <SelectionBox
             options={[
               "Daily Maintenance",
@@ -213,6 +243,8 @@ class History extends React.Component {
         <div className="historyChartContainer">
           {isPending ? (
             <p>Loading Data...</p>
+          ) : !this.props.user_id ? (
+            <></>
           ) : error ? (
             <ErrorBox error={error} />
           ) : this.state.displayedHistory === "dm" ? (
