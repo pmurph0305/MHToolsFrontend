@@ -86,34 +86,26 @@ class History extends React.Component {
       if (!this.props.isPending) {
         if (
           this.state.displayedHistory === "dm" &&
-          this.isNotArrayOrNoLength(this.props.dm)
+          !Array.isArray(this.props.dm)
         ) {
           this.onRequestHistory("dm");
         } else if (
           this.state.displayedHistory === "phq9" &&
-          this.isNotArrayOrNoLength(this.props.phq9)
+          !Array.isArray(this.props.phq9)
         ) {
           this.onRequestHistory("phq9");
         } else if (
           this.state.displayedHistory === "cbtbr" &&
-          this.isNotArrayOrNoLength(this.props.cbtbr)
+          !Array.isArray(this.props.cbtbr)
         ) {
           this.onRequestHistory("cbtbr");
         } else if (
           this.state.displayedHistory === "cbtts" &&
-          this.isNotArrayOrNoLength(this.props.cbtts)
+          !Array.isArray(this.props.cbtts)
         ) {
           this.onRequestHistory("cbtts");
         }
       }
-    }
-  };
-
-  isNotArrayOrNoLength = array => {
-    if (!Array.isArray(array) || !array.length) {
-      return true;
-    } else {
-      return false;
     }
   };
 

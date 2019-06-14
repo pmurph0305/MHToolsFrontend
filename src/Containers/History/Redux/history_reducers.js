@@ -111,7 +111,7 @@ function handleErrors(state, action) {
   } else {
     return updateObject(state, {
       isPending: false,
-      error: "Error getting history data."
+      error: "No data found."
     });
   }
 }
