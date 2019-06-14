@@ -14,3 +14,9 @@
     margin-top: 2.5em;
   }
 }
+
+.cbt-event-submit {
+  @extend %ButtonBase;
+  padding-left: 2em;
+  padding-right: 2em;
+}

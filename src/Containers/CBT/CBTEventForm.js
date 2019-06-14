@@ -111,7 +111,7 @@ class CBTEventForm extends React.Component {
           minLabel={"Less"}
           maxLabel={"More"}
         />
-        <input type="submit" value="Submit" />
+        <input className="cbt-event-submit" type="submit" value="Submit" />
       </form>
     );
   }
