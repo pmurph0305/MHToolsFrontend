@@ -27,6 +27,7 @@ const mapStateToProps = state => {
   return {
     user_id: state.appReducer.user_id,
     coping_skills: state.CSReducer.skills.coping_skills,
+    isPending: state.CSReducer.skills.isPending,
     error: state.CSReducer.skills.error,
     shared_order: state.CSReducer.skills.shared_order,
     viewing: state.CSReducer.skills.viewing
@@ -204,10 +205,7 @@ class CopingSkills extends React.Component {
     }
     if (this.props.user_id) {
       // make sure on refresh, once user_id is set, and no state for coping skills, we request it.
-      if (
-        !Array.isArray(this.props.coping_skills) ||
-        !this.props.coping_skills.length
-      ) {
+      if (!Array.isArray(this.props.coping_skills) && !this.props.isPending) {
         document.getElementById("cs_viewing_box").selectedIndex = "0";
         this.props.onChangeViewing("user");
         this.props.onGetUserSkills(this.props.user_id);
@@ -216,18 +214,23 @@ class CopingSkills extends React.Component {
   }
 
   modifyExpandedCollapsibleSize() {
-    this.props.coping_skills.forEach((skill, index) => {
-      if (skill.hasOwnProperty("editing")) {
-        let text = document.getElementById("cDescContainer_" + index);
-        if (text && text.style.maxHeight) {
-          let desc = document.getElementById("cDescArea_" + index);
-          if (desc) {
-            desc.style.height = desc.scrollHeight + "px";
+    if (
+      Array.isArray(this.props.coping_skills) &&
+      this.props.coping_skills.length
+    ) {
+      this.props.coping_skills.forEach((skill, index) => {
+        if (skill.hasOwnProperty("editing")) {
+          let text = document.getElementById("cDescContainer_" + index);
+          if (text && text.style.maxHeight) {
+            let desc = document.getElementById("cDescArea_" + index);
+            if (desc) {
+              desc.style.height = desc.scrollHeight + "px";
+            }
+            text.style.maxHeight = text.scrollHeight + "px";
           }
-          text.style.maxHeight = text.scrollHeight + "px";
         }
-      }
-    });
+      });
+    }
   }
 
   onEditSkillClick(index) {

@@ -8,34 +8,62 @@ import {
 } from "../../../ReduxHelpers/reduxHelpers";
 
 import {
+  // GET users or shared coping skills.
   REQUEST_CS_USER_SUCCESS,
+  REQUEST_CS_USER_PENDING,
   REQUEST_CS_USER_FAILED,
+
+  // ADD entered Coping skill to user list.
   ADD_CS_USER_SUCCESS,
+  ADD_CS_USER_PENDING,
   ADD_CS_USER_FAILED,
+
+  // DELETE coping skill from user list.
   DELETE_CS_USER_SUCCESS,
+  DELETE_CS_USER_PENDING,
   DELETE_CS_USER_FAILED,
+
+  // Add shared coping skill to user list.
   ADD_CS_SHARED_SUCCESS,
+  ADD_CS_SHARED_PENDING,
   ADD_CS_SHARED_FAILED,
+
+  // Update user's coping skill.
+  UPDATE_CS_SUCCESS,
+  UPDATE_CS_PENDING,
+  UPDATE_CS_FAILED,
+
+  // CHANGE VIEWING
   CHANGE_CS_VIEWING,
   CHANGE_CS_SHARED_ORDER,
-  CHANGE_CS_EDITING,
+
+  // PUT Share a user's coping skill.
+  REQUEST_CS_SHARE_PENDING,
   REQUEST_CS_SHARE_SUCCESS,
   REQUEST_CS_SHARE_FAILED,
-  UPDATE_CS_SUCCESS,
-  UPDATE_CS_FAILED
+  CHANGE_CS_EDITING
 } from "./cs_constants";
 
 import { LOG_OUT_USER } from "../../App/Redux/app_constants";
 
 const initialState = {
-  coping_skills: [],
+  coping_skills: "",
   error: "",
   viewing: "user",
-  shared_order: 0
+  shared_order: 0,
+  isPending: false
 };
 
 function copingSkillsReducer(state = initialState, action = {}) {
   switch (action.type) {
+    case REQUEST_CS_SHARE_PENDING:
+    case REQUEST_CS_USER_PENDING:
+    case ADD_CS_USER_PENDING:
+    case DELETE_CS_USER_PENDING:
+    case ADD_CS_SHARED_PENDING:
+    case UPDATE_CS_PENDING:
+      return setIsPending(state, action);
+
     case REQUEST_CS_USER_SUCCESS:
       return setCopingSkillsList(state, action);
     case REQUEST_CS_USER_FAILED:
@@ -83,6 +111,10 @@ function copingSkillsReducer(state = initialState, action = {}) {
   }
 }
 
+function setIsPending(state, action) {
+  return updateObject(state, { isPending: true });
+}
+
 function updateCopingSkill(state, action) {
   if (Array.isArray(action.payload) && action.payload[0]) {
     let updatedSkills = updateItemByPropertyStringInArray(
@@ -93,9 +125,12 @@ function updateCopingSkill(state, action) {
         return updateObject(skill, action.payload[0]);
       }
     );
-    return updateObject(state, { coping_skills: updatedSkills });
+    return updateObject(state, {
+      coping_skills: updatedSkills,
+      isPending: false
+    });
   } else {
-    return updateObject(state, { error: action.payload });
+    return updateObject(state, { error: action.payload, isPending: false });
   }
 }
 
@@ -106,12 +141,15 @@ function setCopingSkillAsShared(state, action) {
       "skill_id",
       action.payload[0]["skill_id"],
       skill => {
-        return updateObject(skill, { shared: true });
+        return updateObject(skill, { shared: true, isPending: false });
       }
     );
-    return updateObject(state, { coping_skills: updatedSkills });
+    return updateObject(state, {
+      coping_skills: updatedSkills,
+      isPending: false
+    });
   } else {
-    return updateObject(state, { error: action.payload });
+    return updateObject(state, { error: action.payload, isPending: false });
   }
 }
 
@@ -120,15 +158,21 @@ function changeCSEditing(state, action) {
     state.coping_skills,
     action.payload,
     skill => {
-      return updateObject(skill, { editing: !skill["editing"] });
+      return updateObject(skill, {
+        editing: !skill["editing"],
+        isPending: false
+      });
     }
   );
-  return updateObject(state, { coping_skills: updatedSkills });
+  return updateObject(state, {
+    coping_skills: updatedSkills,
+    isPending: false
+  });
 }
 
 function changeCSViewing(state, action) {
   if (action.payload) {
-    return updateObject(state, { viewing: action.payload });
+    return updateObject(state, { viewing: action.payload, isPending: false });
   } else {
     return state;
   }
@@ -136,7 +180,10 @@ function changeCSViewing(state, action) {
 
 function changeCSSharedOrder(state, action) {
   if (action.payload) {
-    return updateObject(state, { shared_order: action.payload });
+    return updateObject(state, {
+      shared_order: action.payload,
+      isPending: false
+    });
   } else {
     return state;
   }
@@ -151,7 +198,7 @@ function addNewCopingSkill(state, action) {
       });
     }
     skills.push(action.payload[0]);
-    return updateObject(state, { coping_skills: skills });
+    return updateObject(state, { coping_skills: skills, isPending: false });
   } else {
     return setCopingSkillsError(state, action);
   }
@@ -173,7 +220,7 @@ function removeSkillFromSkillList(state, action) {
     let skills = state.coping_skills.filter(
       skill => skill.skill_id !== removeId
     );
-    return updateObject(state, { coping_skills: skills });
+    return updateObject(state, { coping_skills: skills, isPending: false });
   } else {
     return state;
   }
@@ -182,7 +229,11 @@ function removeSkillFromSkillList(state, action) {
 function setCopingSkillsList(state, action) {
   // no length as no coping skills returns empty array.
   if (Array.isArray(action.payload)) {
-    return updateObject(state, { coping_skills: action.payload, error: "" });
+    return updateObject(state, {
+      coping_skills: action.payload,
+      error: "",
+      isPending: false
+    });
   } else {
     return setCopingSkillsError(state, action);
   }
@@ -202,4 +253,7 @@ function setCopingSkillsError(state, action) {
   }
 }
 
-export const CSReducer = combineReducers({ skills: copingSkillsReducer });
+export const CSReducer = combineReducers({
+  skills: copingSkillsReducer,
+  isPending: false
+});
