@@ -42,7 +42,7 @@ class AppRouter extends React.Component {
 
   render() {
     return (
-      <Router>
+      <Router basename={process.env.PUBLIC_URL}>
         <NavBar
           onModalChange={this.props.onModalChange}
           isSignedIn={this.props.user_id ? true : false}
