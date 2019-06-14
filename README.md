@@ -6,4 +6,4 @@ This project was created as a way to learn many different concepts of both front
 
 Currently, in the code often times similar things are done in different ways. This was done to better understand and familiarize myself with different concepts, methods, and practices. The plan is to continue to use this project as a way to better understand web development.
 
-This project can be ran locally using `npm start` and will eventually be deployed on gh-pages with the back-end deployed on heroku.
+This project can be ran locally using `npm start` and is also deployed on gh-pages with the backend on heroku. Since the backend is on a free heroku plan, it can take up to a minute for the backend to wake up from sleeping.
