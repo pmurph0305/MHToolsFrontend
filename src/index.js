@@ -19,8 +19,8 @@ import { CBTReducer } from "./Containers/CBT/Redux/cbt_reducers";
 //Redux middleware.
 import thunkMiddleware from "redux-thunk";
 
-import { createLogger } from "redux-logger";
-const logger = createLogger();
+// import { createLogger } from "redux-logger";
+// const logger = createLogger();
 
 const rootReducer = combineReducers({
   appReducer,
@@ -30,12 +30,12 @@ const rootReducer = combineReducers({
   CBTReducer
 });
 
-const store = createStore(
-  rootReducer,
-  applyMiddleware(thunkMiddleware, logger)
-);
+// const store = createStore(
+//   rootReducer,
+//   applyMiddleware(thunkMiddleware, logger)
+// );
 
-//const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
+const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
 
 ReactDOM.render(
   <Provider store={store}>

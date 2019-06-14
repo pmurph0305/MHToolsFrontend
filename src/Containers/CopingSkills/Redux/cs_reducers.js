@@ -160,7 +160,6 @@ function addNewCopingSkill(state, action) {
 function addSharedCopingSkill(state, action) {
   // if user is viewing the shared list still, don't add to the state.
   if (state.viewing === "shared") {
-    console.log("shared", action.payload);
     return state;
   } else {
     // otherwise they are viewing their own list, so add the skill to the state.
@@ -176,7 +175,7 @@ function removeSkillFromSkillList(state, action) {
     );
     return updateObject(state, { coping_skills: skills });
   } else {
-    console.log("TODO: UNKNOWN DELETE ISSUE", action.payload);
+    return state;
   }
 }
 

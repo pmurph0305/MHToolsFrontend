@@ -59,22 +59,37 @@ class DailyMaintenance extends React.Component {
     // Don't get data on remounting if the data is already in the state.
     if (
       (!Array.isArray(this.props.taskList) || !this.props.taskList.length) &&
-      this.props.user_id
+      this.props.user_id &&
+      !this.props.taskListIsPending
     ) {
       // get the current date, slice it to work with database.
-      let date = new Date().toISOString().slice(0, 10);
+      let date = this.getLocalDate();
       this.props.onRequestDMTaskList(this.props.user_id, date);
     }
   }
+
+  getLocalDate = () => {
+    let date = new Date();
+    let month = date.getMonth() + 1;
+    let day = date.getDate();
+    return (
+      date.getFullYear() +
+      "-" +
+      (month < 10 ? "0" + month : month) +
+      "-" +
+      (day < 10 ? "0" + day : day)
+    );
+  };
 
   componentDidUpdate() {
     // Don't get data on update if the data is already in the state.
     if (
       (!Array.isArray(this.props.taskList) || !this.props.taskList.length) &&
-      this.props.user_id
+      this.props.user_id &&
+      !this.props.taskListIsPending
     ) {
       // get the current date, slice it to work with database.
-      let date = new Date().toISOString().slice(0, 10);
+      let date = this.getLocalDate();
       this.props.onRequestDMTaskList(this.props.user_id, date);
     }
   }
@@ -124,11 +139,22 @@ class DailyMaintenance extends React.Component {
     // Save in case anything has been edited.
     this.onSaveClick();
     // Send request for date change.
-    this.props.onRequestDMTaskList(
-      this.props.user_id,
-      this.props.date,
-      Number(event.target.value)
-    );
+    if (event.target.value === "1") {
+      let date = this.getLocalDate();
+      if (date !== this.props.date) {
+        this.props.onRequestDMTaskList(
+          this.props.user_id,
+          this.props.date,
+          Number(event.target.value)
+        );
+      }
+    } else {
+      this.props.onRequestDMTaskList(
+        this.props.user_id,
+        this.props.date,
+        Number(event.target.value)
+      );
+    }
   };
 
   // Handles when edit task icon is clicked.

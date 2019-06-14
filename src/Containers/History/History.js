@@ -73,19 +73,14 @@ class History extends React.Component {
   }
 
   componentDidMount() {
-    // make sure we have a user_id before requesting history.
-    if (this.props.user_id && this.state.displayedHistory === "") {
-      if (this.state.displayedHistory === "") {
-        this.onRequestHistory("dm");
-      } else {
-        // re-get current history on mount, as user can update
-        // data between mounts.
-        this.onRequestHistory(this.state.displayedHistory);
-      }
-    }
+    this.getHistoryIfNeeded();
   }
 
   componentDidUpdate() {
+    this.getHistoryIfNeeded();
+  }
+
+  getHistoryIfNeeded = () => {
     if (this.props.user_id) {
       // only update history on update if we don't have state yet.
       if (!this.props.isPending) {
@@ -112,14 +107,12 @@ class History extends React.Component {
         }
       }
     }
-  }
+  };
 
   isNotArrayOrNoLength = array => {
     if (!Array.isArray(array) || !array.length) {
-      console.log("false");
       return true;
     } else {
-      console.log("true");
       return false;
     }
   };

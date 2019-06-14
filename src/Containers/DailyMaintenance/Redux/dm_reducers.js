@@ -158,8 +158,7 @@ function setDMTaskList(state, action) {
     });
   } else {
     return updateObject(state, {
-      dm_isPending: false,
-      dm_date: new Date().toISOString().slice(0, 10)
+      dm_isPending: false
     });
   }
 }

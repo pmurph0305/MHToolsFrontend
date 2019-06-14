@@ -96,7 +96,6 @@ class App extends Component {
     })
       .then(response => response.json())
       .then(data => {
-        console.log(data);
         if (data.token && data.id) {
           window.sessionStorage.setItem("token", data.token);
           this.onToggleModal();
@@ -167,7 +166,6 @@ class App extends Component {
       } else if (e.target.elements[2].value.length > 255) {
         return this.setFormError("Password is too long");
       }
-      console.log(e.target.elements[4].value);
       this.onRegister(
         e.target.elements[0].value,
         e.target.elements[1].value,
@@ -197,7 +195,6 @@ class App extends Component {
   };
 
   onModalChange = modalType => {
-    console.log("modal change", modalType);
     if (modalType === "signout") {
       this.onSignOut();
     } else {

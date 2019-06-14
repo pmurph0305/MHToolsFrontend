@@ -208,6 +208,8 @@ class CopingSkills extends React.Component {
         !Array.isArray(this.props.coping_skills) ||
         !this.props.coping_skills.length
       ) {
+        document.getElementById("cs_viewing_box").selectedIndex = "0";
+        this.props.onChangeViewing("user");
         this.props.onGetUserSkills(this.props.user_id);
       }
     }
