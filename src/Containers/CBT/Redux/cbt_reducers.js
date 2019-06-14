@@ -12,7 +12,7 @@ import { LOG_OUT_USER } from "../../App/Redux/app_constants";
 import { resetState, updateObject } from "../../../ReduxHelpers/reduxHelpers";
 
 const initialState = {
-  cbt_events: [],
+  cbt_events: "",
   cbt_isPending: false,
   cbt_error: ""
 };
