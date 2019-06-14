@@ -43,7 +43,7 @@ export const onDMSaveClick = (id, updatedTasks) => dispatch => {
  */
 export const requestDMTasks = (id, date, change) => dispatch => {
   dispatch({ type: REQUEST_DM_TASKS_PENDING });
-  if (change) {
+  if (change && date) {
     fetchURLWithJsonAuth(`${DM_URL}/${id}/${date}/${change}`, "GET")
       .then(response => response.json())
       .then(data => {
@@ -52,8 +52,7 @@ export const requestDMTasks = (id, date, change) => dispatch => {
       .catch(err => {
         dispatch({ type: REQUEST_DM_TASKS_FAILED, payload: err });
       });
-  } else {
-    dispatch({ type: REQUEST_DM_TASKS_PENDING });
+  } else if (date) {
     fetchURLWithJsonAuth(`${DM_URL}/${id}/${date}`, "GET")
       .then(response => response.json())
       .then(data => {

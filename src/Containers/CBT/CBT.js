@@ -42,10 +42,7 @@ class CBT extends React.Component {
   }
 
   getPreviousEventsIfLoggedIn = () => {
-    if (
-      this.props.user_id &&
-      (!Array.isArray(this.props.cbt_events) || !this.props.cbt_events.length)
-    ) {
+    if (this.props.user_id && !Array.isArray(this.props.cbt_events)) {
       this.props.onGetCBTEvents(this.props.user_id);
     }
   };

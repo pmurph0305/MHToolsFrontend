@@ -1,18 +1,15 @@
 import {
-  // REQUEST_DM_TASKS_PENDING,
+  REQUEST_DM_TASKS_PENDING,
   REQUEST_DM_TASKS_SUCCESS,
   // REQUEST_DM_TASKS_FAILED,
-
-  //  REQUEST_ADD_DM_TASK_PENDING,
+  REQUEST_ADD_DM_TASK_PENDING,
   REQUEST_ADD_DM_TASK_SUCCESS,
   // REQUEST_ADD_DM_TASK_FAILED,
-
-  //  REMOVE_DM_TASK_PENDING,
+  REMOVE_DM_TASK_PENDING,
   REMOVE_DM_TASK_SUCCESS,
   //  REMOVE_DM_TASK_FAILED,
   REQUEST_CHECK_DM_TASK_SUCCESS,
-
-  //  UPDATE_DM_TASK_PENDING,
+  UPDATE_DM_TASK_PENDING,
   UPDATE_DM_TASK_SUCCESS,
   // UPDATE_DM_TASK_FAILED,
   CHANGE_DM_TASK_TEXT,
@@ -23,19 +20,31 @@ import {
 import { LOG_OUT_USER } from "../../App/Redux/app_constants";
 
 import { resetState } from "../../../ReduxHelpers/reduxHelpers";
+import {
+  REQUEST_CS_SHARE_PENDING,
+  REQUEST_CS_USER_PENDING
+} from "../../CopingSkills/Redux/cs_constants";
 
 // Task list state management
 const initialState = {
   dm_error: "",
   dm_isPending: false,
-  dm_taskList: [],
+  dm_taskList: "",
   dm_date: "",
   dm_editing: ""
 };
 
 // Reducer for getting/updating/creating/modifying tasks.
-function dmTasksReducer(state = [initialState], action) {
+function dmTasksReducer(state = initialState, action) {
   switch (action.type) {
+    case REQUEST_ADD_DM_TASK_PENDING:
+    case REQUEST_CS_SHARE_PENDING:
+    case REQUEST_CS_USER_PENDING:
+    case REQUEST_DM_TASKS_PENDING:
+    case REMOVE_DM_TASK_PENDING:
+    case UPDATE_DM_TASK_PENDING:
+      return setRequestPending(state, action);
+
     case REQUEST_DM_TASKS_SUCCESS:
       return setDMTaskList(state, action);
     case REQUEST_ADD_DM_TASK_SUCCESS:
@@ -67,6 +76,10 @@ export const DMReducer = dmTasksReducer;
 // export const DMReducer = combineReducers({
 //     tasks: dmTasksReducer,
 // })
+
+function setRequestPending(state, action) {
+  return updateObject(state, { dm_isPending: true });
+}
 
 function changeDMTaskEditing(state, action) {
   const tasks = updateItemByIndexInArray(
@@ -154,11 +167,13 @@ function setDMTaskList(state, action) {
   } else if (action.payload === "Unauthorized Request") {
     return updateObject(state, {
       dm_isPending: false,
-      dm_error: "You are not logged in."
+      dm_error: "You are not logged in.",
+      dm_taskList: []
     });
   } else {
     return updateObject(state, {
-      dm_isPending: false
+      dm_isPending: false,
+      dm_taskList: []
     });
   }
 }

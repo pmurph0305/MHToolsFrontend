@@ -57,11 +57,7 @@ class DailyMaintenance extends React.Component {
   // Lifecycles:
   componentDidMount() {
     // Don't get data on remounting if the data is already in the state.
-    if (
-      (!Array.isArray(this.props.taskList) || !this.props.taskList.length) &&
-      this.props.user_id &&
-      !this.props.taskListIsPending
-    ) {
+    if (!Array.isArray(this.props.taskList) && this.props.user_id) {
       // get the current date, slice it to work with database.
       let date = this.getLocalDate();
       this.props.onRequestDMTaskList(this.props.user_id, date);
@@ -84,10 +80,13 @@ class DailyMaintenance extends React.Component {
   componentDidUpdate() {
     // Don't get data on update if the data is already in the state.
     if (
-      (!Array.isArray(this.props.taskList) || !this.props.taskList.length) &&
+      !Array.isArray(this.props.taskList) &&
       this.props.user_id &&
-      !this.props.taskListIsPending
+      !this.props.taskListIsPending &&
+      !this.props.taskListError
     ) {
+      console.log("req2");
+      console.log(this.props.taskList);
       // get the current date, slice it to work with database.
       let date = this.getLocalDate();
       this.props.onRequestDMTaskList(this.props.user_id, date);
@@ -237,7 +236,7 @@ class DailyMaintenance extends React.Component {
                 })
               : null}
             {/* Display input field only if on current date. */}
-            {date === currentDate && user_id && (
+            {(date === currentDate || !date) && user_id && (
               <InputField
                 placeholder={inputPlaceholder}
                 buttonTitle={"Add new task"}
