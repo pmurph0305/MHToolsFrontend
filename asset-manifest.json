@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/mhtools/static/css/main.ec503d83.chunk.css",
+    "main.js": "/mhtools/static/js/main.b5d2042a.chunk.js",
+    "main.js.map": "/mhtools/static/js/main.b5d2042a.chunk.js.map",
+    "runtime~main.js": "/mhtools/static/js/runtime~main.50218cfc.js",
+    "runtime~main.js.map": "/mhtools/static/js/runtime~main.50218cfc.js.map",
+    "static/js/2.d1751e7e.chunk.js": "/mhtools/static/js/2.d1751e7e.chunk.js",
+    "static/js/2.d1751e7e.chunk.js.map": "/mhtools/static/js/2.d1751e7e.chunk.js.map",
+    "index.html": "/mhtools/index.html",
+    "precache-manifest.c3741887ca11d6a0de14e27efd63fe9e.js": "/mhtools/precache-manifest.c3741887ca11d6a0de14e27efd63fe9e.js",
+    "service-worker.js": "/mhtools/service-worker.js",
+    "static/css/main.ec503d83.chunk.css.map": "/mhtools/static/css/main.ec503d83.chunk.css.map"
+  }
+}
