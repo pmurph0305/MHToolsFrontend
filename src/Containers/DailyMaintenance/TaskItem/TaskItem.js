@@ -1,5 +1,7 @@
 import React from "react";
+
 import ClickableIcon from "../../../Components/ClickableIcon/ClickableIcon";
+
 import "./TaskItem.scss";
 
 /**

@@ -85,8 +85,6 @@ class DailyMaintenance extends React.Component {
       !this.props.taskListIsPending &&
       !this.props.taskListError
     ) {
-      console.log("req2");
-      console.log(this.props.taskList);
       // get the current date, slice it to work with database.
       let date = this.getLocalDate();
       this.props.onRequestDMTaskList(this.props.user_id, date);

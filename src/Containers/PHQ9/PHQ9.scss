@@ -25,6 +25,11 @@
     &:first-child {
       border-left: 1px solid $primary-color;
     }
+
+    @media screen and (max-width: 45em) {
+      display: block;
+      border-left: 1px solid $primary-color;
+    }
   }
 
   .TableCell {
@@ -37,6 +42,15 @@
     // Align button center.
     &:last-child {
       text-align: center;
+    }
+
+    @media screen and (max-width: 45em) {
+      display: block;
+      text-align: center;
+      min-height: 0px;
+      &:first-child {
+        padding: 0;
+      }
     }
   }
 
@@ -55,6 +69,11 @@
   margin: 0;
   padding: 0.25rem;
   color: $primary-text-color;
+
+  @media screen and (max-width: 45em) {
+    display: block;
+    text-align: center;
+  }
 }
 
 .SubmissionSuccess {
