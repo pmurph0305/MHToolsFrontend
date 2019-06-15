@@ -1,6 +1,9 @@
 version: 2.1
 jobs:
   build:
+    branches:
+      only:
+        - master
     docker:
       - image: circleci/node:10.15.1
     steps:
@@ -12,6 +15,9 @@ jobs:
       # If any warnings are encountered then the build fails. (CI=true)
       - run: CI=true npm run build
   test_coverage:
+    branches:
+      only:
+        - master
     docker:
       - image: circleci/node:10.15.1
     steps:
