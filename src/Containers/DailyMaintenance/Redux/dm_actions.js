@@ -69,11 +69,12 @@ export const requestDMTasks = (id, date, change) => dispatch => {
  * @param  {string} task text of the task to be added
  * @param  {number} rank new rank of the task to be added.
  */
-export const addDMTask = (id, task, rank) => dispatch => {
+export const addDMTask = (id, task, rank, date) => dispatch => {
   dispatch({ type: REQUEST_ADD_DM_TASK_PENDING });
   fetchURLWithJsonAuth(`${DM_URL}/${id}`, "POST", {
     task: task,
-    rank: rank
+    rank: rank,
+    date: date
   })
     .then(response => response.json())
     .then(data => {
