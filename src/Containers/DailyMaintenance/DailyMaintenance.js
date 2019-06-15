@@ -42,7 +42,8 @@ const mapDispatchToProps = dispatch => {
       dispatch(swapDMTaskRanks(index1, index2)),
     onRequestDMTaskList: (id, date, change) =>
       dispatch(requestDMTasks(id, date, change)),
-    onAddDMTask: (id, task, rank) => dispatch(addDMTask(id, task, rank)),
+    onAddDMTask: (id, task, rank, date) =>
+      dispatch(addDMTask(id, task, rank, date)),
     onToggleDMTask: (id, task_id, index, checked) =>
       dispatch(toggleDMTask(id, task_id, index, checked)),
     onTaskTextChange: (id, text) => dispatch(changeDMTaskName(id, text)),
@@ -118,7 +119,12 @@ class DailyMaintenance extends React.Component {
         // if rank list doesn't have a length, start at rank 0.
         rank = 0;
       }
-      this.props.onAddDMTask(this.props.user_id, inputField.value, rank);
+      this.props.onAddDMTask(
+        this.props.user_id,
+        inputField.value,
+        rank,
+        this.props.date || this.getLocalDate()
+      );
       // clear input field.
       inputField.value = "";
     }

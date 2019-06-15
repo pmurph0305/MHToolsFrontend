@@ -120,7 +120,15 @@ function addDMTask(state, action) {
       action.payload[0]["updated"] = false;
     }
     tasks.push(action.payload[0]);
-    return updateObject(state, { dm_isPending: false, dm_taskList: tasks });
+    let date = state.dm_date;
+    if (!date) {
+      date = action.payload[0].date;
+    }
+    return updateObject(state, {
+      dm_isPending: false,
+      dm_taskList: tasks,
+      dm_date: date
+    });
   } else {
     return Object.assign({}, state.dm_taskList, {
       dm_isPending: false,
@@ -171,6 +179,11 @@ function setDMTaskList(state, action) {
       dm_taskList: []
     });
   } else {
+    if (action.payload === "No data exists for previous date for user.") {
+      return updateObject(state, {
+        dm_isPending: false
+      });
+    }
     return updateObject(state, {
       dm_isPending: false,
       dm_taskList: []
