@@ -76,35 +76,18 @@ class History extends React.Component {
     this.getHistoryIfNeeded();
   }
 
-  componentDidUpdate() {
-    this.getHistoryIfNeeded();
+  componentDidUpdate(prevProps) {
+    console.log(prevProps);
+    if (!prevProps.user_id) {
+      this.getHistoryIfNeeded();
+    }
   }
 
   getHistoryIfNeeded = () => {
     if (this.props.user_id) {
       // only update history on update if we don't have state yet.
       if (!this.props.isPending) {
-        if (
-          this.state.displayedHistory === "dm" &&
-          !Array.isArray(this.props.dm)
-        ) {
-          this.onRequestHistory("dm");
-        } else if (
-          this.state.displayedHistory === "phq9" &&
-          !Array.isArray(this.props.phq9)
-        ) {
-          this.onRequestHistory("phq9");
-        } else if (
-          this.state.displayedHistory === "cbtbr" &&
-          !Array.isArray(this.props.cbtbr)
-        ) {
-          this.onRequestHistory("cbtbr");
-        } else if (
-          this.state.displayedHistory === "cbtts" &&
-          !Array.isArray(this.props.cbtts)
-        ) {
-          this.onRequestHistory("cbtts");
-        }
+        this.onRequestHistory(this.state.displayedHistory);
       }
     }
   };

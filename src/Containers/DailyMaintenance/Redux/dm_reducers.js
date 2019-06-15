@@ -122,7 +122,7 @@ function addDMTask(state, action) {
     tasks.push(action.payload[0]);
     let date = state.dm_date;
     if (!date) {
-      date = action.payload[0].date;
+      date = action.payload[0].date.slice(0, 10);
     }
     return updateObject(state, {
       dm_isPending: false,
