@@ -8,12 +8,16 @@
 
 .DateNavButton {
   @extend %ButtonBase;
-  padding: 0.5rem;
-  margin-bottom: 0.5rem;
+  padding: 0.5em;
+  margin-bottom: 0.5em;
   width: 6rem;
 }
 
 .DateDisplay {
-  font-size: 1.5rem;
-  padding: 0.5rem;
+  font-size: 1.5em;
+  padding: 0.5em;
+
+  @media screen and (max-width: 30em) {
+    font-size: 1em;
+  }
 }

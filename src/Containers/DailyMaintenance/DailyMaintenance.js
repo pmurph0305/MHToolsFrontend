@@ -89,6 +89,10 @@ class DailyMaintenance extends React.Component {
       let date = this.getLocalDate();
       this.props.onRequestDMTaskList(this.props.user_id, date);
     }
+    console.log(this.getLocalDate());
+    console.log(this.props.user_id);
+    console.log(this.props.date);
+    console.log(this.props.date === this.getLocalDate());
   }
 
   componentWillUnmount() {
@@ -234,7 +238,7 @@ class DailyMaintenance extends React.Component {
                 })
               : null}
             {/* Display input field only if on current date. */}
-            {(date === currentDate || !date) && user_id && (
+            {(!date || date === this.getLocalDate()) && user_id && (
               <InputField
                 placeholder={inputPlaceholder}
                 buttonTitle={"Add new task"}

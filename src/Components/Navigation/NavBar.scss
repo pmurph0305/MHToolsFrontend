@@ -24,7 +24,8 @@
       display: inline-block;
       // far left nav is an image to click to go home.
       img {
-        padding-left: 0.5rem;
+        padding-left: 0.25em;
+        padding-bottom: 0.1em;
         vertical-align: middle;
         // Large
         @media screen and (min-width: 60em) {
@@ -58,18 +59,19 @@
         &:active {
           opacity: 0.7;
         }
+        padding: 0.5rem 1vw;
         // Large
-        @media screen and (min-width: 60em) {
-          padding: 1rem;
-        }
-        // Medium
-        @media screen and (min-width: 30em) and (max-width: 60em) {
-          padding: 0.65rem;
-        }
-        // Small
-        @media screen and (min-width: 20em) and (max-width: 30em) {
-          padding: 0.4rem;
-        }
+        // @media screen and (min-width: 60em) {
+        //   padding: 1rem;
+        // }
+        // // Medium
+        // @media screen and (min-width: 30em) and (max-width: 60em) {
+        //   padding: 0.65rem;
+        // }
+        // // Small
+        // @media screen and (min-width: 20em) and (max-width: 30em) {
+        //   padding: 0.4rem;
+        // }
       }
     }
     // last li element is signin/logout so float right.

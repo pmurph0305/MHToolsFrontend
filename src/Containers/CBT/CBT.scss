@@ -8,13 +8,6 @@
   display: block;
 }
 
-.cbt-event-list-container {
-  // Small
-  @media screen and (max-width: 30em) {
-    margin-top: 2.5em;
-  }
-}
-
 .cbt-event-submit {
   @extend %ButtonBase;
   padding-left: 2em;

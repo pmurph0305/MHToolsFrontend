@@ -5,24 +5,17 @@
   padding: 0.5rem 0;
   width: 100%;
   display: flex;
+
+  @media screen and (max-width: 30em) {
+    flex-wrap: wrap;
+  }
 }
 
 .InputField {
   padding: 0.5rem;
   background-color: $secondary-background;
   color: $primary-text-color;
-  // Large screens
-  @media screen and (min-width: 60em) {
-    width: 80%;
-  }
-  // Medium
-  @media screen and (min-width: 30em) and (max-width: 60em) {
-    width: 70%;
-  }
-  // Small
-  @media screen and (max-width: 30em) {
-    width: 100%;
-  }
+  width: 100%;
 }
 
 .AddTaskButton {
