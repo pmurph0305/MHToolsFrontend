@@ -9,6 +9,14 @@
   justify-content: flex-start;
   padding: 0 1em 1em 0;
 
+  @media screen and (max-width: 30em) {
+    flex-direction: column;
+    padding: 0;
+    & > * {
+      margin: 0.25em 0em;
+      width: 100%;
+    }
+  }
   .DefaultSelect {
     margin-right: 1em;
     padding: 0.5rem;
