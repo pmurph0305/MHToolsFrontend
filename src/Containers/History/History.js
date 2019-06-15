@@ -77,7 +77,6 @@ class History extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    console.log(prevProps);
     if (!prevProps.user_id) {
       this.getHistoryIfNeeded();
     }
