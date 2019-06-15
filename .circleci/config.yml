@@ -1,9 +1,6 @@
 version: 2.1
 jobs:
   build:
-    branches:
-      only:
-        - master
     docker:
       - image: circleci/node:10.15.1
     steps:
@@ -15,9 +12,6 @@ jobs:
       # If any warnings are encountered then the build fails. (CI=true)
       - run: CI=true npm run build
   test_coverage:
-    branches:
-      only:
-        - master
     docker:
       - image: circleci/node:10.15.1
     steps:
@@ -27,9 +21,15 @@ jobs:
       - run: npm run testcoverage
 # Orchestrate or schedule a set of jobs, see https://circleci.com/docs/2.0/workflows/
 workflows:
-  # Name the workflow "Welcome"
-  Welcome:
+  # Name the workflow "Main"
+  main:
     # Run the welcome/run job in its own container
     jobs:
-      - build
-      - test_coverage
+      - build:
+        branches:
+          only:
+            - master
+      - test_coverage:
+        branches:
+          only:
+            - master
