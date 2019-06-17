@@ -65,6 +65,18 @@ class DailyMaintenance extends React.Component {
     }
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.user_id !== prevProps.user_id) {
+      let date = this.getLocalDate();
+      this.props.onRequestDMTaskList(this.props.user_id, date);
+    }
+  }
+
+  componentWillUnmount() {
+    // Save on unmount in case anything has been edited.
+    this.onSaveClick();
+  }
+
   getLocalDate = () => {
     let date = new Date();
     let month = date.getMonth() + 1;
@@ -77,29 +89,6 @@ class DailyMaintenance extends React.Component {
       (day < 10 ? "0" + day : day)
     );
   };
-
-  componentDidUpdate() {
-    // Don't get data on update if the data is already in the state.
-    if (
-      !Array.isArray(this.props.taskList) &&
-      this.props.user_id &&
-      !this.props.taskListIsPending &&
-      !this.props.taskListError
-    ) {
-      // get the current date, slice it to work with database.
-      let date = this.getLocalDate();
-      this.props.onRequestDMTaskList(this.props.user_id, date);
-    }
-    console.log(this.getLocalDate());
-    console.log(this.props.user_id);
-    console.log(this.props.date);
-    console.log(this.props.date === this.getLocalDate());
-  }
-
-  componentWillUnmount() {
-    // Save on unmount in case anything has been edited.
-    this.onSaveClick();
-  }
 
   // Event handlers:
   // Handles when a task is added to the list
