@@ -18,7 +18,7 @@ describe("PHQ9 tests", () => {
   });
 
   it("gets footers correctly", () => {
-    expect.assertions(6);
+    expect.assertions(8);
     const wrapFooters = shallow(<PHQ9 />);
     let footers = wrapFooters.instance().getFooters();
     expect(footers[0]).toEqual("");
@@ -37,6 +37,13 @@ describe("PHQ9 tests", () => {
     let footers3 = wrapFooters3.instance().getFooters();
     expect(footers3[0].props.children).toEqual("PHQ-9 submission test fail");
     expect(footers3[1].type).toEqual("button");
+
+    const wrapFooters4 = shallow(
+      <PHQ9 submissionResult="Unauthorized Request" />
+    );
+    let footers4 = wrapFooters4.instance().getFooters();
+    expect(footers4[0].props.children).toEqual("You are not logged in.");
+    expect(footers4[1].type).toEqual("button");
   });
 
   it("selects and updates answers correctly", () => {
