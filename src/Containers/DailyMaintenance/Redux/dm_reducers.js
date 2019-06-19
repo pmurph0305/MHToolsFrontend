@@ -32,7 +32,45 @@ import {
 const initialState = {
   dm_error: "",
   dm_isPending: false,
-  dm_taskList: "",
+  dm_taskList: [
+    {
+      completed: true,
+      date: "2019-06-05",
+      rank: 0,
+      task_id: 1,
+      task: "These are example tasks",
+      updated: false,
+      user_id: -1
+    },
+    {
+      completed: false,
+      date: "2019-06-05",
+      rank: 1,
+      task_id: 2,
+      task: "You are not signed in, or this is still loading",
+      updated: false,
+      user_id: -1
+    },
+    {
+      completed: false,
+      date: "2019-06-05",
+      rank: 2,
+      task_id: 3,
+      task: "So you can only see these examples",
+      updated: false,
+      user_id: -1
+    },
+    {
+      completed: true,
+      date: "2019-06-05",
+      rank: 3,
+      task_id: 4,
+      task:
+        "Register or sign in to be able to add, edit, and track daily maintenance tasks!",
+      updated: false,
+      user_id: -1
+    }
+  ],
   dm_date: "",
   dm_editing: ""
 };
@@ -79,7 +117,6 @@ function dmTasksReducer(state = initialState, action) {
 
     case LOG_OUT_USER:
       return resetState(state, initialState);
-
     default:
       return state;
   }

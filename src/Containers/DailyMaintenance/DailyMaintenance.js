@@ -57,8 +57,8 @@ const mapDispatchToProps = dispatch => {
 class DailyMaintenance extends React.Component {
   // Lifecycles:
   componentDidMount() {
-    // Don't get data on remounting if the data is already in the state.
-    if (!Array.isArray(this.props.taskList) && this.props.user_id) {
+    // only request the task list if the user is logged in.
+    if (this.props.user_id) {
       // get the current date, slice it to work with database.
       let date = this.getLocalDate();
       this.props.onRequestDMTaskList(this.props.user_id, date);
@@ -66,7 +66,9 @@ class DailyMaintenance extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.props.user_id !== prevProps.user_id) {
+    // only request the task list, if the user logged into the current page.
+    // if they sign out, it will reset the state with no user id, and display the examples.
+    if (this.props.user_id && this.props.user_id !== prevProps.user_id) {
       let date = this.getLocalDate();
       this.props.onRequestDMTaskList(this.props.user_id, date);
     }
@@ -179,7 +181,11 @@ class DailyMaintenance extends React.Component {
   // Handles saving updated data when save is clicked after editing.
   onSaveClick = () => {
     // make sure there is a list list to save.
-    if (this.props.taskList && this.props.taskList.length) {
+    if (
+      this.props.taskList &&
+      this.props.taskList.length &&
+      this.props.user_id
+    ) {
       // Only update tasks that need updating (have had their rank changed)
       let tasksToUpdate = this.props.taskList.filter(task => task["updated"]);
       if (tasksToUpdate.length) {
@@ -207,41 +213,54 @@ class DailyMaintenance extends React.Component {
             "A list of tasks you need to get done throughout the day to stay healthy."
           }
         />
-        {!this.props.user_id ? (
+        {!this.props.user_id && (
           <AlertNotSignedIn ThingsTheyCantDo=" create, or track, your daily maintenance tasks" />
-        ) : (
-          <>
-            <DMDateNav date={date} onClick={this.onDateButtonClick} />
-            {taskList && Array.isArray(taskList)
-              ? taskList.map((task, index) => {
-                  return (
-                    <TaskItem
-                      allowEditing={allowEditing}
-                      checkbox={"checkbox"}
-                      checked={task["completed"]}
-                      editing={task["editing"]}
-                      id={index}
-                      key={task["task_id"]}
-                      onChange={onTaskTextChange}
-                      onCheck={this.onCheck}
-                      onEditClick={this.onEditClick}
-                      onRemove={this.onRemoveTask}
-                      onRankChange={this.onRankChange}
-                      task={task["task"]}
-                    />
-                  );
-                })
-              : null}
-            {/* Display input field only if on current date. */}
-            {(!date || date === this.getLocalDate()) && user_id && (
-              <InputField
-                placeholder={inputPlaceholder}
-                buttonTitle={"Add new task"}
-                onClick={this.onAddTaskClick}
-              />
-            )}
-          </>
         )}
+        <>
+          <DMDateNav date={date} onClick={this.onDateButtonClick} />
+          {taskList && user_id && Array.isArray(taskList)
+            ? taskList.map((task, index) => {
+                return (
+                  <TaskItem
+                    allowEditing={allowEditing}
+                    checkbox={"checkbox"}
+                    checked={task["completed"]}
+                    editing={task["editing"]}
+                    id={index}
+                    key={task["task_id"]}
+                    onChange={onTaskTextChange}
+                    onCheck={this.onCheck}
+                    onEditClick={this.onEditClick}
+                    onRemove={this.onRemoveTask}
+                    onRankChange={this.onRankChange}
+                    task={task["task"]}
+                  />
+                );
+              })
+            : taskList && !user_id && Array.isArray(taskList)
+            ? taskList.map((task, index) => {
+                return (
+                  <TaskItem
+                    key={task["task_id"]}
+                    task={task["task"]}
+                    checkbox={"checkbox"}
+                    checked={task["completed"]}
+                    editing={task["editing"]}
+                    id={index}
+                    onRankChange={this.onRankChange}
+                  />
+                );
+              })
+            : null}
+          {/* Display input field only if on current date. */}
+          {(!date || date === this.getLocalDate()) && user_id && (
+            <InputField
+              placeholder={inputPlaceholder}
+              buttonTitle={"Add new task"}
+              onClick={this.onAddTaskClick}
+            />
+          )}
+        </>
         {taskListError && <ErrorBox error={taskListError} />}
       </section>
     );
