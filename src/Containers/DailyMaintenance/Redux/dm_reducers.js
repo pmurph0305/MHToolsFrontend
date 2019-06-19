@@ -196,7 +196,6 @@ function removeDMTask(state, action) {
 
 // Updates the state with the retrieved dm task list.
 function setDMTaskList(state, action) {
-  console.log(action.payload);
   if (Array.isArray(action.payload) && action.payload.length) {
     // Correctly recieved users task list.
     let tasks = action.payload.map(task => {
