@@ -41,7 +41,8 @@ import {
   REQUEST_CS_SHARE_PENDING,
   REQUEST_CS_SHARE_SUCCESS,
   REQUEST_CS_SHARE_FAILED,
-  CHANGE_CS_EDITING
+  CHANGE_CS_EDITING,
+  DISPLAY_EXAMPLE_COPING_SKILLS
 } from "./cs_constants";
 
 import { LOG_OUT_USER } from "../../App/Redux/app_constants";
@@ -79,6 +80,9 @@ function copingSkillsReducer(state = initialState, action = {}) {
     case DELETE_CS_USER_FAILED:
       return setCopingSkillsError(state, action);
 
+    case DISPLAY_EXAMPLE_COPING_SKILLS:
+      return setExampleCopingSkills(state, action);
+
     case ADD_CS_SHARED_SUCCESS:
       // Need to handle case where user clicks add to coping lists and switches back to their own
       // coping list before the fetch's return in the action.
@@ -113,6 +117,32 @@ function copingSkillsReducer(state = initialState, action = {}) {
 
 function setIsPending(state, action) {
   return updateObject(state, { isPending: true });
+}
+
+function setExampleCopingSkills(state, action) {
+  return updateObject(state, {
+    coping_skills: [
+      {
+        date_added: "2019-06-05",
+        description:
+          "This is where the description of a coping skill would go. It would tell you how the coping skill is used. If you register and sign in, you can add, edit, and delete things from your coping skills list.",
+        title: "This is an example coping skill.",
+        shared: true,
+        skill_id: 1,
+        shared_from_id: null,
+        user_id: null
+      },
+      {
+        date_added: "2019-06-05",
+        description:
+          "Right now, you can only view these example coping skills, and coping skills others have shared. Be sure to register or sign in to be able to create your own list of coping skills.",
+        title: "Be sure to register or sign in to create your own list.",
+        shared: true,
+        skill_id: 0,
+        user_id: null
+      }
+    ]
+  });
 }
 
 function updateCopingSkill(state, action) {

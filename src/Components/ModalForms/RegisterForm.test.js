@@ -1,15 +1,15 @@
 import { shallow } from "enzyme";
 import React from "react";
-import SignInForm from "./SignInForm";
+import RegisterForm from "./RegisterForm";
 
-describe("SignInForm tests", () => {
+describe("RegisterForm tests", () => {
   let mockOnSubmit = jest.fn(val => val);
   let mockOnToggleModal = jest.fn(val => val);
   let mockProps = {
     onSubmitForm: mockOnSubmit,
     onToggleModal: mockOnToggleModal
   };
-  const wrapper = shallow(<SignInForm {...mockProps} />);
+  const wrapper = shallow(<RegisterForm {...mockProps} />);
 
   it("matches snapshot", () => {
     expect(wrapper).toMatchSnapshot();

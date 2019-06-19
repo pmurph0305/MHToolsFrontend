@@ -167,8 +167,8 @@ class App extends Component {
         return this.setFormError("Password is too long");
       }
       this.onRegister(
-        e.target.elements[0].value,
         e.target.elements[1].value,
+        e.target.elements[0].value,
         e.target.elements[2].value,
         e.target.elements[4].value
       );

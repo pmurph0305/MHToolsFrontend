@@ -21,10 +21,12 @@ const SignInForm = ({ onSubmitForm, onToggleModal }) => {
                 Email:
               </label>
               <input
+                autoComplete="email"
                 className="form-input"
                 type="text"
                 placeholder="Example@gmail.com"
                 name="email"
+                id="email"
                 required
               />
             </div>
@@ -33,10 +35,12 @@ const SignInForm = ({ onSubmitForm, onToggleModal }) => {
                 Password:
               </label>
               <input
+                autoComplete="current-password"
                 className="form-input"
                 type="password"
                 placeholder="password"
                 name="password"
+                id="password"
                 required
               />
             </div>
