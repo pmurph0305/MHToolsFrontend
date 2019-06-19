@@ -108,8 +108,7 @@ function copingSkillsReducer(state = initialState, action = {}) {
       return setCopingSkillsError(state, action);
 
     case LOG_OUT_USER:
-      resetState(state, initialState);
-      return setExampleCopingSkills();
+      return resetState(state, initialState);
 
     default:
       return state;
