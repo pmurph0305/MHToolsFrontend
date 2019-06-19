@@ -12,7 +12,23 @@ import { LOG_OUT_USER } from "../../App/Redux/app_constants";
 import { resetState, updateObject } from "../../../ReduxHelpers/reduxHelpers";
 
 const initialState = {
-  cbt_events: "",
+  cbt_events: [
+    {
+      situation: "An example of a CBT Thought record",
+      automatic_thoughts:
+        "This isn't a very good example, no one will like it.",
+      alternative_thoughts:
+        "It's still a pretty good example, and could help someone.",
+      evidence_conclusions:
+        "Having an example for people who are new to CBT is better than having no example at all. It still shows key components of a thought record. Be sure to register if you wish to submit and track your own CBT records.",
+      date: "2019-06-05",
+      rating_before: 75,
+      rating_after: 25,
+      thinking_styles: [true, true, false, false, false, true, false],
+      cbt_id: 0,
+      user_id: 0
+    }
+  ],
   cbt_isPending: false,
   cbt_error: ""
 };
