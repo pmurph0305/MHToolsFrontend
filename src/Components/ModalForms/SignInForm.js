@@ -26,6 +26,7 @@ const SignInForm = ({ onSubmitForm, onToggleModal }) => {
                 type="text"
                 placeholder="Example@gmail.com"
                 name="email"
+                id="email"
                 required
               />
             </div>
@@ -39,6 +40,7 @@ const SignInForm = ({ onSubmitForm, onToggleModal }) => {
                 type="password"
                 placeholder="password"
                 name="password"
+                id="password"
                 required
               />
             </div>
