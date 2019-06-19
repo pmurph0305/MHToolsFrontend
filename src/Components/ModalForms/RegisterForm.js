@@ -21,6 +21,7 @@ const RegisterForm = ({ onSubmitForm, onToggleModal, formError }) => {
                 Username:
               </label>
               <input
+                autoComplete="username"
                 className="form-input"
                 type="text"
                 placeholder="Username"
@@ -33,6 +34,7 @@ const RegisterForm = ({ onSubmitForm, onToggleModal, formError }) => {
                 Email:
               </label>
               <input
+                autoComplete="email"
                 className="form-input"
                 type="email"
                 placeholder="Example@gmail.com"
@@ -45,6 +47,7 @@ const RegisterForm = ({ onSubmitForm, onToggleModal, formError }) => {
                 Password:
               </label>
               <input
+                autoComplete="new-password"
                 className="form-input"
                 type="password"
                 placeholder="password"
@@ -57,6 +60,7 @@ const RegisterForm = ({ onSubmitForm, onToggleModal, formError }) => {
                 Re-enter Password:
               </label>
               <input
+                autoComplete="new-password"
                 className="form-input"
                 type="password"
                 placeholder="password"

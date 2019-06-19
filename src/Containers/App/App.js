@@ -151,6 +151,7 @@ class App extends Component {
 
   onSubmitRegisterForm = e => {
     e.preventDefault();
+    window.history.pushState({}, "", "");
     if (
       e.target.elements[0].value &&
       e.target.elements[1].value &&
