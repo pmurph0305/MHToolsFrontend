@@ -14,6 +14,9 @@ import {
   DELETE_CS_USER_PENDING,
   DELETE_CS_USER_FAILED,
 
+  // display examples for non signed in users.
+  DISPLAY_EXAMPLE_COPING_SKILLS,
+
   // Add shared coping skill to user list.
   ADD_CS_SHARED_SUCCESS,
   ADD_CS_SHARED_PENDING,
@@ -84,6 +87,10 @@ export const deleteCopingSkill = (id, skill_id) => dispatch => {
     .catch(err => {
       dispatch({ type: DELETE_CS_USER_FAILED, payload: err });
     });
+};
+
+export const displayExampleCopingSkills = () => dispatch => {
+  dispatch({ type: DISPLAY_EXAMPLE_COPING_SKILLS });
 };
 
 export const getCopingSkills = id => dispatch => {

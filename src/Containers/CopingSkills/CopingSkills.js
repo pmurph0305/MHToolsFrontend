@@ -17,6 +17,7 @@ import {
   getCopingSkills,
   getSharedCopingSkills,
   deleteCopingSkill,
+  displayExampleCopingSkills,
   putShareCopingSkill,
   updateUserCopingSkill
 } from "./Redux/cs_actions";
@@ -45,6 +46,7 @@ const mapDispatchToProps = dispatch => {
     onChangeViewing: viewing => dispatch(changeCSViewing(viewing)),
     onDeleteCopingSkill: (id, skill_id) =>
       dispatch(deleteCopingSkill(id, skill_id)),
+    onDisplayExampleCopingSkills: () => dispatch(displayExampleCopingSkills()),
     onGetUserSkills: id => dispatch(getCopingSkills(id)),
     onGetSharedSkills: (id, type) => dispatch(getSharedCopingSkills(id, type)),
     onShareUserCopingSkill: (id, skill_id) =>
@@ -80,9 +82,7 @@ class CopingSkills extends React.Component {
 
   componentDidMount() {
     if (this.props.user_id) {
-      if (!this.props.coping_skills.length) {
-        this.props.onGetUserSkills(this.props.user_id);
-      }
+      this.props.onGetUserSkills(this.props.user_id);
       if (this.props.viewing === "shared") {
         document.getElementById("cs_viewing_box").selectedIndex = "1";
         document.getElementById(
@@ -128,7 +128,11 @@ class CopingSkills extends React.Component {
     }
     if (Number(event.target.value) === 0) {
       // Get User's coping skills
-      this.props.onGetUserSkills(this.props.user_id);
+      if (this.props.user_id) {
+        this.props.onGetUserSkills(this.props.user_id);
+      } else {
+        this.props.onDisplayExampleCopingSkills();
+      }
       this.props.onChangeViewing("user");
     } else {
       // Get Shared coping skills, default to 'top' for now.
@@ -190,26 +194,27 @@ class CopingSkills extends React.Component {
   }
 
   onDeleteSkillClick(index, skill_id) {
-    let item = document.getElementById("cDescContainer_" + index);
-    if (item.style.maxHeight) {
-      item.style.transition = "max-height 0s";
-      item.style.maxHeight = null;
-      item.style.borderBottom = "0px";
+    if (this.props.user_id) {
+      let item = document.getElementById("cDescContainer_" + index);
+      if (item.style.maxHeight) {
+        item.style.transition = "max-height 0s";
+        item.style.maxHeight = null;
+        item.style.borderBottom = "0px";
+      }
+      this.props.onDeleteCopingSkill(this.props.user_id, skill_id);
     }
-    this.props.onDeleteCopingSkill(this.props.user_id, skill_id);
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
     if (this.props.viewing === "user") {
       this.modifyExpandedCollapsibleSize();
     }
-    if (this.props.user_id) {
+    if (this.props.user_id && this.props.user_id !== prevProps.user_id) {
       // make sure on refresh, once user_id is set, and no state for coping skills, we request it.
-      if (!Array.isArray(this.props.coping_skills) && !this.props.isPending) {
-        document.getElementById("cs_viewing_box").selectedIndex = "0";
-        this.props.onChangeViewing("user");
-        this.props.onGetUserSkills(this.props.user_id);
-      }
+
+      document.getElementById("cs_viewing_box").selectedIndex = "0";
+      this.props.onChangeViewing("user");
+      this.props.onGetUserSkills(this.props.user_id);
     }
   }
 
@@ -255,7 +260,6 @@ class CopingSkills extends React.Component {
   render() {
     const { coping_skills, error, user_id, viewing } = this.props;
     var resizeTimeout;
-
     // Resize expanded collapsibles when window is resized.
     window.onresize = function() {
       clearTimeout(resizeTimeout);
@@ -311,7 +315,9 @@ class CopingSkills extends React.Component {
               return (
                 <SkillCollapsible
                   allowAdd={
-                    skill["user_id"] === parseInt(user_id) ? false : true
+                    skill["user_id"] === parseInt(user_id) || !user_id
+                      ? false
+                      : true
                   }
                   editing={skill["editing"]}
                   index={index}
