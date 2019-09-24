@@ -13,7 +13,7 @@ describe("Navbar tests", () => {
 
   it("route change is called", () => {
     wrapper
-      .find("button")
+      .find("#signin")
       .last()
       .simulate("click");
     expect(mockModalChange).toHaveBeenCalledTimes(1);
@@ -21,6 +21,6 @@ describe("Navbar tests", () => {
   });
 
   it("displays correct number of nav buttons", () => {
-    expect(wrapper.find("NavButtonLi").length).toBe(5);
+    expect(wrapper.find("li").length).toBe(9);
   });
 });

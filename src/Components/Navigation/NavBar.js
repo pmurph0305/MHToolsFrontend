@@ -81,6 +81,7 @@ const NavBar = props => {
               </li>
               <li className="nav__item">
                 <button
+                  id="signin"
                   className="nav__button"
                   onClick={() => onUserModalsClick("signin")}
                 >
