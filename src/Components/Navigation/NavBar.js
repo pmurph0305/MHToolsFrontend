@@ -1,5 +1,4 @@
 import logo from "./mh_logo_white.png";
-import NavButtonLi from "../NavButton/NavButtonLi";
 import PropTypes from "prop-types";
 import React, { useRef } from "react";
 import { Link } from "react-router-dom";
@@ -39,7 +38,7 @@ const NavBar = props => {
     <header className="nav__header">
       <nav className="nav__main" role="navigation">
         <ul ref={menuEl} className="nav__menu">
-          <li onClick={onNavClick} className="nav__item">
+          <li onClick={onNavClick} className="nav__item nav__item--image">
             <Link className="nav__link nav__link--image" to="/">
               <img className="nav__image" alt="home" src={logo} />
             </Link>
