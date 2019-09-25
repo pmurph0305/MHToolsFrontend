@@ -87,8 +87,15 @@ class CopingSkills extends React.Component {
         document.getElementById(
           "cs_shared_order"
         ).selectedIndex = this.props.shared_order.toString();
+        if (!this.props.coping_skills) {
+          let order = document.getElementById("cs_shared_order").value;
+          this.getSharedSkills(order);
+        }
       } else {
         document.getElementById("cs_viewing_box").selectedIndex = "0";
+        if (!this.props.coping_skills) {
+          this.props.onGetUserSkills(this.props.user_id);
+        }
       }
     } else {
       document.getElementById("cs_viewing_box").selectedIndex = "1";
