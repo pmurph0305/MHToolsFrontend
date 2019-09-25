@@ -62,12 +62,16 @@
 
 @media screen and (max-width: 700px) {
   /* Hide normal full screen menu items. */
-  .nav__item:not(:first-child) {
+  .nav__item {
     display: none;
   }
 
+  .nav__item--image {
+    display: flex;
+  }
+
   /* Display burger menu on the right. */
-  .nav__menu .nav__item--icon {
+  .nav__item--icon {
     width: 100%;
     display: flex;
     justify-content: flex-end;
@@ -121,7 +125,7 @@
   }
 
   /* Set nav-button hegihts. */
-  .nav__menu.open-menu .nav__item--icon .nav__button {
+  .nav__menu.open-menu .nav__button--icon {
     height: 60px;
   }
 }
