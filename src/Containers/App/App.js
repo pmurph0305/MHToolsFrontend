@@ -101,9 +101,7 @@ class App extends Component {
           this.onToggleModal();
           this.props.onLoginUser(data.id);
         } else {
-          // Display error in modal like "Incorrect login info"
-          // Track # of attempts,
-          // Provide forgot your password eventually.
+          this.setState({ formError: "Error signing in." });
         }
       })
       .catch(err => {

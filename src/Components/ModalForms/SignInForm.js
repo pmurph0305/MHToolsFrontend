@@ -5,8 +5,9 @@ import "./SignInForm.scss";
 /** SignInForm form - returns a component that renders a signin form
  * @callback onSubmitForm called when the user clicks the submit button
  * @callback onToggleModal called when the user clicks the close (X) button on the modal.
+ * @param {string} formError form error to display when there is an error signing in.
  */
-const SignInForm = ({ onSubmitForm, onToggleModal }) => {
+const SignInForm = ({ onSubmitForm, onToggleModal, formError }) => {
   return (
     <div className="form-container">
       <form className="form-modal" onSubmit={onSubmitForm}>
@@ -51,6 +52,7 @@ const SignInForm = ({ onSubmitForm, onToggleModal }) => {
               value="hiddenValue"
             />
             <input className="form-submit" type="submit" value="Sign in" />
+            {formError && <p className="form-error">{formError}</p>}
           </div>
         </div>
       </form>

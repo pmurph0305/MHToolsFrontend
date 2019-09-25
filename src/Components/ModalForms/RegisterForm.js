@@ -78,8 +78,8 @@ const RegisterForm = ({ onSubmitForm, onToggleModal, formError }) => {
               name="hidden"
               value="hiddenValue"
             />
-            {formError}
             <input className="form-submit" type="submit" value="Register" />
+            {formError && <p className="form-error">{formError}</p>}
           </div>
         </div>
       </form>
