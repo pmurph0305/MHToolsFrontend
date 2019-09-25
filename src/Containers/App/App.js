@@ -183,7 +183,8 @@ class App extends Component {
   onToggleModal = () => {
     this.setState(prevState => ({
       ...prevState,
-      isModalOpen: !prevState.isModalOpen
+      isModalOpen: !prevState.isModalOpen,
+      formError: ""
     }));
   };
 

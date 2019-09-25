@@ -82,7 +82,6 @@ class CopingSkills extends React.Component {
 
   componentDidMount() {
     if (this.props.user_id) {
-      this.props.onGetUserSkills(this.props.user_id);
       if (this.props.viewing === "shared") {
         document.getElementById("cs_viewing_box").selectedIndex = "1";
         document.getElementById(
@@ -211,7 +210,6 @@ class CopingSkills extends React.Component {
     }
     if (this.props.user_id && this.props.user_id !== prevProps.user_id) {
       // make sure on refresh, once user_id is set, and no state for coping skills, we request it.
-
       document.getElementById("cs_viewing_box").selectedIndex = "0";
       this.props.onChangeViewing("user");
       this.props.onGetUserSkills(this.props.user_id);
