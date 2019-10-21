@@ -4,6 +4,7 @@ import Modal from "../../Components/Modal/Modal";
 import RegisterForm from "../../Components/ModalForms/RegisterForm";
 import AppRouter from "../AppRouter/AppRouter";
 import SignInForm from "../../Components/ModalForms/SignInForm";
+import Footer from "../Footer/Footer";
 
 import React, { Component } from "react";
 import { connect } from "react-redux";
@@ -231,6 +232,7 @@ class App extends Component {
           onSubmitPHQ9={this.onSubmitPHQ9}
           submissionResult={this.state.phq9_result}
         />
+        <Footer />
       </div>
     );
   }

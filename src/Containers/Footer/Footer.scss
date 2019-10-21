@@ -1,0 +1,21 @@
+@import "../../styles/shared.scss";
+
+.footer__container {
+  text-align: center;
+  padding: 1em 0;
+  background-color: $primary-background;
+}
+
+.footer__hr {
+  margin: auto;
+  padding-bottom: 0.5em;
+  border-style: inset;
+  border-left: none;
+  border-width: 1px;
+  width: 50%;
+}
+
+.footer__text {
+  color: $primary-text-color;
+  font-size: 0.75em;
+}
